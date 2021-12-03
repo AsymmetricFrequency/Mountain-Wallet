@@ -27,6 +27,22 @@ const Balance = () => {
     //value textinput
 
 
+    //Funcion de obtener splToken
+  const [tokenBalance, setTokenBalance] = useState(0)
+
+  async function obtenerTokenB(publicKey:string, mint:string) {
+    const bala = getToken(publicKey, mint).then((value) => {
+      setTokenBalance(value)
+      console.log(value);
+    })
+  }
+
+
+
+obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
+
+
+
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
@@ -67,7 +83,7 @@ const Balance = () => {
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>1000</Text>
+                                    <Text style={styles.stxtcry}>${tokenBalance}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>CNDR</Text>
