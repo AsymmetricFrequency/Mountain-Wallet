@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
         padding: 50,
         paddingLeft: 10,
         paddingRight: 10,
-        
     },
     botonCont: {
         elevation: 8,

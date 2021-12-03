@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     },
     containeruno: {
         alignItems: 'center',
-
     },
     logo: {
         marginTop: '25%',

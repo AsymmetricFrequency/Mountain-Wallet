@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
         borderColor: 'purple',
         margin: 5,
         paddingLeft: 20,
-        
     },
     ButtonContainer: {
         elevation: 8,
