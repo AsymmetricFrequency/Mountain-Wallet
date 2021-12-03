@@ -6,13 +6,18 @@ import "react-native-url-polyfill/auto";
 
 
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,saveKey, readKey,getHistory } from './api';
-import Balance from './src/screens/Balance';
-import CodigoVerificacion from './src/screens/CodigoVerificacion';
+
+;
 
 //screens
+import Balance from './src/screens/Balance';
 import Crearcuenta from './src/screens/Crearcuenta';
 import Home from './src/screens/Home';
 import ImportarCuenta from './src/screens/Importarcuenta';
+import Importar from './src/screens/Importar'
+import CodigoVerificacion from './src/screens/CodigoVerificacion'
+import Recibir from './src/screens/Recibir';
+import Splashc from './src/screens/Splashc';
 
   
 
@@ -99,7 +104,7 @@ export default function App() {
   
   return (
     
-    <CodigoVerificacion/>
+    <Home/>
     // <View style={styles.container}>
     //   <Text>{mnemonic}</Text>
     //   <TouchableOpacity

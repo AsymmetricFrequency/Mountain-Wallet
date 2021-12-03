@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
 
+
 const Home = () => {
     return (
         <View style={styles.body}>
@@ -22,12 +23,12 @@ const Home = () => {
                                 <Text style={styles.textCI}>IMPORTAR</Text> 
                             </TouchableOpacity>           
                         </View>  
+                        {/* Developed */}
                         <View style={styles.Developed}>
                             <Text style={styles.textDeveloped}>DEVELOPED BY</Text>
                             <Text style={styles.textDeveloped}>CONDORCOIN</Text>
                         </View>              
                     </View>
-                    {/* Developed */}
                 </View>             
             </ImageBackground>   
         </View>
@@ -46,9 +47,11 @@ const styles = StyleSheet.create({
         paddingLeft: '5%',
         paddingRight: '4%',
         alignItems:'center',
+        justifyContent:'center'
     },
     fondo:{
         flex: 1,
+        height:'100%',
         resizeMode:'contain',
     },
     logo:{
@@ -63,7 +66,6 @@ const styles = StyleSheet.create({
         marginTop: '3%',
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        padding: '2%',
         paddingTop: '50%',        
     },
     btnC:{
@@ -92,16 +94,23 @@ const styles = StyleSheet.create({
     },
 
     Developed:{
-        alignItems:'center',
-        position:'relative',
-        top:'60%',
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute', 
         left: 0, 
         right: 0, 
+        bottom: 0,
+        paddingTop: 0,
+
     },
     textDeveloped:{
         color:'#e0e0e0',
         fontWeight:'bold',
         fontSize:RFPercentage(1.5),
+        fontFamily: 'Roboto',
+        
     }
 })
 export default Home
