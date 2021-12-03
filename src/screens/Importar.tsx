@@ -26,7 +26,7 @@ const Importar = () => {
                         {/* Email */}
                         <View style={styles.tablamail} >
                             <View style={styles.cuadromail}>
-                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: XxXxxxxXXXxx " />
+                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." />
                             </View>
                             <View style={styles.cqr}>
                                 <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9}>
