@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, TextInput, Image, Button, Alert } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 const CodigoVerificacion = () => {
     
         return (
-        <View style={styles.body}>
+        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={styles.body}
+        scrollEnabled={false}>
             <View style={styles.containeruno}>
             <Image source={require('./img/mountain.png')} style={styles.logo} />
             <Text style={styles.text1} numberOfLines={2}>CREAR CODIGO DE SEGURIDAD</Text>
@@ -32,7 +36,7 @@ const CodigoVerificacion = () => {
             </View>
             </View>
             
-        </View>
+        </KeyboardAwareScrollView>
         )
     }
 
