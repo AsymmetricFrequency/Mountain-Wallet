@@ -17,25 +17,45 @@ const Importar = () => {
                     <Image style={styles.logo} source={require('./img/enviar.png')}  />
                     {/*Boton Depositar */}
                     <View style={styles.cuadroD}>
-                        <TouchableOpacity style={styles.btnD}  activeOpacity={0.9}>
+                        <TouchableOpacity style={styles.btnD}  activeOpacity={1}>
                             <Text style={styles.textbtnD}>DEPOSITAR</Text> 
                         </TouchableOpacity>
                     </View>
-                    {/* Email */}
+                    
                     <View style={styles.cuadro}>
+                        {/* Email */}
                         <View style={styles.tablamail} >
                             <View style={styles.cuadromail}>
-                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: XXXXXXXXXX@CNDR.com " />
+                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: XxXxxxxXXXxx " />
                             </View>
-                            <View style={styles.smcry}>
-                                <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>1000</Text>
-                                </View>
-                                <View style={styles.monedacry}>
-                                    <Text style={styles.mtxtcry}>CNDR</Text>
-                                </View>
+                            <View style={styles.cqr}>
+                                <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9}>
+                                    <Image style={styles.imgqr} source={require('./img/qr.png')}  />
+                                </TouchableOpacity>
                             </View>                      
                         </View>
+                        {/* Importe*/}
+                        <View style={styles.tablaimp} >
+                            <View style={styles.cuadroimp}>
+                                <TextInput style={styles.inputimp} placeholder="IMPORTE" />
+                            </View>
+                            <View style={styles.cmax}>
+                                <View style={styles.ccnd}>
+                                    <Text>CNDR</Text>
+                                </View>
+                                <View style={styles.cbtnmax}>
+                                    <TouchableOpacity style={styles.btnmax}  activeOpacity={0.9}> 
+                                        <Text style={styles.txtmax}>MAX</Text>                        
+                                    </TouchableOpacity>
+                                </View>                                
+                            </View>                      
+                        </View>
+                        {/* BotonConfirmar */}
+                        <View>
+                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
+                                <Text style={styles.textCI}>CONFIRMAR</Text> 
+                            </TouchableOpacity>        
+                        </View> 
                     </View>
                 </View>             
             </ImageBackground>   
@@ -74,18 +94,16 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     btnD:{
-        backgroundColor:'#5b298a',
+        backgroundColor:'transparent',
         alignItems:'center',
-        marginRight: '15%',
-        marginLeft: '15%',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        paddingTop: '3%',
+        paddingBottom: '3%',
         borderRadius: 20,
     },
     textbtnD:{
-        color:'white',
+        color:'#5b298a',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2),
+        fontSize:RFPercentage(3),
     },
     cuadro:{
         backgroundColor:'white',
@@ -117,27 +135,86 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(1.8),
         color: '#5a5959',
     },
-    smcry:{
+    cqr:{
         width:'20%',
         alignItems: 'flex-end',
         justifyContent: 'center',
     },
-    saldocry:{
+    btnqr:{
+        backgroundColor:'#5b298a',
+        alignItems:'center',
+        paddingTop: '12%',
+        paddingBottom: '12%',
+        paddingLeft: '23%',
+        paddingRight: '23%',
+        borderRadius: 10,
+    },
+    imgqr:{
+        width: 20,
+        height: 20,
+        resizeMode: 'contain',
+    },
+    tablaimp:{
+        marginTop:'4%',
+        borderWidth: 0.8,
+        borderColor: '#e0e0e0',
+        borderRadius:10,
+        height: '5.8%',
+        flexDirection:'row',
+        paddingLeft:'2.5%',
+        paddingRight:'3.5%',
+        paddingTop:'0%'
+    },
+    cuadroimp:{
+        width:'70%',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        paddingLeft: '2%'
     },
-    stxtcry:{
-        fontFamily: 'Roboto',
-        fontSize:RFPercentage(3),
-        color: '#8d8c8c',
-    },
-    monedacry:{
-        justifyContent: 'center',
-    },
-    mtxtcry:{
-        fontFamily: 'Roboto',
+    inputimp:{
+        fontWeight: 'bold',
         fontSize:RFPercentage(1.8),
-        color: '#8d8c8c',
+        color: '#5a5959',
+    },
+    cmax:{
+        width:'30%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection:'row',
+    },
+    ccnd:{
+        width:'50%',
+    },
+    cbtnmax:{
+        width:'50%',
+    },
+    btnmax:{
+        backgroundColor:'#5b298a',
+        alignItems:'center',
+        paddingTop: '20%',
+        paddingBottom: '20%',
+        paddingLeft: '10%',
+        paddingRight:'10%',
+        borderRadius: 10,
+    },
+    txtmax:{
+        color:'white',
+        fontWeight: 'bold',
+        fontSize:RFPercentage(1.5),
+    },
+    btnC:{
+        backgroundColor:'#5b298a',
+        alignItems:'center',
+        marginRight: '10%',
+        marginLeft: '10%',
+        paddingTop: '2%',
+        paddingBottom: '2%',
+        borderRadius: 20,
+        marginTop: '20%'
+    },
+    textCI:{
+        color:'white',
+        fontWeight: 'bold',
+        fontSize:RFPercentage(4),
     },
 })
 export default Importar
