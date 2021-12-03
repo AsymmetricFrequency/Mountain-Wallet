@@ -1,7 +1,7 @@
 import { Keypair } from '@solana/web3.js';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
 import "react-native-url-polyfill/auto";
 
 
@@ -14,7 +14,7 @@ import Balance from './src/screens/Balance';
 import Crearcuenta from './src/screens/Crearcuenta';
 import Home from './src/screens/Home';
 import ImportarCuenta from './src/screens/Importarcuenta';
-import Importar from './src/screens/Importar'
+import Importar from './src/screens/Importar';
 import CodigoVerificacion from './src/screens/CodigoVerificacion'
 import Recibir from './src/screens/Recibir';
 import Splashc from './src/screens/Splashc';
