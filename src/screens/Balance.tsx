@@ -8,7 +8,6 @@ import { TextInput } from 'react-native-element-textinput';
 
 const Balance = () => {
 
-
     //Funcion obtener balance
     const [balance, setBalance] = useState(0)
 
