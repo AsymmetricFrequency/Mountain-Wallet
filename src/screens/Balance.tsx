@@ -83,7 +83,7 @@ obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>${tokenBalance}</Text>
+                                    <Text style={styles.stxtcry}>{tokenBalance}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>CNDR</Text>
@@ -101,7 +101,7 @@ obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>2000</Text>
+                                    <Text style={styles.stxtcry}>{balance}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>SOL</Text>

@@ -93,10 +93,13 @@ function createConnection(cluster:string) {
 //obtener balance de Solanas
 async function getBalance(publicKey: string) {
     const connection = createConnection("devnet")
-    return await connection.getBalance(new solanaWeb3.PublicKey(publicKey)).catch((err) => {
+    const lamports = await connection.getBalance(new solanaWeb3.PublicKey(publicKey)).catch((err) => {
         console.log(err);
     })
-}
+
+    const sol = lamports / LAMPORTS_PER_SOL
+    return sol
+} 
 
 //buscar cuentas asociadas a tokens
 async function findAssociatedTokenAddress(
@@ -122,7 +125,7 @@ async function getToken(publicKey: string, splToken: string){
 
   try {
     const balance = await connection.getTokenAccountBalance(new PublicKey(account.toString()))
-    return balance.value.amount
+    return balance.value.uiAmount
   } catch (e) {
     return 0
   }
@@ -175,7 +178,7 @@ async function sendTokenTransaction(wallet: solanaWeb3.Account, toPublic: string
   
 }
 
-
+// funcion para obtener el historial de transacciones
 async function getHistory(pubKey:string,options = { limit: 20 }){ 0
 
   const connection = createConnection("mainnet-beta");
