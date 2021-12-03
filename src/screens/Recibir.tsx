@@ -4,6 +4,7 @@ import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,s
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
+import { StackNavigator } from "react-navigation";
 // import { TextInput } from 'react-native-element-textinput';
 
 
@@ -14,28 +15,36 @@ const Recibir = () => {
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
-                    <Image style={styles.logo} source={require('./img/enviar.png')}  />
-                    {/*Boton Depositar */}
-                    <View style={styles.cuadroD}>
-                        <TouchableOpacity style={styles.btnD}  activeOpacity={0.9}>
-                            <Text style={styles.textbtnD}>DEPOSITAR</Text> 
+                    <Image style={styles.logo} source={require('./img/recibir.png')}  />
+                    {/*Boton Recibir */}
+                    <View style={styles.cuadroR}>
+                        <TouchableOpacity style={styles.btnR}  activeOpacity={1}>
+                            <Text style={styles.textbtnR}>RECIBIR</Text> 
                         </TouchableOpacity>
                     </View>
-                    {/* Email */}
+
                     <View style={styles.cuadro}>
-                        <View style={styles.tablamail} >
-                            <View style={styles.cuadromail}>
-                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: XXXXXXXXXX@CNDR.com " />
+                        {/* Imagen QR */}
+                        <View style={styles.cuadroQR}>
+                            <Image style={styles.imgqr} source={require('./img/QRCode.png')}  />
+                        </View>      
+                        {/* Copiar */}
+                        <View style={styles.tablaqr} >
+                            <View style={styles.cuadroqr}>
+                                <TextInput style={styles.inputqr} placeholder="Ezq3cnFnLi3HYEeouCas9neVLUsXZf5ppcgwZ5" />
                             </View>
-                            <View style={styles.smcry}>
-                                <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>1000</Text>
-                                </View>
-                                <View style={styles.monedacry}>
-                                    <Text style={styles.mtxtcry}>CNDR</Text>
-                                </View>
-                            </View>                      
-                        </View>
+                            <View style={styles.cbtncop}>
+                                    <TouchableOpacity style={styles.btncop}  activeOpacity={0.9}> 
+                                        <Text style={styles.txtcop}>COPIAR</Text>                        
+                                    </TouchableOpacity>
+                            </View>                    
+                        </View> 
+                        {/*Boton volver*/}       
+                        <View>
+                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
+                                    <Text style={styles.textCI}>VOLVER</Text> 
+                                </TouchableOpacity> 
+                        </View>            
                     </View>
                 </View>             
             </ImageBackground>   
@@ -66,26 +75,24 @@ const styles = StyleSheet.create({
         top:'4%',
         resizeMode: 'contain',
     },
-    cuadroD:{
+    cuadroR:{
         backgroundColor: 'white',
         padding: 20,
         borderRadius: 10,
         marginTop: '5%',
         width: '100%'
     },
-    btnD:{
-        backgroundColor:'#5b298a',
+    btnR:{
+        backgroundColor:'transparent',
         alignItems:'center',
-        marginRight: '15%',
-        marginLeft: '15%',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        paddingTop: '3%',
+        paddingBottom: '3%',
         borderRadius: 20,
     },
-    textbtnD:{
-        color:'white',
+    textbtnR:{
+        color:'#5b298a',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2),
+        fontSize:RFPercentage(3),
     },
     cuadro:{
         backgroundColor:'white',
@@ -96,8 +103,17 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         padding: '2%',
     },
-    tablamail:{
-        marginTop:'4%',
+    cuadroQR:{
+        alignItems:'center',
+        padding: '2%',
+    },
+    imgqr:{
+        width: 200,
+        height: 200,
+        resizeMode: 'contain',
+        marginTop: '2%'
+    },
+    tablaqr:{
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
@@ -105,39 +121,51 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         paddingLeft:'2.5%',
         paddingRight:'3.5%',
-        paddingTop:'0%'
+        paddingTop:'0%',
+        marginTop: '2%'
     },
-    cuadromail:{
+    cuadroqr:{
         width:'80%',
         justifyContent: 'center',
-        paddingLeft: '2%'
+        paddingLeft: '2%',
     },
-    inputmail:{
+    inputqr:{
         fontWeight: 'bold',
         fontSize:RFPercentage(1.8),
         color: '#5a5959',
     },
-    smcry:{
+    cbtncop:{
         width:'20%',
-        alignItems: 'flex-end',
+        alignItems:'center',
         justifyContent: 'center',
     },
-    saldocry:{
-        justifyContent: 'center',
-        alignItems: 'flex-end',
+    btncop:{
+        backgroundColor:'#5b298a',
+        paddingTop: '20%',
+        paddingBottom: '20%',
+        paddingLeft: '10%',
+        paddingRight:'10%',
+        borderRadius: 10,
     },
-    stxtcry:{
-        fontFamily: 'Roboto',
-        fontSize:RFPercentage(3),
-        color: '#8d8c8c',
+    txtcop:{
+        color:'white',
+        fontWeight: 'bold',
+        fontSize:RFPercentage(1.5),
     },
-    monedacry:{
-        justifyContent: 'center',
+    btnC:{
+        backgroundColor:'#5b298a',
+        alignItems:'center',
+        marginRight: '10%',
+        marginLeft: '10%',
+        paddingTop: '2%',
+        paddingBottom: '2%',
+        borderRadius: 20,
+        marginTop: '5%'
     },
-    mtxtcry:{
-        fontFamily: 'Roboto',
-        fontSize:RFPercentage(1.8),
-        color: '#8d8c8c',
+    textCI:{
+        color:'white',
+        fontWeight: 'bold',
+        fontSize:RFPercentage(4),
     },
 })
 export default Recibir
