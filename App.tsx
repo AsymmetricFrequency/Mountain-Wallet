@@ -7,7 +7,7 @@ import "react-native-url-polyfill/auto";
 
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,saveKey, readKey,getHistory } from './api';
 import Balance from './src/screens/Balance';
-import Codigov from './src/screens/Codigov';
+import CodigoVerificacion from './src/screens/CodigoVerificacion';
 
 //screens
 import Crearcuenta from './src/screens/Crearcuenta';
@@ -99,7 +99,7 @@ export default function App() {
   
   return (
     
-    <ImportarCuenta/>
+    <CodigoVerificacion/>
     // <View style={styles.container}>
     //   <Text>{mnemonic}</Text>
     //   <TouchableOpacity
