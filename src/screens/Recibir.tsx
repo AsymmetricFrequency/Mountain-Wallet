@@ -6,8 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { StackNavigator } from "react-navigation";
 // import { TextInput } from 'react-native-element-textinput';
-
-
+import QRCode from 'react-native-qrcode-svg';
 
 const Recibir = () => {
 
@@ -23,11 +22,14 @@ const Recibir = () => {
                         </TouchableOpacity>
                     </View>
 
+                
+                   
                     <View style={styles.cuadro}>
                         {/* Imagen QR */}
-                        <View style={styles.cuadroQR}>
-                            <Image style={styles.imgqr} source={require('./img/QRCode.png')}  />
-                        </View>      
+                           
+                    <QRCode
+                        value="http://awesome.link.qr"
+                    />    
                         {/* Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>

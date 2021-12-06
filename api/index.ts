@@ -1,6 +1,6 @@
 import * as solanaWeb3 from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey, Keypair } from '@solana/web3.js';
 
 import  AsyncStorage  from "@react-native-async-storage/async-storage";
 
@@ -14,7 +14,7 @@ const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 const LAMPORTS_PER_SOL = solanaWeb3.LAMPORTS_PER_SOL                                                                     
 
-
+//
 
 //Funcion guardar llave
 async function saveKey(data){
@@ -88,7 +88,8 @@ async function readPassword(){
 async function generateMnemonic() {
     const randomBytes = await Random.getRandomBytesAsync(16);
     const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
-    saveKey(mnemonic)     
+    //guardando mnemonic en asyncStorage
+    saveMmemonic(mnemonic)     
     return mnemonic
 }
 //mnemonic a semilla
@@ -106,6 +107,7 @@ async function createAccount(seed: string) {
     const hex = Uint8Array.from(Buffer.from(seed))
     const keyPair = nacl.sign.keyPair.fromSeed(hex.slice(0, 32));
     const acc = new solanaWeb3.Account(keyPair.secretKey);
+    saveKey(keyPair.secretKey.toString())
     return acc
 }
 
@@ -156,10 +158,13 @@ async function getToken(publicKey: string, splToken: string){
 
 }
 //enviar transaccion
-async function sendTokenTransaction(wallet: solanaWeb3.Account, toPublic: string, splToken: string, amount: number) {
+async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
   const connection = createConnection("devnet")
-  const DEMO_WALLET_SECRET_KEY = new Uint8Array(wallet.secretKey)
-  const fromWallet = wallet
+
+  //prueba con la llave
+  const DEMO_WALLET_SECRET_KEY = new Uint8Array([245,227,241,78,52,86,34,249,154,108,11,238,175,182,30,183,142,181,39,114,135,60,106,146,197,188,205,100,79,22,57,64,51,190,81,228,64,115,0,1,93,168,72,53,238,168,60,211,151,35,252,21,100,240,0,176,228,240,105,206,47,68,116,28]); 
+  var fromWallet = new solanaWeb3.Account(DEMO_WALLET_SECRET_KEY);
+  //const fromWallet = wallet
   const toWallet = new solanaWeb3.PublicKey(toPublic)
   const myMint = new solanaWeb3.PublicKey(splToken)
 
@@ -218,4 +223,4 @@ return history;
 }
 
 
-export { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory }
+export { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic }

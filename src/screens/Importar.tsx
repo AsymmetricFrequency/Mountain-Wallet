@@ -10,6 +10,16 @@ import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 
 const Importar = () => {
 
+//traer account
+
+//Funcion enviar token
+  async function sendToken(){
+    const send = sendTokenTransaction("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ",1)
+    send.then((value) => {
+      console.log(value);
+    })
+  } 
+
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
@@ -52,7 +62,7 @@ const Importar = () => {
                         </View>
                         {/* BotonConfirmar */}
                         <View>
-                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => sendToken()} >
                                 <Text style={styles.textCI}>CONFIRMAR</Text> 
                             </TouchableOpacity>        
                         </View> 

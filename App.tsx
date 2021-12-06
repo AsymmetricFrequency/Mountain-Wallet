@@ -53,8 +53,8 @@ export default function App() {
     createAccount(seed).then((hexValue) => {
       console.log(hexValue.publicKey.toString())
       setPublicKey(hexValue.publicKey.toString())
-      console.log(hexValue)
       setAccount(hexValue)
+      console.log(hexValue)
     })
   }
   
@@ -101,10 +101,10 @@ export default function App() {
     })
   } 
 
-  
+
   return (
     
-    <Crearcuenta/>
+    <Importar/>
     // <View style={styles.container}>
     //   <Text>{mnemonic}</Text>
     //   <TouchableOpacity
