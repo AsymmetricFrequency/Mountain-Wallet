@@ -8,7 +8,6 @@ import { TextInput } from 'react-native-element-textinput';
 
 const Balance = () => {
 
-
     //Funcion obtener balance
     const [balance, setBalance] = useState(0)
 
@@ -26,6 +25,22 @@ const Balance = () => {
     obtenerBalance("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv")
 
     //value textinput
+
+
+    //Funcion de obtener splToken
+  const [tokenBalance, setTokenBalance] = useState(0)
+
+  async function obtenerTokenB(publicKey:string, mint:string) {
+    const bala = getToken(publicKey, mint).then((value) => {
+      setTokenBalance(value)
+      console.log(value);
+    })
+  }
+
+
+
+obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
+
 
 
     return (
@@ -68,7 +83,7 @@ const Balance = () => {
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>1000</Text>
+                                    <Text style={styles.stxtcry}>{tokenBalance}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>CNDR</Text>
@@ -86,7 +101,7 @@ const Balance = () => {
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>2000</Text>
+                                    <Text style={styles.stxtcry}>{balance}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>SOL</Text>

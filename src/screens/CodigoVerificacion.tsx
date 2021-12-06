@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+
 import { Text, StyleSheet, View, TextInput, Image, Button, Alert, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+
 
 const CodigoVerificacion = () => {
     
@@ -33,14 +35,14 @@ const CodigoVerificacion = () => {
                 </View>
             </View>
             <View style={styles.containerdos}>
-            <TouchableOpacity
-                style={styles.botonCont}
-                onPress={() => Alert.alert('Codigo...')}>
-                <Text style={styles.textoBoton}>CONFIRMAR</Text>
-            </TouchableOpacity>
-            
-            </View>
+              <TouchableOpacity
+                  style={styles.botonCont}
+                  onPress={() => Alert.alert('Codigo...')}>
+                  <Text style={styles.textoBoton}>CONFIRMAR</Text>
+              </TouchableOpacity>
+             </View>
             </View>            
+
         </KeyboardAwareScrollView>
         )
     }
