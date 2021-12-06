@@ -104,7 +104,7 @@ export default function App() {
   
   return (
     
-    <Balance/>
+    <Crearcuenta/>
     // <View style={styles.container}>
     //   <Text>{mnemonic}</Text>
     //   <TouchableOpacity

@@ -14,7 +14,7 @@ const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 const LAMPORTS_PER_SOL = solanaWeb3.LAMPORTS_PER_SOL                                                                     
 
-//
+
 
 //Funcion guardar llave
 async function saveKey(data){
@@ -37,6 +37,30 @@ async function readKey(){
        // saving error  
   }
 }
+
+
+//Funcion guardar llave
+async function saveMmemonic(data){
+  try {     
+    console.log("MNEMONIC:");
+    console.log(await AsyncStorage.setItem('@storage_Mnemonic', data))  
+  } catch (e) { 
+       // saving error  
+  }
+}
+
+//Funcion leer llave
+async function readMnemonic(){
+  //obteniendo llave
+  try {    
+    console.log("READ MNEMONIC:");
+    const key = await AsyncStorage.getItem('@storage_Mnemonic')
+    console.log(key)  
+  } catch (e) { 
+       // saving error  
+  }
+}
+
 
 //Funcion guardar contra
 async function savePassword(data){
