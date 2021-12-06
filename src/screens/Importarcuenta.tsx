@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
     labeluno: {
         margin: 8,
         fontWeight: 'bold',
-        fontSize: 17,
-        
+        fontSize: 17,    
     },
 })

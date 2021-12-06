@@ -14,10 +14,9 @@ const CodigoVerificacion = () => {
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
             
             <View style={styles.containerBlanco}>
-            
             </View>
             <View style={styles.containerBlanco2}>
-                <Image source={require('./img/manito.png')} style={styles.logomano} />
+                <Image source={require('./img/logomanito.png')} style={styles.logomano} />
                 <Text style={styles.textuno} numberOfLines={2}>Crear código de seguridad</Text>
                 <View style={styles.containerunorama}>  
                     <TextInput style={styles.TextInput} maxLength={1} keyboardType="numeric"></TextInput>
