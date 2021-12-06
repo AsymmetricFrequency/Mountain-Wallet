@@ -22,40 +22,26 @@ const Crearcuenta = () => {
     return (
         <View style={styles.body}>
             <View style={styles.containeruno}>
-            <Image source={require('./img/mountain.png')} style={styles.logo} />
-            <Text style={styles.text1} numberOfLines={2}>CREAR CUENTA</Text>
+                <Image source={require('./img/logocolor.png')} style={styles.logo} />
             </View>
-            <View style={styles.containerunorama}>
-                {/*<TextInput  multiline={true} style={styles.TextInput} >{words}</TextInput>*/}
-                <TouchableOpacity style={styles.TextInput}><Text>{words}</Text></TouchableOpacity>
-                
+            <View style={styles.containerBlanco}>
             </View>
-            <View style={styles.checkboxContainer}>
-            {/*<CheckBox
-                style={{flex: 1, padding: 10}}
-                onClick={()=>{
-                    
-                    setState({
-                        isChecked:!this.state.isChecked
-                    })
-                }}
-                isChecked={this.state.isChecked}
-                leftText={"CheckBox"}
-            />*/}
-                <Text style={styles.label}>Marque esta casilla para confirmar que a copiado sus doce palabras en un lugar seguro.</Text>
-
+            <View style={styles.containerBlanco2}>
+                <Text style={styles.textuno} numberOfLines={2}>CREAR CUENTA</Text>
+                <TouchableOpacity style={styles.TextInput}><Text style={styles.labeluno}>{words}</Text></TouchableOpacity>
             </View>
             <View style={styles.containerdos}>
-            <TouchableOpacity
-                style={styles.botonGen}
-                onPress={() => generarMnemonic()}>
-                <Text style={styles.textoBoton}>GENERAR 12 PALABRAS</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.botonCont}
-                onPress={() => Alert.alert('Continua proceso...')}>
-                <Text style={styles.textoBoton}>CONTINUAR</Text>
-            </TouchableOpacity>
+                <Text style={styles.labeldos} numberOfLines={4}>Oprima en "Generar 12 palabras" y copie las palabras que se generan en el recuadro, son de gran importancia para la seguridad de su cuenta.</Text>
+                <TouchableOpacity
+                    style={styles.botonGen}
+                    onPress={() => generarMnemonic()}>
+                    <Text style={styles.textoBoton}>GENERAR 12 PALABRAS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.botonCont}
+                    onPress={() => Alert.alert('Continua proceso...')}>
+                    <Text style={styles.textoBoton}>CONTINUAR</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -68,24 +54,55 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         flex: 1,
-        paddingLeft: '5%',
-        paddingRight: '5%',
         paddingTop: '8%'
     },
     containeruno: {
-        alignItems: 'center',
+        alignItems: 'center'
     },
+    containerBlanco: {
+        width: '100%',
+        color: 'red',
+        marginTop: 10,
+        alignItems: 'center',
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        borderWidth: 5,
+        borderColor: '#b5b2b6',
+        borderStyle: 'solid',
+        paddingTop: '35%',
+    },
+    containerBlanco2: {
+        width: '100%',
+        color: 'red',
+        marginTop: '-36%',
+        borderTopLeftRadius:28,
+        borderTopRightRadius: 28,
+        alignItems: 'center',
+        backgroundColor: 'white',
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        paddingTop: '10%',
+
+    },
+    // containeruno: {
+    //     alignItems: 'center',
+    //     borderTopLeftRadius: 20,
+    //     borderTopRightRadius: 20,
+    //     borderWidth: 0.8,
+    //     borderColor: 'green',
+
+    // },
     logo: {
-        marginTop: '25%',
+        marginTop: '0%',
         width: 150,
         height: 150,
         resizeMode: 'contain',
     },
-    text1: {
-        fontFamily: 'Roboto',
+    textuno: {
+        
         fontSize: 15,
         fontWeight: 'bold',
-        color: '#625d5b'
+        color: '#616161'
     },
     titulo: {
         fontSize: 25,
@@ -95,19 +112,22 @@ const styles = StyleSheet.create({
         marginTop: '2%',
         flexDirection: 'row',
         justifyContent: 'center',
+        
     },
     containerdos: {
-        marginTop: '10%',
+        marginTop: '5%',
+        marginLeft: '5%',
+        marginRight: '5%',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     TextInput: {
         fontSize: 20,
         margin: 10,
         width: 300,
         height: 200,
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: 'purple',
         borderRadius: 20,
         padding: 50,
@@ -115,37 +135,41 @@ const styles = StyleSheet.create({
         paddingRight: 10
     },
     botonGen: {
-        elevation: 8,
-        top: 20,
+        top: 25,
         marginBottom: 20,
         backgroundColor: '#5B298A',
-        width: '80%',
+        width: '83%',
         alignItems: 'center',
         borderRadius: 20
     },
     botonCont: {
-        elevation: 8,
-        top: 20,
+        top: 25,
         backgroundColor: '#5B298A',
-        width: '80%',
+        width: '83%',
         alignItems: 'center',
         borderRadius: 20
     },
     textoBoton: {
-        fontSize: 20,
+        fontSize: 10,
         color: 'white',
         textAlign: 'center',
         padding: 10,
     },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-        justifyContent: 'center',
-    },
-    checkbox: {
-        alignSelf: "center",
-    },
-    label: {
+
+    labeluno: {
         margin: 8,
+        fontWeight: 'bold',
+        fontSize: 17,
+        
+    },
+    labeldos: {
+        margin: 8,
+        padding: 10,
+        fontWeight: 'bold',
+        fontSize: 12,
+        marginRight: '5%',
+        marginLeft: '5%',
+        justifyContent: 'center',
+        textAlign: 'justify'
     },
 })
