@@ -28,12 +28,12 @@ const Recibir = () => {
                         {/* Imagen QR */}
                            
                     <QRCode
-                        value="http://awesome.link.qr"
+                        value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv"
                     />    
                         {/* Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>
-                                <TextInput style={styles.inputqr} placeholder="Ezq3cnFnLi3HYEeouCas9neVLUsXZf5ppcgwZ5" />
+                                <TextInput style={styles.inputqr} placeholder="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv" />
                             </View>
                             <View style={styles.cbtncop}>
                                     <TouchableOpacity style={styles.btncop}  activeOpacity={0.9}> 

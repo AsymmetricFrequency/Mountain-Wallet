@@ -14,7 +14,7 @@ const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 const LAMPORTS_PER_SOL = solanaWeb3.LAMPORTS_PER_SOL                                                                     
 
-//
+
 
 //Funcion guardar llave
 async function saveKey(data){
@@ -92,6 +92,7 @@ async function generateMnemonic() {
     saveMmemonic(mnemonic)     
     return mnemonic
 }
+
 //mnemonic a semilla
 const mnemonicToSeed = async (mnemonic: string) => {
     try {
@@ -157,13 +158,18 @@ async function getToken(publicKey: string, splToken: string){
   }
 
 }
+
 //enviar transaccion
 async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
   const connection = createConnection("devnet")
 
   //prueba con la llave
-  const DEMO_WALLET_SECRET_KEY = new Uint8Array([245,227,241,78,52,86,34,249,154,108,11,238,175,182,30,183,142,181,39,114,135,60,106,146,197,188,205,100,79,22,57,64,51,190,81,228,64,115,0,1,93,168,72,53,238,168,60,211,151,35,252,21,100,240,0,176,228,240,105,206,47,68,116,28]); 
+  const DEMO_WALLET_SECRET_KEY = new Uint8Array([48,120,100,99,102,50,56,50,51,102,100,51,101,101,101,99,51,49,100,54,53,102,56,100,50,49,101,54,97,48,57,98,189,161,122,102,109,24,251,64,171,179,19,248,192,171,203,109,61,170,248,164,223,240,174,12,33,6,139,185,61,115,183,169]); 
   var fromWallet = new solanaWeb3.Account(DEMO_WALLET_SECRET_KEY);
+  console.log(fromWallet.publicKey.toString());
+  console.log(readMnemonic());
+  
+  
   //const fromWallet = wallet
   const toWallet = new solanaWeb3.PublicKey(toPublic)
   const myMint = new solanaWeb3.PublicKey(splToken)
@@ -208,7 +214,7 @@ async function sendTokenTransaction( toPublic: string, splToken: string, amount:
 }
 
 // funcion para obtener el historial de transacciones
-async function getHistory(pubKey:string,options = { limit: 20 }){ 0
+async function getHistory(pubKey:string,options = { limit: 20 }){
 
   const connection = createConnection("mainnet-beta");
   const history = await connection.getConfirmedSignaturesForAddress2(

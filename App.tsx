@@ -84,7 +84,7 @@ export default function App() {
 
   //Funcion enviar token
   async function sendToken(){
-    const send = sendTokenTransaction(account,"uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ",1)
+    const send = sendTokenTransaction("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ",1)
     send.then((value) => {
       console.log(value);
     })
