@@ -26,7 +26,6 @@ const Crearcuenta = () => {
             </View>
             <View style={styles.containerBlanco}>
             </View>
-
             <View style={styles.containerBlanco2}>
                 <Text style={styles.textuno} numberOfLines={2}>CREAR CUENTA</Text>
                 <TouchableOpacity style={styles.TextInput}><Text style={styles.labeluno}>{words}</Text></TouchableOpacity>
