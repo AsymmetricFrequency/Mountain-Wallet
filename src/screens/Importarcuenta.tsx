@@ -1,12 +1,24 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
-
+import { mnemonicToSeed, createAccount, readKey } from '../../api';
 
 const ImportarCuenta = () => {
+
+    const [twelfString, setTwelfString] = useState('')
+
+    async function crearCuenta(twelf: string) {
+        const docePalabras = mnemonicToSeed(twelf)
+        docePalabras.then((value) => {
+            const acc = createAccount(value)
+            acc.then((value) => {
+                console.log(value.secretKey.toString())
+            })
+        })
+    }
+
     return (
         <KeyboardAwareScrollView
             resetScrollToCoords={{ x: 0, y: 0 }}
@@ -20,7 +32,9 @@ const ImportarCuenta = () => {
             <View style={styles.containerBlanco2}>
                 <Text style={styles.textuno} numberOfLines={2}>IMPORTAR CUENTA</Text>
                 <TextInput 
-                    style={styles.TextInput}>
+                    style={styles.TextInput}
+                    onChangeText={text => setTwelfString(text)}
+                >
                     <Text style={styles.labeluno} ></Text>
                 </TextInput>
             </View>
@@ -30,8 +44,13 @@ const ImportarCuenta = () => {
             <View style={styles.containerdos}>
                 <TouchableOpacity
                     style={styles.botonCont}
-                    onPress={() => Alert.alert('Acepto')}>
+                    onPress={() => crearCuenta(twelfString)}>
                     <Text style={styles.textoBoton}>ACEPTAR</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.botonCont}
+                    onPress={() => readKey()}>
+                    <Text style={styles.textoBoton}>Storage</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAwareScrollView>
