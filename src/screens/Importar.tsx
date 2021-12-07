@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler} from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 // import { TextInput } from 'react-native-element-textinput';
-
-
+//navegación
+import { useNavigation } from '@react-navigation/native';
 
 const Importar = () => {
-
+    const navigation = useNavigation();
 //traer account
 
 //Funcion enviar token
@@ -20,6 +20,27 @@ async function sendToken(){
     })
   }
 
+useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Espera", "Quieres volver a Balance o salir de la App?", [
+        {
+          text: "Cancelar",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "Volver a balance", onPress: () => navigation.navigate("Balance" as any) },
+        {text: "Salir de Mountain Wallet", onPress: () => BackHandler.exitApp()}
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+}, []);
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >

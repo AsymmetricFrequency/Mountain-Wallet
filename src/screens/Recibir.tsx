@@ -7,11 +7,12 @@ import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { StackNavigator } from "react-navigation";
 // import { TextInput } from 'react-native-element-textinput';
 import QRCode from 'react-native-qrcode-svg';
-
+//Navegación
+import { useNavigation } from '@react-navigation/native';
 
 
 const Recibir = () => {
-
+    const navigation = useNavigation();
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
@@ -43,7 +44,7 @@ const Recibir = () => {
                         </View> 
                         {/*Boton volver*/}       
                         <View>
-                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
+                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => navigation.goBack()}>
                                     <Text style={styles.textCI}>VOLVER</Text> 
                                 </TouchableOpacity> 
                         </View>            

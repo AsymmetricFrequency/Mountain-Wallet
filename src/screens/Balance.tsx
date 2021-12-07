@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
+//navegación
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native'
 
 const Balance = () => {
-
+    const navigation = useNavigation();
     //Funcion obtener balance
     const [balance, setBalance] = useState(0)
 
@@ -40,7 +43,26 @@ const Balance = () => {
 
   obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
 
+useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Espera", "¿Seguro que quieres salir?", [
+        {
+          text: "Cancelar",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "Si", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
 
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+}, []);
 
     return (
         <View style={styles.body}>
@@ -61,12 +83,12 @@ const Balance = () => {
                     {/* Enviar y recibir */}
                     <View style={styles.dcER}>
                         <View style={styles.dcR}>
-                            <TouchableOpacity style={styles.btnR}  activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnR}  activeOpacity={0.9} onPress={() => navigation.navigate("Recibir" as any)}>
                                 <Text style={styles.textbtnR}>RECIBIR</Text> 
                             </TouchableOpacity>
                         </View>
                         <View style={styles.dcE}>
-                            <TouchableOpacity style={styles.btnR} activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnR} activeOpacity={0.9} onPress={() => navigation.navigate("Importar" as any)}>
                                 <Text style={styles.textbtnR}>ENVIAR</Text>
                             </TouchableOpacity>
                         </View>

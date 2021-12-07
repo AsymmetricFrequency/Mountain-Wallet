@@ -18,6 +18,7 @@ import Importar from './src/screens/Importar';
 import CodigoVerificacion from './src/screens/CodigoVerificacion'
 import Recibir from './src/screens/Recibir';
 import Splashc from './src/screens/Splashc';
+import Tabs from './src/Tabs';
 
   
 
@@ -104,7 +105,7 @@ export default function App() {
 
   return (
     
-    <Recibir/>
+    <Tabs/>
     // <View style={styles.container}>
     //   <Text>{mnemonic}</Text>
     //   <TouchableOpacity

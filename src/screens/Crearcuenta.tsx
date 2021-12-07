@@ -4,7 +4,12 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Ale
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 
+//navegación
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native'
+
 const Crearcuenta = () => {
+    const navigation = useNavigation();
 
     const [isSelected, setSelection] = useState(false);
 
@@ -37,7 +42,7 @@ const Crearcuenta = () => {
                 
                 <TouchableOpacity
                     style={styles.btnC}
-                    onPress={() => Alert.alert('Continua proceso...')} activeOpacity={0.9}>
+                    onPress={() => navigation.navigate("CodigoVerificacion" as any)} activeOpacity={0.9}>
                     <Text style={styles.textC}>CONTINUAR</Text>
                 </TouchableOpacity>
             </View>

@@ -4,10 +4,11 @@ import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, T
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
-
+//Navegación
+import { useNavigation } from '@react-navigation/native';
 
 const ImportarCuenta = () => {
-
+    const navigation = useNavigation();
     const [twelfString, setTwelfString] = useState('')
 
     async function crearCuenta(twelf: string) {
@@ -16,6 +17,7 @@ const ImportarCuenta = () => {
             const acc = createAccount(value)
             acc.then((value) => {
                 console.log(value.secretKey.toString())
+                navigation.navigate("CodigoVerificacion" as any)
             })
         })
     }
