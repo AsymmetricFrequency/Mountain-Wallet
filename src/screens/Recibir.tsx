@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { StackNavigator } from "react-navigation";
 // import { TextInput } from 'react-native-element-textinput';
+import QRCode from 'react-native-qrcode-svg';
 
 
 
@@ -26,12 +27,14 @@ const Recibir = () => {
                     <View style={styles.cuadro}>
                         {/* Imagen QR */}
                         <View style={styles.cuadroQR}>
-                            <Image style={styles.imgqr} source={require('./img/QRCode.png')}  />
-                        </View>      
+                            <QRCode size={200}
+                                value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv"                                
+                            />
+                        </View>    
                         {/* Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>
-                                <TextInput style={styles.inputqr} placeholder="Ezq3cnFnLi3HYEeouCas9neVLUsXZf5ppcgwZ5" />
+                                <TextInput style={styles.inputqr} placeholder="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv" />
                             </View>
                             <View style={styles.cbtncop}>
                                     <TouchableOpacity style={styles.btncop}  activeOpacity={0.9}> 
@@ -106,6 +109,7 @@ const styles = StyleSheet.create({
     cuadroQR:{
         alignItems:'center',
         padding: '2%',
+        marginTop: '2%',
     },
     imgqr:{
         width: 200,
@@ -157,15 +161,15 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginRight: '10%',
         marginLeft: '10%',
-        paddingTop: '2%',
-        paddingBottom: '2%',
+        paddingTop: '4%',
+        paddingBottom: '4%',
         borderRadius: 20,
         marginTop: '5%'
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(4),
+        fontSize:RFPercentage(2),
     },
 })
 export default Recibir

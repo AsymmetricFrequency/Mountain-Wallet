@@ -10,6 +10,16 @@ import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 
 const Importar = () => {
 
+//traer account
+
+//Funcion enviar token
+async function sendToken(){
+    const send = sendTokenTransaction("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ", 1)
+    send.then((value) => {
+      console.log(value);
+    })
+  }
+
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
@@ -18,7 +28,7 @@ const Importar = () => {
                     {/*Boton Depositar */}
                     <View style={styles.cuadroD}>
                         <TouchableOpacity style={styles.btnD}  activeOpacity={1}>
-                            <Text style={styles.textbtnD}>DEPOSITAR</Text> 
+                            <Text style={styles.textbtnD}>ENVIAR</Text> 
                         </TouchableOpacity>
                     </View>
                     
@@ -26,7 +36,7 @@ const Importar = () => {
                         {/* Email */}
                         <View style={styles.tablamail} >
                             <View style={styles.cuadromail}>
-                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." />
+                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." autoFocus={true}/>
                             </View>
                             <View style={styles.cqr}>
                                 <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9}>
@@ -52,7 +62,7 @@ const Importar = () => {
                         </View>
                         {/* BotonConfirmar */}
                         <View>
-                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => sendToken()}>
                                 <Text style={styles.textCI}>CONFIRMAR</Text> 
                             </TouchableOpacity>        
                         </View> 
@@ -206,15 +216,15 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginRight: '10%',
         marginLeft: '10%',
-        paddingTop: '2%',
-        paddingBottom: '2%',
+        paddingTop: '4%',
+        paddingBottom: '4%',
         borderRadius: 20,
         marginTop: '20%'
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(4),
+        fontSize:RFPercentage(2),
     },
 })
 export default Importar

@@ -1,6 +1,6 @@
 import * as solanaWeb3 from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey, Keypair } from '@solana/web3.js';
 
 import  AsyncStorage  from "@react-native-async-storage/async-storage";
 
@@ -88,9 +88,11 @@ async function readPassword(){
 async function generateMnemonic() {
     const randomBytes = await Random.getRandomBytesAsync(16);
     const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
-    saveKey(mnemonic)     
+    //guardando mnemonic en asyncStorage
+    saveMmemonic(mnemonic)     
     return mnemonic
 }
+
 //mnemonic a semilla
 const mnemonicToSeed = async (mnemonic: string) => {
     try {
@@ -106,6 +108,7 @@ async function createAccount(seed: string) {
     const hex = Uint8Array.from(Buffer.from(seed))
     const keyPair = nacl.sign.keyPair.fromSeed(hex.slice(0, 32));
     const acc = new solanaWeb3.Account(keyPair.secretKey);
+    saveKey(keyPair.secretKey.toString())
     return acc
 }
 
@@ -155,11 +158,19 @@ async function getToken(publicKey: string, splToken: string){
   }
 
 }
+
 //enviar transaccion
-async function sendTokenTransaction(wallet: solanaWeb3.Account, toPublic: string, splToken: string, amount: number) {
+async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
   const connection = createConnection("devnet")
-  const DEMO_WALLET_SECRET_KEY = new Uint8Array(wallet.secretKey)
-  const fromWallet = wallet
+
+  //prueba con la llave
+  const DEMO_WALLET_SECRET_KEY = new Uint8Array([48,120,100,99,102,50,56,50,51,102,100,51,101,101,101,99,51,49,100,54,53,102,56,100,50,49,101,54,97,48,57,98,189,161,122,102,109,24,251,64,171,179,19,248,192,171,203,109,61,170,248,164,223,240,174,12,33,6,139,185,61,115,183,169]); 
+  var fromWallet = new solanaWeb3.Account(DEMO_WALLET_SECRET_KEY);
+  console.log(fromWallet.publicKey.toString());
+  console.log(readMnemonic());
+  
+  
+  //const fromWallet = wallet
   const toWallet = new solanaWeb3.PublicKey(toPublic)
   const myMint = new solanaWeb3.PublicKey(splToken)
 
@@ -203,7 +214,7 @@ async function sendTokenTransaction(wallet: solanaWeb3.Account, toPublic: string
 }
 
 // funcion para obtener el historial de transacciones
-async function getHistory(pubKey:string,options = { limit: 20 }){ 0
+async function getHistory(pubKey:string,options = { limit: 20 }){
 
   const connection = createConnection("mainnet-beta");
   const history = await connection.getConfirmedSignaturesForAddress2(
@@ -218,4 +229,4 @@ return history;
 }
 
 
-export { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory }
+export { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic }

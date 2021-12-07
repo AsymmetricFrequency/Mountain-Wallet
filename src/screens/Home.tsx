@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginRight: '10%',
         marginLeft: '10%',
-        paddingTop: '2%',
-        paddingBottom: '2%',
+        paddingTop: '4%',
+        paddingBottom: '4%',
         borderRadius: 20,
     },
     btnI:{
@@ -83,14 +83,14 @@ const styles = StyleSheet.create({
         marginTop:'5%',
         marginRight: '10%',
         marginLeft: '10%',
-        paddingTop: '2%',
-        paddingBottom: '2%',
+        paddingTop: '4%',
+        paddingBottom: '4%',
         borderRadius: 20,
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(4),
+        fontSize:RFPercentage(2),
     },
 
     Developed:{
