@@ -37,6 +37,7 @@ const ImportarCuenta = () => {
                 >
                     <Text style={styles.labeluno} ></Text>
                 </TextInput>
+                
                 <Text style={styles.labeldos} numberOfLines={4}>Ingrese sus 12 palabras de respaldo</Text>
                 <TouchableOpacity
                     style={styles.btnC}

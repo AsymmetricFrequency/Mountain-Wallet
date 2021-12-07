@@ -23,6 +23,7 @@ const Home = () => {
                                 <Text style={styles.textCI}>IMPORTAR</Text> 
                             </TouchableOpacity>           
                         </View>  
+                        
                         {/* Developed */}
                         <View style={styles.Developed}>
                             <Text style={styles.textDeveloped}>DEVELOPED BY</Text>

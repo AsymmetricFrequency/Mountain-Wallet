@@ -28,6 +28,7 @@ const Crearcuenta = () => {
                 <TouchableOpacity style={styles.TextInput}>
                     <Text style={styles.labeluno}>{words}</Text>
                 </TouchableOpacity>
+                
                 <Text style={styles.labeldos} numberOfLines={4}>Oprima en "Generar 12 palabras" y copie las palabras que se generan en el recuadro, son de gran importancia para la seguridad de su cuenta.</Text>
                 <TouchableOpacity
                     style={styles.btnG}

@@ -30,6 +30,7 @@ const Recibir = () => {
                                 value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv"                                
                             />
                         </View>    
+                        
                         {/* Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>

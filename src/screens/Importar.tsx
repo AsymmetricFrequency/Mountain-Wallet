@@ -31,6 +31,7 @@ async function sendToken(){
                             <Text style={styles.textbtnD}>ENVIAR</Text> 
                         </TouchableOpacity>
                     </View>
+                    
                     <View style={styles.cuadro}>
                         {/* Email */}
                         <View style={styles.tablamail} >
