@@ -8,6 +8,8 @@ import { StackNavigator } from "react-navigation";
 // import { TextInput } from 'react-native-element-textinput';
 import QRCode from 'react-native-qrcode-svg';
 
+
+
 const Recibir = () => {
 
     return (
@@ -21,15 +23,13 @@ const Recibir = () => {
                             <Text style={styles.textbtnR}>RECIBIR</Text> 
                         </TouchableOpacity>
                     </View>
-
-                
-                   
                     <View style={styles.cuadro}>
                         {/* Imagen QR */}
-                           
-                    <QRCode
-                        value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv"
-                    />    
+                        <View style={styles.cuadroQR}>
+                            <QRCode size={200}
+                                value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv"                                
+                            />
+                        </View>                            
                         {/* Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     cuadroQR:{
         alignItems:'center',
         padding: '2%',
+        marginTop: '2%',
     },
     imgqr:{
         width: 200,
@@ -159,15 +160,15 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginRight: '10%',
         marginLeft: '10%',
-        paddingTop: '2%',
-        paddingBottom: '2%',
+        paddingTop: '4%',
+        paddingBottom: '4%',
         borderRadius: 20,
         marginTop: '5%'
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(4),
+        fontSize:RFPercentage(2),
     },
 })
 export default Recibir

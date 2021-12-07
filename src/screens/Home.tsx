@@ -22,7 +22,7 @@ const Home = () => {
                             <TouchableOpacity style={styles.btnI}  activeOpacity={0.9}>
                                 <Text style={styles.textCI}>IMPORTAR</Text> 
                             </TouchableOpacity>           
-                        </View>  
+                        </View>                          
                         {/* Developed */}
                         <View style={styles.Developed}>
                             <Text style={styles.textDeveloped}>DEVELOPED BY</Text>
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginRight: '10%',
         marginLeft: '10%',
-        paddingTop: '2%',
-        paddingBottom: '2%',
+        paddingTop: '4%',
+        paddingBottom: '4%',
         borderRadius: 20,
     },
     btnI:{
@@ -83,16 +83,15 @@ const styles = StyleSheet.create({
         marginTop:'5%',
         marginRight: '10%',
         marginLeft: '10%',
-        paddingTop: '2%',
-        paddingBottom: '2%',
+        paddingTop: '4%',
+        paddingBottom: '4%',
         borderRadius: 20,
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(4),
+        fontSize:RFPercentage(2),
     },
-
     Developed:{
         width: '100%',
         height: '100%',

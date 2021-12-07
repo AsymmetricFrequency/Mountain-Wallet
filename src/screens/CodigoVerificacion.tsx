@@ -1,46 +1,132 @@
-import React, { Component } from 'react'
-
-import { Text, StyleSheet, View, TextInput, Image, Button, Alert, TouchableOpacity } from 'react-native'
+import React, { Component,useRef, useState } from 'react'
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 
 
 const CodigoVerificacion = () => {
+
+        // Referencias para salto input
+        const pin1Ref = useRef(null)
+        const pin2Ref = useRef(null)
+        const pin3Ref = useRef(null)
+        const pin4Ref = useRef(null)
+
+        const cof1Ref = useRef(null)
+        const cof2Ref = useRef(null)
+        const cof3Ref = useRef(null)
+        const cof4Ref = useRef(null)
+
+        const [pin1, setPin1] = useState("");
+        const [pin2, setPin2] = useState("");
+        const [pin3, setPin3] = useState("");
+        const [pin4, setPin4] = useState("");
     
+        const [cof1, setCof1] = useState("");
+        const [cof2, setCof2] = useState("");
+        const [cof3, setCof3] = useState("");
+        const [cof4, setCof4] = useState("");
+        
         return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.body}
         scrollEnabled={false}>
             <View style={styles.containeruno}>
+                {/* logo */}
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
-            
-            <View style={styles.containerBlanco}>
-            </View>
-            <View style={styles.containerBlanco2}>
-                <Image source={require('./img/logmanito.png')} style={styles.logomano} />
-                <Text style={styles.textuno} numberOfLines={2}>Crear código de seguridad</Text>
-                <View style={styles.containerunorama}>  
-                    <TextInput style={styles.TextInput} maxLength={1} keyboardType="numeric"></TextInput>
-                    <TextInput style={styles.TextInput} maxLength={1} keyboardType="numeric"></TextInput>
-                    <TextInput style={styles.TextInput} maxLength={1} keyboardType="numeric"></TextInput>
-                    <TextInput style={styles.TextInput} maxLength={1} keyboardType="numeric"></TextInput>
+                {/* BordeGris */}
+                <View style={styles.containerBlanco}>
+                    <Image source={require('./img/logmanito.png')} style={styles.logomano} />
+                    {/* Codigo seguridad */}
+                    <Text style={styles.textuno} numberOfLines={2}>CREAR CÓDIGO DE SEGURIDAD</Text>
+                    <View style={styles.containerunorama}>  
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true} 
+                           ref={pin1Ref}
+                           onChange={(pin1)=>{
+                                 setPin1(pin1);
+                                 if (pin1 != ""){
+                                     pin2Ref.current.focus();
+                                 }
+                            }}
+                        />
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric"
+                            ref={pin2Ref}
+                            onChange={(pin2)=>{
+                                setPin2(pin2)
+                                if (pin2 != ""){
+                                    pin3Ref.current.focus();
+                                }
+                            }}
+                        />
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
+                            ref={pin3Ref}
+                            onChange={(pin3)=>{
+                                setPin3(pin3);
+                                if (pin3 != ""){
+                                    pin4Ref.current.focus();
+                                }
+                            }}
+                        />
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
+                            ref={pin4Ref}
+                            onChange={(pin4)=>{
+                                setPin1(pin4);
+                                if (pin3 != ""){
+                                    cof1Ref.current.focus();
+                                }
+                            }}
+                        />
+                    </View>
+                    
+                    {/* Confirmar codigo */}
+                    <Text style={styles.textdos} numberOfLines={2}>CONFIRMAR CÓDIGO DE SEGURIDAD</Text>
+                    
+                    <View style={styles.containerunorama}>
+                        <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
+                            ref={cof1Ref}
+                            onChange={(cof1)=>{
+                                setCof1(cof1);
+                                if (cof1 != ""){
+                                    cof2Ref.current.focus();
+                                }
+                            }}
+                        />
+                        <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
+                            ref={cof2Ref}
+                            onChange={(cof2)=>{
+                                setCof2(cof2);
+                                if (cof2 != ""){
+                                    cof3Ref.current.focus();
+                                }
+                            }}
+                        />
+                        <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
+                            ref={cof3Ref}
+                            onChange={(cof3)=>{
+                                setCof3(cof3);
+                                if (cof3 != ""){
+                                    cof4Ref.current.focus();
+                                }
+                            }}
+                        />
+                        <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
+                            ref={cof4Ref}
+                            onChange={(cof4)=>{
+                                setCof4(cof4);
+                            }}
+                        />                    
+                    </View>
+                    
+                    <View>
+                        <TouchableOpacity
+                            style={styles.btnC}
+                            onPress={() => Alert.alert('Codigo...')} activeOpacity={0.9}>
+                            <Text style={styles.textCI}>CONFIRMAR</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                    <Text style={styles.textdos} numberOfLines={2}>Confirmar código de seguridad</Text>
-                <View style={styles.containerunorama}>
-                    <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"></TextInput>
-                    <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"></TextInput>
-                    <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"></TextInput>
-                    <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"></TextInput>
-                </View>
-            </View>
-            <View style={styles.containerdos}>
-              <TouchableOpacity
-                  style={styles.botonCont}
-                  onPress={() => Alert.alert('Codigo...')}>
-                  <Text style={styles.textoBoton}>CONFIRMAR</Text>
-              </TouchableOpacity>
-             </View>
             </View>            
 
         </KeyboardAwareScrollView>
@@ -59,40 +145,28 @@ const styles = StyleSheet.create({
     },
     containeruno: {
         alignItems: 'center',
-
-    },
-    container2: {
-        alignItems: 'center',
-        paddingTop: '30%',
-        backgroundColor: 'white'
     },
     containerBlanco: {
-        width: '100%',
         marginTop: 10,
         alignItems: 'center',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        borderWidth: 5,
-        borderColor: '#b5b2b6',
-        borderStyle: 'solid',
-        paddingTop: '40%',
-    },
-    containerBlanco2: {
-        width: '100%',
-        marginTop: '-40%',
-        borderTopLeftRadius:28,
-        borderTopRightRadius: 28,
-        alignItems: 'center',
-        backgroundColor: 'white',
-        paddingLeft: '10%',
-        paddingRight: '10%',
         paddingTop: '10%',
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'white',
+        elevation: 10,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.1,
+        shadowRadius: 5,     
     },
     logo: {
         marginTop: '0%',
         width: 150,
         height: 150,
         resizeMode: 'contain',
+        alignItems: 'center',
     },
     logomano: {
         top: '0%',
@@ -102,27 +176,24 @@ const styles = StyleSheet.create({
         
     },
     textuno: {
-        top: '10%',
-        fontSize: 15,
+        marginTop: '8%',
+        fontSize:RFPercentage(2.3),
         fontWeight: 'bold',
-        color: '#625d5b'
+        color: '#625d5b',
     },
     textdos: {
-        top: '30%',
-        fontSize: 15,
+        marginTop: '6%',
+        fontSize:RFPercentage(2.3),
         fontWeight: 'bold',
-        color: '#625d5b'
+        color: '#625d5b',
     },
     containerunorama: {
         marginTop: '0%',
         flexDirection: 'row',
         //container para los textInput
     },
-    containerdos: {
-        marginTop: '25%',
-    },
-    TextInput: {
-        top: '70%',
+    TextInput1: {
+        marginTop: '5%',
         flexDirection: 'row',
         width: 50,
         height: 50,
@@ -130,11 +201,11 @@ const styles = StyleSheet.create({
         borderColor: 'purple',
         margin: 5,
         paddingLeft: 20,
-        borderRadius: 10
-        
+        borderRadius: 10,
+        fontSize:RFPercentage(2.3),
     },
     TextInput2: {
-        top: '155%',
+        marginTop: '5%',
         flexDirection: 'row',
         width: 50,
         height: 50,
@@ -142,32 +213,22 @@ const styles = StyleSheet.create({
         borderColor: 'purple',
         margin: 5,
         paddingLeft: 20,
-        borderRadius: 10
-    },
-    ButtonContainer: {
-        elevation: 8,
-        backgroundColor: '#5B298A',
         borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 60,
+        fontSize:RFPercentage(2.3),
     },
-    ButtonText: {
-        fontSize: 18,
-        color: "#fff",
-        fontWeight: "bold",
-        alignSelf: "center",
-      },
-    botonCont: {
-        top: '100%',
-        backgroundColor: '#5B298A',
-        width: '80%',
+    btnC:{
+        backgroundColor:'#5b298a',
+        paddingTop: '4%',
+        paddingBottom: '4%',
+        borderRadius: 20,
+        marginTop: '5%',
         alignItems: 'center',
-        borderRadius: 20
     },
-    textoBoton: {
-        fontSize: 20,
-        color: 'white',
-        textAlign: 'center',
-        padding: 10,
+    textCI:{
+        color:'white',
+        fontWeight: 'bold',
+        fontSize:RFPercentage(2),
+        marginLeft: '22%',
+        marginRight: '22%',
     },
 })

@@ -26,7 +26,6 @@ const Balance = () => {
 
     //value textinput
 
-
     //Funcion de obtener splToken
   const [tokenBalance, setTokenBalance] = useState(0)
 
@@ -39,7 +38,7 @@ const Balance = () => {
 
 
 
-obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
+  obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
 
 
 
@@ -89,9 +88,7 @@ obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx
                                     <Text style={styles.mtxtcry}>CNDR</Text>
                                 </View>
                             </View>                           
-                        </View>
-                        
-
+                        </View>                        
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
                                 <Image style={styles.imgcry} source={require('./img/billeteras/solana.png')}  />
@@ -153,7 +150,11 @@ const styles = StyleSheet.create({
     },
     columnadosB: {
         alignItems:'flex-start',
-        width:'50%',
+        width:'11%',
+        backgroundColor:'#923085',
+        borderRadius: 8,
+        paddingLeft: '2%',
+        paddingRight: '2%',
     },
     txtinferiorL:{
         fontFamily:'Roboto',
@@ -168,10 +169,7 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize:RFPercentage(3),
         fontWeight:'bold',
-        backgroundColor:'#923085',
-        paddingLeft: '3%',
-        paddingRight: '3%',
-        borderRadius: 10,
+
     },
     dcER:{
         flexDirection: 'row',
