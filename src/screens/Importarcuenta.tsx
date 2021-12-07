@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     checkbox: {
         alignSelf: "center",
     },
-        
     labeluno: {
         margin: 8,
         fontWeight: 'bold',

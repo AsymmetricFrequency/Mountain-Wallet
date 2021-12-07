@@ -18,7 +18,6 @@ const Crearcuenta = () => {
         })
       }
 
-
     return (
         <View style={styles.body}>
             <View style={styles.containeruno}>

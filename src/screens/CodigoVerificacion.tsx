@@ -117,7 +117,6 @@ const CodigoVerificacion = () => {
                             }}
                         />                    
                     </View>
-                    
                     <View>
                         <TouchableOpacity
                             style={styles.btnC}

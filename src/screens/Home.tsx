@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFPercentage(2),
     },
-
     Developed:{
         width: '100%',
         height: '100%',

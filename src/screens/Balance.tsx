@@ -91,7 +91,6 @@ const Balance = () => {
                             </View>                           
                         </View>
                         
-
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
                                 <Image style={styles.imgcry} source={require('./img/billeteras/solana.png')}  />

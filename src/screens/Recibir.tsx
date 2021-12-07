@@ -23,7 +23,6 @@ const Recibir = () => {
                             <Text style={styles.textbtnR}>RECIBIR</Text> 
                         </TouchableOpacity>
                     </View>
-
                     <View style={styles.cuadro}>
                         {/* Imagen QR */}
                         <View style={styles.cuadroQR}>
