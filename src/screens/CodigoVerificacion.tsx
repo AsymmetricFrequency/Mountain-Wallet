@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(2.3),
         fontWeight: 'bold',
         color: '#625d5b',
-    },
+    }, 
     textdos: {
         marginTop: '6%',
         fontSize:RFPercentage(2.3),
