@@ -13,11 +13,14 @@ const Importar = () => {
 
 //traer account
 
+const [pubKey,setPubKey] = useState("")
+const [amounToken,setAmounToken] = useState("")
+
 //Funcion enviar token
-    async function sendToken(){
-        const send = sendTokenTransaction("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ", 1)
+    async function sendToken(pubKey:string, amount:number){
+        const send = sendTokenTransaction(pubKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ", amount)
         send.then((value) => {
-        console.log(value);
+            console.log(value);
         })
     }
 
@@ -39,7 +42,7 @@ const Importar = () => {
                             {/* Email */}
                             <View style={styles.tablamail} >
                                 <View style={styles.cuadromail}>
-                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." autoFocus={true}/>
+                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." autoFocus={true} onChangeText={text => setPubKey(text)}/>
                                 </View>
                                 <View style={styles.cqr}>
                                     <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9}>
@@ -50,7 +53,7 @@ const Importar = () => {
                             {/* Importe*/}
                             <View style={styles.tablaimp} >
                                 <View style={styles.cuadroimp}>
-                                    <TextInput style={styles.inputimp} placeholder="IMPORTE" />
+                                    <TextInput style={styles.inputimp} placeholder="IMPORTE" onChangeText={text => setAmounToken(text)} />
                                 </View>
                                 <View style={styles.cmax}>
                                     <View style={styles.ccnd}>
@@ -65,7 +68,7 @@ const Importar = () => {
                             </View>
                             {/* BotonConfirmar */}
                             <View>
-                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => sendToken()}>
+                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => sendToken(pubKey,Number(amounToken))}>
                                     <Text style={styles.textCI}>CONFIRMAR</Text> 
                                 </TouchableOpacity>        
                             </View> 
