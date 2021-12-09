@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(2.3),
         fontWeight: 'bold',
         color: '#625d5b',
-    },
+    }, 
     textdos: {
         marginTop: '6%',
         fontSize:RFPercentage(2.3),
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         marginTop: '5%',
         flexDirection: 'row',
         width: 50,
-        height: 50,
+        height: 50, 
         borderWidth: 1,
         borderColor: 'purple',
         margin: 5,
