@@ -1,16 +1,31 @@
 import React, { useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput} from 'react-native'
+import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, SafeAreaView,Clipboard, ToastAndroid} from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
-import { StackNavigator } from "react-navigation";
+
 // import { TextInput } from 'react-native-element-textinput';
 import QRCode from 'react-native-qrcode-svg';
+//Navegación
 
 
 
 const Recibir = () => {
+   
+
+    const [copiedText, setCopiedText] = useState('')
+ 
+    const CopyToClipboard = () => {
+      Clipboard.setString('uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv') 
+      Alert.alert('Texto Copiado')     
+    };
+   
+    const fetchCopiedText = async () => {
+        const text = await Clipboard.getString()
+        setCopiedText(text)
+    };
+   
 
     return (
         <View style={styles.body}>
@@ -33,10 +48,10 @@ const Recibir = () => {
                         {/* Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>
-                                <TextInput style={styles.inputqr} placeholder="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv" />
+                                <TextInput style={styles.inputqr} editable = {false} value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv" />
                             </View>
                             <View style={styles.cbtncop}>
-                                    <TouchableOpacity style={styles.btncop}  activeOpacity={0.9}> 
+                                    <TouchableOpacity style={styles.btncop}  activeOpacity={0.9} onPress={() => CopyToClipboard()}> 
                                         <Text style={styles.txtcop}>COPIAR</Text>                        
                                     </TouchableOpacity>
                             </View>                    
@@ -44,9 +59,14 @@ const Recibir = () => {
                         {/*Boton volver*/}       
                         <View>
                                 <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
-                                    <Text style={styles.textCI}>VOLVER</Text> 
+                                    <Text style={styles.textCI} >VOLVER</Text> 
                                 </TouchableOpacity> 
-                        </View>            
+                        </View>           
+
+                        <TouchableOpacity   style={{marginTop:20}}activeOpacity={0.9} onPress={() => fetchCopiedText()}>
+                                    <Text >---Click Probar Copiado---</Text> 
+                        </TouchableOpacity>  
+                        <Text>{copiedText}</Text>
                     </View>
                 </View>             
             </ImageBackground>   
@@ -130,7 +150,7 @@ const styles = StyleSheet.create({
     cuadroqr:{
         width:'80%',
         justifyContent: 'center',
-        paddingLeft: '2%',
+        paddingLeft: '1%',
     },
     inputqr:{
         fontWeight: 'bold',

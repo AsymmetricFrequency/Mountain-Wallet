@@ -4,7 +4,8 @@ import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, T
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
-
+//Navegación
+import { Dimensions } from 'react-native';
 
 const ImportarCuenta = () => {
 
@@ -31,13 +32,12 @@ const ImportarCuenta = () => {
             <View style={styles.containerBlanco}>
                 <Text style={styles.textuno} numberOfLines={2}>IMPORTAR CUENTA</Text>
                 <TextInput 
-                    style={styles.TextInput}
+                    style={styles.TextInputf}
                     autoFocus={true} multiline={true}
-                    onChangeText={text => setTwelfString(text)}
-                >
+                    onChangeText={text => setTwelfString(text)}>
                     <Text style={styles.labeluno} ></Text>
                 </TextInput>                
-                <Text style={styles.labeldos} numberOfLines={4}>Ingrese sus 12 palabras de respaldo</Text>
+                <Text style={styles.labeldos} numberOfLines={4}>Ingrese sus 12 palabras de respaldo en minusculas</Text>
                 <TouchableOpacity
                     style={styles.btnC}
                     onPress={() => crearCuenta(twelfString)}>
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 5,     
     },
+    
     logo: {
         marginTop: '0%',
         width: 150,
@@ -108,21 +109,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    TextInput: {
+    TextInputf: {
         margin: 10,
         width: 300,
         height: 200,
         borderWidth: 0.8,
         borderColor: 'purple',
         borderRadius: 20,
-        padding: 50,
         paddingLeft: 10,
         paddingRight: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
         marginTop:'5%',
         fontWeight: 'bold',
         fontSize:RFPercentage(2.3),
+        flexDirection: 'column',
+        textAlignVertical : "center",
+        justifyContent: 'center',
+        textAlign:'center',
+        alignItems: 'center'
+        
+    },
+    labeluno: {
+        margin: 8,        
     },
     botonCont: {
         marginBottom: 20,
@@ -141,18 +148,14 @@ const styles = StyleSheet.create({
     checkbox: {
         alignSelf: "center",
     },
-    labeluno: {
-        margin: 8,
-        fontWeight: 'bold',
-        textAlign: 'justify'     
-    },
+    
     labeldos: {
         margin: 8,
         padding: 10,
         fontSize:RFPercentage(2.3),
         marginRight: '5%',
         marginLeft: '5%',
-        textAlign: 'justify',
+        textAlign:'center',
         color: '#b1b1b1',
     },
     btnC:{
