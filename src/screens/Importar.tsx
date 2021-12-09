@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler} from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // import { TextInput } from 'react-native-element-textinput';
-
+//navegación
 
 
 const Importar = () => {
@@ -13,62 +14,68 @@ const Importar = () => {
 //traer account
 
 //Funcion enviar token
-async function sendToken(){
-    const send = sendTokenTransaction("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ", 1)
-    send.then((value) => {
-      console.log(value);
-    })
-  }
+    async function sendToken(){
+        const send = sendTokenTransaction("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ", 1)
+        send.then((value) => {
+        console.log(value);
+        })
+    }
+
 
     return (
-        <View style={styles.body}>
-            <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
-                <View style={styles.containeruno}>
-                    <Image style={styles.logo} source={require('./img/enviar.png')}  />
-                    {/*Boton Depositar */}
-                    <View style={styles.cuadroD}>
-                        <TouchableOpacity style={styles.btnD}  activeOpacity={1}>
-                            <Text style={styles.textbtnD}>ENVIAR</Text> 
-                        </TouchableOpacity>
-                    </View>                    
-                    <View style={styles.cuadro}>
-                        {/* Email */}
-                        <View style={styles.tablamail} >
-                            <View style={styles.cuadromail}>
-                                <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." autoFocus={true}/>
-                            </View>
-                            <View style={styles.cqr}>
-                                <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9}>
-                                    <Image style={styles.imgqr} source={require('./img/qr.png')}  />
-                                </TouchableOpacity>
-                            </View>                      
-                        </View>
-                        {/* Importe*/}
-                        <View style={styles.tablaimp} >
-                            <View style={styles.cuadroimp}>
-                                <TextInput style={styles.inputimp} placeholder="IMPORTE" />
-                            </View>
-                            <View style={styles.cmax}>
-                                <View style={styles.ccnd}>
-                                    <Text>CNDR</Text>
+        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}contentContainerStyle={styles.body}
+        scrollEnabled={false}>
+            <View style={styles.body}>
+                <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
+                    <View style={styles.containeruno}>
+                        <Image style={styles.logo} source={require('./img/enviar.png')}  />
+                        {/*Boton Depositar */}
+                        <View style={styles.cuadroD}>
+                            <TouchableOpacity style={styles.btnD}  activeOpacity={1}>
+                                <Text style={styles.textbtnD}>ENVIAR</Text> 
+                            </TouchableOpacity>
+                        </View>                    
+                        <View style={styles.cuadro}>
+                            {/* Email */}
+                            <View style={styles.tablamail} >
+                                <View style={styles.cuadromail}>
+                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." autoFocus={true}/>
                                 </View>
-                                <View style={styles.cbtnmax}>
-                                    <TouchableOpacity style={styles.btnmax}  activeOpacity={0.9}> 
-                                        <Text style={styles.txtmax}>MAX</Text>                        
+                                <View style={styles.cqr}>
+                                    <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9}>
+                                        <Image style={styles.imgqr} source={require('./img/qr.png')}  />
                                     </TouchableOpacity>
-                                </View>                                
-                            </View>                      
+                                </View>                      
+                            </View>
+                            {/* Importe*/}
+                            <View style={styles.tablaimp} >
+                                <View style={styles.cuadroimp}>
+                                    <TextInput style={styles.inputimp} placeholder="IMPORTE" />
+                                </View>
+                                <View style={styles.cmax}>
+                                    <View style={styles.ccnd}>
+                                        <Text>CNDR</Text>
+                                    </View>
+                                    <View style={styles.cbtnmax}>
+                                        <TouchableOpacity style={styles.btnmax}  activeOpacity={0.9}> 
+                                            <Text style={styles.txtmax}>MAX</Text>                        
+                                        </TouchableOpacity>
+                                    </View>                                
+                                </View>                      
+                            </View>
+                            {/* BotonConfirmar */}
+                            <View>
+                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => sendToken()}>
+                                    <Text style={styles.textCI}>CONFIRMAR</Text> 
+                                </TouchableOpacity>        
+                            </View> 
                         </View>
-                        {/* BotonConfirmar */}
-                        <View>
-                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => sendToken()}>
-                                <Text style={styles.textCI}>CONFIRMAR</Text> 
-                            </TouchableOpacity>        
-                        </View> 
-                    </View>
-                </View>             
-            </ImageBackground>   
-        </View>
+                    </View>             
+                </ImageBackground>   
+            </View>
+
+        </KeyboardAwareScrollView>
+        
     )
 }
 
