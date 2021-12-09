@@ -6,8 +6,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
 
+//navegación
+
 
 const Home = () => {
+
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
@@ -16,10 +19,10 @@ const Home = () => {
                     {/* Botones*/}
                     <View style={styles.botonesCI}>
                         <View>
-                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} >
                                 <Text style={styles.textCI}>CREAR CUENTA</Text> 
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnI}  activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnI}  activeOpacity={0.9} >
                                 <Text style={styles.textCI}>IMPORTAR</Text> 
                             </TouchableOpacity>           
                         </View>                          
