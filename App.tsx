@@ -7,7 +7,8 @@ import "react-native-url-polyfill/auto";
 
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,saveKey, readKey,getHistory } from './api';
 
-;
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //screens
 import Balance from './src/screens/Balance';
@@ -22,6 +23,8 @@ import Splashc from './src/screens/Splashc';
   
 
 export default function App() { 
+
+  const Stack = createNativeStackNavigator();
 
   //Funcion de generar 12 palabras
   const [mnemonic, setMnemonic] = useState("")
@@ -103,8 +106,17 @@ export default function App() {
 
 
   return (
-    
-    <Importar/>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
+        <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
+        <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>
+        <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
+        <Stack.Screen name="Codigo" component={CodigoVerificacion} options={{headerShown: false}}/>
+        <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
+        <Stack.Screen name="Enviar" component={Importar} options={{headerShown: false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
     // <View style={styles.container}>
     //   <Text>{mnemonic}</Text>
     //   <TouchableOpacity

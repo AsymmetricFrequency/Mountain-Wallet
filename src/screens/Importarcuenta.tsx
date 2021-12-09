@@ -7,7 +7,7 @@ import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, g
 //Navegación
 import { Dimensions } from 'react-native';
 
-const ImportarCuenta = () => {
+const ImportarCuenta = ({navigation}: {navigation: any}) => {
 
     const [twelfString, setTwelfString] = useState('')
 
@@ -16,7 +16,7 @@ const ImportarCuenta = () => {
         docePalabras.then((value) => {
             const acc = createAccount(value)
             acc.then((value) => {
-                console.log(value.secretKey.toString())
+                navigation.navigate('Codigo')
             })
         })
     }

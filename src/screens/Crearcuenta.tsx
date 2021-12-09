@@ -7,7 +7,7 @@ import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,s
 
 
 
-const Crearcuenta = () => {
+const Crearcuenta = ({navigation}: {navigation: any}) => {
     
     const [isSelected, setSelection] = useState(false);
 
@@ -49,7 +49,9 @@ const Crearcuenta = () => {
                 
                 <TouchableOpacity
                     style={styles.btnC}
-                    activeOpacity={0.9}>
+                    activeOpacity={0.9}
+                    onPress={() => navigation.navigate('Codigo')}
+                >
                     <Text style={styles.textC}>CONTINUAR</Text>
                 </TouchableOpacity>
             </View>

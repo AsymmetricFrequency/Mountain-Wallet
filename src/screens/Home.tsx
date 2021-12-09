@@ -9,28 +9,27 @@ import { TextInput } from 'react-native-element-textinput';
 //navegación
 
 
-const Home = () => {
+const Home = ({navigation}: {navigation: any}) => {
 
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
                     <Image style={styles.logo} source={require('./img/logoblanco.png')}  />
-                    {/* Botones*/}
+                   
                     <View style={styles.botonesCI}>
-                        <View>
-                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} >
-                                <Text style={styles.textCI}>CREAR CUENTA</Text> 
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnI}  activeOpacity={0.9} >
-                                <Text style={styles.textCI}>IMPORTAR</Text> 
-                            </TouchableOpacity>           
-                        </View>                          
-                        {/* Developed */}
                         <View style={styles.Developed}>
                             <Text style={styles.textDeveloped}>DEVELOPED BY</Text>
                             <Text style={styles.textDeveloped}>CONDORCOIN</Text>
-                        </View>              
+                        </View>  
+                        <View>
+                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.5} onPress={() => navigation.navigate('Crear')}>
+                                <Text style={styles.textCI}>CREAR CUENTA</Text> 
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.btnI}  activeOpacity={0.5} onPress={() => navigation.navigate('ImportarCuenta')}>
+                                <Text style={styles.textCI}>IMPORTAR</Text> 
+                            </TouchableOpacity>           
+                        </View>                                       
                     </View>
                 </View>             
             </ImageBackground>   
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     fondo:{
-        flex: 1,
+        
         height:'100%',
         resizeMode:'contain',
     },
@@ -104,15 +103,13 @@ const styles = StyleSheet.create({
         left: 0, 
         right: 0, 
         bottom: 0,
-        paddingTop: 0,
-
+        paddingTop: 0
     },
     textDeveloped:{
         color:'#e0e0e0',
         fontWeight:'bold',
         fontSize:RFPercentage(1.5),
-        fontFamily: 'Roboto',
-        
+        fontFamily: 'Roboto'
     }
 })
 export default Home
