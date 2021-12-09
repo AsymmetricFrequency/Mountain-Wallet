@@ -150,17 +150,17 @@ const styles = StyleSheet.create({
         alignItems:'flex-end',
     },
     columnadosB: {
-        alignItems:'flex-start',
-        width:'11%',
+        alignItems:'center',
+        width:'12%',
         backgroundColor:'#923085',
         borderRadius: 8,
-        paddingLeft: '2%',
-        paddingRight: '2%',
+        // paddingLeft: '2%',
+        // paddingRight: '2%',
     },
     txtinferiorL:{
         fontFamily:'Roboto',
         color:'white',
-        fontSize:RFPercentage(3),
+        fontSize:RFPercentage(2.5),
         fontWeight:'bold',
         paddingLeft: '3%',
         paddingRight: '3%',
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     txtinferiorR:{
         fontFamily:'Roboto',
         color:'white',
-        fontSize:RFPercentage(3),
+        fontSize:RFPercentage(2.5),
         fontWeight:'bold',
 
     },
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     },
     stxtcry:{
         fontFamily: 'Roboto',
-        fontSize:RFPercentage(3),
+        fontSize:RFPercentage(2.5),
         color: '#8d8c8c',
     },
     monedacry:{
