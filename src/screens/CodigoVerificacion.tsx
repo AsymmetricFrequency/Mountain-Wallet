@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         marginTop: '5%',
         flexDirection: 'row',
         width: 50,
-        height: 50,
+        height: 50, 
         borderWidth: 1,
         borderColor: 'purple',
         margin: 5,
