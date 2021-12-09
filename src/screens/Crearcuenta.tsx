@@ -1,11 +1,14 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 
-const Crearcuenta = () => {
 
+
+
+const Crearcuenta = () => {
+    
     const [isSelected, setSelection] = useState(false);
 
     const [words, setWords] = useState('')
@@ -16,7 +19,12 @@ const Crearcuenta = () => {
           console.log(value);
           setWords(value)
         })
-      }
+    }
+
+    const CopyToClipboard = () => {
+        Clipboard.setString(words) 
+        Alert.alert('Texto Copiado')     
+    };
 
     return (
         <View style={styles.body}>
@@ -25,9 +33,13 @@ const Crearcuenta = () => {
             </View>
             <View style={styles.containerBlanco}>
                 <Text style={styles.textuno} numberOfLines={2}>CREAR CUENTA</Text>
-                <TouchableOpacity style={styles.TextInput}>
-                    <Text style={styles.labeluno}>{words}</Text>
-                </TouchableOpacity>                
+                
+                <TouchableOpacity style={styles.TextInput} onPress={() => CopyToClipboard()}>
+                    <View>
+                        <Text style={styles.labeluno}>{words}</Text>
+                    </View>
+                </TouchableOpacity>
+
                 <Text style={styles.labeldos} numberOfLines={4}>Oprima en "Generar 12 palabras" y copie las palabras que se generan en el recuadro, son de gran importancia para la seguridad de su cuenta.</Text>
                 <TouchableOpacity
                     style={styles.btnG}
@@ -37,7 +49,7 @@ const Crearcuenta = () => {
                 
                 <TouchableOpacity
                     style={styles.btnC}
-                    onPress={() => Alert.alert('Continua proceso...')} activeOpacity={0.9}>
+                    activeOpacity={0.9}>
                     <Text style={styles.textC}>CONTINUAR</Text>
                 </TouchableOpacity>
             </View>
