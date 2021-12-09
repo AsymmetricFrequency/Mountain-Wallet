@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
+
+
 
 const Balance = () => {
 
@@ -41,7 +43,6 @@ const Balance = () => {
   obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
 
 
-
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
@@ -61,12 +62,12 @@ const Balance = () => {
                     {/* Enviar y recibir */}
                     <View style={styles.dcER}>
                         <View style={styles.dcR}>
-                            <TouchableOpacity style={styles.btnR}  activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnR}  activeOpacity={0.9} >
                                 <Text style={styles.textbtnR}>RECIBIR</Text> 
                             </TouchableOpacity>
                         </View>
                         <View style={styles.dcE}>
-                            <TouchableOpacity style={styles.btnR} activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.btnR} activeOpacity={0.9} >
                                 <Text style={styles.textbtnR}>ENVIAR</Text>
                             </TouchableOpacity>
                         </View>
