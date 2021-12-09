@@ -7,7 +7,7 @@ import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,s
 //navegación
 
 
-const CodigoVerificacion = () => {
+const CodigoVerificacion = ({navigation}: {navigation: any}) => {
   
         // Referencias para salto input
         const pin1Ref = useRef(null)
@@ -123,7 +123,9 @@ const CodigoVerificacion = () => {
                     <View>
                         <TouchableOpacity
                             style={styles.btnC}
-                            activeOpacity={0.9}>
+                            activeOpacity={0.9}
+                            onPress={() => navigation.navigate('Balance')}
+                        >
                             <Text style={styles.textCI}>CONFIRMAR</Text>
                         </TouchableOpacity>
                     </View>

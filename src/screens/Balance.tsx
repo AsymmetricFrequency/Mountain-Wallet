@@ -8,7 +8,7 @@ import { TextInput } from 'react-native-element-textinput';
 
 
 
-const Balance = () => {
+const Balance = ({navigation}: {navigation: any}) => {
 
     //Funcion obtener balance
     const [balance, setBalance] = useState(0)
@@ -62,12 +62,20 @@ const Balance = () => {
                     {/* Enviar y recibir */}
                     <View style={styles.dcER}>
                         <View style={styles.dcR}>
-                            <TouchableOpacity style={styles.btnR}  activeOpacity={0.9} >
+                            <TouchableOpacity style=
+                            {styles.btnR} 
+                            activeOpacity={0.9} 
+                            onPress={() => navigation.navigate('Recibir')}
+                            >
                                 <Text style={styles.textbtnR}>RECIBIR</Text> 
                             </TouchableOpacity>
                         </View>
                         <View style={styles.dcE}>
-                            <TouchableOpacity style={styles.btnR} activeOpacity={0.9} >
+                            <TouchableOpacity style=
+                            {styles.btnR} 
+                            activeOpacity={0.9} 
+                            onPress={() => navigation.navigate('Enviar')}
+                            >
                                 <Text style={styles.textbtnR}>ENVIAR</Text>
                             </TouchableOpacity>
                         </View>
