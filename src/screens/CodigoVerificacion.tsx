@@ -4,10 +4,11 @@ import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpaci
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+//navegación
 
 
 const CodigoVerificacion = () => {
-
+  
         // Referencias para salto input
         const pin1Ref = useRef(null)
         const pin2Ref = useRef(null)
@@ -122,7 +123,7 @@ const CodigoVerificacion = () => {
                     <View>
                         <TouchableOpacity
                             style={styles.btnC}
-                            onPress={() => Alert.alert('Codigo...')} activeOpacity={0.9}>
+                            activeOpacity={0.9}>
                             <Text style={styles.textCI}>CONFIRMAR</Text>
                         </TouchableOpacity>
                     </View>
