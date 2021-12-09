@@ -104,7 +104,7 @@ export default function App() {
 
   return (
     
-    <Recibir/>
+    <Home/>
     // <View style={styles.container}>
     //   <Text>{mnemonic}</Text>
     //   <TouchableOpacity
