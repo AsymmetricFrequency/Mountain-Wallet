@@ -20,7 +20,6 @@ import CodigoVerificacion from './src/screens/CodigoVerificacion'
 import Recibir from './src/screens/Recibir';
 import Splashc from './src/screens/Splashc';
 
-  
 
 export default function App() { 
 
@@ -102,10 +101,15 @@ export default function App() {
       setHis(value[0].signature.toString())
       console.log(value);
     })
-  } 
+  }
+  
+  const [llave, setLlave] = useState("")
+  
+  readKey().then((value) => {
+    setLlave(value)
+  })
 
-
-  if (readKey != null) {
+  if (llave != null && llave != '' && llave != undefined) {
     return (
       <NavigationContainer>
         <Stack.Navigator>
@@ -122,6 +126,7 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
           <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
           <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>
+          <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

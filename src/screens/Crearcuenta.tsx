@@ -50,7 +50,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 <TouchableOpacity
                     style={styles.btnC}
                     activeOpacity={0.9}
-                    onPress={() => navigation.navigate('Codigo')}
+                    onPress={() => navigation.navigate('Balance')}
                 >
                     <Text style={styles.textC}>CONTINUAR</Text>
                 </TouchableOpacity>

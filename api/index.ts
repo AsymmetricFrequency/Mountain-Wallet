@@ -32,7 +32,8 @@ async function readKey(){
   try {    
     console.log("READ KEY:");
     const key = await AsyncStorage.getItem('@storage_Key')
-    console.log(key)  
+    console.log(key) 
+    return key 
   } catch (e) { 
        // saving error  
   }

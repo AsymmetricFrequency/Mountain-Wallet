@@ -16,7 +16,7 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
         docePalabras.then((value) => {
             const acc = createAccount(value)
             acc.then((value) => {
-                navigation.navigate('Codigo')
+                navigation.navigate('Balance')
             })
         })
     }
