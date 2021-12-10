@@ -105,63 +105,27 @@ export default function App() {
   } 
 
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
-        <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
-        <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>
-        <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
-        <Stack.Screen name="Codigo" component={CodigoVerificacion} options={{headerShown: false}}/>
-        <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
-        <Stack.Screen name="Enviar" component={Importar} options={{headerShown: false}}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-    // <View style={styles.container}>
-    //   <Text>{mnemonic}</Text>
-    //   <TouchableOpacity
-    //     style={styles.boton}
-    //     onPress={() => generarMnemonic()}
-    //   >
-    //     <Text>Generar Mnemonic</Text>
-    //   </TouchableOpacity>
-    //   <Text>{seed}</Text>
-    //   <TouchableOpacity
-    //     style={styles.boton}
-    //     onPress={() => generarSeed(mnemonic)}
-    //   >
-    //     <Text>Generar Semilla</Text>
-    //   </TouchableOpacity>
-    //   <Text>{publicKey}</Text>
-    //   <TouchableOpacity
-    //     style={styles.boton}
-    //     onPress={() => generarCuenta(seed)}
-    //   >
-    //     <Text>Crear Cuenta</Text>
-    //   </TouchableOpacity>
-    //   <Text>{balance}</Text>
-    //   <TouchableOpacity
-    //     style={styles.boton}
-    //     onPress={() => obtenerBalance(publicKey)}
-    //   >
-    //     <Text>Obtener Balance</Text>
-    //   </TouchableOpacity>
-    //   <Text>{tokenBalance}</Text>
-    //   <TouchableOpacity
-    //     style={styles.boton}
-    //     onPress={() => obtenerTokenB(publicKey, "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")}
-    //   >
-    //     <Text>Obtener Balance Token</Text>
-    //   </TouchableOpacity>
-    //   <Text>{his}</Text>
-    //   <TouchableOpacity
-    //     style={styles.boton}
-    //     onPress={() => historial("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv")}
-    //   >
-    //     <Text>Enviar</Text>
-    //   </TouchableOpacity>
-    // </View>
-  );
+  if (readKey != null) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
+          <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
+          <Stack.Screen name="Enviar" component={Importar} options={{headerShown: false}}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
+          <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
+          <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

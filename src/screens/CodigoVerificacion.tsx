@@ -124,7 +124,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         <TouchableOpacity
                             style={styles.btnC}
                             activeOpacity={0.9}
-                            onPress={() => navigation.navigate('Balance')}
+                            // onPress={() => navigation.navigate('Balance')}
                         >
                             <Text style={styles.textCI}>CONFIRMAR</Text>
                         </TouchableOpacity>
