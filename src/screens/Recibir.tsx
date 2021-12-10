@@ -28,14 +28,17 @@ const Recibir = () => {
    
     
 //funcion obtener llave publica
-const [pKey,setPKey] = useState("")
-readPublicKey().then((val)=>{
-    console.log("PUBLIC KEY:");
-    console.log(val);
-    
-    setPKey(val)
-})
+    const [pKey,setPKey] = useState("pubKey")
 
+    async function obtenerPKey(){
+        readPublicKey().then((val)=>{
+            console.log("PUBLIC KEY:");
+            console.log(val);
+            setPKey(val)
+        })
+    }
+
+    obtenerPKey()
 
     return (
         <View style={styles.body}>
