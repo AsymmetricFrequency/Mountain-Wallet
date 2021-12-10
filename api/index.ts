@@ -39,6 +39,29 @@ async function readKey(){
   }
 }
 
+//Funcion guardar llave
+async function savePublicKey(data){
+  try {     
+    console.log("SAVE PUBLIC KEY:");
+    console.log(await AsyncStorage.setItem('@storage_PublicKey', data))  
+  } catch (e) { 
+       // saving error  
+  }
+}
+
+//Leer la public key de la cuenta
+async function readPublicKey(){
+  //obteniendo llave
+  try {    
+    console.log("READ PUBLIC KEY:");
+    const key = await AsyncStorage.getItem('@storage_PublicKey')
+    console.log(key) 
+    return key 
+  } catch (e) { 
+       // saving error  
+  }
+}
+
 
 //Funcion guardar llave
 async function saveMmemonic(data){
@@ -230,4 +253,4 @@ return history;
 }
 
 
-export { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic }
+export { savePublicKey,readPublicKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic }

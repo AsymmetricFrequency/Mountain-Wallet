@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler } from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
@@ -24,7 +24,7 @@ const Balance = ({navigation}: {navigation: any}) => {
     }
 
     //obtener balance de una llave publica
-    obtenerBalance("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv")
+    obtenerBalance(pKey)
 
     //value textinput
 
@@ -38,9 +38,16 @@ const Balance = ({navigation}: {navigation: any}) => {
     })
   }
 
+//funcion obtener llave publica
+const [pKey,setPKey] = useState("")
+readPublicKey().then((val)=>{
+    console.log("PUBLIC KEY:");
+    console.log(val);
+    
+    setPKey(val)
+})
 
-
-  obtenerTokenB("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
+  obtenerTokenB(pKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
 
 
     return (

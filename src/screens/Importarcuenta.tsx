@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction, savePublicKey } from '../../api';
 //Navegación
 import { Dimensions } from 'react-native';
 
@@ -17,6 +17,7 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
             const acc = createAccount(value)
             acc.then((value) => {
                 navigation.navigate('Balance')
+                savePublicKey(value.publicKey.toString())
             })
         })
     }

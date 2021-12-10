@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, SafeAreaView,Clipboard, ToastAndroid} from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
@@ -17,7 +17,7 @@ const Recibir = () => {
     const [copiedText, setCopiedText] = useState('')
  
     const CopyToClipboard = () => {
-      Clipboard.setString('uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv') 
+      Clipboard.setString(pKey) 
       Alert.alert('Texto Copiado')     
     };
    
@@ -26,6 +26,16 @@ const Recibir = () => {
         setCopiedText(text)
     };
    
+    
+//funcion obtener llave publica
+const [pKey,setPKey] = useState("")
+readPublicKey().then((val)=>{
+    console.log("PUBLIC KEY:");
+    console.log(val);
+    
+    setPKey(val)
+})
+
 
     return (
         <View style={styles.body}>
@@ -42,13 +52,13 @@ const Recibir = () => {
                         {/* Imagen QR */}
                         <View style={styles.cuadroQR}>
                             <QRCode size={200}
-                                value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv"                                
+                                value={pKey}                                
                             />
                         </View>                            
                         {/* Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>
-                                <TextInput style={styles.inputqr} editable = {false} value="uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv" />
+                                <TextInput style={styles.inputqr} editable = {false} value={pKey} />
                             </View>
                             <View style={styles.cbtncop}>
                                     <TouchableOpacity style={styles.btncop}  activeOpacity={0.9} onPress={() => CopyToClipboard()}> 
