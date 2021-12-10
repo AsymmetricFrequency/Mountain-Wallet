@@ -43,11 +43,6 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                     onPress={() => crearCuenta(twelfString)}>
                     <Text style={styles.textC}>ACEPTAR</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.textC}
-                    onPress={() => readKey()}>
-                    <Text style={styles.textoBoton}>Storage</Text>
-                </TouchableOpacity>
             </View>
         </KeyboardAwareScrollView>
     )
