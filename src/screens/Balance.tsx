@@ -23,9 +23,6 @@ const Balance = ({navigation}: {navigation: any}) => {
         })
     }
 
-    //obtener balance de una llave publica
-    obtenerBalance(pKey)
-
     //value textinput
 
     //Funcion de obtener splToken
@@ -48,6 +45,8 @@ readPublicKey().then((val)=>{
 })
 
   obtenerTokenB(pKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
+  //obtener balance de una llave publica
+  obtenerBalance(pKey)
 
 
     return (

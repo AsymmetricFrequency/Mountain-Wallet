@@ -127,6 +127,8 @@ export default function App() {
           <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
           <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>
           <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
+          <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
+          <Stack.Screen name="Enviar" component={Importar} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
