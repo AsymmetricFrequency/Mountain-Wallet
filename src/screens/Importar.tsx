@@ -5,8 +5,8 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {BarCodeScanner} from "expo-barcode-scanner"
 // import { TextInput } from 'react-native-element-textinput';
-//navegación
 
 
 const Importar = () => {
@@ -22,6 +22,75 @@ const [amounToken,setAmounToken] = useState("")
         send.then((value) => {
             console.log(value);
         })
+    }
+
+
+    const [hasPermission,setHasPermission] = useState(null)
+    const [scanned,setScanned] = useState(false)
+    const [text,setText] = useState("no provided")
+    
+    //preguntando el permiso para camara
+    const askForCameraPermission = () =>{
+
+        (async () =>{
+
+            const {status} = await BarCodeScanner.requestPermissionsAsync()
+            setHasPermission(status == 'granted')
+
+        })()
+
+    }
+
+
+    useEffect(()=>{
+
+        askForCameraPermission()
+
+    },[])
+
+    const handleBarCodeScanned = ({type,data}) =>{
+
+        setScanned(true)
+        setText(data)
+        console.log('Type: '+type+'\nData'+data);
+        
+
+    }
+
+    if(hasPermission === null){
+
+        return(
+            <Text>Permiso nulo</Text>
+        )
+
+    }
+
+
+    if(hasPermission === false){
+
+        return(
+            <View style={styles.containeruno}>
+                <View style={styles.barcodebox}>
+
+                </View>
+            </View>
+        )
+
+    }
+
+    if(hasPermission === true){
+
+        return(
+            <View style={styles.containeruno}>
+                <View style={styles.barcodebox}>
+                    <BarCodeScanner onBarCodeScanned={scanned ? undefined: handleBarCodeScanned} style={{height:400,width:400}} >
+                    </BarCodeScanner>
+                </View>
+                <Text>{text}</Text>
+                {scanned && <Button title='scan' onPress={()=>setScanned(false)} ></Button>}
+            </View>
+        )
+
     }
 
 
@@ -235,5 +304,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFPercentage(2),
     },
+    barcodebox:{
+        backgroundColor:'#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 300,
+        width: 300,
+        overflow: 'hidden',
+        borderRadius: 30,
+    }
 })
 export default Importar
