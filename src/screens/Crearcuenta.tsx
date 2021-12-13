@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, savePublicKey } from '../../api';
 
 
 
@@ -25,6 +25,18 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
         Clipboard.setString(words) 
         Alert.alert('Texto Copiado')     
     };
+
+    async function crearCuentejere(palabras: string) {
+        const docePalabras = mnemonicToSeed(palabras)
+        docePalabras.then((value) => {
+            const acc = createAccount(value)
+            acc.then((value) => {
+                navigation.navigate('Balance')
+                savePublicKey(value.publicKey.toString())
+                console.log(value.publicKey);
+            })
+        })
+    }
 
     return (
         <View style={styles.body}>
@@ -51,7 +63,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 <TouchableOpacity
                     style={styles.btnC}
                     activeOpacity={0.9}
-                    onPress={() => navigation.navigate('Balance')}
+                    onPress={() => crearCuentejere(words)}
                 >
                     <Text style={styles.textC}>CONTINUAR</Text>
                 </TouchableOpacity>
