@@ -56,7 +56,7 @@ const [amounToken,setAmounToken] = useState("")
         
 
     }
-
+    //si el permiso es nulo
     if(hasPermission === null){
 
         return(
@@ -65,7 +65,7 @@ const [amounToken,setAmounToken] = useState("")
 
     }
 
-
+    //si el permiso es falso
     if(hasPermission === false){
 
         return(
@@ -77,7 +77,7 @@ const [amounToken,setAmounToken] = useState("")
         )
 
     }
-
+    //si el permiso es verdadero
     if(hasPermission === true){
 
         return(
