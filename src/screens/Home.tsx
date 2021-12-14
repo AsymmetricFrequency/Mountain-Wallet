@@ -5,11 +5,16 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
-
+//import * as Animatable from 'react-native-animatable';
+import { useNavigation } from '@react-navigation/native';
 //navegación
 
 
 const Home = ({navigation}: {navigation: any}) => {
+
+    setTimeout(() => {
+        navigation.navigate("Home" as any)
+    }, 2500);
 
     return (
         <View style={styles.body}>
@@ -28,7 +33,27 @@ const Home = ({navigation}: {navigation: any}) => {
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.btnI}  activeOpacity={0.5} onPress={() => navigation.navigate('ImportarCuenta')}>
                                 <Text style={styles.textCI}>IMPORTAR</Text> 
-                            </TouchableOpacity>           
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.fabLocationBR}  onPress={() => Linking.openURL('https://famonterrey.org/')}>
+                            
+                                <Animatable.View style={styles.fab}
+                                    animation="tada"
+                                    duration={2000}
+                                    iterationCount={"infinite"}>
+                                    <Image source={require('./img/LogoMin.png')} style={styles.miniLogo}/>
+                                </Animatable.View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.Developed}>
+                            <Text style={styles.textDeveloped} onPress={() => Alert.alert('Visita nuestra página','https://condorcoin.co/')}>DEVELOPED BY</Text>
+                            <Text style={styles.textDeveloped} onPress={() => Alert.alert('Visita nuestra página','https://condorcoin.co/')}>CONDORCOIN</Text>
+                            <Animatable.Image  
+                                animation="bounceInRight"
+                                duration={2000}
+                                source={require('./img/conocen.png')} 
+                                style={styles.letrasConoce}
+                            >
+                            </Animatable.Image>
                         </View>                                       
                     </View>
                 </View>             
@@ -36,7 +61,6 @@ const Home = ({navigation}: {navigation: any}) => {
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     body: {
@@ -110,6 +134,29 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:RFPercentage(1.5),
         fontFamily: 'Roboto'
-    }
+    },
+    fabLocationBR: {
+        position: 'absolute',
+        bottom: -220,
+        left: 5
+    },
+    fab: {
+        backgroundColor: '#5b298a',  
+        width: 60,
+        height: 60,
+        borderRadius: 100,
+        justifyContent: 'center'
+    },
+    miniLogo: {
+        width: 50,
+        height: 50,
+        alignSelf: 'center'
+    },
+    letrasConoce: {
+        top: "28%",
+        width: 150,
+        height: 52,
+        resizeMode: 'contain'
+    },
 })
 export default Home
