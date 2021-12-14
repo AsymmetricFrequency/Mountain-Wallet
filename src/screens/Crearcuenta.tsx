@@ -31,7 +31,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
         docePalabras.then((value) => {
             const acc = createAccount(value)
             acc.then((value) => {
-                navigation.navigate('Balance')
+                navigation.navigate('CrearPass')
                 savePublicKey(value.publicKey.toString())
                 console.log(value.publicKey);
             })

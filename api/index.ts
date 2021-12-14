@@ -101,7 +101,8 @@ async function readPassword(){
   //obteniendo contra
   try {    
     console.log("READ PASSWORD:");
-    console.log(await AsyncStorage.getItem('@storage_Pass'))  
+    const password = await AsyncStorage.getItem('@storage_Pass')
+    return password  
   } catch (e) { 
        // saving error  
   }
@@ -253,4 +254,4 @@ return history;
 }
 
 
-export { savePublicKey,readPublicKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic }
+export { savePublicKey,readPublicKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic, savePassword, readPassword }
