@@ -127,7 +127,7 @@ readPublicKey().then((val)=>{
                                 <Animatable.View style={styles.fab}
                                     duration={2000}
                                     iterationCount={"infinite"}>
-                                    <Image source={require('./img/LogoMini.png')} style={styles.miniLogo}/>
+                                    <Image source={require('./img/LogoMin.png')} style={styles.miniLogo}/>
                                 </Animatable.View>
                         </TouchableOpacity>
                     </View>
@@ -136,7 +136,6 @@ readPublicKey().then((val)=>{
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     body: {

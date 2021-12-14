@@ -40,7 +40,7 @@ const Home = ({navigation}: {navigation: any}) => {
                                     animation="tada"
                                     duration={2000}
                                     iterationCount={"infinite"}>
-                                    <Image source={require('./img/LogoMini.png')} style={styles.miniLogo}/>
+                                    <Image source={require('./img/LogoMin.png')} style={styles.miniLogo}/>
                                 </Animatable.View>
                             </TouchableOpacity>
                         </View>
@@ -50,7 +50,7 @@ const Home = ({navigation}: {navigation: any}) => {
                             <Animatable.Image  
                                 animation="bounceInRight"
                                 duration={2000}
-                                source={require('./img/conoce.png')} 
+                                source={require('./img/conocen.png')} 
                                 style={styles.letrasConoce}
                             >
                             </Animatable.Image>
@@ -61,7 +61,6 @@ const Home = ({navigation}: {navigation: any}) => {
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     body: {
