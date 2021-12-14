@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert } from 'react-native'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, Linking } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
-//import * as Animatable from 'react-native-animatable';
+import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
 //navegación
 
@@ -34,8 +34,11 @@ const Home = ({navigation}: {navigation: any}) => {
                             <TouchableOpacity style={styles.btnI}  activeOpacity={0.5} onPress={() => navigation.navigate('ImportarCuenta')}>
                                 <Text style={styles.textCI}>IMPORTAR</Text> 
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.fabLocationBR}  onPress={() => Linking.openURL('https://famonterrey.org/')}>
                             
+                        </View>
+                        <View style={styles.Developed}>
+                            <TouchableOpacity style={styles.Developed2}  onPress={() => Linking.openURL('https://famonterrey.org/')}>
+                                
                                 <Animatable.View style={styles.fab}
                                     animation="tada"
                                     duration={2000}
@@ -43,10 +46,6 @@ const Home = ({navigation}: {navigation: any}) => {
                                     <Image source={require('./img/LogoMin.png')} style={styles.miniLogo}/>
                                 </Animatable.View>
                             </TouchableOpacity>
-                        </View>
-                        <View style={styles.Developed}>
-                            <Text style={styles.textDeveloped} onPress={() => Alert.alert('Visita nuestra página','https://condorcoin.co/')}>DEVELOPED BY</Text>
-                            <Text style={styles.textDeveloped} onPress={() => Alert.alert('Visita nuestra página','https://condorcoin.co/')}>CONDORCOIN</Text>
                             <Animatable.Image  
                                 animation="bounceInRight"
                                 duration={2000}
@@ -119,12 +118,24 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(2),
     },
     Developed:{
+        
         width: '100%',
-        height: '100%',
+        height: '70%',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute', 
         left: 0, 
+        right: 0, 
+        bottom: 0,
+        paddingTop: 0
+    },
+    Developed2:{
+        width: '20%',
+        height: '50%',
+        justifyContent: 'center',
+        alignSelf:'center',
+        position: 'absolute',
+        left: 7, 
         right: 0, 
         bottom: 0,
         paddingTop: 0

@@ -9,7 +9,11 @@ import {BarCodeScanner} from "expo-barcode-scanner"
 // import { TextInput } from 'react-native-element-textinput';
 
 
-const Importar = () => {
+const Importar = ({navigation}: {navigation: any},{route}: {route: any}) => {
+
+
+//llamar props del lector qr
+const {address} = route.params;
 
 //traer account
 
@@ -42,7 +46,7 @@ const [amounToken,setAmounToken] = useState("")
                             {/* Email */}
                             <View style={styles.tablamail} >
                                 <View style={styles.cuadromail}>
-                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." autoFocus={true} onChangeText={text => setPubKey(text)}/>
+                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." value={address} autoFocus={true} onChangeText={text => setPubKey(text)}/>
                                 </View>
                                 <View style={styles.cqr}>
                                     <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9}>

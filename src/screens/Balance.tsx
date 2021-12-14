@@ -5,6 +5,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
+import * as Animatable from 'react-native-animatable';
 
 
 

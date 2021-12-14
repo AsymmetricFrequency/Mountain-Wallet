@@ -20,6 +20,7 @@ import CodigoVerificacion from './src/screens/CodigoVerificacion'
 import Recibir from './src/screens/Recibir';
 import Splashc from './src/screens/Splashc';
 import PassLogin from './src/screens/PassLogin'
+import QrReader from './src/screens/QrReader';
 
 
 export default function App() { 
@@ -132,6 +133,7 @@ export default function App() {
           <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
           <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
           <Stack.Screen name="Enviar" component={Importar} options={{headerShown: false}}/>
+          <Stack.Screen name="QrReader" component={QrReader} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

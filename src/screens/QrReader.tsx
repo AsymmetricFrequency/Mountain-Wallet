@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler} from 'react-native'
 import {BarCodeScanner} from "expo-barcode-scanner"
+import { NavigationRouteContext } from '@react-navigation/native'
 
 
-const QrReader = () => {
+const QrReader = ({navigation}: {navigation: any}) => {
 
 
     const [hasPermission,setHasPermission] = useState(null)
@@ -35,9 +36,14 @@ const QrReader = () => {
 
         setScanned(true)
         setText(data)
+        
+        //aqui va el envio de los props
+        navigation.navigate('Importar', {
+            address: text
+          });
+          
         console.log('Type: '+type+'\nData'+data);
         
-
     }
     
     //si el permiso es nulo
@@ -76,7 +82,10 @@ const QrReader = () => {
         )
 
     }
-
+   
+    return(
+        <Text>Permiso nulo</Text>
+    )
 
 
 }
@@ -118,11 +127,6 @@ const styles = StyleSheet.create({
         paddingBottom: '3%',
         borderRadius: 20,
     },
-    textbtnD:{
-        color:'#5b298a',
-        fontWeight: 'bold',
-        fontSize:RFPercentage(3),
-    },
     cuadro:{
         backgroundColor:'white',
         width: '100%',
@@ -147,11 +151,6 @@ const styles = StyleSheet.create({
         width:'80%',
         justifyContent: 'center',
         paddingLeft: '2%'
-    },
-    inputmail:{
-        fontWeight: 'bold',
-        fontSize:RFPercentage(1.8),
-        color: '#5a5959',
     },
     cqr:{
         width:'20%',
@@ -188,11 +187,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: '2%'
     },
-    inputimp:{
-        fontWeight: 'bold',
-        fontSize:RFPercentage(1.8),
-        color: '#5a5959',
-    },
     cmax:{
         width:'30%',
         alignItems: 'center',
@@ -214,11 +208,7 @@ const styles = StyleSheet.create({
         paddingRight:'10%',
         borderRadius: 10,
     },
-    txtmax:{
-        color:'white',
-        fontWeight: 'bold',
-        fontSize:RFPercentage(1.5),
-    },
+   
     btnC:{
         backgroundColor:'#5b298a',
         alignItems:'center',
@@ -228,13 +218,7 @@ const styles = StyleSheet.create({
         paddingBottom: '4%',
         borderRadius: 20,
         marginTop: '20%'
-    },
-    textCI:{
-        color:'white',
-        fontWeight: 'bold',
-        fontSize:RFPercentage(2),
-    },
-    barcodebox:{
+    },barcodebox:{
         backgroundColor:'#fff',
         alignItems: 'center',
         justifyContent: 'center',
