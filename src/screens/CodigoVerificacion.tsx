@@ -3,7 +3,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { savePassword } from '../../api';
 //navegación
 
 
@@ -20,15 +20,28 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         const cof3Ref = useRef(null)
         const cof4Ref = useRef(null)
 
-        const [pin1, setPin1] = useState("");
-        const [pin2, setPin2] = useState("");
-        const [pin3, setPin3] = useState("");
-        const [pin4, setPin4] = useState("");
+        const [pin1, setPin1] = useState("")
+        const [pin2, setPin2] = useState("")
+        const [pin3, setPin3] = useState("")
+        const [pin4, setPin4] = useState("")
     
-        const [cof1, setCof1] = useState("");
-        const [cof2, setCof2] = useState("");
-        const [cof3, setCof3] = useState("");
-        const [cof4, setCof4] = useState("");
+        const [cof1, setCof1] = useState("")
+        const [cof2, setCof2] = useState("")
+        const [cof3, setCof3] = useState("")
+        const [cof4, setCof4] = useState("")
+
+        function validarPassword() {
+            if(pin1 === cof1 && pin2 === cof2 && pin3 === cof3 && pin4 === cof4){
+                //Entonces breve aqui ya guardariamos el password y pasariamos a al Balance
+                //Para guardar el password pues si hay que concatenar pin1+pin2+pin3+pin4 en un solo string
+                const password = pin1+pin2+pin3+pin4
+                savePassword(password)
+                navigation.navigate('Balance')
+            } else {
+                //Y aqui pues le dariamos un alert que verifique la password
+                console.log("nonas")
+            }
+        }
         
         return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
@@ -46,38 +59,38 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true} 
                            ref={pin1Ref}
                            onChange={(pin1)=>{
-                                 setPin1(pin1);
                                  if (pin1 != ""){
                                      pin2Ref.current.focus();
                                  }
                             }}
+                            onChangeText={text => setPin1(text)}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric"
                             ref={pin2Ref}
                             onChange={(pin2)=>{
-                                setPin2(pin2)
                                 if (pin2 != ""){
                                     pin3Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setPin2(text)}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                             ref={pin3Ref}
                             onChange={(pin3)=>{
-                                setPin3(pin3);
                                 if (pin3 != ""){
                                     pin4Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setPin3(text)}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                             ref={pin4Ref}
                             onChange={(pin4)=>{
-                                setPin1(pin4);
-                                if (pin3 != ""){
+                                if (pin4 != ""){
                                     cof1Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setPin4(text)}
                         />
                     </View>
                     
@@ -88,35 +101,33 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof1Ref}
                             onChange={(cof1)=>{
-                                setCof1(cof1);
                                 if (cof1 != ""){
                                     cof2Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setCof1(text)}
                         />
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof2Ref}
                             onChange={(cof2)=>{
-                                setCof2(cof2);
                                 if (cof2 != ""){
                                     cof3Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setCof2(text)}
                         />
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof3Ref}
                             onChange={(cof3)=>{
-                                setCof3(cof3);
                                 if (cof3 != ""){
                                     cof4Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setCof3(text)}
                         />
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof4Ref}
-                            onChange={(cof4)=>{
-                                setCof4(cof4);
-                            }}
+                            onChangeText={text => setCof4(text)}
                         />                    
                     </View>
                     
@@ -124,7 +135,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         <TouchableOpacity
                             style={styles.btnC}
                             activeOpacity={0.9}
-                            // onPress={() => navigation.navigate('Balance')}
+                            onPress={() => validarPassword()}
                         >
                             <Text style={styles.textCI}>CONFIRMAR</Text>
                         </TouchableOpacity>

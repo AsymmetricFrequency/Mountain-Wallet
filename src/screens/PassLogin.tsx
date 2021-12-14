@@ -3,7 +3,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { readPassword } from '../../api';
 //navegación
 
 
@@ -19,6 +19,25 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         const [pin2, setPin2] = useState("");
         const [pin3, setPin3] = useState("");
         const [pin4, setPin4] = useState("");
+
+        const [storedPass, setStoredPass] = useState("")
+
+        readPassword().then((val)=>{
+            console.log("PASSWORD:");
+            console.log(val);
+            
+            setStoredPass(val)
+        })
+
+        function validarPassword() {
+            const password = pin1+pin2+pin3+pin4
+            if (password == storedPass) {
+                navigation.navigate('Balance')
+            } else {
+                // Falta hacer la alerta de que no es 
+                console.log("No es la misma")
+            }
+        }
 
         return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
@@ -36,45 +55,40 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true} 
                            ref={pin1Ref}
                            onChange={(pin1)=>{
-                                 setPin1(pin1);
                                  if (pin1 != ""){
                                      pin2Ref.current.focus();
                                  }
                             }}
+                            onChangeText={text => setPin1(text)}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric"
                             ref={pin2Ref}
                             onChange={(pin2)=>{
-                                setPin2(pin2)
                                 if (pin2 != ""){
                                     pin3Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setPin2(text)}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                             ref={pin3Ref}
                             onChange={(pin3)=>{
-                                setPin3(pin3);
                                 if (pin3 != ""){
                                     pin4Ref.current.focus();
                                 }
                             }}
+                            onChangeText={text => setPin3(text)}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                             ref={pin4Ref}
-                            onChange={(pin4)=>{
-                                setPin1(pin4);
-                                if (pin3 != ""){
-                                    pin4Ref.current.focus();
-                                }
-                            }}
+                            onChangeText={text => setPin4(text)}
                         />
                     </View>
                     <View>
                         <TouchableOpacity
                             style={styles.btnC}
                             activeOpacity={0.9}
-                            // onPress={() => navigation.navigate('Balance')}
+                            onPress={() => validarPassword()}
                         >
                             <Text style={styles.textCI}>CONFIRMAR</Text>
                         </TouchableOpacity>
