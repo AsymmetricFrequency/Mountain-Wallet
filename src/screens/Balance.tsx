@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler } from 'react-native'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler, Linking } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -120,6 +120,16 @@ readPublicKey().then((val)=>{
                                 </View>
                             </View>                           
                         </View>
+                    </View>
+                    <View style={styles.Developed}>
+                        <TouchableOpacity style={styles.btnlogo}  onPress={() => Linking.openURL('https://famonterrey.org/')} >
+                                {/* onPress={() => Alert.alert('https://famonterrey.org/')} */}
+                                <Animatable.View style={styles.fab}
+                                    duration={2000}
+                                    iterationCount={"infinite"}>
+                                    <Image source={require('./img/LogoMini.png')} style={styles.miniLogo}/>
+                                </Animatable.View>
+                        </TouchableOpacity>
                     </View>
                 </View>             
             </ImageBackground>   
@@ -276,6 +286,43 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize:RFPercentage(1.8),
         color: '#8d8c8c',
+    },
+    fab: {
+        backgroundColor: '#5b298a',  
+        width: 60,
+        height: 60,
+        borderRadius: 100,
+        justifyContent: 'center'
+    },
+    miniLogo: {
+        width: 50,
+        height: 50,
+        alignSelf: 'center'
+    },
+
+    Developed:{
+        width: "100%",
+        height: "100%",
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute', 
+        top:'60%',
+        resizeMode: 'contain',
+        marginLeft:'90%',
+        left:'-4%'
+
+    },
+    btnlogo:{
+        
+        // width: "100%",
+        // height: "100%",
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute', 
+        left: 0, 
+        right: 0, 
+        paddingTop: 0,
+        top:0
     },
 })
 export default Balance
