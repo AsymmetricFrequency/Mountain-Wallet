@@ -12,7 +12,6 @@ import QRCode from 'react-native-qrcode-svg';
 
 
 const Recibir = () => {
-   
 
     const [copiedText, setCopiedText] = useState('')
  
