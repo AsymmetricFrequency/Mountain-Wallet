@@ -5,7 +5,7 @@ import {BarCodeScanner} from "expo-barcode-scanner"
 import { NavigationRouteContext } from '@react-navigation/native'
 
 
-const QrReader = ({navigation}: {navigation: any},{route}: {route: any}) => {
+const QrReader = ({navigation}: {navigation: any}) => {
 
 
     const [hasPermission,setHasPermission] = useState(null)
