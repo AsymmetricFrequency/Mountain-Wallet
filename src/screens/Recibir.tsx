@@ -75,10 +75,7 @@ const Recibir = () => {
                                 </TouchableOpacity> 
                         </View>           
 
-                        <TouchableOpacity   style={{marginTop:20}}activeOpacity={0.9} onPress={() => fetchCopiedText()}>
-                                    <Text >---Click Probar Copiado---</Text> 
-                        </TouchableOpacity>  
-                        <Text>{copiedText}</Text>
+                        
                     </View>
                 </View>             
             </ImageBackground>   
@@ -166,8 +163,9 @@ const styles = StyleSheet.create({
     },
     inputqr:{
         fontWeight: 'bold',
-        fontSize:RFPercentage(1.8),
+        fontSize:RFPercentage(1.2),
         color: '#5a5959',
+        left:'1%'
     },
     cbtncop:{
         width:'20%',
@@ -181,6 +179,7 @@ const styles = StyleSheet.create({
         paddingLeft: '10%',
         paddingRight:'10%',
         borderRadius: 10,
+        left:'10%'
     },
     txtcop:{
         color:'white',
