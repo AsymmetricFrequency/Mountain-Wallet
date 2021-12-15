@@ -5,7 +5,7 @@ import {BarCodeScanner} from "expo-barcode-scanner"
 import { NavigationRouteContext } from '@react-navigation/native'
 
 
-const QrReader = ({navigation}: {navigation: any}) => {
+const QrReader = ({navigation}: {navigation: any},{route}: {route: any}) => {
 
 
     const [hasPermission,setHasPermission] = useState(null)
@@ -38,7 +38,7 @@ const QrReader = ({navigation}: {navigation: any}) => {
         setText(data)
         
         //aqui va el envio de los props
-        navigation.navigate('Importar', {
+        navigation.navigate('Enviar', {
             address: text
           });
           
