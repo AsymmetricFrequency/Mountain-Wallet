@@ -16,7 +16,7 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
         docePalabras.then((value) => {
             const acc = createAccount(value)
             acc.then((value) => {
-                navigation.navigate('CrearPass')
+                navigation.navigate('PantallaCarga')
                 savePublicKey(value.publicKey.toString())
             })
         })
@@ -41,7 +41,7 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                 <Text style={styles.labeldos} numberOfLines={4}>Ingrese sus 12 palabras de respaldo en minusculas</Text>
                 <TouchableOpacity
                     style={styles.btnC}
-                    onPress={() => crearCuenta(twelfString)}>
+                    onPress={() => navigation.navigate('PantallaCarga')}>
                     <Text style={styles.textC}>ACEPTAR</Text>
                 </TouchableOpacity>
             </View>
