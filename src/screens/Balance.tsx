@@ -59,15 +59,19 @@ readPublicKey().then((val)=>{
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
                     <Image style={styles.logo} source={require('./img/logoblanco.png')}  />
+
       
                     <Text style={styles.txtbalance}>{balance}</Text>
 
                     {/* <View style={styles.doscolumnasB} >
+
+                    <View style={styles.doscolumnasB} >
+
                         <View style={styles.columnaunoB}>
-                            <Text style={styles.txtinferiorL}>+0.00</Text>
+                            <Text style={styles.txtinferiorL}></Text>
                         </View>
                         <View style={styles.columnadosB}>
-                            <Text style={styles.txtinferiorR}>0%</Text>
+                            <Text style={styles.txtinferiorR}></Text>
                         </View>
                     </View> */}
       
@@ -182,7 +186,6 @@ const styles = StyleSheet.create({
     columnadosB: {
         alignItems:'center',
         width:'12%',
-        backgroundColor:'#923085',
         borderRadius: 8,
         // paddingLeft: '2%',
         // paddingRight: '2%',
