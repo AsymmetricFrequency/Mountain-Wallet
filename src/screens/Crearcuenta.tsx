@@ -31,7 +31,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
         docePalabras.then((value) => {
             const acc = createAccount(value)
             acc.then((value) => {
-                navigation.navigate('CrearPass')
+                navigation.navigate('PantallaCarga')
                 savePublicKey(value.publicKey.toString())
                 console.log(value.publicKey);
             })
@@ -59,7 +59,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 <TouchableOpacity
                     style={styles.btnC}
                     activeOpacity={0.7}
-                    onPress={() => crearCuentejere(words)}
+                    onPress={() => navigation.navigate('PantallaCarga')}
                 >
                     <Text style={styles.textC}>CONTINUAR</Text>
                 </TouchableOpacity>
