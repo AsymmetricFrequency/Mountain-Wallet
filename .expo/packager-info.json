@@ -3,8 +3,8 @@
   "expoServerPort": null,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://kv-fqm.barneyeldinosaurio.mountain-wallet.exp.direct",
+  "packagerNgrokUrl": "https://packager.kv-fqm.barneyeldinosaurio.mountain-wallet.exp.direct",
+  "ngrokPid": 22411,
   "webpackServerPort": null
 }
