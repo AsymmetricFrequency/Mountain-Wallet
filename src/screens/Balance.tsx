@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler, Linking } from 'react-native'
+import {  Dimensions,ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler, Linking } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
 import * as Animatable from 'react-native-animatable';
+
+
+const windowWidth = Dimensions.get('screen').width;
+const windowHeight = Dimensions.get('screen').height;
 
 
 
@@ -55,18 +59,18 @@ readPublicKey().then((val)=>{
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
                     <Image style={styles.logo} source={require('./img/logoblanco.png')}  />
-                    {/* Balance */}
-                    <Text style={styles.txtbalance}>$ {balance}...</Text>
-                    {/* Balance inferior */}
-                    <View style={styles.doscolumnasB} >
+      
+                    <Text style={styles.txtbalance}>{balance}</Text>
+
+                    {/* <View style={styles.doscolumnasB} >
                         <View style={styles.columnaunoB}>
                             <Text style={styles.txtinferiorL}>+0.00</Text>
                         </View>
                         <View style={styles.columnadosB}>
                             <Text style={styles.txtinferiorR}>0%</Text>
                         </View>
-                    </View>
-                    {/* Enviar y recibir */}
+                    </View> */}
+      
                     <View style={styles.dcER}>
                         <View style={styles.dcR}>
                             <TouchableOpacity style=
@@ -87,7 +91,7 @@ readPublicKey().then((val)=>{
                             </TouchableOpacity>
                         </View>
                     </View>
-                    {/* Balance cryptos */}
+
                     <View style={styles.balancecry}>
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
@@ -98,8 +102,9 @@ readPublicKey().then((val)=>{
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>{tokenBalance}</Text>
+                                    <Text numberOfLines={1} onPress={() => Alert.alert(tokenBalance.toString())}style={styles.stxtcry}>{tokenBalance}</Text>
                                 </View>
+                                
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>CNDR</Text>
                                 </View>
@@ -114,7 +119,7 @@ readPublicKey().then((val)=>{
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>{balance}</Text>
+                                    <Text style={styles.stxtcry} onPress={() => Alert.alert(balance.toString())}>{balance}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>SOL</Text>
@@ -122,16 +127,16 @@ readPublicKey().then((val)=>{
                             </View>                           
                         </View>
                     </View>
-                    <View style={styles.Developed}>
+                    {/* <View style={styles.Developed}>
                         <TouchableOpacity style={styles.btnlogo}  onPress={() => Linking.openURL('https://famonterrey.org/')} >
-                                {/* onPress={() => Alert.alert('https://famonterrey.org/')} */}
+                               
                                 <Animatable.View style={styles.fab}
                                     duration={2000}
                                     iterationCount={"infinite"}>
                                     <Image source={require('./img/LogoMin.png')} style={styles.miniLogo}/>
                                 </Animatable.View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>             
             </ImageBackground>   
         </View>
@@ -139,35 +144,36 @@ readPublicKey().then((val)=>{
 }
 
 const styles = StyleSheet.create({
-    body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
+    body:{
+        height: windowHeight,
+        width: windowWidth,
     },
     containeruno:{
-        paddingTop: '8%',
+        paddingTop: RFValue(35),
         paddingLeft: '5%',
         paddingRight: '4%',
         alignItems:'center',
     },
     fondo:{
-        flex: 1,
-        resizeMode:'contain',
+        height: windowHeight,
+        width: windowWidth,
+        margin:0,
+        resizeMode: 'contain',
+
     },
     logo:{
-        width: 180,
-        height: 180,
         resizeMode: 'contain',
+        width: windowWidth*0.5,
+        height: windowHeight*0.2
     },
     txtbalance:{
-        fontFamily:'Roboto',
-        fontSize:RFPercentage(5),
+        fontSize:RFValue(45),
         color:'white',
         fontWeight:'bold',
     },
     doscolumnasB:{
         flexDirection: 'row',
-        width:'100%',
+        width: windowWidth,
     },
     columnaunoB: {
         width:'50%',
@@ -199,74 +205,69 @@ const styles = StyleSheet.create({
     dcER:{
         flexDirection: 'row',
         backgroundColor: 'white',
-        padding: 20,
+        padding: RFValue(15),
         borderRadius: 10,
-        marginTop: '5%',
+        marginTop: RFValue(5),
     },
     dcR:{
-        fontFamily:'Roboto',
-        width:'50%',
+        width: '50%',
     },
     dcE:{
-        fontFamily:'Roboto',
         width:'50%',
     },
     btnR:{
         backgroundColor:'#5b298a',
         alignItems:'center',
-        marginRight: '10%',
-        marginLeft: '10%',
-        paddingTop: '8%',
-        paddingBottom: '8%',
+        marginRight: RFValue(15),
+        marginLeft: RFValue(15),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
         borderRadius: 20,
     },
     textbtnR:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2),
+        fontSize:RFValue(11.5),
     },
     balancecry:{
         backgroundColor:'white',
-        width: '100%',
-        height: '100%',
-        marginTop: '3%',
+        marginTop: RFValue(15),
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        padding: '2%',
+        padding: RFValue(10),
+        height: windowHeight*0.7
     },
     tablacry:{
-        marginTop:'4%',
+        marginTop:RFValue(10),
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
-        height: '5.8%',
+        height: windowHeight*0.08,
         flexDirection:'row',
-        paddingLeft:'2.5%',
-        paddingRight:'3.5%',
-        paddingTop:'0%'
+        paddingLeft: RFValue(10),
+        paddingRight: RFValue(12),
     },
     logocry:{
         width:'15%',
         justifyContent: 'center',
     },
     imgcry:{
-        width: 50,
-        height: 50,
+        width: windowWidth*0.12,
+        height: windowHeight*0.12,
         resizeMode: 'contain',
     },
     nombrecry:{
-        width:'45%',
+        width:'40%',
         justifyContent: 'center',
-        paddingLeft: '2%'
+        paddingLeft: RFValue(8),
     },
     ntxtcry:{
-        fontFamily: 'Roboto',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2.3),
+        fontSize:RFValue(14),
         color: '#8d8c8c',
     },
     smcry:{
-        width:'40%',
+        width:'45%',
         alignItems: 'flex-end',
         justifyContent: 'center',
     },
@@ -275,16 +276,16 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     stxtcry:{
-        fontFamily: 'Roboto',
-        fontSize:RFPercentage(2.5),
+        fontSize:RFValue(18),
         color: '#8d8c8c',
+
     },
     monedacry:{
         justifyContent: 'center',
     },
     mtxtcry:{
         fontFamily: 'Roboto',
-        fontSize:RFPercentage(1.8),
+        fontSize:RFValue(13),
         color: '#8d8c8c',
     },
     fab: {
