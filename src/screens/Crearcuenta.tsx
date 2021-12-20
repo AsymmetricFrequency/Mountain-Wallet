@@ -26,7 +26,6 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
           setWords(value)
         });setbotonpalabras(true);     
     }
-
     const CopyToClipboard = () => {
         if(!botonpalabras){
             showToast();
