@@ -10,17 +10,17 @@ import { savePassword } from '../../api';
 const CodigoVerificacion = ({navigation}: {navigation: any}) => {
   
         // Referencias para salto input
-        const pin1Ref = useRef(null)
-        const pin2Ref = useRef(null)
-        const pin3Ref = useRef(null)
-        const pin4Ref = useRef(null)
+        const pin1Ref = useRef(null);
+        const pin2Ref = useRef(null);
+        const pin3Ref = useRef(null);
+        const pin4Ref = useRef(null);
 
         const cof1Ref = useRef(null)
         const cof2Ref = useRef(null)
         const cof3Ref = useRef(null)
         const cof4Ref = useRef(null)
 
-        const [pin1, setPin1] = useState("")
+        const [pin1, setPin1] = useState("");
         const [pin2, setPin2] = useState("")
         const [pin3, setPin3] = useState("")
         const [pin4, setPin4] = useState("")
@@ -58,39 +58,36 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     <View style={styles.containerunorama}>  
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true} 
                            ref={pin1Ref}
-                           onChange={(pin1)=>{
-                                 if (pin1 != ""){
-                                     pin2Ref.current.focus();
-                                 }
-                            }}
-                            onChangeText={text => setPin1(text)}
+                           onChangeText={text=>{
+                               if(!text) pin1Ref.current.focus();
+                               else text && pin2Ref.current.focus();
+                               setPin1(text);
+                               
+                           }}
                         />
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric"
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                             ref={pin2Ref}
-                            onChange={(pin2)=>{
-                                if (pin2 != ""){
-                                    pin3Ref.current.focus();
-                                }
-                            }}
-                            onChangeText={text => setPin2(text)}
+                            onChangeText={text=>{
+                                if(!text) pin2Ref.current.focus();
+                                else text && pin3Ref.current.focus();
+                                setPin2(text);
+                           }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                             ref={pin3Ref}
-                            onChange={(pin3)=>{
-                                if (pin3 != ""){
-                                    pin4Ref.current.focus();
-                                }
-                            }}
-                            onChangeText={text => setPin3(text)}
+                            onChangeText={text=>{
+                                if(!text) pin3Ref.current.focus();
+                               else text && pin4Ref.current.focus();
+                               setPin3(text)
+                           }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                             ref={pin4Ref}
-                            onChange={(pin4)=>{
-                                if (pin4 != ""){
-                                    cof1Ref.current.focus();
-                                }
-                            }}
-                            onChangeText={text => setPin4(text)}
+                            onChangeText={text=>{
+                                if(!text) pin4Ref.current.focus();
+                               else text && cof1Ref.current.focus();
+                               setPin4(text)
+                           }}
                         />
                     </View>
                     
@@ -100,30 +97,27 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     <View style={styles.containerunorama}>
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof1Ref}
-                            onChange={(cof1)=>{
-                                if (cof1 != ""){
-                                    cof2Ref.current.focus();
-                                }
-                            }}
-                            onChangeText={text => setCof1(text)}
+                            onChangeText={text=>{
+                                if(!text) cof1Ref.current.focus();
+                               else text && cof2Ref.current.focus();
+                               setCof1(text)
+                           }}
                         />
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof2Ref}
-                            onChange={(cof2)=>{
-                                if (cof2 != ""){
-                                    cof3Ref.current.focus();
-                                }
-                            }}
-                            onChangeText={text => setCof2(text)}
+                            onChangeText={text=>{
+                                if(!text) cof2Ref.current.focus();
+                               else text && cof3Ref.current.focus();
+                               setCof2(text)
+                           }}
                         />
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof3Ref}
-                            onChange={(cof3)=>{
-                                if (cof3 != ""){
-                                    cof4Ref.current.focus();
-                                }
-                            }}
-                            onChangeText={text => setCof3(text)}
+                            onChangeText={text=>{
+                                if(!text) cof3Ref.current.focus();
+                               else text && cof4Ref.current.focus();
+                               setCof3(text)
+                           }}
                         />
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof4Ref}
@@ -146,7 +140,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         </KeyboardAwareScrollView>
         )
     }
-
 
 export default CodigoVerificacion
 
@@ -207,7 +200,7 @@ const styles = StyleSheet.create({
         //container para los textInput
     },
     TextInput1: {
-        marginTop: '5%',
+        marginTop: '3%',
         flexDirection: 'row',
         width: 50,
         height: 50, 
@@ -219,7 +212,7 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(2.3),
     },
     TextInput2: {
-        marginTop: '5%',
+        marginTop: '3%',
         flexDirection: 'row',
         width: 50,
         height: 50,
