@@ -20,24 +20,15 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
 
 
     function generarMnemonic(){
-        var auxiliar='';
         const memo = generateMnemonic()
         memo.then((value) => {
           console.log(value);
           setWords(value)
-        //   if(value===auxiliar) {
-        //       setbotonactivo(true)
-        //     }
-        //     else {
-        //         setbotonactivo(false)
-        //     }
-        });setbotonpalabras(true); 
-        
-        
+        });setbotonpalabras(true);     
     }
 
     const CopyToClipboard = () => {
-                if(!botonpalabras){
+        if(!botonpalabras){
             showToast();
         }else{
             Clipboard.setString(words) 
