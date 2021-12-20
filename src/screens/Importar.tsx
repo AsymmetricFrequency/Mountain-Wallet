@@ -67,11 +67,20 @@ const [amounToken,setAmounToken] = useState("")
                                     </View>                                
                                 </View>                      
                             </View>
-                            {/* BotonConfirmar */}
-                            <View>
-                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => sendToken(pubKey,Number(amounToken))}>
-                                    <Text style={styles.textCI}>CONFIRMAR</Text> 
-                                </TouchableOpacity>        
+                            {/* BotonVolverConfirmar */}
+                            <View style={styles.dcVC}>
+                                <View style={styles.dcV}>
+                                    <TouchableOpacity style={styles.btnVC} activeOpacity={0.9} onPress={() => navigation.navigate('Balance')}>
+                                        <Text style={styles.textbtnVC}>VOLVER</Text> 
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.dcC}>
+                                    <TouchableOpacity style={styles.btnVC}  activeOpacity={0.9} onPress={() => sendToken(pubKey,Number(amounToken))}>
+                                        <Text style={styles.textbtnVC}>CONFIRMAR</Text> 
+                                    </TouchableOpacity>  
+                                </View>
+                                
+                                      
                             </View> 
                         </View>
                     </View>             
@@ -135,7 +144,7 @@ const styles = StyleSheet.create({
         padding: '2%',
     },
     tablamail:{
-        marginTop:'4%',
+        marginTop:RFValue(25),
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
@@ -175,7 +184,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     tablaimp:{
-        marginTop:'4%',
+        marginTop:RFValue(25),
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
@@ -221,21 +230,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFPercentage(1.5),
     },
-    btnC:{
-        backgroundColor:'#5b298a',
-        alignItems:'center',
-        marginRight: '10%',
-        marginLeft: '10%',
-        paddingTop: '4%',
-        paddingBottom: '4%',
-        borderRadius: 20,
-        marginTop: '20%'
-    },
-    textCI:{
-        color:'white',
-        fontWeight: 'bold',
-        fontSize:RFPercentage(2),
-    },
     barcodebox:{
         backgroundColor:'#fff',
         alignItems: 'center',
@@ -244,6 +238,40 @@ const styles = StyleSheet.create({
         width: 300,
         overflow: 'hidden',
         borderRadius: 30,
-    }
+    },
+    dcVC:{
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        padding: RFValue(15),
+        borderRadius: 10,
+        marginTop:RFValue(20)
+        
+    },
+    dcV:{
+        width: '50%',
+    },
+    dcC:{
+        width:'50%',
+    },
+    btnVC:{
+        backgroundColor:'#5b298a',
+        alignItems:'center',
+        marginRight: RFValue(15),
+        marginLeft: RFValue(15),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
+        borderRadius: 20,
+        elevation: 10,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+
+    },
+    textbtnVC:{
+        color:'white',
+        fontWeight: 'bold',
+        fontSize:RFValue(11.5),
+    },
 })
 export default Importar
