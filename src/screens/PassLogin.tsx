@@ -52,34 +52,34 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     {/* Codigo seguridad */}
                     <Text style={styles.textuno} numberOfLines={2}>INGRESA TU CÓDIGO DE SEGURIDAD</Text>
                     <View style={styles.containerunorama}>  
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true} 
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true}  secureTextEntry={true} 
                            ref={pin1Ref}
-                           onChange={(pin1)=>{
-                                 if (pin1 != ""){
-                                     pin2Ref.current.focus();
-                                 }
-                            }}
-                            onChangeText={text => setPin1(text)}
+                           onChangeText={text=>{
+                               if(!text) pin1Ref.current.focus();
+                               else text && pin2Ref.current.focus();
+                               setPin1(text);
+                               
+                           }}
                         />
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric"
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin2Ref}
-                            onChange={(pin2)=>{
-                                if (pin2 != ""){
-                                    pin3Ref.current.focus();
-                                }
+                            onChangeText={text=>{
+                                if(!text) pin2Ref.current.focus();
+                                else text && pin3Ref.current.focus();
+                                setPin2(text);
+                                
                             }}
-                            onChangeText={text => setPin2(text)}
                         />
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin3Ref}
-                            onChange={(pin3)=>{
-                                if (pin3 != ""){
-                                    pin4Ref.current.focus();
-                                }
+                            onChangeText={text=>{
+                                if(!text) pin3Ref.current.focus();
+                                else text && pin4Ref.current.focus();
+                                setPin3(text);
+                                
                             }}
-                            onChangeText={text => setPin3(text)}
                         />
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin4Ref}
                             onChangeText={text => setPin4(text)}
                         />
@@ -151,9 +151,10 @@ const styles = StyleSheet.create({
     }, 
     
     containerunorama: {
-        marginTop: '0%',
         flexDirection: 'row',
         //container para los textInput
+
+
     },
     TextInput1: {
         marginTop: '10%',
@@ -163,9 +164,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'purple',
         margin: 5,
-        paddingLeft: 20,
+        paddingLeft: 22,
         borderRadius: 10,
-        fontSize:RFPercentage(2.3),
+        fontSize:RFPercentage(3),
+
+
     },
     btnC:{
         backgroundColor:'#5b298a',
