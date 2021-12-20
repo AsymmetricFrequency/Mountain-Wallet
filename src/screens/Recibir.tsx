@@ -11,7 +11,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 
 
-const Recibir = () => {
+const Recibir = ({navigation}: {navigation: any}) => {
 
     const [copiedText, setCopiedText] = useState('')
  
@@ -70,12 +70,12 @@ const Recibir = () => {
                         </View> 
                         {/*Boton volver*/}       
                         <View>
-                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9}>
+                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => navigation.goBack()} >
                                     <Text style={styles.textCI} >VOLVER</Text> 
                                 </TouchableOpacity> 
                         </View>           
 
-                        <TouchableOpacity   style={{marginTop:20}}activeOpacity={0.9} onPress={() => fetchCopiedText()}>
+                        <TouchableOpacity   style={{marginTop:20}} activeOpacity={0.9} onPress={() => fetchCopiedText()}>
                                     <Text >---Click Probar Copiado---</Text> 
                         </TouchableOpacity>  
                         <Text>{copiedText}</Text>

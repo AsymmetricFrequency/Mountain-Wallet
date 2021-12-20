@@ -10,7 +10,7 @@ const QrReader = ({navigation}: {navigation: any}) => {
 
     const [hasPermission,setHasPermission] = useState(null)
     const [scanned,setScanned] = useState(false)
-    const [text,setText] = useState("no provided")
+    const [text,setText] = useState()
 
     //preguntando el permiso para camara
     const askForCameraPermission = () =>{
@@ -38,7 +38,7 @@ const QrReader = ({navigation}: {navigation: any}) => {
         setText(data)
         
         //aqui va el envio de los props
-        navigation.navigate('Importar', {
+        navigation.navigate('Enviar', {
             address: text
           });
           
@@ -74,7 +74,7 @@ const QrReader = ({navigation}: {navigation: any}) => {
         return(
             <View style={styles.containeruno}>
                 <View style={styles.barcodebox}> 
-                    <BarCodeScanner onBarCodeScanned={scanned ? undefined: handleBarCodeScanned} style={{height:400,width:400}} ></BarCodeScanner>
+                    <BarCodeScanner onBarCodeScanned={scanned ? undefined: handleBarCodeScanned} style={{height:1000,width:1000}} ></BarCodeScanner>
                 </View>
                 <Text>{text}</Text>
                 {scanned && <Button title='scan' onPress={()=>setScanned(false)} ></Button>}
@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
         paddingLeft: '5%',
         paddingRight: '4%',
         alignItems:'center',
+        height:'100%',
+        justifyContent:'center'
     },
     fondo:{
         flex: 1,

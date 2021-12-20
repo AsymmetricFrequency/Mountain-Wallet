@@ -31,7 +31,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
         docePalabras.then((value) => {
             const acc = createAccount(value)
             acc.then((value) => {
-                navigation.navigate('CrearPass')
+                navigation.navigate('PantallaCarga')
                 savePublicKey(value.publicKey.toString())
                 console.log(value.publicKey);
             })
@@ -45,28 +45,25 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
             </View>
             <View style={styles.containerBlanco}>
                 <Text style={styles.textuno} numberOfLines={2}>CREAR CUENTA</Text>
-                
-                <TouchableOpacity style={styles.TextInput} onPress={() => CopyToClipboard()}>
-                    <View>
-                        <Text style={styles.labeluno}>{words}</Text>
-                    </View>
-                </TouchableOpacity>
-
-                <Text style={styles.labeldos} numberOfLines={4}>Oprima en "Generar 12 palabras" y copie las palabras que se generan en el recuadro, son de gran importancia para la seguridad de su cuenta.</Text>
-                
+                <Text style={styles.labeldos} numberOfLines={4}>Oprima en "Generar" y guarde las 12 palabras porque son de gran importancia para la seguridad de su cuenta.</Text>
                 <TouchableOpacity
                     style={styles.btnG}
                     onPress={() => generarMnemonic()} activeOpacity={0.9}>
-                    <Text style={styles.textG}>GENERAR 12 PALABRAS</Text>
+                    <Text style={styles.textG}>GENERAR</Text>
                 </TouchableOpacity>
-                
+                <TouchableOpacity style={styles.TextInput} onPress={() => CopyToClipboard()} disabled={false} >
+                    <View>
+                        <Text  style={styles.labeluno}>{words}</Text>
+                    </View>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.btnC}
-                    activeOpacity={0.9}
-                    onPress={() => crearCuentejere(words)}
+                    activeOpacity={0.7}
+                    onPress={() => navigation.navigate('PantallaCarga')}
                 >
                     <Text style={styles.textC}>CONTINUAR</Text>
                 </TouchableOpacity>
+                {/* <ActivityIndicator size="small" color="purple" /> */}
             </View>
         </View>
     )

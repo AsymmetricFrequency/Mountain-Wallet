@@ -21,6 +21,7 @@ import Recibir from './src/screens/Recibir';
 import Splashc from './src/screens/Splashc';
 import PassLogin from './src/screens/PassLogin'
 import QrReader from './src/screens/QrReader';
+import PantallaCarga from './src/screens/PantallaCarga';
 
 
 export default function App() { 
@@ -116,9 +117,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Pass" component={PassLogin} options={{headerShown: false}}/>
-          <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
+          <Stack.Screen name="Balance" component={Balance} options={{headerShown: false, gestureEnabled: false}}/>
           <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
           <Stack.Screen name="Enviar" component={Importar} options={{headerShown: false}}/>
+          <Stack.Screen name="QrReader" component={QrReader} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -129,8 +131,9 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
           <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
           <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>
-          <Stack.Screen name="CrearPass" component={CodigoVerificacion} options={{headerShown: false}}/>
-          <Stack.Screen name="Balance" component={Balance} options={{headerShown: false}}/>
+          <Stack.Screen name="PantallaCarga" component={PantallaCarga} options={{headerShown: false}}/>
+          <Stack.Screen name="CrearPass" component={CodigoVerificacion} options={{headerShown: false, gestureEnabled: false}}/>
+          <Stack.Screen name="Balance" component={Balance} options={{headerShown: false, gestureEnabled: false}}/>
           <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
           <Stack.Screen name="Enviar" component={Importar} options={{headerShown: false}}/>
           <Stack.Screen name="QrReader" component={QrReader} options={{headerShown: false}}/>
