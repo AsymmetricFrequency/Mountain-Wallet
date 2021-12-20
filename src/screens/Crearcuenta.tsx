@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard,ToastAndroid } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, savePublicKey } from '../../api';
 
@@ -10,20 +10,40 @@ import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, 
 const Crearcuenta = ({navigation}: {navigation: any}) => {
     
     const [isSelected, setSelection] = useState(false);
+    const [botoncontinuar, setbotoncontinuar] = useState(false);
+    const [botonpalabras, setbotonpalabras] = useState(false);
 
     const [words, setWords] = useState('')
+    const showToast = () => {
+        ToastAndroid.show("No haz generado tus 12 palabras", ToastAndroid.SHORT);
+    };
+
 
     function generarMnemonic(){
+        var auxiliar='';
         const memo = generateMnemonic()
         memo.then((value) => {
           console.log(value);
           setWords(value)
-        })
+        //   if(value===auxiliar) {
+        //       setbotonactivo(true)
+        //     }
+        //     else {
+        //         setbotonactivo(false)
+        //     }
+        });setbotonpalabras(true); 
+        
+        
     }
 
     const CopyToClipboard = () => {
-        Clipboard.setString(words) 
-        Alert.alert('Texto Copiado')     
+                if(!botonpalabras){
+            showToast();
+        }else{
+            Clipboard.setString(words) 
+            Alert.alert('Texto Copiado');
+            setbotoncontinuar(true);
+        } 
     };
 
     async function crearCuentejere(palabras: string) {
@@ -38,6 +58,8 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
         })
     }
 
+    
+
     return (
         <View style={styles.body}>
             <View style={styles.containeruno}>
@@ -51,17 +73,19 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                     onPress={() => generarMnemonic()} activeOpacity={0.9}>
                     <Text style={styles.textG}>GENERAR</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.TextInput} onPress={() => CopyToClipboard()} disabled={false} >
+                <TouchableOpacity style={styles.TextInput} onPress={() => CopyToClipboard()}>
                     <View>
                         <Text  style={styles.labeluno}>{words}</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.btnC}
-                    activeOpacity={0.7}
+                    style={[styles.btnC,{backgroundColor:!botoncontinuar?"rgba(91, 41, 137, 0.58)":"#5b298a"}]}
+                    activeOpacity={0.9}
+                    disabled={!botoncontinuar}
                     onPress={() => navigation.navigate('PantallaCarga')}
+                    
                 >
-                    <Text style={styles.textC}>CONTINUAR</Text>
+                    <Text style={styles.textC} >CONTINUAR</Text>
                 </TouchableOpacity>
                 {/* <ActivityIndicator size="small" color="purple" /> */}
             </View>
@@ -169,14 +193,19 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginTop: '5%',
         alignItems: 'center',
+        elevation: 10,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.1,
+        shadowRadius: 5,  
     },
     btnC:{
-        backgroundColor:'#5b298a',
         paddingTop: '4%',
         paddingBottom: '4%',
         borderRadius: 20,
         marginTop: '5%',
         alignItems: 'center',
+
     },
     textG:{
         color:'white',
