@@ -57,8 +57,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                            onChangeText={text=>{
                                if(!text) pin1Ref.current.focus();
                                else text && pin2Ref.current.focus();
-                               setPin1(text);
-                               
+                               setPin1(text);                               
                            }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 

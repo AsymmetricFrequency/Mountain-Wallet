@@ -141,7 +141,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         )
     }
 
-
 export default CodigoVerificacion
 
 const styles = StyleSheet.create({
