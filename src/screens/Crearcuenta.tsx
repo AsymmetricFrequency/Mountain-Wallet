@@ -1,8 +1,10 @@
 import * as React from 'react'
-import { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard,ToastAndroid } from 'react-native';
+import { useState, useRef } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard, Modal } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, savePublicKey } from '../../api';
+import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
 
 
@@ -14,9 +16,30 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
     const [botonpalabras, setbotonpalabras] = useState(false);
 
     const [words, setWords] = useState('')
-    const showToast = () => {
-        ToastAndroid.show("No haz generado tus 12 palabras", ToastAndroid.SHORT);
-    };
+
+    const [anmt,setanmt]= useState("");
+    const [showModal, SetModal] = useState(false);
+    const [copiadoModal, setCopiadoModal] = useState(false);
+    const vermodal = () => {
+        setCopiadoModal(true);
+
+        setanmt("fadeInDownBig");
+   
+        
+        setTimeout( () => {
+            setanmt("fadeOutUp");
+            setTimeout( () => {
+            
+                setCopiadoModal(false);
+                
+                // if(anmt === "lightSpeedOut") SetModal(false);
+            }, 100 )
+            
+            // if(anmt === "lightSpeedOut") SetModal(false);
+        },2000)
+
+    }
+    
 
 
     function generarMnemonic(){
@@ -28,10 +51,45 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
     }
     const CopyToClipboard = () => {
         if(!botonpalabras){
-            showToast();
+            SetModal(true);
+
+            setanmt("fadeInDownBig");
+    
+            
+            setTimeout( () => {
+                setanmt("fadeOutUp");
+                setTimeout( () => {
+                
+                    SetModal(false);
+                    
+                    // if(anmt === "lightSpeedOut") SetModal(false);
+                }, 100 )
+                
+                // if(anmt === "lightSpeedOut") SetModal(false);
+            },2000)
+
         }else{
             Clipboard.setString(words) 
-            Alert.alert('Texto Copiado');
+            setCopiadoModal(true);
+
+            setanmt("fadeInDownBig");
+    
+            
+            setTimeout( () => {
+                setanmt("fadeOutUp");
+                setTimeout( () => {
+                
+                    setCopiadoModal(false);
+                    
+                    // if(anmt === "lightSpeedOut") SetModal(false);
+                }, 100 )
+                
+                // if(anmt === "lightSpeedOut") SetModal(false);
+            },2000)
+
+
+
+
             setbotoncontinuar(true);
         } 
     };
@@ -52,15 +110,105 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
 
     return (
         <View style={styles.body}>
+            <Modal
+                visible={showModal}
+                transparent
+                onRequestClose={() =>
+                    SetModal(false)
+                }
+                // animationType='slide'
+                hardwareAccelerated
+                
+            >
+                <Animatable.View animation={anmt} duration= {600}>
+                    
+                    <View style={styles.bodymodal}>
+                        <View style={styles.ventanamodal}>
+                            <View style={styles.icontext}>
+                                <View style={styles.contenedorlottie}>
+                                    <LottieView
+                                        style={styles.lottie}
+                                        source={require("./Lottie/error.json")}
+                                        autoPlay
+                                    />
+                                </View>
+                                
+                                
+                            </View>   
+                            <View style={styles.textnoti}>
+                                <View style={styles.contenedortext}>
+                                        <Text style={styles.texticon}>Error</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.notificacion}>No has generado las 12 palabras</Text>
+                                </View>
+                            </View>               
+                            
+
+                        </View>
+                
+                    </View>
+                </Animatable.View>         
+            </Modal>
+
+
+
+            <Modal
+                visible={copiadoModal}
+                transparent
+                onRequestClose={() =>
+                    setCopiadoModal(false)
+                }
+                // animationType='slide'
+                hardwareAccelerated
+                
+            >
+                <Animatable.View animation={anmt} duration= {600}>
+                    
+                    <View style={styles.bodymodal}>
+                        <View style={styles.ventanamodal}>
+                            <View style={styles.icontext}>
+                                <View style={styles.contenedorlottie}>
+                                    <LottieView
+                                        style={styles.lottie}
+                                        source={require("./Lottie/copiado.json")}
+                                        autoPlay
+                                    />
+                                </View>
+                                
+                                
+                            </View>   
+                            <View style={styles.textnoti}>
+                                <View style={styles.contenedortext}>
+                                        <Text style={styles.texticon}>Texto Copiado</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.notificacion}>Guarda las 12 palabras</Text>
+                                </View>
+                            </View>               
+                            
+
+                        </View>
+                
+                    </View>
+                </Animatable.View>         
+            </Modal>
+
+
+
+
+
             <View style={styles.containeruno}>
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
             </View>
             <View style={styles.containerBlanco}>
                 <Text style={styles.textuno} numberOfLines={2}>CREAR CUENTA</Text>
-                <Text style={styles.labeldos} numberOfLines={4}>Oprima en "Generar" y guarde las 12 palabras porque son de gran importancia para la seguridad de su cuenta.</Text>
+                <Text style={styles.labeldos} numberOfLines={4}>Oprima en "Generar" y copie las 12 palabras porque son de gran importancia para la seguridad de su cuenta.</Text>
                 <TouchableOpacity
                     style={styles.btnG}
+                    // onPress={() => vermodal()} activeOpacity={0.9}>
                     onPress={() => generarMnemonic()} activeOpacity={0.9}>
+                    
                     <Text style={styles.textG}>GENERAR</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.TextInput} onPress={() => CopyToClipboard()}>
@@ -211,4 +359,56 @@ const styles = StyleSheet.create({
         marginLeft: '24%',
         marginRight: '24%',
     },
+
+
+
+    //Estilo de modal
+    bodymodal: {
+        flex: 1,
+        // backgroundColor: '#00000099',
+        alignItems: 'center',
+
+    },
+    ventanamodal: {
+        width: 350,
+        height: 80,
+        backgroundColor: '#5B298A',
+        borderWidth: 0.5,
+        borderColor: '#000',
+        borderRadius: 20,
+        paddingLeft:'5%',
+        paddingRight:'5%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        top:'2%'
+    },
+    icontext: {
+        alignItems: 'center',
+    },
+    textnoti: {
+
+    },
+    contenedorlottie:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    lottie: {
+        width:60,
+        height:60,
+    },
+    contenedortext: {
+        justifyContent: 'center',
+    },
+    texticon: {
+        fontSize:RFValue(25),
+        fontWeight: "bold",
+        color:'white'
+
+    },
+    notificacion:{
+        fontSize:RFValue(15),
+        color:'white'
+    },
+
+    
 })
