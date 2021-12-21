@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction, savePublicKey } from '../../api';
+import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction, savePublicKey, saveMmemonic } from '../../api';
 //Navegación
 import { Dimensions } from 'react-native';
 
@@ -20,6 +20,11 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                 savePublicKey(value.publicKey.toString())
             })
         })
+    }
+
+    function continuar() {
+        saveMmemonic(twelfString)
+        navigation.navigate('PantallaCarga')
     }
     
     return (
@@ -41,7 +46,7 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                 <Text style={styles.labeldos} numberOfLines={4}>Ingrese sus 12 palabras de respaldo en minusculas</Text>
                 <TouchableOpacity
                     style={styles.btnC}
-                    onPress={() => navigation.navigate('PantallaCarga')}>
+                    onPress={() => continuar()}>
                     <Text style={styles.textC}>ACEPTAR</Text>
                 </TouchableOpacity>
             </View>
