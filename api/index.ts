@@ -79,7 +79,8 @@ async function readMnemonic(){
   try {    
     console.log("READ MNEMONIC:");
     const key = await AsyncStorage.getItem('@storage_Mnemonic')
-    console.log(key)  
+    console.log(key) 
+    return key 
   } catch (e) { 
        // saving error  
   }
@@ -184,30 +185,19 @@ async function getToken(publicKey: string, splToken: string){
 
 }
 
-//enviar transaccion
-async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
-  const connection = createConnection("devnet")
+async function enviarTrans(fromWallet,connection,myMint,toPublic,amount){
+  // Create associated token accounts for my token if they don't exist yet
 
-  //prueba con la llave
-  const DEMO_WALLET_SECRET_KEY = new Uint8Array([245,227,241,78,52,86,34,249,154,108,11,238,175,182,30,183,142,181,39,114,135,60,106,146,197,188,205,100,79,22,57,64,51,190,81,228,64,115,0,1,93,168,72,53,238,168,60,211,151,35,252,21,100,240,0,176,228,240,105,206,47,68,116,28]); 
-  var fromWallet = new solanaWeb3.Account(DEMO_WALLET_SECRET_KEY);
-  console.log(fromWallet.publicKey.toString());
-  console.log(readMnemonic());
-  
-  
-  //const fromWallet = wallet
-  const toWallet = new solanaWeb3.PublicKey(toPublic)
-  const myMint = new solanaWeb3.PublicKey(splToken)
 
-  var myToken = new Token(
-    connection,
-    myMint,
-    TOKEN_PROGRAM_ID,
-    fromWallet
-  );
 
-   // Create associated token accounts for my token if they don't exist yet
-   var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
+            var myToken = new Token(
+              connection,
+              myMint,
+              TOKEN_PROGRAM_ID,
+              fromWallet
+            )
+          
+  var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
     fromWallet.publicKey
   )
   var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
@@ -215,27 +205,45 @@ async function sendTokenTransaction( toPublic: string, splToken: string, amount:
   )
 
   var transaction = new solanaWeb3.Transaction()
-    .add(
-      Token.createTransferInstruction(
-        TOKEN_PROGRAM_ID,
-        fromTokenAccount.address,
-        toTokenAccount.address,
-        fromWallet.publicKey,
-        [],
-        amount * LAMPORTS_PER_SOL
-      )
+  .add(
+    Token.createTransferInstruction(
+      TOKEN_PROGRAM_ID,
+      fromTokenAccount.address,
+      toTokenAccount.address,
+      fromWallet.publicKey,
+      [],
+      amount * LAMPORTS_PER_SOL
     )
-  
-  var signature = await solanaWeb3.sendAndConfirmTransaction(
-    connection,
-    transaction,
-    [fromWallet]
-  );
-  console.log("SIGNATURE", signature);
-  console.log("SUCCESS");
+  )
 
+var signature = await solanaWeb3.sendAndConfirmTransaction(
+  connection,
+  transaction,
+  [fromWallet]
+)
+console.log("SIGNATURE", signature)
+console.log("SUCCESS")
+}
 
-  
+//enviar transaccion
+async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
+  const connection = createConnection("devnet")
+  const myMint = new solanaWeb3.PublicKey(splToken)
+
+  const mnemonic = readMnemonic()
+  mnemonic.then((value) => {
+    const docePalabras = mnemonicToSeed(value)
+    docePalabras.then((value) => {
+        const acc = createAccount(value)
+        acc.then((value) => {
+              console.log('Esta es tu cucha: '+value.publicKey)
+              enviarTrans(value,connection,myMint,toPublic,amount)          
+         
+        })
+      
+    })
+  })
+
 }
 
 // funcion para obtener el historial de transacciones

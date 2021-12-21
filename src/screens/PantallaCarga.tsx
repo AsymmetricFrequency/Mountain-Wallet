@@ -6,7 +6,6 @@ import { readMnemonic, createAccount, savePublicKey, mnemonicToSeed } from '../.
 const PantallaCarga = ({navigation}: {navigation: any}) => {
 
     const [palabras, setPalabras] = useState("")
-    const [twelf, settwelf] = useState("")
 
     async function leerMnemonic() {
         const mnemonic = readMnemonic()
@@ -14,34 +13,23 @@ const PantallaCarga = ({navigation}: {navigation: any}) => {
             setPalabras(value)
         })
     }
+
+    leerMnemonic()
+
     //Crear cuenta
     async function crearCuenta(palabras: string) {
         const docePalabras = mnemonicToSeed(palabras)
         docePalabras.then((value) => {
             const acc = createAccount(value)
             acc.then((value) => {
-                navigation.navigate('CrearPass')
                 savePublicKey(value.publicKey.toString())
-                console.log(value.publicKey);
-            })
-        })
-    }
-
-    //Importar
-    async function importarCuenta(twelf: string) {
-        const docePalabras = mnemonicToSeed(twelf)
-        docePalabras.then((value) => {
-            const acc = createAccount(value)
-            acc.then((value) => {
                 navigation.navigate('CrearPass')
-                savePublicKey(value.publicKey.toString())
             })
         })
     }
 
     setTimeout(() => {
         crearCuenta(palabras)
-        importarCuenta(twelf)
     }, 2000);
 
     return (
