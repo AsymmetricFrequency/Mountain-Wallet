@@ -34,9 +34,7 @@ const PantallaCarga = ({navigation}: {navigation: any}) => {
 
     return (
         <View style={styles.body}>
-            <ImageBackground source={require('./img/FondoCargar.png')} style={styles.fondo}>
-                <Image style={styles.gif} source={require('./img/cargando-2.gif')}/>
-            </ImageBackground>
+                <ActivityIndicator size="large" color="purple" />
         </View>
     )
 }
@@ -62,8 +60,8 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     gif: {
-        width: '100%',
-        height: '20%',
+        width: '50%',
+        height: '10%',
         resizeMode: 'contain'
     },
 })
