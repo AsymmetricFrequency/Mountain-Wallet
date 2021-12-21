@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput} from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction, readKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
@@ -12,7 +12,16 @@ const Splashc = () => {
 
     const navigation = useNavigation();
 
+    const [llave, setLlave] = useState("")
+  
+    readKey().then((value) => {
+      setLlave(value)
+    })
+
     setTimeout(() => {
+      if(llave != null && llave != '' && llave != undefined){
+        navigation.navigate("Pass" as any)
+      }
         navigation.navigate("Home" as any)
     }, 2500);
 

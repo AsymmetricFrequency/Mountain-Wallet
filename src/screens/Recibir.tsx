@@ -73,11 +73,7 @@ const Recibir = ({navigation}: {navigation: any}) => {
                                 <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => navigation.goBack()} >
                                     <Text style={styles.textCI} >VOLVER</Text> 
                                 </TouchableOpacity> 
-                        </View>           
-
-                        <TouchableOpacity   style={{marginTop:20}} activeOpacity={0.9} onPress={() => fetchCopiedText()}>
-                                    <Text >---Click Probar Copiado---</Text> 
-                        </TouchableOpacity>  
+                        </View>             
                         <Text>{copiedText}</Text>
                     </View>
                 </View>             
@@ -162,12 +158,13 @@ const styles = StyleSheet.create({
     cuadroqr:{
         width:'80%',
         justifyContent: 'center',
-        paddingLeft: '1%',
+        
     },
     inputqr:{
         fontWeight: 'bold',
-        fontSize:RFPercentage(1.8),
+        fontSize:RFPercentage(1.2),
         color: '#5a5959',
+        left: '2%'
     },
     cbtncop:{
         width:'20%',
@@ -181,6 +178,7 @@ const styles = StyleSheet.create({
         paddingLeft: '10%',
         paddingRight:'10%',
         borderRadius: 10,
+        left: '13%'
     },
     txtcop:{
         color:'white',
