@@ -188,41 +188,46 @@ async function getToken(publicKey: string, splToken: string){
 async function enviarTrans(fromWallet,connection,myMint,toPublic,amount){
   // Create associated token accounts for my token if they don't exist yet
 
-
-
-            var myToken = new Token(
-              connection,
-              myMint,
-              TOKEN_PROGRAM_ID,
-              fromWallet
-            )
-          
-  var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-    fromWallet.publicKey
-  )
-  var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-    new solanaWeb3.PublicKey(toPublic)
-  )
-
-  var transaction = new solanaWeb3.Transaction()
-  .add(
-    Token.createTransferInstruction(
+  try {
+    var myToken = new Token(
+      connection,
+      myMint,
       TOKEN_PROGRAM_ID,
-      fromTokenAccount.address,
-      toTokenAccount.address,
-      fromWallet.publicKey,
-      [],
-      amount * LAMPORTS_PER_SOL
+      fromWallet
     )
-  )
+            
+    var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
+      fromWallet.publicKey
+    )
+    var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
+      new solanaWeb3.PublicKey(toPublic)
+    )
+  
+    var transaction = new solanaWeb3.Transaction()
+    .add(
+      Token.createTransferInstruction(
+        TOKEN_PROGRAM_ID,
+        fromTokenAccount.address,
+        toTokenAccount.address,
+        fromWallet.publicKey,
+        [],
+        amount * LAMPORTS_PER_SOL
+      )
+    )
 
-var signature = await solanaWeb3.sendAndConfirmTransaction(
-  connection,
-  transaction,
-  [fromWallet]
-)
-console.log("SIGNATURE", signature)
-console.log("SUCCESS")
+    var signature = await solanaWeb3.sendAndConfirmTransaction(
+      connection,
+      transaction,
+      [fromWallet]
+    ).catch((err) => {
+      // Alerta de que no tiene fondos en el token
+    })
+
+    console.log("SIGNATURE", signature)
+    console.log("SUCCESS")
+  } catch (error) {
+    console.log('Este es el error '+error);
+  }
 }
 
 //enviar transaccion
@@ -236,9 +241,7 @@ async function sendTokenTransaction( toPublic: string, splToken: string, amount:
     docePalabras.then((value) => {
         const acc = createAccount(value)
         acc.then((value) => {
-              console.log('Esta es tu cucha: '+value.publicKey)
               enviarTrans(value,connection,myMint,toPublic,amount)          
-         
         })
       
     })
