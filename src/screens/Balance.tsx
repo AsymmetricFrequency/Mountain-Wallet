@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {  Dimensions,ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler, Linking } from 'react-native'
+import {  Dimensions,ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler, Linking, Platform } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -84,7 +84,7 @@ useEffect(()=>{
                             <Text style={styles.txtinferiorR}></Text>
                         </View>
                     </View> */}
-      
+                    {/* Cuadro recibir y enviar */}
                     <View style={styles.dcER}>
                         <View style={styles.dcR}>
                             <TouchableOpacity style=
@@ -106,6 +106,7 @@ useEffect(()=>{
                         </View>
                     </View>
 
+                    {/* tabla de criptos */}
                     <View style={styles.balancecry}>
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
@@ -116,14 +117,16 @@ useEffect(()=>{
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text numberOfLines={1} onPress={() => Alert.alert(tokenBalance.toString())}style={styles.stxtcry}>{tokenBalance}</Text>
+                                    <Text numberOfLines={1} style={styles.stxtcry}>{tokenBalance}</Text>
                                 </View>
                                 
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>CNDR</Text>
                                 </View>
                             </View>                           
-                        </View>                        
+                        </View>  
+
+
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
                                 <Image style={styles.imgcry} source={require('./img/billeteras/solana.png')}  />
@@ -133,7 +136,7 @@ useEffect(()=>{
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry} onPress={() => Alert.alert(balance.toString())}>{balance}</Text>
+                                    <Text style={styles.stxtcry}>{balance}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>SOL</Text>
@@ -141,22 +144,16 @@ useEffect(()=>{
                             </View>                           
                         </View>
                     </View>
-                    {/* <View style={styles.Developed}>
-                        <TouchableOpacity style={styles.btnlogo}  onPress={() => Linking.openURL('https://famonterrey.org/')} >
-                               
-                                <Animatable.View style={styles.fab}
-                                    duration={2000}
-                                    iterationCount={"infinite"}>
-                                    <Image source={require('./img/LogoMin.png')} style={styles.miniLogo}/>
-                                </Animatable.View>
-                        </TouchableOpacity>
-                    </View> */}
                 </View>             
             </ImageBackground>   
         </View>
     )
 }
 
+
+
+const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const styles = StyleSheet.create({
     body:{
         height: windowHeight,
@@ -164,8 +161,8 @@ const styles = StyleSheet.create({
     },
     containeruno:{
         paddingTop: RFValue(35),
-        paddingLeft: '5%',
-        paddingRight: '4%',
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
         alignItems:'center',
     },
     fondo:{
@@ -173,7 +170,6 @@ const styles = StyleSheet.create({
         width: windowWidth,
         margin:0,
         resizeMode: 'contain',
-
     },
     logo:{
         resizeMode: 'contain',
@@ -185,36 +181,36 @@ const styles = StyleSheet.create({
         color:'white',
         fontWeight:'bold',
     },
-    doscolumnasB:{
-        flexDirection: 'row',
-        width: windowWidth,
-    },
-    columnaunoB: {
-        width:'50%',
-        alignItems:'flex-end',
-    },
-    columnadosB: {
-        alignItems:'center',
-        width:'12%',
-        borderRadius: 8,
-        // paddingLeft: '2%',
-        // paddingRight: '2%',
-    },
-    txtinferiorL:{
-        fontFamily:'Roboto',
-        color:'white',
-        fontSize:RFPercentage(2.5),
-        fontWeight:'bold',
-        paddingLeft: '3%',
-        paddingRight: '3%',
-    },
-    txtinferiorR:{
-        fontFamily:'Roboto',
-        color:'white',
-        fontSize:RFPercentage(2.5),
-        fontWeight:'bold',
+    // doscolumnasB:{
+    //     flexDirection: 'row',
+    //     width: windowWidth,
+    // },
+    // columnaunoB: {
+    //     width:'50%',
+    //     alignItems:'flex-end',
+    // },
+    // columnadosB: {
+    //     alignItems:'center',
+    //     width:'12%',
+    //     borderRadius: 8,
+    //     // paddingLeft: '2%',
+    //     // paddingRight: '2%',
+    // },
+    // txtinferiorL:{
+    //     fontFamily:'Roboto',
+    //     color:'white',
+    //     fontSize:RFPercentage(2.5),
+    //     fontWeight:'bold',
+    //     paddingLeft: '3%',
+    //     paddingRight: '3%',
+    // },
+    // txtinferiorR:{
+    //     fontFamily:'Roboto',
+    //     color:'white',
+    //     fontSize:RFPercentage(2.5),
+    //     fontWeight:'bold',
 
-    },
+    // },
     dcER:{
         flexDirection: 'row',
         backgroundColor: 'white',
@@ -300,43 +296,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize:RFValue(13),
         color: '#8d8c8c',
-    },
-    fab: {
-        backgroundColor: '#5b298a',  
-        width: 60,
-        height: 60,
-        borderRadius: 100,
-        justifyContent: 'center'
-    },
-    miniLogo: {
-        width: 50,
-        height: 50,
-        alignSelf: 'center'
-    },
-
-    Developed:{
-        width: "100%",
-        height: "100%",
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute', 
-        top:'60%',
-        resizeMode: 'contain',
-        marginLeft:'90%',
-        left:'-4%'
-
-    },
-    btnlogo:{
-        
-        // width: "100%",
-        // height: "100%",
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute', 
-        left: 0, 
-        right: 0, 
-        paddingTop: 0,
-        top:0
     },
 })
 export default Balance
