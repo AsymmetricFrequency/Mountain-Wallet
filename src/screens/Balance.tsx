@@ -54,10 +54,15 @@ readPublicKey().then((val)=>{
     setPKey(val)
 })
 
-  obtenerTokenB(pKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
-  //obtener balance de una llave publica
-  obtenerBalance(pKey)
+useEffect(()=>{
 
+    //obtener balance del token
+    obtenerTokenB(pKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
+    //obtener balance solanas
+    obtenerBalance(pKey)
+
+})
+  
 
     return (
         <View style={styles.body}>
