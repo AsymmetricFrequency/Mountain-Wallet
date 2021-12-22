@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert } from 'react-native';
+import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Modal, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction, savePublicKey, saveMmemonic } from '../../api';
+import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 //Navegación
 import { Dimensions } from 'react-native';
 
@@ -22,16 +24,77 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
         })
     }
 
+    const [anmt,setanmt]= useState("");
+    const [vacioModal, setVacioModal] = useState(false);
+
     function continuar() {
-        saveMmemonic(twelfString)
-        navigation.navigate('PantallaCarga')
+        if (twelfString != "") {
+            saveMmemonic(twelfString)
+            navigation.navigate('PantallaCarga')
+        } else {
+            setVacioModal(true);
+            setanmt("fadeInDownBig");            
+            setTimeout( () => {
+                setanmt("fadeOutUp");
+                setTimeout( () => {
+                    setVacioModal(false);
+                }, 100 ) 
+            },2000)
+        }
     }
+
+ 
     
     return (
         <KeyboardAwareScrollView
             resetScrollToCoords={{ x: 0, y: 0 }}
             contentContainerStyle={styles.body}
             scrollEnabled={false} >
+            <Modal
+                visible={vacioModal}
+                transparent
+                onRequestClose={() =>
+                    setVacioModal(false)
+                }
+                // animationType='slide'
+                hardwareAccelerated
+                
+            >
+                <Animatable.View animation={anmt} duration= {600}>
+                    
+                    <View style={styles.bodymodal}>
+                        <View style={styles.ventanamodal}>
+                            <View style={styles.icontext}>
+                                <View style={styles.contenedorlottie}>
+                                    <LottieView
+                                        style={styles.lottie}
+                                        source={require("./Lottie/error.json")}
+                                        autoPlay
+                                    />
+                                </View>
+                                
+                                
+                            </View>   
+                            <View style={styles.textnoti}>
+                                <View style={styles.contenedortext}>
+                                        <Text style={styles.texticon}>Error</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.notificacion}>No has ingresado las 12 palabras</Text>
+                                </View>
+                            </View>               
+                            
+
+                        </View>
+                
+                    </View>
+                </Animatable.View>         
+            </Modal>
+
+
+
+
+
             <View style={styles.containeruno}>
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
             </View>
@@ -40,7 +103,8 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                 <TextInput 
                     style={styles.TextInputf}
                     autoFocus={true} multiline={true}
-                    onChangeText={text => setTwelfString(text)}>
+                    onChangeText={text => setTwelfString(text)}
+                    autoCapitalize = 'none'>
                     <Text style={styles.labeluno} ></Text>
                 </TextInput>                
                 <Text style={styles.labeldos} numberOfLines={4}>Ingrese sus 12 palabras de respaldo en minusculas</Text>
@@ -56,6 +120,7 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
 
 export default ImportarCuenta
 
+const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const styles = StyleSheet.create({
     body: {
         width: '100%',
@@ -173,5 +238,51 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(2),
         marginLeft: '26%',
         marginRight: '26%',
+    },
+
+
+    bodymodal: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    ventanamodal: {
+        width: 350,
+        height: 80,
+        backgroundColor: '#5B298A',
+        borderWidth: 0.5,
+        borderColor: '#000',
+        borderRadius: 20,
+        paddingLeft:'5%',
+        paddingRight:'5%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        top:alturaios
+    },
+    icontext: {
+        alignItems: 'center',
+    },
+    textnoti: {
+
+    },
+    contenedorlottie:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    lottie: {
+        width:60,
+        height:60,
+    },
+    contenedortext: {
+        justifyContent: 'center',
+    },
+    texticon: {
+        fontSize:RFValue(25),
+        fontWeight: "bold",
+        color:'white'
+
+    },
+    notificacion:{
+        fontSize:RFValue(15),
+        color:'white'
     },
 })
