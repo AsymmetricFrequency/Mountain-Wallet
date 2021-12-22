@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, SafeAreaView,Clipboard, ToastAndroid} from 'react-native'
+import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, SafeAreaView,Clipboard, ToastAndroid, Modal} from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
-
+import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
+import Icon from 'react-native-vector-icons/Ionicons';
 // import { TextInput } from 'react-native-element-textinput';
 import QRCode from 'react-native-qrcode-svg';
 //Navegación
@@ -15,9 +17,19 @@ const Recibir = ({navigation}: {navigation: any}) => {
 
     const [copiedText, setCopiedText] = useState('')
  
+
+    const [anmt,setanmt]= useState("");
+    const [copiadoModal, setCopiadoModal] = useState(false);
     const CopyToClipboard = () => {
       Clipboard.setString(pKey) 
-      Alert.alert('Texto Copiado')     
+      setCopiadoModal(true);
+      setanmt("fadeInDownBig");
+      setTimeout( () => {
+          setanmt("fadeOutUp");
+          setTimeout( () => {
+              setCopiadoModal(false);
+          }, 100 )
+      },2000)   
     };
    
     const fetchCopiedText = async () => {
@@ -41,6 +53,48 @@ const Recibir = ({navigation}: {navigation: any}) => {
 
     return (
         <View style={styles.body}>
+            <Modal
+                visible={copiadoModal}
+                transparent
+                onRequestClose={() =>
+                    setCopiadoModal(false)
+                }
+                // animationType='slide'
+                hardwareAccelerated
+                
+            >
+                <Animatable.View animation={anmt} duration= {600}>
+                    
+                    <View style={styles.bodymodal}>
+                        <View style={styles.ventanamodal}>
+                            <View style={styles.icontext}>
+                                <View style={styles.contenedorlottie}>
+                                    <LottieView
+                                        style={styles.lottie}
+                                        source={require("./Lottie/copiado.json")}
+                                        autoPlay
+                                    />
+                                </View>
+                                
+                                
+                            </View>   
+                            <View style={styles.textnoti}>
+                                <View style={styles.contenedortext}>
+                                        <Text style={styles.texticon}>Texto Copiado</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.notificacion}>Ya puedes compartir tu dirección</Text>
+                                </View>
+                            </View>               
+                            
+
+                        </View>
+                
+                    </View>
+                </Animatable.View>         
+            </Modal>
+
+
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
                     <Image style={styles.logo} source={require('./img/recibir.png')}  />
@@ -64,7 +118,8 @@ const Recibir = ({navigation}: {navigation: any}) => {
                             </View>
                             <View style={styles.cbtncop}>
                                     <TouchableOpacity style={styles.btncop}  activeOpacity={0.9} onPress={() => CopyToClipboard()}> 
-                                        <Text style={styles.txtcop}>COPIAR</Text>                        
+                                        <Icon name ="copy-outline" size={25} color="white"/>
+                                        {/* <Text style={styles.txtcop}>COPIAR</Text>                         */}
                                     </TouchableOpacity>
                             </View>                    
                         </View> 
@@ -82,7 +137,7 @@ const Recibir = ({navigation}: {navigation: any}) => {
     )
 }
 
-
+const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const styles = StyleSheet.create({
     body: {
         width: '100%',
@@ -173,8 +228,8 @@ const styles = StyleSheet.create({
     },
     btncop:{
         backgroundColor:'#5b298a',
-        paddingTop: '20%',
-        paddingBottom: '20%',
+        paddingTop: '10%',
+        paddingBottom: '10%',
         paddingLeft: '10%',
         paddingRight:'10%',
         borderRadius: 10,
@@ -199,6 +254,54 @@ const styles = StyleSheet.create({
         color:'white',
         fontWeight: 'bold',
         fontSize:RFPercentage(2),
+    },
+
+
+   //Modal
+
+    bodymodal: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    ventanamodal: {
+        width: 350,
+        height: 80,
+        backgroundColor: '#5B298A',
+        borderWidth: 0.5,
+        borderColor: '#000',
+        borderRadius: 20,
+        paddingLeft:'5%',
+        paddingRight:'5%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        top:alturaios
+    },
+    icontext: {
+        alignItems: 'center',
+    },
+    textnoti: {
+
+    },
+    contenedorlottie:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    lottie: {
+        width:60,
+        height:60,
+    },
+    contenedortext: {
+        justifyContent: 'center',
+    },
+    texticon: {
+        fontSize:RFValue(25),
+        fontWeight: "bold",
+        color:'white'
+
+    },
+    notificacion:{
+        fontSize:RFValue(15),
+        color:'white'
     },
 })
 export default Recibir
