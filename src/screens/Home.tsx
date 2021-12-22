@@ -37,22 +37,15 @@ const Home = ({navigation}: {navigation: any}) => {
                             
                         </View>
                         <View style={styles.Developed}>
-                            <TouchableOpacity style={styles.Developed2}  onPress={() => Linking.openURL('https://famonterrey.org/')}>
+                            <TouchableOpacity style={styles.Developed2}  onPress={() => Linking.openURL('https://condorcoin.co/')}>
                                 
                                 <Animatable.View style={styles.fab}
                                     animation="tada"
                                     duration={2000}
                                     iterationCount={"infinite"}>
-                                    <Image source={require('./img/LogoMin.png')} style={styles.miniLogo}/>
+                                    <Image source={require('./img/condorBlanco.png')} style={styles.miniLogo}/>
                                 </Animatable.View>
                             </TouchableOpacity>
-                            <Animatable.Image  
-                                animation="bounceInRight"
-                                duration={2000}
-                                source={require('./img/conocen.png')} 
-                                style={styles.letrasConoce}
-                            >
-                            </Animatable.Image>
                         </View>                                       
                     </View>
                 </View>             
@@ -159,8 +152,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     miniLogo: {
-        width: 50,
-        height: 50,
+        width: 48,
+        height: 48,
         alignSelf: 'center'
     },
     letrasConoce: {
