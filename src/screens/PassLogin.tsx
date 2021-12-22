@@ -1,7 +1,9 @@
 import React, { Component,useRef, useState } from 'react'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
 import { readPassword } from '../../api';
 //navegación
@@ -29,13 +31,22 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
             setStoredPass(val)
         })
 
+        const [anmt,setanmt]= useState("");
+        const [vacioModal, setVacioModal] = useState(false);
+
         function validarPassword() {
             const password = pin1+pin2+pin3+pin4
             if (password == storedPass) {
                 navigation.navigate('Balance')
             } else {
-                // Falta hacer la alerta de que no es 
-                console.log("No es la misma")
+                setVacioModal(true);
+                setanmt("fadeInDownBig");            
+                setTimeout( () => {
+                setanmt("fadeOutUp");
+                setTimeout( () => {
+                    setVacioModal(false);
+                }, 100 ) 
+                },2000)
             }
         }
 
@@ -43,6 +54,50 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.body}
         scrollEnabled={false}>
+
+            
+            <Modal
+                visible={vacioModal}
+                transparent
+                onRequestClose={() =>
+                    setVacioModal(false)
+                }
+                // animationType='slide'
+                hardwareAccelerated
+                
+            >
+                <Animatable.View animation={anmt} duration= {600}>
+                    
+                    <View style={styles.bodymodal}>
+                        <View style={styles.ventanamodal}>
+                            <View style={styles.icontext}>
+                                <View style={styles.contenedorlottie}>
+                                    <LottieView
+                                        style={styles.lottie}
+                                        source={require("./Lottie/error.json")}
+                                        autoPlay
+                                    />
+                                </View>
+                                
+                                
+                            </View>   
+                            <View style={styles.textnoti}>
+                                <View style={styles.contenedortext}>
+                                        <Text style={styles.texticon}>Error</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.notificacion}>Contraseña incorrecta</Text>
+                                </View>
+                            </View>               
+                            
+
+                        </View>
+                
+                    </View>
+                </Animatable.View>         
+            </Modal>
+
+
             <View style={styles.containeruno}>
                 {/* logo */}
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
@@ -101,6 +156,8 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
 
 
 export default CodigoVerificacion
+
+const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 
 const styles = StyleSheet.create({
     body: {
@@ -183,5 +240,52 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(2),
         marginLeft: '22%',
         marginRight: '22%',
+    },
+
+    //Modal
+
+    bodymodal: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    ventanamodal: {
+        width: 350,
+        height: 80,
+        backgroundColor: '#5B298A',
+        borderWidth: 0.5,
+        borderColor: '#000',
+        borderRadius: 20,
+        paddingLeft:'5%',
+        paddingRight:'5%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        top:alturaios
+    },
+    icontext: {
+        alignItems: 'center',
+    },
+    textnoti: {
+
+    },
+    contenedorlottie:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    lottie: {
+        width:60,
+        height:60,
+    },
+    contenedortext: {
+        justifyContent: 'center',
+    },
+    texticon: {
+        fontSize:RFValue(25),
+        fontWeight: "bold",
+        color:'white'
+
+    },
+    notificacion:{
+        fontSize:RFValue(15),
+        color:'white'
     },
 })
