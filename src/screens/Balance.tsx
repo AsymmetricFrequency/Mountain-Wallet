@@ -117,7 +117,8 @@ useEffect(()=>{
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text numberOfLines={1} style={styles.stxtcry}>{tokenBalance}</Text>
+                                    
+                                    <Text numberOfLines={1} style={styles.stxtcry} >{tokenBalance}</Text>
                                 </View>
                                 
                                 <View style={styles.monedacry}>
@@ -232,6 +233,11 @@ const styles = StyleSheet.create({
         paddingTop: RFValue(12),
         paddingBottom: RFValue(12),
         borderRadius: 20,
+        elevation:24,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.5,
+        shadowRadius: 8,
     },
     textbtnR:{
         color:'white',
