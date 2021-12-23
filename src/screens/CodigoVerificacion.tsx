@@ -1,12 +1,14 @@
 import React, { Component,useRef, useState } from 'react'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform } from 'react-native'
+import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as Animatable from 'react-native-animatable';
 import { savePassword } from '../../api';
 import LottieView from 'lottie-react-native';
-//navegación
 
+
+const windowWidth = Dimensions.get('screen').width;
+const windowHeight = Dimensions.get('screen').height;
 
 const CodigoVerificacion = ({navigation}: {navigation: any}) => {
   
@@ -20,8 +22,8 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         const cof2Ref = useRef(null)
         const cof3Ref = useRef(null)
         const cof4Ref = useRef(null)
-
-        const [pin1, setPin1] = useState("");
+        //Cambiar estados
+        const [pin1, setPin1] = useState("")
         const [pin2, setPin2] = useState("")
         const [pin3, setPin3] = useState("")
         const [pin4, setPin4] = useState("")
@@ -42,7 +44,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 //Para guardar el password pues si hay que concatenar pin1+pin2+pin3+pin4 en un solo string
                 const password = pin1+pin2+pin3+pin4
                 savePassword(password)
-                navigation.navigate('Balance')
+                navigation.navigate('PantallaCarga')
             } else if(pin1 == "" || pin2 == "" || pin3 == "" || pin4 == ""  || cof1 == "" || cof2 == "" || cof3 == "" || cof4 == "") {
                 setvacioModal(true);
                 setanmt("fadeInDownBig");
@@ -76,12 +78,9 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 onRequestClose={() =>
                     setIncorrectoModal(false)
                 }
-                // animationType='slide'
                 hardwareAccelerated
-                
             >
                 <Animatable.View animation={anmt} duration= {600}>
-                    
                     <View style={styles.bodymodal}>
                         <View style={styles.ventanamodal}>
                             <View style={styles.icontext}>
@@ -92,8 +91,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                                         autoPlay
                                     />
                                 </View>
-                                
-                                
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
@@ -102,15 +99,11 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                                 <View>
                                     <Text style={styles.notificacion}>Los codigos no coinciden</Text>
                                 </View>
-                            </View>               
-                            
-
+                            </View> 
                         </View>
-                
                     </View>
                 </Animatable.View>         
             </Modal>
-
 
 
             <Modal
@@ -119,12 +112,9 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 onRequestClose={() =>
                     setvacioModal(false)
                 }
-                // animationType='slide'
                 hardwareAccelerated
-                
             >
                 <Animatable.View animation={anmt} duration= {600}>
-                    
                     <View style={styles.bodymodal}>
                         <View style={styles.ventanamodal}>
                             <View style={styles.icontext}>
@@ -134,41 +124,34 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                                         source={require("./Lottie/error.json")}
                                         autoPlay
                                     />
-                                </View>
-                                
-                                
+                                </View> 
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
                                         <Text style={styles.texticon}>Error</Text>
                                 </View>
                                 <View>
-                                    <Text style={styles.notificacion}>Alguno de los campos está vacio</Text>
+                                    <Text style={styles.notificacion}>Algunos de los campos estan vacios</Text>
                                 </View>
-                            </View>               
-                            
-
+                            </View> 
                         </View>
-                
-                    </View>
+                  </View>
                 </Animatable.View>         
             </Modal>
-
-
-
-
-
 
             <View style={styles.containeruno}>
                 {/* logo */}
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
                 {/* BordeGris */}
                 <View style={styles.containerBlanco}>
-                    <Image source={require('./img/logmanito.png')} style={styles.logomano} />
+                    <View style={styles.imgmano}>
+                        <Image source={require('./img/logmanito.png')} style={styles.logomano} />
+                    </View>
+                    
                     {/* Codigo seguridad */}
                     <Text style={styles.textuno} numberOfLines={2}>CREAR CÓDIGO DE SEGURIDAD</Text>
                     <View style={styles.containerunorama}>  
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true} 
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true}
                            ref={pin1Ref}
                            onChangeText={text=>{
                                if(!text) pin1Ref.current.focus();
@@ -253,121 +236,127 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         )
     }
 
-export default CodigoVerificacion
+
+
 
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+const cuadroios = Platform.OS === 'ios' ? 55 : 45;
 const styles = StyleSheet.create({
     body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        paddingTop: '8%'
+        height: windowHeight,
+        width: windowWidth,
     },
     containeruno: {
-        alignItems: 'center',
+        paddingTop: RFValue(35),
+        alignItems:'center',
+    },
+    logo: {
+        resizeMode: 'contain',
+        width: windowWidth*0.5,
+        height: windowHeight*0.2
     },
     containerBlanco: {
-        marginTop: 10,
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
+        marginTop: RFValue(12),
         alignItems: 'center',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        paddingTop: '10%',
-        height: '100%',
-        width: '100%',
+        height: windowHeight*0.8,
+        width: windowWidth,
         backgroundColor: 'white',
-        elevation: 10,
+        elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
-        shadowRadius: 5,     
+        shadowRadius: 5,    
     },
-    logo: {
-        marginTop: '0%',
-        width: 150,
-        height: 150,
-        resizeMode: 'contain',
+    imgmano: {
+        justifyContent: 'center',
         alignItems: 'center',
+        marginTop:RFValue(20),
     },
     logomano: {
-        top: '0%',
-        alignItems: 'center',
-        width: 100,
-        height: 100,
-        
+        width: RFValue(110), 
+        height: RFValue(110),
+        resizeMode: 'contain',
+    },
+    containerunorama: {
+        flexDirection: 'row',
     },
     textuno: {
-        marginTop: '8%',
-        fontSize:RFPercentage(2.3),
+        marginTop: RFValue(25),
+        fontSize:RFValue(13),
         fontWeight: 'bold',
         color: '#625d5b',
     }, 
     textdos: {
-        marginTop: '6%',
-        fontSize:RFPercentage(2.3),
+        marginTop: RFValue(25),
+        fontSize:RFValue(13),
         fontWeight: 'bold',
         color: '#625d5b',
     },
-    containerunorama: {
-        marginTop: '0%',
-        flexDirection: 'row',
-        //container para los textInput
-    },
     TextInput1: {
-        marginTop: '3%',
-        flexDirection: 'row',
-        width: 50,
-        height: 50, 
+        marginTop: RFValue(12),
+        width: RFValue(cuadroios),
+        height: RFValue(cuadroios), 
         borderWidth: 1,
         borderColor: 'purple',
-        margin: 5,
-        paddingLeft: 20,
+        margin: RFValue(5),
+        justifyContent: 'center',
+        textAlign: 'center',
         borderRadius: 10,
-        fontSize:RFPercentage(2.3),
+        fontSize:RFValue(15),
     },
     TextInput2: {
-        marginTop: '3%',
-        flexDirection: 'row',
-        width: 50,
-        height: 50,
+        marginTop: RFValue(12),
+        width: RFValue(cuadroios),
+        height: RFValue(cuadroios), 
         borderWidth: 1,
         borderColor: 'purple',
-        margin: 5,
-        paddingLeft: 20,
+        margin: RFValue(5),
+        justifyContent: 'center',
+        textAlign: 'center',
         borderRadius: 10,
-        fontSize:RFPercentage(2.3),
+        fontSize:RFValue(15),
     },
     btnC:{
         backgroundColor:'#5b298a',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        alignItems:'center',
+        paddingLeft: RFValue(80),
+        paddingRight: RFValue(80),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
         borderRadius: 20,
-        marginTop: '5%',
-        alignItems: 'center',
+        marginTop: RFValue(25),
+        elevation:24,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.5,
+        shadowRadius: 8,
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2),
-        marginLeft: '22%',
-        marginRight: '22%',
+        fontSize:RFValue(11.5),
     },
 
 
+    //Modal
     bodymodal: {
         flex: 1,
-        // backgroundColor: '#00000099',
         alignItems: 'center',
-
     },
     ventanamodal: {
-        width: 350,
-        height: 80,
+        width: windowWidth*0.95,
+        height: windowHeight*0.1,
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
-        borderColor: '#000',
+        borderColor: 'black',
         borderRadius: 20,
-        paddingLeft:'5%',
-        paddingRight:'5%',
+        paddingLeft:RFValue(12),
+        paddingRight:RFValue(12),
         flexDirection: 'row',
         alignItems: 'center',
         top:alturaios
@@ -390,13 +379,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     texticon: {
-        fontSize:RFValue(25),
+        fontSize:RFValue(18),
         fontWeight: "bold",
         color:'white'
-
     },
     notificacion:{
-        fontSize:RFValue(15),
+        fontSize:RFValue(12),
         color:'white'
     },
 })
+export default CodigoVerificacion
