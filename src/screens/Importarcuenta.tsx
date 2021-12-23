@@ -8,7 +8,8 @@ import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 //Navegación
 import { Dimensions } from 'react-native';
-
+const windowWidth = Dimensions.get('screen').width;
+const windowHeight = Dimensions.get('screen').height;
 const ImportarCuenta = ({navigation}: {navigation: any}) => {
 
     const [twelfString, setTwelfString] = useState('')
@@ -105,9 +106,8 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                     autoFocus={true} multiline={true}
                     onChangeText={text => setTwelfString(text)}
                     autoCapitalize = 'none'>
-                    <Text style={styles.labeluno} ></Text>
                 </TextInput>                
-                <Text style={styles.labeldos} numberOfLines={4}>Ingrese sus 12 palabras de respaldo en minusculas</Text>
+                <Text style={styles.labeluno} numberOfLines={4}>Ingrese sus 12 palabras de respaldo en minusculas</Text>
                 <TouchableOpacity
                     style={styles.btnC}
                     onPress={() => continuar()}>
@@ -118,142 +118,100 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
     )
 }
 
-export default ImportarCuenta
-
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+const aceptartios = Platform.OS === 'ios' ? 15 : 5;
 const styles = StyleSheet.create({
+  
     body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        paddingTop: '8%'
+        height: windowHeight,
+        width: windowWidth,
     },
     containeruno: {
-        alignItems: 'center',
+        paddingTop: RFValue(35),
+        alignItems:'center',
+    },
+    logo: {
+        resizeMode: 'contain',
+        width: windowWidth*0.5,
+        height: windowHeight*0.2
     },
     containerBlanco: {
-        marginTop: 10,
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
+        marginTop: RFValue(12),
         alignItems: 'center',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        paddingTop: '10%',
-        height: '100%',
-        width: '100%',
+        height: windowHeight*0.8,
+        width: windowWidth,
         backgroundColor: 'white',
-        elevation: 10,
+        elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
-        shadowRadius: 5,     
-    },
-    
-    logo: {
-        marginTop: '0%',
-        width: 150,
-        height: 150,
-        resizeMode: 'contain',
+        shadowRadius: 5,    
     },
     textuno: {
-        fontSize:RFPercentage(2.3),
+        marginTop:RFValue(20),
+        fontSize:RFValue(16),
         fontWeight: 'bold',
-        color: '#625d5b'
-    },
-    titulo: {
-        fontSize: 25,
-        margin: 40
-    },
-    containerunorama: {
-        marginTop: '2%',
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    containerdos: {
-        marginTop: '10%',
-        marginLeft: '2%',
-        marginRight: '2%',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        color: '#616161'
     },
     TextInputf: {
-        margin: 10,
-        width: 300,
-        height: 200,
+        margin: RFValue(15),
+        width: RFValue(300),
+        height: RFValue(200),
         borderWidth: 0.8,
         borderColor: 'purple',
         borderRadius: 20,
-        paddingLeft: 10,
-        paddingRight: 10,
-        marginTop:'5%',
-        fontWeight: 'bold',
-        fontSize:RFPercentage(2.3),
-        flexDirection: 'column',
-        textAlignVertical : "center",
-        justifyContent: 'center',
-        textAlign:'center',
-        alignItems: 'center'
-        
+        padding: RFValue(25),
+        textAlign: 'center'        
     },
     labeluno: {
-        margin: 8,        
-    },
-    botonCont: {
-        marginBottom: 20,
-        top: 20,
-        backgroundColor: '#5B298A',
-        width: '80%',
-        alignItems: 'center',
-        borderRadius: 8
-    },
-    textoBoton: {
-        fontSize: 20,
-        color: 'white',
-        textAlign: 'center',
-        padding: 10,
-    },
-    checkbox: {
-        alignSelf: "center",
-    },
-    
-    labeldos: {
-        margin: 8,
-        padding: 10,
-        fontSize:RFPercentage(2.3),
-        marginRight: '5%',
-        marginLeft: '5%',
-        textAlign:'center',
+        margin: RFValue(8),
+        fontSize: RFValue(15),
+        marginRight: RFValue(20),
+        marginLeft: RFValue(20),
+        textAlign: 'justify',
         color: '#b1b1b1',
     },
     btnC:{
         backgroundColor:'#5b298a',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        alignItems:'center',
+        paddingLeft: RFValue(80),
+        paddingRight: RFValue(80),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
         borderRadius: 20,
-        marginTop: '5%',
-        alignItems: 'center',
+        marginTop: RFValue(aceptartios),
+        elevation:24,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.5,
+        shadowRadius: 8,
     },
     textC:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2),
-        marginLeft: '26%',
-        marginRight: '26%',
+        fontSize:RFValue(11.5),
     },
 
 
+    //Modal
     bodymodal: {
         flex: 1,
         alignItems: 'center',
     },
     ventanamodal: {
-        width: 350,
-        height: 80,
+        width: windowWidth*0.95,
+        height: windowHeight*0.1,
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
-        borderColor: '#000',
+        borderColor: 'black',
         borderRadius: 20,
-        paddingLeft:'5%',
-        paddingRight:'5%',
+        paddingLeft:RFValue(12),
+        paddingRight:RFValue(12),
         flexDirection: 'row',
         alignItems: 'center',
         top:alturaios
@@ -276,13 +234,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     texticon: {
-        fontSize:RFValue(25),
+        fontSize:RFValue(18),
         fontWeight: "bold",
         color:'white'
-
     },
     notificacion:{
-        fontSize:RFValue(15),
+        fontSize:RFValue(12),
         color:'white'
     },
 })
+export default ImportarCuenta
