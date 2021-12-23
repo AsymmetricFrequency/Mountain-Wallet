@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
-import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, SafeAreaView,Clipboard, ToastAndroid, Modal} from 'react-native'
+import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, SafeAreaView,Clipboard, ToastAndroid, Modal,Platform,Dimensions, ScrollView } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
+import { Pressable, Hoverable} from "react-native-web-hover";
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 // import { TextInput } from 'react-native-element-textinput';
 import QRCode from 'react-native-qrcode-svg';
 //Navegación
-
+    const windowWidth = Dimensions.get('screen').width;
+    const windowHeight = Dimensions.get('screen').height;
 
 
 const Recibir = ({navigation}: {navigation: any}) => {
-
+  
     const [copiedText, setCopiedText] = useState('')
  
 
@@ -38,7 +39,7 @@ const Recibir = ({navigation}: {navigation: any}) => {
     };
    
     
-//funcion obtener llave publica
+    //funcion obtener llave publica
     const [pKey,setPKey] = useState("pubKey")
 
     async function obtenerPKey(){
@@ -52,7 +53,7 @@ const Recibir = ({navigation}: {navigation: any}) => {
     obtenerPKey()
 
     return (
-        <View style={styles.body}>
+        <View style={styles.body} >
             <Modal
                 visible={copiadoModal}
                 transparent
@@ -64,7 +65,6 @@ const Recibir = ({navigation}: {navigation: any}) => {
                 
             >
                 <Animatable.View animation={anmt} duration= {600}>
-                    
                     <View style={styles.bodymodal}>
                         <View style={styles.ventanamodal}>
                             <View style={styles.icontext}>
@@ -75,8 +75,6 @@ const Recibir = ({navigation}: {navigation: any}) => {
                                         autoPlay
                                     />
                                 </View>
-                                
-                                
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
@@ -85,41 +83,42 @@ const Recibir = ({navigation}: {navigation: any}) => {
                                 <View>
                                     <Text style={styles.notificacion}>Ya puedes compartir tu dirección</Text>
                                 </View>
-                            </View>               
-                            
-
+                            </View>
                         </View>
-                
                     </View>
                 </Animatable.View>         
             </Modal>
-
+            
 
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
-                    <Image style={styles.logo} source={require('./img/recibir.png')}  />
+                    {/* imagen superior */}
+                    <View style={styles.contenedorlogo}>
+                        <Image style={styles.logo} source={require('./img/recibir.png')}  />
+                    </View>
+                    
                     {/*Boton Recibir */}
                     <View style={styles.cuadroR}>
-                        <TouchableOpacity style={styles.btnR}  activeOpacity={1}>
-                            <Text style={styles.textbtnR}>RECIBIR</Text> 
-                        </TouchableOpacity>
+                        <Text style={styles.textbtnR}>RECIBIR</Text> 
                     </View>
+                    {/* cuadro blanco */}
                     <View style={styles.cuadro}>
                         {/* Imagen QR */}
                         <View style={styles.cuadroQR}>
-                            <QRCode size={200}
+                            <QRCode size={windowWidth*0.5}
                                 value={pKey}                                
                             />
                         </View>                            
-                        {/* Copiar */}
+                        {/* Direccion y Copiar */}
                         <View style={styles.tablaqr} >
                             <View style={styles.cuadroqr}>
-                                <TextInput style={styles.inputqr} editable = {false} value={pKey} />
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                <TextInput style={styles.inputqr} value={pKey} editable={false}/>
+                            </ScrollView>
                             </View>
                             <View style={styles.cbtncop}>
                                     <TouchableOpacity style={styles.btncop}  activeOpacity={0.9} onPress={() => CopyToClipboard()}> 
                                         <Icon name ="copy-outline" size={25} color="white"/>
-                                        {/* <Text style={styles.txtcop}>COPIAR</Text>                         */}
                                     </TouchableOpacity>
                             </View>                    
                         </View> 
@@ -138,77 +137,77 @@ const Recibir = ({navigation}: {navigation: any}) => {
 }
 
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+const heightlogo = Platform.OS === 'ios' ? 0.287 : 0.272;
 const styles = StyleSheet.create({
     body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
+        height: windowHeight,
+        width: windowWidth,
+    },
+    scroll:{
+        backgroundColor: 'red'
     },
     containeruno:{
-        paddingTop: '8%',
-        paddingLeft: '5%',
-        paddingRight: '4%',
+        paddingTop: RFValue(35),
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
         alignItems:'center',
     },
     fondo:{
-        flex: 1,
-        resizeMode:'contain',
+        height: windowHeight,
+        width: windowWidth,
+        margin:0,
+        resizeMode: 'contain',
+    },
+    contenedorlogo:{
+        height: windowHeight*heightlogo,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     logo:{
-        width: 310,
-        height: 250,
-        top:'4%',
         resizeMode: 'contain',
+        width: windowWidth*0.9,        
     },
     cuadroR:{
         backgroundColor: 'white',
-        padding: 20,
         borderRadius: 10,
-        marginTop: '5%',
-        width: '100%'
-    },
-    btnR:{
-        backgroundColor:'transparent',
-        alignItems:'center',
-        paddingTop: '3%',
-        paddingBottom: '3%',
-        borderRadius: 20,
+        width: '100%',
+        padding: RFValue(25),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     textbtnR:{
         color:'#5b298a',
         fontWeight: 'bold',
-        fontSize:RFPercentage(3),
+        fontSize:RFValue(15),
     },
     cuadro:{
         backgroundColor:'white',
-        width: '100%',
-        height: '100%',
-        marginTop: '3%',
+        marginTop: RFValue(15),
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        padding: '2%',
+        padding: RFValue(10),
+        height: windowHeight*0.7
     },
     cuadroQR:{
         alignItems:'center',
-        padding: '2%',
-        marginTop: '2%',
+        marginTop:RFValue(10),
+        justifyContent: 'center',
     },
     imgqr:{
-        width: 200,
-        height: 200,
-        resizeMode: 'contain',
-        marginTop: '2%'
+
+
+
     },
     tablaqr:{
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
-        height: '5.8%',
+        height: windowHeight*0.08,
         flexDirection:'row',
-        paddingLeft:'2.5%',
-        paddingRight:'3.5%',
-        paddingTop:'0%',
-        marginTop: '2%'
+        paddingLeft: RFValue(10),
+        paddingRight: RFValue(12),
+        marginTop: RFValue(12),
     },
     cuadroqr:{
         width:'80%',
@@ -217,10 +216,8 @@ const styles = StyleSheet.create({
     },
     inputqr:{
         fontWeight: 'bold',
-        fontSize:RFPercentage(1.2),
-        color: '#5a5959',
-        left: '2%'
-    },
+        fontSize:RFValue(13),
+        color: '#5a5959',},
     cbtncop:{
         width:'20%',
         alignItems:'center',
@@ -228,12 +225,10 @@ const styles = StyleSheet.create({
     },
     btncop:{
         backgroundColor:'#5b298a',
-        paddingTop: '10%',
-        paddingBottom: '10%',
-        paddingLeft: '10%',
-        paddingRight:'10%',
+        padding: RFValue(5),
         borderRadius: 10,
-        left: '13%'
+        alignItems:'center',
+        left: RFValue(5)
     },
     txtcop:{
         color:'white',
@@ -243,35 +238,39 @@ const styles = StyleSheet.create({
     btnC:{
         backgroundColor:'#5b298a',
         alignItems:'center',
-        marginRight: '10%',
-        marginLeft: '10%',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        marginRight: RFValue(30),
+        marginLeft: RFValue(30),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
         borderRadius: 20,
-        marginTop: '5%'
+        marginTop: RFValue(15),
+        elevation:10,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.5,
+        shadowRadius: 8,
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2),
+        fontSize:RFValue(11.5),
     },
 
 
-   //Modal
-
+    //Modal
     bodymodal: {
         flex: 1,
         alignItems: 'center',
     },
     ventanamodal: {
-        width: 350,
-        height: 80,
+        width: windowWidth*0.95,
+        height: windowHeight*0.1,
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
-        borderColor: '#000',
+        borderColor: 'white',
         borderRadius: 20,
-        paddingLeft:'5%',
-        paddingRight:'5%',
+        paddingLeft:RFValue(12),
+        paddingRight:RFValue(12),
         flexDirection: 'row',
         alignItems: 'center',
         top:alturaios
@@ -294,13 +293,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     texticon: {
-        fontSize:RFValue(25),
+        fontSize:RFValue(18),
         fontWeight: "bold",
         color:'white'
-
     },
     notificacion:{
-        fontSize:RFValue(15),
+        fontSize:RFValue(12),
         color:'white'
     },
 })
