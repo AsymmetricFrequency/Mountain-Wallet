@@ -292,7 +292,6 @@ const styles = StyleSheet.create({
     stxtcry:{
         fontSize:RFValue(18),
         color: '#8d8c8c',
-
     },
     monedacry:{
         justifyContent: 'center',
