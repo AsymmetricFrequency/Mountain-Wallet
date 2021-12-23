@@ -210,7 +210,6 @@ const styles = StyleSheet.create({
     //     color:'white',
     //     fontSize:RFPercentage(2.5),
     //     fontWeight:'bold',
-
     // },
     dcER:{
         flexDirection: 'row',

@@ -23,7 +23,9 @@ const PantallaCarga = ({navigation}: {navigation: any}) => {
             const acc = createAccount(value)
             acc.then((value) => {
                 savePublicKey(value.publicKey.toString())
-                navigation.navigate('CrearPass')
+                setTimeout(() => {
+                    navigation.navigate('Balance')
+                }, 2000)
             })
         })
     }

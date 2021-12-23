@@ -1,14 +1,14 @@
 import React, { Component,useRef, useState } from 'react'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform } from 'react-native'
+import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions} from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 
 import { readPassword } from '../../api';
-//navegación
 
-
+const windowWidth = Dimensions.get('screen').width;
+const windowHeight = Dimensions.get('screen').height;
 const CodigoVerificacion = ({navigation}: {navigation: any}) => {
   
         // Referencias para salto input
@@ -54,20 +54,15 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.body}
         scrollEnabled={false}>
-
-            
             <Modal
                 visible={vacioModal}
                 transparent
                 onRequestClose={() =>
                     setVacioModal(false)
                 }
-                // animationType='slide'
                 hardwareAccelerated
-                
             >
                 <Animatable.View animation={anmt} duration= {600}>
-                    
                     <View style={styles.bodymodal}>
                         <View style={styles.ventanamodal}>
                             <View style={styles.icontext}>
@@ -78,8 +73,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                                         autoPlay
                                     />
                                 </View>
-                                
-                                
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
@@ -88,11 +81,8 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                                 <View>
                                     <Text style={styles.notificacion}>Contraseña incorrecta</Text>
                                 </View>
-                            </View>               
-                            
-
+                            </View>  
                         </View>
-                
                     </View>
                 </Animatable.View>         
             </Modal>
@@ -103,7 +93,9 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
                 {/* BordeGris */}
                 <View style={styles.containerBlanco}>
-                    <Image source={require('./img/logmanito.png')} style={styles.logomano} />
+                    <View style={styles.imgmano}>
+                        <Image source={require('./img/logmanito.png')} style={styles.logomano} />
+                    </View>
                     {/* Codigo seguridad */}
                     <Text style={styles.textuno} numberOfLines={2}>INGRESA TU CÓDIGO DE SEGURIDAD</Text>
                     <View style={styles.containerunorama}>  
@@ -154,109 +146,107 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         )
     }
 
-
-export default CodigoVerificacion
-
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
-
+const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+const cuadroios = Platform.OS === 'ios' ? 55 : 45;
 const styles = StyleSheet.create({
     body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        paddingTop: '8%'
+        height: windowHeight,
+        width: windowWidth,
     },
     containeruno: {
-        alignItems: 'center',
+        paddingTop: RFValue(35),
+        alignItems:'center',
+    },
+    logo: {
+        resizeMode: 'contain',
+        width: windowWidth*0.5,
+        height: windowHeight*0.2
     },
     containerBlanco: {
-        marginTop: 10,
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
+        marginTop: RFValue(12),
         alignItems: 'center',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        paddingTop: '10%',
-        height: '100%',
-        width: '100%',
+        height: windowHeight*0.8,
+        width: windowWidth,
         backgroundColor: 'white',
-        elevation: 10,
+        elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
-        shadowRadius: 5,     
+        shadowRadius: 5,    
     },
-    logo: {
-        marginTop: '0%',
-        width: 150,
-        height: 150,
-        resizeMode: 'contain',
+    imgmano: {
+        justifyContent: 'center',
         alignItems: 'center',
+        marginTop:RFValue(100),
     },
     logomano: {
-        top: '5%',
-        alignItems: 'center',
-        width: 100,
-        height: 100,
-        
+        width: RFValue(110), 
+        height: RFValue(110),
+        resizeMode: 'contain',
     },
     textuno: {
-        
-        marginTop: '20%',
-        fontSize:RFPercentage(1.5),
+        marginTop: RFValue(25),
+        fontSize:RFValue(13),
         fontWeight: 'bold',
         color: '#625d5b',
     }, 
     
     containerunorama: {
         flexDirection: 'row',
-        //container para los textInput
-
-
     },
     TextInput1: {
-        marginTop: '10%',
-        flexDirection: 'row',
-        width: 50,
-        height: 50, 
+        marginTop: RFValue(12),
+        width: RFValue(cuadroios),
+        height: RFValue(cuadroios), 
         borderWidth: 1,
         borderColor: 'purple',
-        margin: 5,
-        paddingLeft: 22,
+        margin: RFValue(5),
+        justifyContent: 'center',
+        textAlign: 'center',
         borderRadius: 10,
-        fontSize:RFPercentage(3),
-
-
+        fontSize:RFValue(15),
+        fontWeight: 'bold',
     },
     btnC:{
         backgroundColor:'#5b298a',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        alignItems:'center',
+        paddingLeft: RFValue(80),
+        paddingRight: RFValue(80),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
         borderRadius: 20,
-        marginTop: '20%',
-        alignItems: 'center',
+        marginTop: RFValue(25),
+        elevation:24,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.5,
+        shadowRadius: 8,
     },
     textCI:{
         color:'white',
         fontWeight: 'bold',
-        fontSize:RFPercentage(2),
-        marginLeft: '22%',
-        marginRight: '22%',
+        fontSize:RFValue(11.5),
     },
 
     //Modal
-
     bodymodal: {
         flex: 1,
         alignItems: 'center',
     },
     ventanamodal: {
-        width: 350,
-        height: 80,
+        width: windowWidth*0.95,
+        height: windowHeight*0.1,
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
-        borderColor: '#000',
+        borderColor: 'black',
         borderRadius: 20,
-        paddingLeft:'5%',
-        paddingRight:'5%',
+        paddingLeft:RFValue(12),
+        paddingRight:RFValue(12),
         flexDirection: 'row',
         alignItems: 'center',
         top:alturaios
@@ -279,13 +269,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     texticon: {
-        fontSize:RFValue(25),
+        fontSize:RFValue(18),
         fontWeight: "bold",
         color:'white'
-
     },
     notificacion:{
-        fontSize:RFValue(15),
+        fontSize:RFValue(12),
         color:'white'
     },
 })
+export default CodigoVerificacion
