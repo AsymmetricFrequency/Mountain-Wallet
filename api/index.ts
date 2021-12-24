@@ -14,8 +14,6 @@ const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 const LAMPORTS_PER_SOL = solanaWeb3.LAMPORTS_PER_SOL                                                                     
 
-
-
 //Funcion guardar llave
 async function saveKey(data){
   try {     
@@ -185,8 +183,9 @@ async function getToken(publicKey: string, splToken: string){
 
 }
 
-async function enviarTrans(fromWallet,connection,myMint,toPublic,amount){
-  // Create associated token accounts for my token if they don't exist yet
+async function enviarTrans(fromWallet,toPublic,amount){
+  const connection = createConnection("devnet")
+  const myMint = new solanaWeb3.PublicKey("7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
 
   try {
     var myToken = new Token(
@@ -220,33 +219,12 @@ async function enviarTrans(fromWallet,connection,myMint,toPublic,amount){
       transaction,
       [fromWallet]
     ).catch((err) => {
-      // Alerta de que no tiene fondos en el token
+      console.log(err)
     })
-
-    console.log("SIGNATURE", signature)
-    console.log("SUCCESS")
-  } catch (error) {
-    console.log('Este es el error '+error);
+    return signature
+    } catch (error) {
+      return error
   }
-}
-
-//enviar transaccion
-async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
-  const connection = createConnection("devnet")
-  const myMint = new solanaWeb3.PublicKey(splToken)
-
-  const mnemonic = readMnemonic()
-  mnemonic.then((value) => {
-    const docePalabras = mnemonicToSeed(value)
-    docePalabras.then((value) => {
-        const acc = createAccount(value)
-        acc.then((value) => {
-              enviarTrans(value,connection,myMint,toPublic,amount)          
-        })
-      
-    })
-  })
-
 }
 
 // funcion para obtener el historial de transacciones
@@ -265,4 +243,20 @@ return history;
 }
 
 
-export { savePublicKey,readPublicKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic, savePassword, readPassword }
+export { 
+  savePublicKey,
+  readPublicKey,
+  generateMnemonic,
+  mnemonicToSeed,
+  createAccount,
+  getBalance,
+  getToken,
+  saveKey,
+  readKey,
+  getHistory,
+  saveMmemonic,
+  readMnemonic,
+  savePassword, 
+  readPassword,
+  enviarTrans 
+}
