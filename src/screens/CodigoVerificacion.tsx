@@ -1,6 +1,6 @@
 import React, { Component,useEffect,useRef, useState } from 'react'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions } from 'react-native'
+import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions, Keyboard  } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as Animatable from 'react-native-animatable';
 import { savePassword } from '../../api';
@@ -241,7 +241,8 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         />
                         <TextInput style={styles.TextInput2} maxLength={1} keyboardType="numeric"
                             ref={cof4Ref}
-                            onChangeText={text => setCof4(text)}
+                            onChangeText={text => {setCof4(text)
+                            Keyboard.dismiss()}}
                         />                    
                     </View>
                     
