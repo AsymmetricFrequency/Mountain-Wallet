@@ -47,8 +47,13 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 setanmt("fadeOutUp");
                 setTimeout( () => {
                     setVacioModal(false);
-                }, 100 ) 
-                },2000)
+                    }, 100 ) 
+                },900)
+                setPin1("")
+                setPin2("")
+                setPin3("")
+                setPin4("")
+                }   
             }
         }
 
@@ -127,6 +132,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     <View style={styles.containerunorama}>  
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true}  secureTextEntry={true} 
                            ref={pin1Ref}
+                           value={pin1}
                            onChangeText={text=>{
                                if(!text) pin1Ref.current.focus();
                                else text && pin2Ref.current.focus();
@@ -135,25 +141,29 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin2Ref}
+                            value={pin2}
                             onChangeText={text=>{
                                 if(!text) pin2Ref.current.focus();
                                 else text && pin3Ref.current.focus();
-                                setPin2(text);
-                                
+                                setPin2(text);                                
                             }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin3Ref}
+                            value={pin3}
                             onChangeText={text=>{
                                 if(!text) pin3Ref.current.focus();
                                 else text && pin4Ref.current.focus();
-                                setPin3(text);
-                                
+                                setPin3(text);                                
                             }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin4Ref}
-                            onChangeText={text => setPin4(text)}
+                            value={pin4}
+                            onChangeText={text =>{
+                                setPin4(text);
+                                Keyboard.dismiss()
+                            }}                            
                         />
                     </View>
                     <View>
