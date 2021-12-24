@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler} from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
+import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import {BarCodeScanner} from "expo-barcode-scanner"
-// import { TextInput } from 'react-native-element-textinput';
 
 
 const Importar = ({navigation}: {navigation: any}) => {
 
 
-//traer account
+    //traer account
+    const [pubKey,setPubKey] = useState("")
+    const [amounToken,setAmounToken] = useState("")
 
-const [pubKey,setPubKey] = useState("")
-const [amounToken,setAmounToken] = useState("")
 
-//Funcion enviar token
-    async function sendToken(pubKey:string, amount:number){
-        const send = sendTokenTransaction(pubKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ", amount)
-        send.then((value) => {
-            console.log(value);
+    // Nueva funcion de enviar token 
+    async function enviarToken(pubKey:string, amount:number) {
+        const mnemonic = readMnemonic()
+        mnemonic.then((value) => {
+            const docePalabras = mnemonicToSeed(value)
+            docePalabras.then((value) => {
+            const acc = createAccount(value)
+                acc.then((value) => {
+                    enviarTrans(value,pubKey,amount).then((value) => {
+                        // Aqui ya viene el handleo de verdad
+                        console.log('Hasta aqui vamos: '+value)
+                    })         
+                })
+            })
         })
     }
 
@@ -43,7 +48,7 @@ const [amounToken,setAmounToken] = useState("")
                             {/* Email */}
                             <View style={styles.tablamail} >
                                 <View style={styles.cuadromail}>
-                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." autoFocus={true} onChangeText={text => setPubKey(text)}/>
+                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." onChangeText={text => setPubKey(text)}/>
                                 </View>
                                 <View style={styles.cqr}>
                                     <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9} onPress={() => navigation.navigate('QrReader')} >
@@ -75,7 +80,7 @@ const [amounToken,setAmounToken] = useState("")
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.dcC}>
-                                    <TouchableOpacity style={styles.btnVC}  activeOpacity={0.9} onPress={() => sendToken(pubKey,Number(amounToken))}>
+                                    <TouchableOpacity style={styles.btnVC}  activeOpacity={0.9} onPress={() => enviarToken(pubKey,Number(amounToken))}>
                                         <Text style={styles.textbtnVC}>CONFIRMAR</Text> 
                                     </TouchableOpacity>  
                                 </View>
