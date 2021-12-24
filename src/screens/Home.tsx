@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, Linking,Platform,Dimensions } from 'react-native'
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -7,6 +7,8 @@ import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
+// Fuente
+import * as Font from 'expo-font'
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -17,6 +19,30 @@ const Home = ({navigation}: {navigation: any}) => {
     setTimeout(() => {
         navigation.navigate("Home" as any)
     }, 2500);
+
+    //Función fuentes tipograficas
+
+    const[fontsLoaded, setFontsLoaded] = useState(false);
+
+        useEffect(() => {
+            if (!fontsLoaded) {
+                loadFonts();
+            }
+        });
+    const loadFonts = async () => {
+        await Font.loadAsync({
+
+            //Fuente
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
+        });
+
+        setFontsLoaded(true);
+    }
+
+    if (!fontsLoaded) {
+    return(<View/>);
+    }
+    ///
 
     return (
         <View style={styles.body}>
@@ -144,7 +170,7 @@ const styles = StyleSheet.create({
         color:'#e0e0e0',
         fontWeight:'bold',
         fontSize:RFValue(8),
-        fontFamily: 'Roboto'
+        fontFamily: 'opensans-regular'
     },
     //Boton pagina
     Developed2:{
