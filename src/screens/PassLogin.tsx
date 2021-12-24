@@ -1,6 +1,6 @@
 import React, { Component,useEffect,useRef, useState } from 'react'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions} from 'react-native'
+import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions, Keyboard} from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
@@ -53,7 +53,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 setPin2("")
                 setPin3("")
                 setPin4("")
-                }   
+                   
             }
         }
 
@@ -77,7 +77,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
     }
 
     if (!fontsLoaded) {
-    return(<View/>);
+        return(<View/>);
     }
     ///
 
