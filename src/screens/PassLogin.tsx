@@ -1,4 +1,4 @@
-import React, { Component,useRef, useState } from 'react'
+import React, { Component,useEffect,useRef, useState } from 'react'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions} from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -6,6 +6,8 @@ import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 
 import { readPassword } from '../../api';
+// Fuente
+import * as Font from 'expo-font'
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -49,6 +51,30 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 },2000)
             }
         }
+
+    //Función fuentes tipograficas
+
+    const[fontsLoaded, setFontsLoaded] = useState(false);
+
+        useEffect(() => {
+            if (!fontsLoaded) {
+                loadFonts();
+            }
+        });
+    const loadFonts = async () => {
+        await Font.loadAsync({
+
+            //Fuente
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
+        });
+
+        setFontsLoaded(true);
+    }
+
+    if (!fontsLoaded) {
+    return(<View/>);
+    }
+    ///
 
         return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
@@ -194,6 +220,7 @@ const styles = StyleSheet.create({
         fontSize:RFValue(13),
         fontWeight: 'bold',
         color: '#625d5b',
+        fontFamily: 'opensans-regular'
     }, 
     
     containerunorama: {

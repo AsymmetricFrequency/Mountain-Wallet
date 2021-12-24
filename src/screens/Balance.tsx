@@ -6,7 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
 import { TextInput } from 'react-native-element-textinput';
 import * as Animatable from 'react-native-animatable';
-
+// Fuente
+import * as Font from 'expo-font'
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -62,7 +63,29 @@ useEffect(()=>{
     obtenerBalance(pKey)
 
 })
-  
+    //Función fuentes tipograficas
+
+    const[fontsLoaded, setFontsLoaded] = useState(false);
+
+        useEffect(() => {
+            if (!fontsLoaded) {
+                loadFonts();
+            }
+        });
+    const loadFonts = async () => {
+        await Font.loadAsync({
+
+            //Fuente
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
+        });
+
+        setFontsLoaded(true);
+    }
+
+    if (!fontsLoaded) {
+    return(<View/>);
+    }
+    ///
 
     return (
         <View style={styles.body}>
@@ -249,7 +272,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
         padding: RFValue(10),
-        height: windowHeight*0.7
+        height: windowHeight*0.7,
     },
     tablacry:{
         marginTop:RFValue(10),
@@ -279,6 +302,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFValue(14),
         color: '#8d8c8c',
+        fontFamily: 'opensans-regular'
     },
     smcry:{
         width:'45%',

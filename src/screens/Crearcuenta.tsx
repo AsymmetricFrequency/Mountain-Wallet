@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard, Modal, Platform, Dimensions } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, savePublicKey } from '../../api';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
+//Fuente
+import * as Font from 'expo-font'
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -39,7 +41,30 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
             // if(anmt === "lightSpeedOut") SetModal(false);
         },2000)
     }
-    
+
+    //Función fuentes tipograficas
+
+    const[fontsLoaded, setFontsLoaded] = useState(false);
+
+        useEffect(() => {
+            if (!fontsLoaded) {
+                loadFonts();
+            }
+        });
+    const loadFonts = async () => {
+        await Font.loadAsync({
+
+            //Fuente
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
+        });
+
+        setFontsLoaded(true);
+    }
+
+    if (!fontsLoaded) {
+    return(<View/>);
+    }
+    ///
 
 
     function generarMnemonic(){
@@ -220,7 +245,8 @@ const styles = StyleSheet.create({
         marginTop:RFValue(20),
         fontSize:RFValue(16),
         fontWeight: 'bold',
-        color: '#616161'
+        color: '#616161',
+        fontFamily:'opensans-regular'
     },
     labeluno: {
         margin:RFValue(15),
@@ -229,6 +255,7 @@ const styles = StyleSheet.create({
         marginLeft: RFValue(20),
         textAlign: 'justify',
         color: '#b1b1b1',
+        fontFamily:'opensans-regular'
     },
     btnG:{
         backgroundColor:'#5b298a',
