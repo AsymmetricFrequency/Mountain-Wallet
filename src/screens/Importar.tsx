@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler} from 'react-native'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler, Platform, Dimensions} from 'react-native'
 import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
+    const windowWidth = Dimensions.get('screen').width;
+    const windowHeight = Dimensions.get('screen').height;
 
 const Importar = ({navigation}: {navigation: any}) => {
 
@@ -98,17 +100,17 @@ const Importar = ({navigation}: {navigation: any}) => {
 
 
     return (
-        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}contentContainerStyle={styles.body}
+        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={styles.body}
         scrollEnabled={false}>
-            <View style={styles.body}>
                 <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                     <View style={styles.containeruno}>
-                        <Image style={styles.logo} source={require('./img/enviar.png')}  />
+                        <View style={styles.contenedorlogo}>
+                            <Image style={styles.logo} source={require('./img/enviar.png')}  />
+                        </View>
                         {/*Boton Depositar */}
-                        <View style={styles.cuadroD}>
-                            <TouchableOpacity style={styles.btnD}  activeOpacity={1}>
-                                <Text style={styles.textbtnD}>ENVIAR</Text> 
-                            </TouchableOpacity>
+                        <View style={styles.cuadroE}>
+                                <Text style={styles.textbtnE}>ENVIAR</Text> 
                         </View>                    
                         <View style={styles.cuadro}>
                             {/* Email */}
@@ -129,7 +131,7 @@ const Importar = ({navigation}: {navigation: any}) => {
                                 </View>
                                 <View style={styles.cmax}>
                                     <View style={styles.ccnd}>
-                                        <Text>CNDR</Text>
+                                        <Text style={styles.textcnd}>CNDR</Text>
                                     </View>
                                     <View style={styles.cbtnmax}>
                                         <TouchableOpacity style={styles.btnmax} onPress={() => setMax()} activeOpacity={0.9}> 
@@ -155,78 +157,78 @@ const Importar = ({navigation}: {navigation: any}) => {
                             </View> 
                         </View>
                     </View>             
-                </ImageBackground>   
-            </View>
-
+                </ImageBackground>  
         </KeyboardAwareScrollView>
         
     )
 }
 
-
+const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+const heightlogo = Platform.OS === 'ios' ? 0.287 : 0.272;
 const styles = StyleSheet.create({
     body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
+        height: windowHeight,
+        width: windowWidth,
     },
     containeruno:{
-        paddingTop: '8%',
-        paddingLeft: '5%',
-        paddingRight: '4%',
+        paddingTop: RFValue(35),
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
         alignItems:'center',
     },
     fondo:{
-        flex: 1,
-        resizeMode:'contain',
-    },
-    logo:{
-        width: 310,
-        height: 250,
-        top:'4%',
+        height: windowHeight,
+        width: windowWidth,
+        margin:0,
         resizeMode: 'contain',
     },
-    cuadroD:{
+    contenedorlogo:{
+        height: windowHeight*heightlogo,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logo:{
+        resizeMode: 'contain',
+        width: windowWidth*0.9,        
+    },
+    cuadroE:{
         backgroundColor: 'white',
-        padding: 20,
         borderRadius: 10,
-        marginTop: '5%',
-        width: '100%'
+        width: '100%',
+        padding: RFValue(25),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    btnD:{
-        backgroundColor:'transparent',
-        alignItems:'center',
-        paddingTop: '3%',
-        paddingBottom: '3%',
-        borderRadius: 20,
-    },
-    textbtnD:{
+    textbtnE:{
         color:'#5b298a',
         fontWeight: 'bold',
-        fontSize:RFPercentage(3),
+        fontSize:RFValue(15),
     },
     cuadro:{
-        backgroundColor:'white',
-        width: '100%',
-        height: '100%',
-        marginTop: '3%',
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-        padding: '2%',
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
+        marginTop: RFValue(12),
+        alignItems: 'center',
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        height: windowHeight*0.8,
+        width: "100%",
+        backgroundColor: 'white',
     },
     tablamail:{
         marginTop:RFValue(25),
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
-        height: '5.8%',
+        height: windowHeight*0.09,
         flexDirection:'row',
-        paddingLeft:'2.5%',
+        paddingLeft:RFValue(10),
         paddingRight:'3.5%',
         paddingTop:'0%'
     },
     cuadromail:{
-        width:'80%',
+        width:windowWidth*0.62,
         justifyContent: 'center',
         paddingLeft: '2%'
     },
@@ -236,17 +238,17 @@ const styles = StyleSheet.create({
         color: '#5a5959',
     },
     cqr:{
-        width:'20%',
+        width:windowWidth*0.15,
         alignItems: 'flex-end',
         justifyContent: 'center',
     },
     btnqr:{
         backgroundColor:'#5b298a',
         alignItems:'center',
-        paddingTop: '12%',
-        paddingBottom: '12%',
-        paddingLeft: '23%',
-        paddingRight: '23%',
+        paddingTop: RFValue(10),
+        paddingBottom: RFValue(10),
+        paddingLeft: RFValue(13),
+        paddingRight: RFValue(13),
         borderRadius: 10,
     },
     imgqr:{
@@ -259,16 +261,15 @@ const styles = StyleSheet.create({
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
-        height: '5.8%',
+        height: 50,
         flexDirection:'row',
         paddingLeft:'2.5%',
         paddingRight:'3.5%',
-        paddingTop:'0%'
     },
     cuadroimp:{
-        width:'70%',
+        width:windowWidth*0.55,
         justifyContent: 'center',
-        paddingLeft: '2%'
+        // paddingLeft: '2%'
     },
     inputimp:{
         fontWeight: 'bold',
@@ -276,39 +277,34 @@ const styles = StyleSheet.create({
         color: '#5a5959',
     },
     cmax:{
-        width:'30%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width:RFValue(85),
         flexDirection:'row',
     },
     ccnd:{
-        width:'50%',
+        width:RFValue(45),
+        justifyContent:"center",
+        alignItems:'flex-end',
+        paddingRight:3
+        
+    },
+    textcnd:{
+        fontSize:RFValue(13)
     },
     cbtnmax:{
-        width:'50%',
+        width:RFValue(42),
+        justifyContent:'center',
     },
     btnmax:{
         backgroundColor:'#5b298a',
         alignItems:'center',
-        paddingTop: '20%',
-        paddingBottom: '20%',
-        paddingLeft: '10%',
-        paddingRight:'10%',
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
         borderRadius: 10,
     },
     txtmax:{
         color:'white',
         fontWeight: 'bold',
         fontSize:RFPercentage(1.5),
-    },
-    barcodebox:{
-        backgroundColor:'#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 300,
-        width: 300,
-        overflow: 'hidden',
-        borderRadius: 30,
     },
     dcVC:{
         flexDirection: 'row',
@@ -319,10 +315,10 @@ const styles = StyleSheet.create({
         
     },
     dcV:{
-        width: '50%',
+        width: RFValue(143),
     },
     dcC:{
-        width:'50%',
+        width: RFValue(143),
     },
     btnVC:{
         backgroundColor:'#5b298a',
