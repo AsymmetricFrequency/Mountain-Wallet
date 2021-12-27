@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react'
+<<<<<<< HEAD
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler, Platform, Dimensions} from 'react-native'
+=======
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler,Modal,Platform,Dimensions,} from 'react-native'
+>>>>>>> 18624f153099910a0598accec761b01546cddfbc
 import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
     const windowWidth = Dimensions.get('screen').width;
     const windowHeight = Dimensions.get('screen').height;
 
+const windowWidth = Dimensions.get('screen').width;
+const windowHeight = Dimensions.get('screen').height;
 const Importar = ({navigation}: {navigation: any}) => {
 
 
@@ -50,6 +58,9 @@ const Importar = ({navigation}: {navigation: any}) => {
     }, 1000)
     
 
+    const [anmt,setanmt]= useState("");
+    const [MostrarModal, setModal] = useState(false);
+    const [MostrarError, setError] = useState("");
 
     // Nueva funcion de enviar token 
     async function enviarToken(pubKey:string, amount:number) {
@@ -60,8 +71,26 @@ const Importar = ({navigation}: {navigation: any}) => {
             // Si lo que deseo enviar es mayor a lo que tengo
             if(tengo < necesito){
                 console.log('No tienes CNDR suficiente')
+                setError("No tienes CNDR suficiente");
+                setModal(true);
+                setanmt("fadeInDownBig");
+                setTimeout( () => {
+                    setanmt("fadeOutUp");
+                    setTimeout( () => {
+                        setModal(false);
+                    }, 100 )
+                },2500)  
             } else if(balance == 0){
-                console.log('No tienes SOL suficiente')
+                console.log('No tienes SOL suficiente');
+                setError("No tienes SOL suficiente");
+                setModal(true);
+                setanmt("fadeInDownBig");
+                setTimeout( () => {
+                    setanmt("fadeOutUp");
+                    setTimeout( () => {
+                        setModal(false);
+                    }, 100 )
+                },2500)  
             }  else {
                 const mnemonic = readMnemonic()
                 mnemonic.then((value) => {
@@ -74,13 +103,53 @@ const Importar = ({navigation}: {navigation: any}) => {
                                 // La cuenta no ha sido fondeada
                                 if (value == 'Error: Failed to find account') {
                                     console.log('Error, la cuenta no ha sido fondeada')
+                                    setError("La cuenta no ha sido fondeada");
+                                    setModal(true);
+                                    setanmt("fadeInDownBig");
+                                    setTimeout( () => {
+                                        setanmt("fadeOutUp");
+                                        setTimeout( () => {
+                                            setModal(false);
+                                        }, 100 )
+                                    },1000)  
                                 // La public key ingresada esta paila
                                 } else if (value == 'Error: Invalid public key input') {
                                     console.log('Error, la billetera destino no existe')
+                                    setError("La billetera destino no existe");
+                                    setModal(true);
+                                    setanmt("fadeInDownBig");
+                                    setTimeout( () => {
+                                        setanmt("fadeOutUp");
+                                        setTimeout( () => {
+                                            setModal(false);
+                                        }, 100 )
+                                    },2500) 
+                                } else if(value == 'Error: Non-base58 character') {
+                                    console.log('La direccion no puede contener espacios')
+                                    setError("La direccion no puede contener espacios");
+                                    setModal(true);
+                                    setanmt("fadeInDownBig");
+                                    setTimeout( () => {
+                                        setanmt("fadeOutUp");
+                                        setTimeout( () => {
+                                            setModal(false);
+                                        }, 100 )
+                                    },2000) 
                                 } else if(value == 'signature') {
                                     console.log('Transacción exitosa')
+
+                                    
                                 } else {
-                                    console.log('Aqui si ya paso algo muy raro')
+                                    console.log('Aqui si ya paso algo muy raro'+value)
+                                    setError("Aqui si ya paso algo muy raro");
+                                    setModal(true);
+                                    setanmt("fadeInDownBig");
+                                    setTimeout( () => {
+                                        setanmt("fadeOutUp");
+                                        setTimeout( () => {
+                                            setModal(false);
+                                        }, 100 )
+                                    },1000) 
                                 }
                             })
     
@@ -90,7 +159,16 @@ const Importar = ({navigation}: {navigation: any}) => {
             }
         // Si alguno de los inputs esta vacio
         } else {
-            console.log('Revisa los datos ingresados')
+            console.log('Revisa los datos ingresados');
+            setError('Revisa los datos ingresados');
+            setModal(true);
+                setanmt("fadeInDownBig");
+                setTimeout( () => {
+                    setanmt("fadeOutUp");
+                    setTimeout( () => {
+                        setModal(false);
+                    }, 100 )
+                },1000)  
         }
     }
 
@@ -103,6 +181,47 @@ const Importar = ({navigation}: {navigation: any}) => {
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.body}
         scrollEnabled={false}>
+<<<<<<< HEAD
+=======
+            <View style={styles.body}>
+                <Modal
+                    visible={MostrarModal}
+                    transparent
+                    onRequestClose={() =>
+                        setModal(false)
+                    }
+                    hardwareAccelerated
+                >
+                    <Animatable.View animation={anmt} duration= {600}>
+                        <View style={styles.bodymodal}>
+                            <View style={styles.ventanamodal}>
+                                <View style={styles.icontext}>
+                                    <View style={styles.contenedorlottie}>
+                                        <LottieView
+                                            style={styles.lottie}
+                                            source={require("./Lottie/error.json")}
+                                            autoPlay
+                                        />
+                                    </View>
+                                </View>   
+                                <View style={styles.textnoti}>
+                                    <View style={styles.contenedortext}>
+                                            <Text style={styles.texticon}>Error</Text>
+                                    </View>
+                                    <View>
+                                        <Text style={styles.notificacion}>
+                                            {MostrarError}                                   
+                                            
+                                            
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </Animatable.View>         
+                </Modal>
+
+>>>>>>> 18624f153099910a0598accec761b01546cddfbc
                 <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                     <View style={styles.containeruno}>
                         <View style={styles.contenedorlogo}>
@@ -151,15 +270,19 @@ const Importar = ({navigation}: {navigation: any}) => {
                                     <TouchableOpacity style={styles.btnVC}  activeOpacity={0.9} onPress={() => enviarToken(pubKey,Number(amounToken))}>
                                         <Text style={styles.textbtnVC}>CONFIRMAR</Text> 
                                     </TouchableOpacity>  
-                                </View>
-                                
-                                      
+                                </View>         
                             </View> 
                         </View>
                     </View>             
+<<<<<<< HEAD
                 </ImageBackground>  
         </KeyboardAwareScrollView>
         
+=======
+                </ImageBackground>   
+            </View>
+        </KeyboardAwareScrollView> 
+>>>>>>> 18624f153099910a0598accec761b01546cddfbc
     )
 }
 
@@ -339,6 +462,51 @@ const styles = StyleSheet.create({
         color:'white',
         fontWeight: 'bold',
         fontSize:RFValue(11.5),
+    },
+
+    //Modal
+    bodymodal: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    ventanamodal: {
+        width: windowWidth*0.95,
+        height: windowHeight*0.1,
+        backgroundColor: '#5B298A',
+        borderWidth: 0.5,
+        borderColor: 'white',
+        borderRadius: 20,
+        paddingLeft:RFValue(12),
+        paddingRight:RFValue(12),
+        flexDirection: 'row',
+        alignItems: 'center',
+        top:alturaios
+    },
+    icontext: {
+        alignItems: 'center',
+    },
+    textnoti: {
+
+    },
+    contenedorlottie:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    lottie: {
+        width:60,
+        height:60,
+    },
+    contenedortext: {
+        justifyContent: 'center',
+    },
+    texticon: {
+        fontSize:RFValue(18),
+        fontWeight: "bold",
+        color:'white'
+    },
+    notificacion:{
+        fontSize:RFValue(12),
+        color:'white'
     },
 })
 export default Importar
