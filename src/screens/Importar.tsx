@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
-<<<<<<< HEAD
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler, Platform, Dimensions} from 'react-native'
-=======
+
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler,Modal,Platform,Dimensions,} from 'react-native'
->>>>>>> 18624f153099910a0598accec761b01546cddfbc
-import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';
+
+import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';1
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 
-    const windowWidth = Dimensions.get('screen').width;
-    const windowHeight = Dimensions.get('screen').height;
+
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -181,9 +178,6 @@ const Importar = ({navigation}: {navigation: any}) => {
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.body}
         scrollEnabled={false}>
-<<<<<<< HEAD
-=======
-            <View style={styles.body}>
                 <Modal
                     visible={MostrarModal}
                     transparent
@@ -221,7 +215,7 @@ const Importar = ({navigation}: {navigation: any}) => {
                     </Animatable.View>         
                 </Modal>
 
->>>>>>> 18624f153099910a0598accec761b01546cddfbc
+
                 <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                     <View style={styles.containeruno}>
                         <View style={styles.contenedorlogo}>
@@ -274,15 +268,9 @@ const Importar = ({navigation}: {navigation: any}) => {
                             </View> 
                         </View>
                     </View>             
-<<<<<<< HEAD
+
                 </ImageBackground>  
         </KeyboardAwareScrollView>
-        
-=======
-                </ImageBackground>   
-            </View>
-        </KeyboardAwareScrollView> 
->>>>>>> 18624f153099910a0598accec761b01546cddfbc
     )
 }
 
