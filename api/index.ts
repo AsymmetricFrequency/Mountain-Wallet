@@ -221,7 +221,7 @@ async function enviarTrans(fromWallet,toPublic,amount){
     ).catch((err) => {
       console.log(err)
     })
-    return signature
+    return "signature"
     } catch (error) {
       return error
   }
