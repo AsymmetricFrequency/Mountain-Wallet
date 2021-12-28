@@ -58,9 +58,12 @@ const Importar = ({navigation}: {navigation: any}) => {
     const [anmt,setanmt]= useState("");
     const [MostrarModal, setModal] = useState(false);
     const [MostrarError, setError] = useState("");
-
+    const [enviarT, setenviarT] = useState(false);
     // Nueva funcion de enviar token 
     async function enviarToken(pubKey:string, amount:number) {
+
+        setenviarT(true)
+
         // Verificar si los dos inputs contienen valores
         if (amounToken != '' && pubKey != '') {
             const tengo = Number(tokenBalance)
@@ -134,7 +137,8 @@ const Importar = ({navigation}: {navigation: any}) => {
                                     },2000) 
                                 } else if(value == 'signature') {
                                     console.log('Transacción exitosa')
-
+                                    Alert.alert('Transacción exitosa!!!')
+                                    navigation.navigate('Balance')
                                     
                                 } else {
                                     console.log('Aqui si ya paso algo muy raro'+value)
@@ -171,6 +175,17 @@ const Importar = ({navigation}: {navigation: any}) => {
 
     function setMax() {
         setAmounToken(tokenBalance.toString())
+    }
+
+
+    if(enviarT){
+        return (
+            <View style={styles.body}>
+                <ImageBackground source={require('./img/FondoCargar.png')} style={styles.fondo}>
+                    <Image style={styles.enviar} source={require('./img/enviar.gif')}/>
+                </ImageBackground>
+            </View>
+        )
     }
 
 
@@ -271,8 +286,11 @@ const Importar = ({navigation}: {navigation: any}) => {
 
                 </ImageBackground>  
         </KeyboardAwareScrollView>
+
     )
-}
+    
+    }
+ 
 
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
@@ -495,6 +513,12 @@ const styles = StyleSheet.create({
     notificacion:{
         fontSize:RFValue(12),
         color:'white'
+    },
+    enviar: {
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain'
     },
 })
 export default Importar
