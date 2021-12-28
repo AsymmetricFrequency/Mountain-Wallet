@@ -176,7 +176,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     {/* Codigo seguridad */}
                     <Text style={styles.textuno} numberOfLines={2}>CREAR CÓDIGO DE SEGURIDAD</Text>
                     <View style={styles.containerunorama}>  
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true}
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" 
                            ref={pin1Ref}
                            onChangeText={text=>{
                                if(!text) pin1Ref.current.focus();
