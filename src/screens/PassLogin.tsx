@@ -79,6 +79,9 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
     if (!fontsLoaded) {
         return(<View/>);
     }
+
+ 
+
     ///
 
         return (
@@ -134,36 +137,54 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                            ref={pin1Ref}
                            value={pin1}
                            onChangeText={text=>{
-                               if(!text) pin1Ref.current.focus();
-                               else text && pin2Ref.current.focus();
-                               setPin1(text);                               
+                            if(text === "") {
+                                setPin1("")
+                             } else {
+                                    text && pin2Ref.current.focus()
+                                    setPin1(text);
+                               }                               
                            }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin2Ref}
                             value={pin2}
                             onChangeText={text=>{
-                                if(!text) pin2Ref.current.focus();
-                                else text && pin3Ref.current.focus();
-                                setPin2(text);                                
+                                if(text === "") {
+                                    setPin2("")
+                                 } else {
+                                    text && pin3Ref.current.focus()
+                                    setPin2(text)
+                                }                                
                             }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin3Ref}
                             value={pin3}
                             onChangeText={text=>{
-                                if(!text) pin3Ref.current.focus();
-                                else text && pin4Ref.current.focus();
-                                setPin3(text);                                
+                                if(text === "") {
+                                    setPin3("")
+                                 } else {
+                                    text && pin4Ref.current.focus()
+                                    setPin3(text)
+                                }                               
                             }}
                         />
+                        
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin4Ref}
                             value={pin4}
-                            onChangeText={text =>{
-                                setPin4(text);
-                                Keyboard.dismiss()
-                            }}                            
+                            onChangeText={text =>{  
+                                if(text === "") {
+                                   setPin4(text)
+                                }  else if(text != "" && pin1 != "" && pin2 != "" && pin3 != "") {
+                                    setPin4(text) 
+                                    Keyboard.dismiss()
+                                }  else {
+                                    setPin4(text)
+                                }                                                  
+                            }}  
+                           
+                                                      
                         />
                     </View>
                     <View>
