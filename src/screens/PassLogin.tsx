@@ -130,7 +130,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     {/* Codigo seguridad */}
                     <Text style={styles.textuno} numberOfLines={2}>INGRESA TU CÓDIGO DE SEGURIDAD</Text>
                     <View style={styles.containerunorama}>  
-                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" autoFocus={true}  secureTextEntry={true} 
+                        <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                            ref={pin1Ref}
                            value={pin1}
                            onChangeText={text=>{
