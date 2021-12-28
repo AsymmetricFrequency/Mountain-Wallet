@@ -260,12 +260,12 @@ const styles = StyleSheet.create({
     btnG:{
         backgroundColor:'#5b298a',
         alignItems:'center',
-        paddingLeft: RFValue(60),
-        paddingRight: RFValue(60),
+        paddingLeft: RFValue(85),
+        paddingRight: RFValue(85),
         paddingTop: RFValue(12),
         paddingBottom: RFValue(12),
         borderRadius: 20,
-        marginTop: RFValue(13),
+        marginTop: RFValue(5),
         elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
@@ -360,6 +360,5 @@ const styles = StyleSheet.create({
         fontSize:RFValue(12),
         color:'white'
     },
-    
 })
 export default Crearcuenta
