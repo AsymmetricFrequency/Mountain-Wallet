@@ -188,7 +188,6 @@ const Importar = ({navigation}: {navigation: any}) => {
         )
     }
 
-
     return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.body}
