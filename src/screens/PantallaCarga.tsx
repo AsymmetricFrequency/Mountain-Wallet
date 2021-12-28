@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, ActivityIndicator, Text, ImageBackground, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { readMnemonic, createAccount, savePublicKey, mnemonicToSeed } from '../../api';
+import LottieView from 'lottie-react-native';
+import { RFValue, RFPercentage } from 'react-native-responsive-fontsize';
+import * as Animatable from 'react-native-animatable';
+import * as Random from 'expo-random';
+import { randomInt } from 'crypto';
+
 
 const PantallaCarga = ({navigation}: {navigation: any}) => {
 
@@ -33,10 +39,17 @@ const PantallaCarga = ({navigation}: {navigation: any}) => {
     setTimeout(() => {
         crearCuenta(palabras)
     }, 2000);
-
+    
     return (
         <View style={styles.body}>
-                <ActivityIndicator size="large" color="purple" />
+            <View style={styles.body}>
+                <LottieView
+                    style={styles.lottie}
+                    source={require("./Lottie/flowerCarga.json")}
+                    autoPlay
+                />
+            </View>
+
         </View>
     )
 }
@@ -52,8 +65,9 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
-    textocarga: {
-        fontWeight:'bold'
+    txtcarga: {
+        top: RFValue(90),
+        fontSize:RFValue(18),
     },
     fondo:{
         width: '100%',
@@ -61,9 +75,18 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
-    gif: {
-        width: '50%',
-        height: '10%',
-        resizeMode: 'contain'
+    lottie: {
+        width:200,
+        height:200,
+        alignItems:'center',
+        justifyContent:'center'
     },
 })
+function txtcarga() {
+    throw new Error('Function not implemented.');
+}
+
+function generaFrase(palabras: string) {
+    throw new Error('Function not implemented.');
+}
+
