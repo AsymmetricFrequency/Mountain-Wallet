@@ -70,6 +70,7 @@ const Importar = ({navigation}: {navigation: any}) => {
             const necesito = Number(amounToken)
             // Si lo que deseo enviar es mayor a lo que tengo
             if(tengo < necesito){
+                setenviarT(false)
                 console.log('No tienes CNDR suficiente')
                 setError("No tienes CNDR suficiente");
                 setModal(true);
@@ -81,6 +82,7 @@ const Importar = ({navigation}: {navigation: any}) => {
                     }, 100 )
                 },2500)  
             } else if(balance == 0){
+                setenviarT(false)
                 console.log('No tienes SOL suficiente');
                 setError("No tienes SOL suficiente");
                 setModal(true);
@@ -102,6 +104,7 @@ const Importar = ({navigation}: {navigation: any}) => {
                             enviarTrans(value,pubKey,amount).then((value) => {
                                 // La cuenta no ha sido fondeada
                                 if (value == 'Error: Failed to find account') {
+                                    setenviarT(false)
                                     console.log('Error, la cuenta no ha sido fondeada')
                                     setError("La cuenta no ha sido fondeada");
                                     setModal(true);
@@ -114,6 +117,7 @@ const Importar = ({navigation}: {navigation: any}) => {
                                     },1000)  
                                 // La public key ingresada esta paila
                                 } else if (value == 'Error: Invalid public key input') {
+                                    setenviarT(false)
                                     console.log('Error, la billetera destino no existe')
                                     setError("La billetera destino no existe");
                                     setModal(true);
@@ -125,6 +129,7 @@ const Importar = ({navigation}: {navigation: any}) => {
                                         }, 100 )
                                     },2500) 
                                 } else if(value == 'Error: Non-base58 character') {
+                                    setenviarT(false)
                                     console.log('La direccion no puede contener espacios')
                                     setError("La direccion no puede contener espacios");
                                     setModal(true);
@@ -141,6 +146,7 @@ const Importar = ({navigation}: {navigation: any}) => {
                                     navigation.navigate('Balance')
                                     
                                 } else {
+                                    setenviarT(false)
                                     console.log('Aqui si ya paso algo muy raro'+value)
                                     setError("Aqui si ya paso algo muy raro");
                                     setModal(true);
@@ -160,6 +166,7 @@ const Importar = ({navigation}: {navigation: any}) => {
             }
         // Si alguno de los inputs esta vacio
         } else {
+            setenviarT(false)
             console.log('Revisa los datos ingresados');
             setError('Revisa los datos ingresados');
             setModal(true);
