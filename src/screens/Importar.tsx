@@ -12,9 +12,14 @@ import * as Animatable from 'react-native-animatable';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-const Importar = ({navigation}: {navigation: any}) => {
 
 
+
+const Importar = ({route,navigation}: {route:any,navigation: any}) => {
+
+    //props cam
+    const qr = route.params
+    
     //traer account
     const [pubKey,setPubKey] = useState("")
     const [amounToken,setAmounToken] = useState("")

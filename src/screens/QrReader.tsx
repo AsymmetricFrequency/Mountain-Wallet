@@ -10,7 +10,7 @@ const QrReader = ({navigation}: {navigation: any}) => {
 
     const [hasPermission,setHasPermission] = useState(null)
     const [scanned,setScanned] = useState(false)
-    const [text,setText] = useState()
+    const [text,setText] = useState('')
 
     //preguntando el permiso para camara
     const askForCameraPermission = () =>{
@@ -31,18 +31,20 @@ const QrReader = ({navigation}: {navigation: any}) => {
 
     },[])
 
+ 
+
     //Handleo del escaneado
     const handleBarCodeScanned = ({type,data}) =>{
-
+       
         setScanned(true)
+        
         setText(data)
         
-        //aqui va el envio de los props
-        navigation.navigate('Enviar', {
-            address: text
-          });
-          
         console.log('Type: '+type+'\nData'+data);
+
+        //aqui va el envio de los props
+        navigation.navigate('Enviar', {qrRead:text})
+          
         
     }
     
