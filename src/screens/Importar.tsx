@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react'
 
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler,Modal,Platform,Dimensions,} from 'react-native'
 
-import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';1
+import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import LottieView from 'lottie-react-native';
+// import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
+import { Lotierror,Lotiexito } from './component/lottie';
+
+
 
 
 
@@ -59,10 +62,16 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
         obtenerBalance(pKey)
     }, 1000)
     
-
+    //Constantes modales
     const [anmt,setanmt]= useState("");
     const [MostrarModal, setModal] = useState(false);
     const [MostrarError, setError] = useState("");
+    const [lottie, setLottie] = useState(<Lotierror/>);
+    const [aprobado,setaprobado] = useState(false);
+    const [mostrartitulo, setmostrartitulo] = useState("");
+    // limpiar direccion
+    const [direccion,setdireccion]= useState("");
+    //Constante animacion evnio
     const [enviarT, setenviarT] = useState(false);
     // Nueva funcion de enviar token 
     async function enviarToken(pubKey:string, amount:number) {
@@ -77,8 +86,10 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
             if(tengo < necesito){
                 setenviarT(false)
                 console.log('No tienes CNDR suficiente')
+                setmostrartitulo("Error");
                 setError("No tienes CNDR suficiente");
                 setModal(true);
+                setLottie(<Lotierror/>)
                 setanmt("fadeInDownBig");
                 setTimeout( () => {
                     setanmt("fadeOutUp");
@@ -89,8 +100,10 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
             } else if(balance == 0){
                 setenviarT(false)
                 console.log('No tienes SOL suficiente');
+                setmostrartitulo("Error");
                 setError("No tienes SOL suficiente");
                 setModal(true);
+                setLottie(<Lotierror/>)
                 setanmt("fadeInDownBig");
                 setTimeout( () => {
                     setanmt("fadeOutUp");
@@ -111,8 +124,10 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                 if (value == 'Error: Failed to find account') {
                                     setenviarT(false)
                                     console.log('Error, la cuenta no ha sido fondeada')
+                                    setmostrartitulo("Error");
                                     setError("La cuenta no ha sido fondeada");
                                     setModal(true);
+                                    setLottie(<Lotierror/>)
                                     setanmt("fadeInDownBig");
                                     setTimeout( () => {
                                         setanmt("fadeOutUp");
@@ -124,8 +139,10 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                 } else if (value == 'Error: Invalid public key input') {
                                     setenviarT(false)
                                     console.log('Error, la billetera destino no existe')
+                                    setmostrartitulo("Error");
                                     setError("La billetera destino no existe");
                                     setModal(true);
+                                    setLottie(<Lotierror/>)
                                     setanmt("fadeInDownBig");
                                     setTimeout( () => {
                                         setanmt("fadeOutUp");
@@ -136,8 +153,10 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                 } else if(value == 'Error: Non-base58 character') {
                                     setenviarT(false)
                                     console.log('La direccion no puede contener espacios')
+                                    setmostrartitulo("Error");
                                     setError("La direccion no puede contener espacios");
                                     setModal(true);
+                                    setLottie(<Lotierror/>)
                                     setanmt("fadeInDownBig");
                                     setTimeout( () => {
                                         setanmt("fadeOutUp");
@@ -147,14 +166,31 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                     },2000) 
                                 } else if(value == 'signature') {
                                     console.log('Transacción exitosa')
-                                    Alert.alert('Transacción exitosa!!!')
-                                    navigation.navigate('Balance')
+                                    //animacion transacccion exitosa
+                                    setenviarT(false)
+                                    setaprobado(true);
+                                    setmostrartitulo("Transaccion Exitosa");
+                                    setError("Todo salio correcto");
+                                    setLottie(<Lotiexito/>)
+                                    setanmt("fadeInDownBig");
+                                    setAmounToken("");
+                                    setdireccion("");
+                                    setTimeout( () => {
+                                        setanmt("fadeOutUp");
+                                        setTimeout( () => {
+                                            setaprobado(false);
+                                        }, 100 )                                        
+                                    },3000) 
+                                    // navigation.navigate('Balance')
+
                                     
                                 } else {
                                     setenviarT(false)
                                     console.log('Aqui si ya paso algo muy raro'+value)
+                                    setmostrartitulo("Error");
                                     setError("Aqui si ya paso algo muy raro");
                                     setModal(true);
+                                    setLottie(<Lotierror/>)
                                     setanmt("fadeInDownBig");
                                     setTimeout( () => {
                                         setanmt("fadeOutUp");
@@ -173,15 +209,17 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
         } else {
             setenviarT(false)
             console.log('Revisa los datos ingresados');
+            setmostrartitulo("Error");
             setError('Revisa los datos ingresados');
             setModal(true);
-                setanmt("fadeInDownBig");
+            setLottie(<Lotierror/>)
+            setanmt("fadeInDownBig");
+            setTimeout( () => {
+                setanmt("fadeOutUp");
                 setTimeout( () => {
-                    setanmt("fadeOutUp");
-                    setTimeout( () => {
-                        setModal(false);
-                    }, 100 )
-                },1000)  
+                    setModal(false);
+                }, 100 )
+            },1000)  
         }
     }
 
@@ -189,7 +227,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
         setAmounToken(tokenBalance.toString())
     }
 
-
+    //Animacion de enviado
     if(enviarT){
         return (
             <View style={styles.body}>
@@ -212,33 +250,60 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                     }
                     hardwareAccelerated
                 >
-                    <Animatable.View animation={anmt} duration= {600}>
-                        <View style={styles.bodymodal}>
-                            <View style={styles.ventanamodal}>
-                                <View style={styles.icontext}>
-                                    <View style={styles.contenedorlottie}>
-                                        <LottieView
-                                            style={styles.lottie}
-                                            source={require("./Lottie/error.json")}
-                                            autoPlay
-                                        />
+                    <View style={styles.cajamodal}>
+                        <Animatable.View animation={anmt} duration= {600}>
+                            <View style={styles.bodymodal}>
+                                <View style={styles.ventanamodal}>
+                                    <View style={styles.icontext}>
+                                        <View style={styles.contenedorlottie}>
+                                            {lottie}
+                                        </View>
+                                    </View>   
+                                    <View style={styles.textnoti}>
+                                        <View style={styles.contenedortext}>
+                                                <Text style={styles.texticon}>{mostrartitulo}</Text>
+                                        </View>
+                                        <View>
+                                            <Text style={styles.notificacion}>
+                                                {MostrarError}
+                                            </Text>
+                                        </View>
                                     </View>
-                                </View>   
-                                <View style={styles.textnoti}>
-                                    <View style={styles.contenedortext}>
-                                            <Text style={styles.texticon}>Error</Text>
+                                </View>
+                            </View>
+                        </Animatable.View>
+                    </View>         
+                </Modal>
+                {/* Modal transaccion exitosa */}
+                <Modal
+                    visible={aprobado}
+                    transparent
+                    onRequestClose={() =>
+                        setaprobado(false)
+                    }
+                    hardwareAccelerated
+                >
+                    <View style={styles.cajafull}>
+                        <Animatable.View animation={anmt} duration= {600}>
+                            <View style={styles.bodyfull}>
+                                <View style={styles.ventanafull}>
+                                    <View style={styles.icontextfull}>
+                                        <View style={styles.contenedorlottiefull}>
+                                            {lottie}
+                                        </View>
+                                    </View>   
+                                    <View style={styles.contenedortextfull}>
+                                        <Text style={styles.texticonfull}>{mostrartitulo}</Text>
                                     </View>
                                     <View>
-                                        <Text style={styles.notificacion}>
-                                            {MostrarError}                                   
-                                            
-                                            
+                                        <Text style={styles.notificacionfull}>
+                                            {MostrarError}
                                         </Text>
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                    </Animatable.View>         
+                        </Animatable.View>
+                    </View>         
                 </Modal>
 
 
@@ -255,7 +320,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                             {/* Email */}
                             <View style={styles.tablamail} >
                                 <View style={styles.cuadromail}>
-                                    <TextInput style={styles.inputmail} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." onChangeText={text => setPubKey(text)}/>
+                                    <TextInput style={styles.inputmail} value={direccion} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." onChangeText={text => setPubKey(text)}/>
                                 </View>
                                 <View style={styles.cqr}>
                                     <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9} onPress={() => navigation.navigate('QrReader')} >
@@ -266,7 +331,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                             {/*Importe*/}
                             <View style={styles.tablaimp} >
                                 <View style={styles.cuadroimp}>
-                                    <TextInput style={styles.inputimp} placeholder="IMPORTE" value={amounToken} onChangeText={text => setAmounToken(text)} />
+                                    <TextInput style={styles.inputimp}  placeholder="IMPORTE" value={amounToken} onChangeText={text => setAmounToken(text)} />
                                 </View>
                                 <View style={styles.cmax}>
                                     <View style={styles.ccnd}>
@@ -480,11 +545,21 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFValue(11.5),
     },
+    enviar: {
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain'
+    },
 
     //Modal
+    cajamodal:{
+        flex: 1,
+    },
     bodymodal: {
         flex: 1,
         alignItems: 'center',
+
     },
     ventanamodal: {
         width: windowWidth*0.95,
@@ -509,10 +584,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    lottie: {
-        width:60,
-        height:60,
-    },
     contenedortext: {
         justifyContent: 'center',
     },
@@ -525,11 +596,53 @@ const styles = StyleSheet.create({
         fontSize:RFValue(12),
         color:'white'
     },
-    enviar: {
+ 
+
+
+    // aprobadomodal
+    cajafull:{
+        flex: 1,
+        backgroundColor:"rgba(91, 41, 137, 0.83)",
+        justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        resizeMode: 'contain'
     },
+    bodyfull: {
+
+    },
+    ventanafull: {
+        width: windowWidth*0.95,
+        height: windowHeight*0.15,
+        // backgroundColor: '#5B298A',
+        // borderWidth: 0.5,
+        // borderColor: 'white',
+        // borderRadius: 20,
+        paddingLeft:RFValue(12),
+        paddingRight:RFValue(12),
+        flexDirection: "column",
+        alignItems: 'center',
+    },
+    icontextfull: {
+        alignItems: 'center',
+        top:RFValue(-40)
+    },
+    contenedorlottiefull:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    contenedortextfull: {
+        justifyContent: 'center',
+    },
+    texticonfull: {
+        fontSize:RFValue(18),
+        fontWeight: "bold",
+        color:'white',
+        top:RFValue(-60)
+    },
+    notificacionfull:{
+        fontSize:RFValue(12),
+        color:'white',
+        top:RFValue(-60)
+    },
+
 })
 export default Importar
