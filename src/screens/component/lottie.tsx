@@ -28,6 +28,19 @@ const Lotiexito = () => {
     
 }
 
+const Lotieqr = () => {
+    return (
+        <LottieView
+            style={styles.lottieqr}                                            
+            source={require("../Lottie/qrscan.json")}
+            speed={1}
+            autoPlay
+            // loop={false}
+        />
+    )
+    
+}
+
 
 const styles = StyleSheet.create({
     lottie: {
@@ -38,7 +51,11 @@ const styles = StyleSheet.create({
         width:200,
         height:200,
     },
+    lottieqr: {
+        width:380,
+        height:380,
+    },
 })
 
-export {Lotierror, Lotiexito};
+export {Lotierror, Lotiexito, Lotieqr};
 
