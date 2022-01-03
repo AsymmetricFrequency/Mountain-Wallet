@@ -92,9 +92,20 @@ useEffect(()=>{
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
                     <Image style={styles.logo} source={require('./img/logoblanco.png')}  />
-
-      
-                    <Text style={styles.txtbalance}>{balance}</Text>
+                    <View style={styles.divisor}>
+                        <View style={styles.balanceaux}></View>
+                        <View style={styles.balance}>
+                            <View style={styles.cajabalance}>
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                    <Text style={styles.txtbalance} numberOfLines={1} ellipsizeMode='middle'>{balance}</Text>
+                                </ScrollView>
+                            </View>
+                        </View>
+                        <View style={styles.moneda}>
+                            <Text style={styles.txtmoneda}>CNDR</Text>
+                        </View>
+                    </View>
+                    {/* <Text style={styles.txtbalance}>{balance}</Text> */}
 
                     {/* <View style={styles.doscolumnasB} >
 
@@ -177,6 +188,7 @@ useEffect(()=>{
 
 
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const anchocaja = Platform.OS === 'ios' ? 115 : 124;
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const styles = StyleSheet.create({
     body:{
@@ -200,9 +212,42 @@ const styles = StyleSheet.create({
         width: windowWidth*0.5,
         height: windowHeight*0.2
     },
+    divisor: {
+        flexDirection: 'row',
+        width: windowWidth,
+    },
+    balanceaux:{
+        width:"30%",
+        // backgroundColor: 'blue'
+    },
+    balance: {
+        width:"40%",
+        // backgroundColor: 'red',
+        alignItems: 'center'
+    },
+    cajabalance:{
+        width:RFValue(anchocaja),
+        justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: 'black'
+    },
     txtbalance:{
         fontSize:RFValue(45),
         color:'white',
+        fontWeight:'bold',
+    },
+    moneda:{
+        width:"10%",
+        justifyContent: 'center',
+        // alignSelf:"center",
+        alignItems: 'center',
+        backgroundColor: 'white',
+        marginVertical:"6%",
+        borderRadius:5,
+    },
+    txtmoneda:{
+        fontSize:RFValue(10),
+        color:'#5b298a',
         fontWeight:'bold',
     },
     // doscolumnasB:{
