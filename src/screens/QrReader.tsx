@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler} from 'react-native'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler, Clipboard} from 'react-native'
 import {BarCodeScanner} from "expo-barcode-scanner"
 import { NavigationRouteContext } from '@react-navigation/native'
 
@@ -40,12 +40,12 @@ const QrReader = ({navigation}: {navigation: any}) => {
         
         setText(data)
         
-        console.log('Type: '+type+'\nData'+data);
+        Clipboard.setString(data)
 
         //aqui va el envio de los props
-        navigation.navigate('Enviar', {qrRead:text})
+        navigation.navigate('Enviar', data)
           
-        
+        alert("Este mensaje fue correcto")
     }
     
     //si el permiso es nulo
