@@ -1,9 +1,20 @@
 
 import React, { useState, useEffect } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler, Clipboard} from 'react-native'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler, Clipboard, Modal, Dimensions,Platform} from 'react-native'
 import {BarCodeScanner} from "expo-barcode-scanner"
-import { NavigationRouteContext } from '@react-navigation/native'
 
+import * as Animatable from 'react-native-animatable';
+import { NavigationRouteContext } from '@react-navigation/native'
+import { Lotierror,Lotiexito,Lotieqr } from './component/lottie';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+
+
+const windowWidth = Dimensions.get('screen').width;
+const windowHeight = Dimensions.get('screen').height;
+
+const { height, width } = Dimensions.get('window');
+const maskRowHeight = Math.round((300) / 20);
+const maskColWidth = (width - 300) / 2;
 
 const QrReader = ({navigation}: {navigation: any}) => {
 
@@ -30,7 +41,12 @@ const QrReader = ({navigation}: {navigation: any}) => {
         askForCameraPermission()
 
     },[])
-
+    //Constantes modales
+    const [anmt,setanmt]= useState("");
+    const [aprobado,setaprobado] = useState(false);
+    const [MostrarError, setError] = useState("");
+    const [lottie, setLottie] = useState(<Lotierror/>);
+    const [mostrartitulo, setmostrartitulo] = useState("");
  
 
     //Handleo del escaneado
@@ -43,9 +59,20 @@ const QrReader = ({navigation}: {navigation: any}) => {
         Clipboard.setString(data)
 
         //aqui va el envio de los props
-        navigation.navigate('Enviar', data)
+        // navigation.navigate('Enviar')
           
-        alert("Este mensaje fue correcto")
+        // alert("Este mensaje fue correcto")
+        setmostrartitulo("QR Scaneado");
+        setError("Llave pública copiada en el portapapeles:");
+        setaprobado(true);
+        setLottie(<Lotieqr/>)
+        setanmt("fadeInDownBig");
+        // setTimeout( () => {
+        //     setanmt("fadeOutUp");
+        //     setTimeout( () => {
+        //         setaprobado(false);
+        //     }, 100 )                                        
+        // },3000) 
     }
     
     //si el permiso es nulo
@@ -69,17 +96,85 @@ const QrReader = ({navigation}: {navigation: any}) => {
         )
 
     }
+
+    //boton volver
+    function regresar () {
+        setScanned(false);
+        navigation.navigate('Enviar')
+    }
     
     //si el permiso es verdadero
     if(hasPermission === true){
 
+        
+
         return(
             <View style={styles.containeruno}>
-                <View style={styles.barcodebox}> 
-                    <BarCodeScanner onBarCodeScanned={scanned ? undefined: handleBarCodeScanned} style={{height:1000,width:1000}} ></BarCodeScanner>
-                </View>
-                <Text>{text}</Text>
-                {scanned && <Button title='scan' onPress={()=>setScanned(false)} ></Button>}
+                <Modal
+                    visible={aprobado}
+                    transparent
+                    onRequestClose={() =>
+                        setaprobado(false)
+                    }
+                    hardwareAccelerated
+                >
+                    <View style={styles.cajafull}>
+                        <Animatable.View animation={anmt} duration= {600}>
+                            <View style={styles.bodyfull}>
+                                <View style={styles.ventanafull}>
+                                    <View style={styles.contenedortextfull}>
+                                        <Text style={styles.texticonfull}>{mostrartitulo}</Text>
+                                    </View>
+                                    <View style={styles.icontextfull}>
+                                        <View style={styles.contenedorlottiefull}>
+                                            {lottie}
+                                        </View>
+                                    </View>   
+                                    
+                                    <View>
+                                        <Text style={styles.notificacionfull}>
+                                            {MostrarError}
+                                        </Text>
+                                    </View>
+
+                                    <Text style={styles.copiadotxt}>{text}</Text>
+
+                                    <View style={styles.dcVC}>
+                                        <View style={styles.dcV}>
+                                            <TouchableOpacity style={styles.btnVC} activeOpacity={0.9} onPress={() =>[setScanned(false),setaprobado(false)]}>
+                                                <Text style={styles.textbtnVC}>REESCANEAR</Text> 
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={styles.dcC}>
+                                            <TouchableOpacity style={styles.btnVC}  activeOpacity={0.9} onPress={() => regresar()}>
+                                                <Text style={styles.textbtnVC}>CONFIRMAR</Text> 
+                                            </TouchableOpacity>  
+                                        </View>         
+                                    </View> 
+                                </View>
+                            </View>
+                        </Animatable.View>
+                    </View>         
+                </Modal>
+       
+
+                <BarCodeScanner onBarCodeScanned={scanned ? undefined: handleBarCodeScanned} style={[StyleSheet.absoluteFillObject, styles.colorqr]} >
+                    <View style={styles.tituloqr}>
+                        <Text style={styles.textqr}>ESCANEAR CÓDIGO QR</Text> 
+                    </View>   
+                    <View style={styles.barcodebox}>
+
+                    </View>
+                    <View style={styles.cajavolver}>
+                        <TouchableOpacity style={styles.btnvolver}  activeOpacity={0.9} onPress={() => regresar()}>
+                                <Text style={styles.txtvolver}>VOLVER</Text> 
+                        </TouchableOpacity>       
+                    </View> 
+                    
+                </BarCodeScanner>
+                
+              
+               
             </View>
         )
 
@@ -91,145 +186,154 @@ const QrReader = ({navigation}: {navigation: any}) => {
 
 
 }
-
+const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 
 const styles = StyleSheet.create({
     body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
+       
     },
     containeruno:{
         paddingTop: '8%',
         paddingLeft: '5%',
         paddingRight: '4%',
-        alignItems:'center',
         height:'100%',
-        justifyContent:'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
-    fondo:{
-        flex: 1,
-        resizeMode:'contain',
+    tituloqr:{
+        position: 'absolute',
+        alignItems: 'center',
+        top:80,
+        backgroundColor: 'rgba(29, 29, 27, 0.45)',
+        padding: RFValue(20),
+        borderRadius:15
     },
-    logo:{
-        width: 310,
-        height: 250,
-        top:'4%',
-        resizeMode: 'contain',
+    textqr: {
+        color:"white",
     },
-    cuadroD:{
-        backgroundColor: 'white',
-        padding: 20,
-        borderRadius: 10,
-        marginTop: '5%',
-        width: '100%'
+    colorqr:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingLeft: '5%',
+        paddingRight: '4%',
+
     },
-    btnD:{
-        backgroundColor:'transparent',
-        alignItems:'center',
-        paddingTop: '3%',
-        paddingBottom: '3%',
-        borderRadius: 20,
+    barcodebox:{
+        alignItems: 'center',
+        height: 280,
+        width: 280,
+        borderRadius:15,
+        borderWidth: 5,
+        borderColor: 'rgba(255, 255, 255, 0.45)',
+        
     },
-    cuadro:{
+    cajavolver:{
+        position: 'absolute',
+        bottom:60,
+        alignItems: 'center',
+    },
+    btnvolver:{
         backgroundColor:'white',
-        width: '100%',
-        height: '100%',
-        marginTop: '3%',
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-        padding: '2%',
-    },
-    tablamail:{
-        marginTop:'4%',
-        borderWidth: 0.8,
-        borderColor: '#e0e0e0',
-        borderRadius:10,
-        height: '5.8%',
-        flexDirection:'row',
-        paddingLeft:'2.5%',
-        paddingRight:'3.5%',
-        paddingTop:'0%'
-    },
-    cuadromail:{
-        width:'80%',
-        justifyContent: 'center',
-        paddingLeft: '2%'
-    },
-    cqr:{
-        width:'20%',
-        alignItems: 'flex-end',
-        justifyContent: 'center',
-    },
-    btnqr:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
-        paddingTop: '12%',
-        paddingBottom: '12%',
-        paddingLeft: '23%',
-        paddingRight: '23%',
-        borderRadius: 10,
-    },
-    imgqr:{
-        width: 20,
-        height: 20,
-        resizeMode: 'contain',
-    },
-    tablaimp:{
-        marginTop:'4%',
-        borderWidth: 0.8,
-        borderColor: '#e0e0e0',
-        borderRadius:10,
-        height: '5.8%',
-        flexDirection:'row',
-        paddingLeft:'2.5%',
-        paddingRight:'3.5%',
-        paddingTop:'0%'
-    },
-    cuadroimp:{
-        width:'70%',
-        justifyContent: 'center',
-        paddingLeft: '2%'
-    },
-    cmax:{
-        width:'30%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection:'row',
-    },
-    ccnd:{
-        width:'50%',
-    },
-    cbtnmax:{
-        width:'50%',
-    },
-    btnmax:{
-        backgroundColor:'#5b298a',
-        alignItems:'center',
-        paddingTop: '20%',
-        paddingBottom: '20%',
-        paddingLeft: '10%',
-        paddingRight:'10%',
-        borderRadius: 10,
-    },
-   
-    btnC:{
-        backgroundColor:'#5b298a',
-        alignItems:'center',
-        marginRight: '10%',
-        marginLeft: '10%',
-        paddingTop: '4%',
-        paddingBottom: '4%',
+        paddingHorizontal: RFValue(50),
+        paddingVertical: RFValue(15),
         borderRadius: 20,
-        marginTop: '20%'
-    },barcodebox:{
-        backgroundColor:'#fff',
-        alignItems: 'center',
+        elevation: 10,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+
+    },
+    txtvolver:{
+        color:'#5b298a',
+        fontWeight: 'bold',
+        fontSize:RFValue(12),
+    },
+
+    
+
+    // aprobadomodal
+    cajafull:{
+        flex: 1,
+        backgroundColor:"rgba(91, 41, 137, 1)",
         justifyContent: 'center',
-        height: 300,
-        width: 300,
-        overflow: 'hidden',
-        borderRadius: 30,
-    }
+        alignItems: 'center',
+    },
+    bodyfull: {
+
+    },
+    ventanafull: {
+        width: windowWidth*0.95,
+        height: windowHeight*0.15,
+        paddingLeft:RFValue(12),
+        paddingRight:RFValue(12),
+        flexDirection: "column",
+        alignItems: 'center',
+    },
+    icontextfull: {
+        alignItems: 'center',
+        top:RFValue(-150)
+    },
+    contenedorlottiefull:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    contenedortextfull: {
+        justifyContent: 'center',
+    },
+    texticonfull: {
+        fontSize:RFValue(25),
+        fontWeight: "bold",
+        color:'white',
+        top:RFValue(-180)
+    },
+    notificacionfull:{
+        fontSize:RFValue(16),
+        color:'white',
+        top:RFValue(-80)
+    },
+    copiadotxt: {
+        color:'#b9b8b8',
+        top:RFValue(-70),
+        fontSize:RFValue(16)
+    },
+
+
+    dcVC:{
+        flexDirection: 'row',
+        padding: RFValue(15),
+        borderRadius: 10,
+        top:RFValue(-50)
+        
+    },
+    dcV:{
+        width: RFValue(143),
+    },
+    dcC:{
+        width: RFValue(143),
+    },
+    btnVC:{
+        backgroundColor:'white',
+        alignItems:'center',
+        marginRight: RFValue(15),
+        marginLeft: RFValue(15),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
+        borderRadius: 20,
+        elevation: 10,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+
+    },
+    textbtnVC:{
+        color:'#5b298a',
+        fontWeight: 'bold',
+        fontSize:RFValue(11.5),
+    },
+
 })
 export default QrReader
