@@ -69,8 +69,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
     const [lottie, setLottie] = useState(<Lotierror/>);
     const [aprobado,setaprobado] = useState(false);
     const [mostrartitulo, setmostrartitulo] = useState("");
-    // limpiar direccion
-    const [direccion,setdireccion]= useState("");
     //Constante animacion evnio
     const [enviarT, setenviarT] = useState(false);
     // Nueva funcion de enviar token 
@@ -174,7 +172,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                     setLottie(<Lotiexito/>)
                                     setanmt("fadeInDownBig");
                                     setAmounToken("");
-                                    setdireccion("");
                                     setTimeout( () => {
                                         setanmt("fadeOutUp");
                                         setTimeout( () => {
@@ -320,7 +317,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                             {/* Email */}
                             <View style={styles.tablamail} >
                                 <View style={styles.cuadromail}>
-                                    <TextInput style={styles.inputmail} value={direccion} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." onChangeText={text => setPubKey(text)}/>
+                                    <TextInput style={styles.inputmail} value={pubKey} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." onChangeText={text => setPubKey(text)}/>
                                 </View>
                                 <View style={styles.cqr}>
                                     <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9} onPress={() => navigation.navigate('QrReader')} >

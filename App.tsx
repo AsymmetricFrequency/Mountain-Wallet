@@ -1,11 +1,8 @@
-import { Keypair } from '@solana/web3.js';
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import "react-native-url-polyfill/auto";
 
-
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,saveKey, readKey,getHistory } from './api';
+import { readKey } from './api';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -27,84 +24,6 @@ import PantallaCarga from './src/screens/PantallaCarga';
 export default function App() { 
 
   const Stack = createNativeStackNavigator();
-
-  //Funcion de generar 12 palabras
-  const [mnemonic, setMnemonic] = useState("")
-
-  function generarMnemonic(){
-    const memo = generateMnemonic()
-    memo.then((value) => {
-      console.log(value)
-      setMnemonic(value)
-    })
-  }
-
-  //Funcion semilla desde 12 palabras
-  const [seed, setSeed] = useState("")
-
-
-  function generarSeed(mnemonic: string) {
-    mnemonicToSeed(mnemonic).then((value) => {
-      //guardar llave
-      setSeed(value)
-    })
-  }
-
-  //Funcion para crear cuenta
-  const [publicKey, setPublicKey] = useState("")
-  const [account, setAccount] = useState()
-
-  function generarCuenta(seed) {
-    createAccount(seed).then((hexValue) => {
-      console.log(hexValue.publicKey.toString())
-      setPublicKey(hexValue.publicKey.toString())
-      setAccount(hexValue)
-      console.log(hexValue)
-    })
-  }
-  
-  
-  //Funcion obtener balance
-  const [balance, setBalance] = useState(0)
-
-  async function obtenerBalance(publicKey: string) {
-    getBalance(publicKey).then((value) => {
-      console.log(value)
-      setBalance(value)
-    }).catch((error) => {
-      console.log(error);
-      return "error"
-    })
-  }
-
-  //Funcion de obtener splToken
-  const [tokenBalance, setTokenBalance] = useState(0)
-
-  async function obtenerTokenB(publicKey:string, mint:string) {
-    const bala = getToken(publicKey, mint).then((value) => {
-      setTokenBalance(value)
-      console.log(value);
-    })
-  }
-
-  //Funcion enviar token
-  async function sendToken(){
-    const send = sendTokenTransaction("uja3w9XG1g6DQSVT6YASK99FVmdVwXoHVoQEgtEJdLv","7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ",1)
-    send.then((value) => {
-      console.log(value);
-    })
-  } 
-
-  //Funcion obtener historial
-  const [his,setHis] = useState("")
-
-  async function historial(pubKey:string){
-    const send = getHistory(pubKey)
-    send.then((value) => {      
-      setHis(value[0].signature.toString())
-      console.log(value);
-    })
-  }
   
   const [llave, setLlave] = useState("")
   
