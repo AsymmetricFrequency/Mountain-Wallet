@@ -35,6 +35,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Splash" component={Splashc} options={{headerShown: false}}/>
           <Stack.Screen name="Pass" component={PassLogin} options={{headerShown: false}}/>
           <Stack.Screen name="Balance" component={Balance} options={{headerShown: false, gestureEnabled: false}}/>
           <Stack.Screen name="Recibir" component={Recibir} options={{headerShown: false}}/>
@@ -47,6 +48,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Splash" component={Splashc} options={{headerShown: false}}/>
           <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
           <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
           <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>

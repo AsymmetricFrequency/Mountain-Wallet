@@ -1,25 +1,19 @@
-
-import React, { useState, useEffect } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler, Clipboard, Modal, Dimensions,Platform} from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Clipboard, Platform, Dimensions, Modal} from 'react-native';
+import { Camera } from 'expo-camera';
 import {BarCodeScanner} from "expo-barcode-scanner"
-
-import * as Animatable from 'react-native-animatable';
-import { NavigationRouteContext } from '@react-navigation/native'
-import { Lotierror,Lotiexito,Lotieqr } from './component/lottie';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import * as Animatable from 'react-native-animatable';
+import { Lotierror,Lotiexito,Lotieqr } from './component/lottie';
 
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const { height, width } = Dimensions.get('window');
-const maskRowHeight = Math.round((300) / 20);
-const maskColWidth = (width - 300) / 2;
+const QrReader = ({navigation}: {navigation: any}) =>  {
 
-const QrReader = ({navigation}: {navigation: any}) => {
-
-
-    const [hasPermission,setHasPermission] = useState(null)
+    if(Platform.OS === 'ios' ){
+        const [hasPermission,setHasPermission] = useState(null)
     const [scanned,setScanned] = useState(false)
     const [text,setText] = useState('')
 
@@ -184,10 +178,43 @@ const QrReader = ({navigation}: {navigation: any}) => {
         <Text>Permiso nulo</Text>
     )
 
+    }else if(Platform.OS === 'android'){
+        const [hasPermission, setHasPermission] = useState(null);
+        const [type, setType] = useState(Camera.Constants.Type.back);
+
+        useEffect(() => {
+            (async () => {
+            const { status } = await Camera.requestCameraPermissionsAsync();
+            setHasPermission(status === 'granted');
+            })();
+        }, []);
+
+        if (hasPermission === null) {
+            return <View />;
+        }
+        if (hasPermission === false) {
+            return <Text>No access to camera</Text>;
+        }
+        return(
+        <View style={styles.container}>
+            <Camera
+                onBarCodeScanned={(...args) => {
+                const data = args[0].data;
+                const result = JSON.stringify(data);
+                Clipboard.setString(data)
+                navigation.navigate('Enviar',data);
+                }}
+                barCodeScannerSettings={{
+                barCodeTypes: ['qr'],
+                }}
+                style={{ flex: 1 }}
+            />
+            </View>
+        );   
+    }
 
 }
-const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
-
+  
 const styles = StyleSheet.create({
     body: {
        
@@ -335,5 +362,28 @@ const styles = StyleSheet.create({
         fontSize:RFValue(11.5),
     },
 
+    container: {
+        flex: 1,
+      },
+      camera: {
+        flex: 1,
+      },
+      buttonContainer: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        flexDirection: 'row',
+        margin: 20,
+      },
+      button: {
+        flex: 0.1,
+        alignSelf: 'flex-end',
+        alignItems: 'center',
+      },
+      text: {
+        fontSize: 18,
+        color: 'white',
+      },
+
 })
-export default QrReader
+
+export default QrReader;

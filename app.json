@@ -25,7 +25,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.barneyeldinosaurio.MountainWallet"
+      "package": "com.barneyeldinosaurio.MountainWallet",
+      "permissions": ["CAMERA", "READ_PHONE_STATE", "RECORD_AUDIO", "READ_CONTACTS"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
