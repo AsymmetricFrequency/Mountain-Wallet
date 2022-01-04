@@ -127,7 +127,7 @@ const QrReader = ({navigation}: {navigation: any}) => {
                                     </View>
                                     <View style={styles.icontextfull}>
                                         <View style={styles.contenedorlottiefull}>
-                                            {lottie}
+                                            {/* {lottie} */}
                                         </View>
                                     </View>   
                                     
