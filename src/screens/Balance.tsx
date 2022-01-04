@@ -151,6 +151,7 @@ useEffect(()=>{
 
                     {/* tabla de criptos */}
                     <View style={styles.balancecry}>
+                        {/* CONDOR */}
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
                                 <Image style={styles.imgcry} source={require('./img/billeteras/logocondor.png')}  />
@@ -170,7 +171,7 @@ useEffect(()=>{
                             </View>                           
                         </View>  
 
-
+                        {/* SOLANA */}
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
                                 <Image style={styles.imgcry} source={require('./img/billeteras/solana.png')}  />
@@ -187,6 +188,25 @@ useEffect(()=>{
                                 </View>
                             </View>                           
                         </View>
+
+                        {/* USDT */}
+                        <View style={styles.tablacry} >
+                            <View style={styles.logocry}>
+                                <Image style={styles.imgcry} source={require('./img/billeteras/usdtDos.png')}  />
+                            </View>
+                            <View style={styles.nombrecry}>
+                                <Text style={styles.ntxtcry}>TETHER</Text>
+                            </View>
+                            <View style={styles.smcry}>
+                                <View style={styles.saldocry}>
+                                    <Text style={styles.stxtcry}>{balance}</Text>
+                                </View>
+                                <View style={styles.monedacry}>
+                                    <Text style={styles.mtxtcry}>USDT</Text>
+                                </View>
+                            </View>                           
+                        </View>
+
                     </View>
                 </View>             
             </ImageBackground>   
