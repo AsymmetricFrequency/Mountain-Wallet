@@ -9,8 +9,8 @@ import * as Animatable from 'react-native-animatable';
 // Fuente
 import * as Font from 'expo-font'
 
-const windowWidth = Dimensions.get('screen').width;
-const windowHeight = Dimensions.get('screen').height;
+const windowWidth = Dimensions.get('screen').width
+const windowHeight = Dimensions.get('screen').height
 
 
 
@@ -26,7 +26,7 @@ const Balance = ({navigation}: {navigation: any}) => {
         console.log(value)
         setBalance(value)
         }).catch((error) => {
-        console.log(error);
+        console.log(error)
         return "error"
         })
     }
@@ -39,21 +39,32 @@ const Balance = ({navigation}: {navigation: any}) => {
   async function obtenerTokenB(publicKey:string, mint:string) {
     const bala = getToken(publicKey, mint).then((value) => {
       setTokenBalance(value)
-      console.log(value);
+      console.log(value)
     })
   }
+
+   //Funcion de obtener splToken USDT
+   const [tokenBalanceUSDT, setTokenBalanceUSDT] = useState(0)
+
+   async function obtenerTokenBUSDT(publicKey:string, mint:string) {
+     const bala = getToken(publicKey, mint).then((value) => {
+       setTokenBalanceUSDT(value)
+       console.log(value)
+     })
+   }
 
 //funcion obtener llave publica
 const [pKey,setPKey] = useState("")
 readPublicKey().then((val)=>{
-    console.log("PUBLIC KEY:");
-    console.log(val);
-    
+    console.log("PUBLIC KEY:")
+    console.log(val)
     setPKey(val)
 })
 
 useEffect(()=>{
 
+    //obtener token de USDT(ESTO SOLO SE USA EN LA MAINNET)
+    obtenerTokenBUSDT(pKey,"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB")
     //obtener balance del token
     obtenerTokenB(pKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
     //obtener balance solanas
@@ -61,28 +72,26 @@ useEffect(()=>{
 
 })
     //Función fuentes tipograficas
-
     const[fontsLoaded, setFontsLoaded] = useState(false);
-
-        useEffect(() => {
-            if (!fontsLoaded) {
-                loadFonts();
-            }
-        });
-    const loadFonts = async () => {
-        await Font.loadAsync({
-
-            //Fuente
-            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
-        });
-
-        setFontsLoaded(true);
-    }
+        
+    useEffect(() => {
+        if (!fontsLoaded) {
+            loadFonts()
+        } 
+    })
+    
+        const loadFonts = async () => {
+    
+            await Font.loadAsync({
+                //Fuente
+                'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
+            })
+            setFontsLoaded(true)
+        }
 
     if (!fontsLoaded) {
-    return(<View/>);
+        return(<View/>)
     }
-    ///
 
     return (
         <View style={styles.body}>
@@ -139,6 +148,7 @@ useEffect(()=>{
 
                     {/* tabla de criptos */}
                     <View style={styles.balancecry}>
+                        {/* CONDOR */}
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
                                 <Image style={styles.imgcry} source={require('./img/billeteras/logocondor.png')}  />
@@ -158,7 +168,7 @@ useEffect(()=>{
                             </View>                           
                         </View>  
 
-
+                        {/* SOLANA */}
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
                                 <Image style={styles.imgcry} source={require('./img/billeteras/solana.png')}  />
@@ -175,6 +185,25 @@ useEffect(()=>{
                                 </View>
                             </View>                           
                         </View>
+
+                        {/* USDT */}
+                        <View style={styles.tablacry} >
+                            <View style={styles.logocry}>
+                                <Image style={styles.imgcry} source={require('./img/billeteras/usdtDos.png')}  />
+                            </View>
+                            <View style={styles.nombrecry}>
+                                <Text style={styles.ntxtcry}>TETHER</Text>
+                            </View>
+                            <View style={styles.smcry}>
+                                <View style={styles.saldocry}>
+                                    <Text style={styles.stxtcry}>{balance}</Text>
+                                </View>
+                                <View style={styles.monedacry}>
+                                    <Text style={styles.mtxtcry}>USDT</Text>
+                                </View>
+                            </View>                           
+                        </View>
+
                     </View>
                 </View>             
             </ImageBackground>   
