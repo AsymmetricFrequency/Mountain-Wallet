@@ -16,10 +16,7 @@ const windowHeight = Dimensions.get('screen').height;
 
 const Balance = ({navigation}: {navigation: any}) => {
 
-    useEffect(() => {
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
-        return () => backHandler.remove()
-      }, [])
+    
 
     //Funcion obtener balance
     const [balance, setBalance] = useState(0)
