@@ -117,6 +117,7 @@ async function generateMnemonic() {
     return mnemonic
 }
 
+
 //mnemonic a semilla
 const mnemonicToSeed = async (mnemonic: string) => {
     try {
@@ -125,7 +126,7 @@ const mnemonicToSeed = async (mnemonic: string) => {
         console.log(error);
         return "error"
     }
-};
+}
 
 //crear cuenta
 async function createAccount(seed: string) {
