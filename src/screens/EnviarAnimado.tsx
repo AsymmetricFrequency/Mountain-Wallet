@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, ActivityIndicator, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
-
+import React from 'react'
+import { View, StyleSheet, ImageBackground, Image} from 'react-native';
 
 const EnviarAnimado = ({navigation}: {navigation: any}) => {
 
@@ -18,6 +16,7 @@ const EnviarAnimado = ({navigation}: {navigation: any}) => {
 export default EnviarAnimado
 
 const styles = StyleSheet.create({
+    
     body: {
         width: '100%',
         height: '100%',

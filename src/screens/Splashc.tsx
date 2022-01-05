@@ -1,19 +1,13 @@
 import React, { useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput} from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction, readKey } from '../../api';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
+import { StyleSheet, View, Image } from 'react-native'
+import { readKey } from '../../api';
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
-
 
 const Splashc = () => {
 
     const navigation = useNavigation();
-
     const [llave, setLlave] = useState("")
-  
     readKey().then((value) => {
       setLlave(value)
     })
@@ -31,15 +25,15 @@ const Splashc = () => {
           <View style={styles.containeruno}>
             {/* <Image style={styles.logorigin} source={require('./img/logocolor.png')}  /> */}
             <Animatable.View 
-                    animation="fadeInDownBig"
-                    duration={2000}>
-                    <Image style={styles.logo} source={require('./img/mm1.png')}  />
+              animation="fadeInDownBig"
+              duration={2000}>
+              <Image style={styles.logo} source={require('./img/mm1.png')}  />
             </Animatable.View>
             <Animatable.View
-                    animation="fadeInUp"
-                    duration={2000}>
-                    <Image style={styles.logo2} source={require('./img/mm2.png')}  />
-                    <Image style={styles.letras} source={require('./img/mm3.png')}/>
+              animation="fadeInUp"
+              duration={2000}>
+              <Image style={styles.logo2} source={require('./img/mm2.png')}  />
+              <Image style={styles.letras} source={require('./img/mm3.png')}/>
             </Animatable.View>
           </View>
         </View>
@@ -49,6 +43,7 @@ const Splashc = () => {
 export default Splashc
 
 const styles = StyleSheet.create({
+
   body: {
       width: '100%',
       height: '100%',

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, Linking,Platform,Dimensions } from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction } from '../../api';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
-import { TextInput } from 'react-native-element-textinput';
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image, Linking, Platform, Dimensions } from 'react-native'
+import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from 'react-native-animatable';
-import { useNavigation } from '@react-navigation/native';
 // Fuente
 import * as Font from 'expo-font'
 
@@ -42,14 +37,12 @@ const Home = ({navigation}: {navigation: any}) => {
     if (!fontsLoaded) {
     return(<View/>);
     }
-    ///
 
     return (
         <View style={styles.body}>
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
                     <Image style={styles.logo} source={require('./img/logoblanco.png')}  />
-                   
                     <View style={styles.botonesCI}>
                         {/* Botones */}
                         <View style={styles.botones}>
@@ -88,6 +81,7 @@ const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const bottomdevelopios = Platform.OS === 'ios' ? 80 : 120;
 
 const styles = StyleSheet.create({
+    
     body:{
         height: windowHeight,
         width: windowWidth,

@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { useState, useRef, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Clipboard, Modal, Platform, Dimensions } from 'react-native';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, savePublicKey } from '../../api';
+import { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Clipboard, Modal, Platform, Dimensions } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
+import { generateMnemonic } from '../../api';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 //Fuente
@@ -14,36 +14,30 @@ const windowHeight = Dimensions.get('screen').height;
 
 const Crearcuenta = ({navigation}: {navigation: any}) => {
     
-    const [isSelected, setSelection] = useState(false);
     const [botoncontinuar, setbotoncontinuar] = useState(false);
     const [botonpalabras, setbotonpalabras] = useState(false);
-
     const [words, setWords] = useState('')
-
     const [anmt,setanmt]= useState("");
     const [showModal, SetModal] = useState(false);
     const [copiadoModal, setCopiadoModal] = useState(false);
+    
     const vermodal = () => {
         setCopiadoModal(true);
 
         setanmt("fadeInDownBig");
-   
-        
+    
         setTimeout( () => {
             setanmt("fadeOutUp");
             setTimeout( () => {
             
                 setCopiadoModal(false);
-                
                 // if(anmt === "lightSpeedOut") SetModal(false);
             }, 100 )
-            
             // if(anmt === "lightSpeedOut") SetModal(false);
         },2000)
     }
 
     //Función fuentes tipograficas
-
     const[fontsLoaded, setFontsLoaded] = useState(false);
 
         useEffect(() => {
@@ -51,27 +45,25 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 loadFonts();
             }
         });
+    
     const loadFonts = async () => {
         await Font.loadAsync({
 
             //Fuente
             'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
         });
-
         setFontsLoaded(true);
     }
 
     if (!fontsLoaded) {
     return(<View/>);
     }
-    ///
-
 
     function generarMnemonic(){
         const memo = generateMnemonic()
         memo.then((value) => {
-          console.log(value);
-          setWords(value)
+            console.log(value);
+            setWords(value)
         });setbotonpalabras(true);     
     }
     const CopyToClipboard = () => {
@@ -110,7 +102,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 }
                 hardwareAccelerated 
             >
-                <Animatable.View animation={anmt} duration= {600}>
+                <Animatable.View animation={anmt} duration={600}>
                     <View style={styles.bodymodal}>
                         <View style={styles.ventanamodal}>
                             <View style={styles.icontext}>
@@ -135,8 +127,6 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 </Animatable.View>         
             </Modal>
 
-
-
             <Modal
                 visible={copiadoModal}
                 transparent
@@ -146,8 +136,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 // animationType='slide'
                 hardwareAccelerated
             >
-                <Animatable.View animation={anmt} duration= {600}>
-                    
+                <Animatable.View animation={anmt} duration={600}>
                     <View style={styles.bodymodal}>
                         <View style={styles.ventanamodal}>
                             <View style={styles.icontext}>
@@ -179,28 +168,22 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 {/* texto */}
                 <Text style={styles.textuno} numberOfLines={2}>CREAR CUENTA</Text>
                 <Text style={styles.labeluno} numberOfLines={4}>Oprima en "Generar" y copie las 12 palabras porque son de gran importancia para la seguridad de su cuenta.</Text>
-               
                 <TouchableOpacity
                     style={styles.btnG}
                     onPress={() => generarMnemonic()} activeOpacity={0.9}>
-                    
                     <Text style={styles.textG}>GENERAR</Text>
                 </TouchableOpacity>
-
                 {/* cuadro de 12 palabras */}
                 <TouchableOpacity style={styles.TextInput} onPress={() => CopyToClipboard()}>
                     <View>
                         <Text  style={styles.labeldos}>{words}</Text>
                     </View>
                 </TouchableOpacity>
-
-
                 <TouchableOpacity
                     style={[styles.btnC,{backgroundColor:!botoncontinuar?"rgba(91, 41, 137, 0.58)":"#5b298a"}]}
                     activeOpacity={0.9}
                     disabled={!botoncontinuar}
-                    onPress={() => navigation.navigate('CrearPass')}
-                    
+                    onPress={() => navigation.navigate('CrearPass')} 
                 >
                     <Text style={styles.textC} >CONTINUAR</Text>
                 </TouchableOpacity>
@@ -209,9 +192,12 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
     )
 }
 
+
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+
 const styles = StyleSheet.create({
+
     body: {
         height: windowHeight,
         width: windowWidth,
@@ -308,7 +294,6 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
         shadowRadius: 8,
-
     },
     textC:{
         color:'white',

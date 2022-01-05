@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, ActivityIndicator, Text, ImageBackground, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react'
+import { View, StyleSheet } from 'react-native';
 import { readMnemonic, createAccount, savePublicKey, mnemonicToSeed } from '../../api';
 import LottieView from 'lottie-react-native';
-import { RFValue, RFPercentage } from 'react-native-responsive-fontsize';
-import * as Animatable from 'react-native-animatable';
-import * as Random from 'expo-random';
-import { randomInt } from 'crypto';
-
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const PantallaCarga = ({navigation}: {navigation: any}) => {
 
@@ -42,14 +37,13 @@ const PantallaCarga = ({navigation}: {navigation: any}) => {
     
     return (
         <View style={styles.body}>
-            <View style={styles.body}>
+            
                 <LottieView
                     style={styles.lottie}
                     source={require("./Lottie/flowerCarga.json")}
                     autoPlay
                 />
-            </View>
-
+            
         </View>
     )
 }
@@ -57,11 +51,11 @@ const PantallaCarga = ({navigation}: {navigation: any}) => {
 export default PantallaCarga
 
 const styles = StyleSheet.create({
+
     body: {
         width: '100%',
         height: '100%',
         flex: 1,
-        paddingTop: '8%',
         alignItems:'center',
         justifyContent:'center'
     },
@@ -82,11 +76,5 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
 })
-function txtcarga() {
-    throw new Error('Function not implemented.');
-}
 
-function generaFrase(palabras: string) {
-    throw new Error('Function not implemented.');
-}
 
