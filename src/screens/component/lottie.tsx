@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     lottieqr: {
         width:380,
         height:380,
+
     },
 })
 
