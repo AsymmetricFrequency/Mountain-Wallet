@@ -1,15 +1,16 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { KeyboardAvoidingView,StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Button, Alert, Modal, Platform } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Modal, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { readKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction, savePublicKey, saveMmemonic } from '../../api';
+import { RFValue } from "react-native-responsive-fontsize";
+import { mnemonicToSeed, createAccount, savePublicKey, saveMmemonic } from '../../api';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
-//Navegación
 import { Dimensions } from 'react-native';
+
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
+
 const ImportarCuenta = ({navigation}: {navigation: any}) => {
 
     const [twelfString, setTwelfString] = useState('')
@@ -44,13 +45,12 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
         }
     }
 
- 
-    
     return (
         <KeyboardAwareScrollView
             resetScrollToCoords={{ x: 0, y: 0 }}
             contentContainerStyle={styles.body}
-            scrollEnabled={false} >
+            scrollEnabled={false} 
+        >
             <Modal
                 visible={vacioModal}
                 transparent
@@ -59,10 +59,8 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                 }
                 // animationType='slide'
                 hardwareAccelerated
-                
             >
-                <Animatable.View animation={anmt} duration= {600}>
-                    
+                <Animatable.View animation={anmt} duration={600}> 
                     <View style={styles.bodymodal}>
                         <View style={styles.ventanamodal}>
                             <View style={styles.icontext}>
@@ -73,8 +71,6 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                                         autoPlay
                                     />
                                 </View>
-                                
-                                
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
@@ -83,19 +79,11 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
                                 <View>
                                     <Text style={styles.notificacion}>No has ingresado las 12 palabras</Text>
                                 </View>
-                            </View>               
-                            
-
-                        </View>
-                
+                            </View>
+                        </View>             
                     </View>
                 </Animatable.View>         
             </Modal>
-
-
-
-
-
             <View style={styles.containeruno}>
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
             </View>
@@ -118,9 +106,11 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
     )
 }
 
+
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const aceptartios = Platform.OS === 'ios' ? 15 : 5;
+
 const styles = StyleSheet.create({
   
     body: {
@@ -196,7 +186,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFValue(11.5),
     },
-
 
     //Modal
     bodymodal: {

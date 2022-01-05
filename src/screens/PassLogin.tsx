@@ -1,10 +1,9 @@
-import React, { Component,useEffect,useRef, useState } from 'react'
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { Text, StyleSheet, View, Image, Button, Alert, TextInput, TouchableOpacity, Modal, Platform, Dimensions, Keyboard} from 'react-native'
+import React, { useEffect,useRef, useState } from 'react'
+import { RFValue } from "react-native-responsive-fontsize";
+import { Text, StyleSheet, View, Image, TextInput, TouchableOpacity, Modal, Platform, Dimensions, Keyboard} from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
-
 import { readPassword } from '../../api';
 // Fuente
 import * as Font from 'expo-font'
@@ -29,7 +28,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         readPassword().then((val)=>{
             console.log("PASSWORD:");
             console.log(val);
-            
             setStoredPass(val)
         })
 
@@ -45,15 +43,14 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 setanmt("fadeInDownBig");            
                 setTimeout( () => {
                 setanmt("fadeOutUp");
-                setTimeout( () => {
-                    setVacioModal(false);
+                    setTimeout( () => {
+                        setVacioModal(false);
                     }, 100 ) 
                 },900)
                 setPin1("")
                 setPin2("")
                 setPin3("")
-                setPin4("")
-                   
+                setPin4("") 
             }
         }
 
@@ -68,7 +65,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         });
     const loadFonts = async () => {
         await Font.loadAsync({
-
             //Fuente
             'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
         });
@@ -80,14 +76,10 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         return(<View/>);
     }
 
- 
-
-    ///
-
         return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={styles.body}
-        scrollEnabled={false}>
+            contentContainerStyle={styles.body}
+            scrollEnabled={false}>
             <Modal
                 visible={vacioModal}
                 transparent
@@ -121,7 +113,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                 </Animatable.View>         
             </Modal>
 
-
             <View style={styles.containeruno}>
                 {/* logo */}
                 <Image source={require('./img/logocolor.png')} style={styles.logo} />
@@ -130,19 +121,20 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     <View style={styles.imgmano}>
                         <Image source={require('./img/logmanito.png')} style={styles.logomano} />
                     </View>
+
                     {/* Codigo seguridad */}
                     <Text style={styles.textuno} numberOfLines={2}>INGRESA TU CÓDIGO DE SEGURIDAD</Text>
                     <View style={styles.containerunorama}>  
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
-                           ref={pin1Ref}
-                           value={pin1}
-                           onChangeText={text=>{
-                            if(text === "") {
-                                setPin1("")
-                             } else {
-                                    text && pin2Ref.current.focus()
-                                    setPin1(text);
-                               }                               
+                            ref={pin1Ref}
+                            value={pin1}
+                            onChangeText={text=>{
+                                if(text === "") {
+                                    setPin1("")
+                                }   else {
+                                        text && pin2Ref.current.focus()
+                                        setPin1(text);
+                                    }                               
                            }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
@@ -151,10 +143,10 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                             onChangeText={text=>{
                                 if(text === "") {
                                     setPin2("")
-                                 } else {
-                                    text && pin3Ref.current.focus()
-                                    setPin2(text)
-                                }                                
+                                }   else {
+                                        text && pin3Ref.current.focus()
+                                        setPin2(text)
+                                    }                                
                             }}
                         />
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
@@ -163,10 +155,10 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                             onChangeText={text=>{
                                 if(text === "") {
                                     setPin3("")
-                                 } else {
-                                    text && pin4Ref.current.focus()
-                                    setPin3(text)
-                                }                               
+                                }   else {
+                                        text && pin4Ref.current.focus()
+                                        setPin3(text)
+                                    }                                  
                             }}
                         />
                         
@@ -182,9 +174,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                                 }  else {
                                     setPin4(text)
                                 }                                                  
-                            }}  
-                           
-                                                      
+                            }}                          
                         />
                     </View>
                     <View>
@@ -197,16 +187,18 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>            
-
+            </View>
         </KeyboardAwareScrollView>
         )
     }
 
+
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const cuadroios = Platform.OS === 'ios' ? 55 : 45;
+
 const styles = StyleSheet.create({
+    
     body: {
         height: windowHeight,
         width: windowWidth,

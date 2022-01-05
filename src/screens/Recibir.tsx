@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
-import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, SafeAreaView,Clipboard, ToastAndroid, Modal,Platform,Dimensions, ScrollView } from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
+import {ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image, TextInput, Clipboard, Modal,Platform,Dimensions, ScrollView } from 'react-native'
+import { readPublicKey } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Hoverable} from "react-native-web-hover";
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import { TextInput } from 'react-native-element-textinput';
 import QRCode from 'react-native-qrcode-svg';
-//Navegación
+
     const windowWidth = Dimensions.get('screen').width;
     const windowHeight = Dimensions.get('screen').height;
 
@@ -17,20 +14,18 @@ import QRCode from 'react-native-qrcode-svg';
 const Recibir = ({navigation}: {navigation: any}) => {
   
     const [copiedText, setCopiedText] = useState('')
- 
-
     const [anmt,setanmt]= useState("");
     const [copiadoModal, setCopiadoModal] = useState(false);
     const CopyToClipboard = () => {
-      Clipboard.setString(pKey) 
-      setCopiadoModal(true);
-      setanmt("fadeInDownBig");
-      setTimeout( () => {
-          setanmt("fadeOutUp");
-          setTimeout( () => {
-              setCopiadoModal(false);
-          }, 100 )
-      },2000)   
+        Clipboard.setString(pKey) 
+        setCopiadoModal(true);
+        setanmt("fadeInDownBig");
+        setTimeout( () => {
+            setanmt("fadeOutUp");
+            setTimeout( () => {
+                setCopiadoModal(false);
+            }, 100 )
+        },2000)   
     };
    
     const fetchCopiedText = async () => {
@@ -62,7 +57,6 @@ const Recibir = ({navigation}: {navigation: any}) => {
                 }
                 // animationType='slide'
                 hardwareAccelerated
-                
             >
                 <Animatable.View animation={anmt} duration= {600}>
                     <View style={styles.bodymodal}>
@@ -89,14 +83,12 @@ const Recibir = ({navigation}: {navigation: any}) => {
                 </Animatable.View>         
             </Modal>
             
-
             <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                 <View style={styles.containeruno}>
                     {/* imagen superior */}
                     <View style={styles.contenedorlogo}>
                         <Image style={styles.logo} source={require('./img/recibir.png')}  />
                     </View>
-                    
                     {/*Boton Recibir */}
                     <View style={styles.cuadroR}>
                         <Text style={styles.textbtnR}>RECIBIR</Text> 
@@ -136,10 +128,13 @@ const Recibir = ({navigation}: {navigation: any}) => {
     )
 }
 
+
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const heightlogo = Platform.OS === 'ios' ? 0.287 : 0.272;
+
 const styles = StyleSheet.create({
+
     body: {
         height: windowHeight,
         width: windowWidth,
@@ -194,11 +189,6 @@ const styles = StyleSheet.create({
         marginTop:RFValue(10),
         justifyContent: 'center',
     },
-    imgqr:{
-
-
-
-    },
     tablaqr:{
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
@@ -212,7 +202,6 @@ const styles = StyleSheet.create({
     cuadroqr:{
         width:'80%',
         justifyContent: 'center',
-        
     },
     inputqr:{
         fontWeight: 'bold',
@@ -255,7 +244,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFValue(11.5),
     },
-
 
     //Modal
     bodymodal: {

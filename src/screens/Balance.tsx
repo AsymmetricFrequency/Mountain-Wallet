@@ -1,76 +1,70 @@
 import React, { useState, useEffect } from 'react'
-import {  Dimensions,ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, BackHandler, Linking, Platform } from 'react-native'
-import { generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken,sendTokenTransaction,readPublicKey } from '../../api';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, Hoverable, ScrollView } from "react-native-web-hover";
-import { TextInput } from 'react-native-element-textinput';
-import * as Animatable from 'react-native-animatable';
+import {  Dimensions,ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image, Platform } from 'react-native'
+import { getBalance, getToken, readPublicKey } from '../../api';
+import { RFValue } from "react-native-responsive-fontsize";
+import { ScrollView } from "react-native-web-hover";
 // Fuente
 import * as Font from 'expo-font'
 
 const windowWidth = Dimensions.get('screen').width
 const windowHeight = Dimensions.get('screen').height
 
-
-
 const Balance = ({navigation}: {navigation: any}) => {
-
-    
 
     //Funcion obtener balance
     const [balance, setBalance] = useState(0)
 
     async function obtenerBalance(publicKey: string) {
         getBalance(publicKey).then((value) => {
-        console.log(value)
-        setBalance(value)
+            console.log(value)
+            setBalance(value)
         }).catch((error) => {
-        console.log(error)
-        return "error"
+            console.log(error)
+            return "error"
         })
     }
 
     //value textinput
 
     //Funcion de obtener splToken
-  const [tokenBalance, setTokenBalance] = useState(0)
+    const [tokenBalance, setTokenBalance] = useState(0)
 
-  async function obtenerTokenB(publicKey:string, mint:string) {
-    const bala = getToken(publicKey, mint).then((value) => {
-      setTokenBalance(value)
-      console.log(value)
-    })
-  }
+    async function obtenerTokenB(publicKey:string, mint:string) {
+        const bala = getToken(publicKey, mint).then((value) => {
+            setTokenBalance(value)
+            console.log(value)
+        })
+    }
 
    //Funcion de obtener splToken USDT
    const [tokenBalanceUSDT, setTokenBalanceUSDT] = useState(0)
 
-   async function obtenerTokenBUSDT(publicKey:string, mint:string) {
-     const bala = getToken(publicKey, mint).then((value) => {
-       setTokenBalanceUSDT(value)
-       console.log(value)
-     })
-   }
+    async function obtenerTokenBUSDT(publicKey:string, mint:string) {
+        const bala = getToken(publicKey, mint).then((value) => {
+            setTokenBalanceUSDT(value)
+            console.log(value)
+        })
+    }
 
-//funcion obtener llave publica
-const [pKey,setPKey] = useState("")
-readPublicKey().then((val)=>{
-    console.log("PUBLIC KEY:")
-    console.log(val)
-    setPKey(val)
-})
+    //funcion obtener llave publica
+    const [pKey,setPKey] = useState("")
+    readPublicKey().then((val)=>{
+        console.log("PUBLIC KEY:")
+        console.log(val)
+        setPKey(val)
+    })
 
-useEffect(()=>{
+    useEffect(()=>{
 
-    //obtener token de USDT(ESTO SOLO SE USA EN LA MAINNET)
-    obtenerTokenBUSDT(pKey,"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB")
-    //obtener balance del token
-    obtenerTokenB(pKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
-    //obtener balance solanas
-    obtenerBalance(pKey)
+        //obtener token de USDT(ESTO SOLO SE USA EN LA MAINNET)
+        obtenerTokenBUSDT(pKey,"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB")
+        //obtener balance del token
+        obtenerTokenB(pKey,"7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
+        //obtener balance solanas
+        obtenerBalance(pKey)
 
-})
+    })
+
     //Función fuentes tipograficas
     const[fontsLoaded, setFontsLoaded] = useState(false);
         
@@ -128,18 +122,18 @@ useEffect(()=>{
                     <View style={styles.dcER}>
                         <View style={styles.dcR}>
                             <TouchableOpacity style=
-                            {styles.btnR} 
-                            activeOpacity={0.9} 
-                            onPress={() => navigation.navigate('Recibir')}
+                                {styles.btnR} 
+                                activeOpacity={0.9} 
+                                onPress={() => navigation.navigate('Recibir')}
                             >
                                 <Text style={styles.textbtnR}>RECIBIR</Text> 
                             </TouchableOpacity>
                         </View>
                         <View style={styles.dcE}>
                             <TouchableOpacity style=
-                            {styles.btnR} 
-                            activeOpacity={0.9} 
-                            onPress={() => navigation.navigate('Enviar')}
+                                {styles.btnR} 
+                                activeOpacity={0.9} 
+                                onPress={() => navigation.navigate('Enviar')}
                             >
                                 <Text style={styles.textbtnR}>ENVIAR</Text>
                             </TouchableOpacity>
@@ -148,6 +142,7 @@ useEffect(()=>{
 
                     {/* tabla de criptos */}
                     <View style={styles.balancecry}>
+                    
                         {/* CONDOR */}
                         <View style={styles.tablacry} >
                             <View style={styles.logocry}>
@@ -157,11 +152,9 @@ useEffect(()=>{
                                 <Text style={styles.ntxtcry}>CONDORCOIN</Text>
                             </View>
                             <View style={styles.smcry}>
-                                <View style={styles.saldocry}>
-                                    
+                                <View style={styles.saldocry}> 
                                     <Text numberOfLines={1} style={styles.stxtcry} >{tokenBalance}</Text>
                                 </View>
-                                
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>CNDR</Text>
                                 </View>
@@ -203,7 +196,6 @@ useEffect(()=>{
                                 </View>
                             </View>                           
                         </View>
-
                     </View>
                 </View>             
             </ImageBackground>   
@@ -212,31 +204,33 @@ useEffect(()=>{
 }
 
 
-
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const anchocaja = Platform.OS === 'ios' ? 115 : 124;
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+
 const styles = StyleSheet.create({
+
     body:{
         height: windowHeight,
         width: windowWidth,
     },
     containeruno:{
+        alignItems:'center',
         paddingTop: RFValue(35),
         paddingLeft: RFValue(15),
         paddingRight: RFValue(paddinrightios),
-        alignItems:'center',
     },
     fondo:{
         height: windowHeight,
-        width: windowWidth,
         margin:0,
         resizeMode: 'contain',
+        width: windowWidth,
     },
     logo:{
+        height: windowHeight*0.2,
         resizeMode: 'contain',
         width: windowWidth*0.5,
-        height: windowHeight*0.2
+        
     },
     divisor: {
         flexDirection: 'row',
@@ -244,32 +238,28 @@ const styles = StyleSheet.create({
     },
     balanceaux:{
         width:"30%",
-        // backgroundColor: 'blue'
     },
     balance: {
+        alignItems: 'center',
         width:"40%",
-        // backgroundColor: 'red',
-        alignItems: 'center'
     },
     cajabalance:{
-        width:RFValue(anchocaja),
-        justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'black'
+        justifyContent: 'center',
+        width:RFValue(anchocaja),
     },
     txtbalance:{
-        fontSize:RFValue(45),
         color:'white',
+        fontSize:RFValue(45),
         fontWeight:'bold',
     },
     moneda:{
-        width:"10%",
-        justifyContent: 'center',
-        // alignSelf:"center",
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: 'white',
         marginVertical:"6%",
         borderRadius:5,
+        width:"10%",
     },
     txtmoneda:{
         fontSize:RFValue(10),
