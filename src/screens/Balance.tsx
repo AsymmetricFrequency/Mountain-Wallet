@@ -123,7 +123,7 @@ const Balance = ({navigation}: {navigation: any}) => {
                         <View style={styles.dcR}>
                             <TouchableOpacity style=
                                 {styles.btnR} 
-                                activeOpacity={0.9} 
+                                activeOpacity={0.5} 
                                 onPress={() => navigation.navigate('Recibir')}
                             >
                                 <Text style={styles.textbtnR}>RECIBIR</Text> 
@@ -132,7 +132,7 @@ const Balance = ({navigation}: {navigation: any}) => {
                         <View style={styles.dcE}>
                             <TouchableOpacity style=
                                 {styles.btnR} 
-                                activeOpacity={0.9} 
+                                activeOpacity={0.5} 
                                 onPress={() => navigation.navigate('Enviar')}
                             >
                                 <Text style={styles.textbtnR}>ENVIAR</Text>

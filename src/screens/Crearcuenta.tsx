@@ -170,7 +170,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 <Text style={styles.labeluno} numberOfLines={4}>Oprima en "Generar" y copie las 12 palabras porque son de gran importancia para la seguridad de su cuenta.</Text>
                 <TouchableOpacity
                     style={styles.btnG}
-                    onPress={() => generarMnemonic()} activeOpacity={0.9}>
+                    onPress={() => generarMnemonic()} activeOpacity={0.5}>
                     <Text style={styles.textG}>GENERAR</Text>
                 </TouchableOpacity>
                 {/* cuadro de 12 palabras */}
@@ -181,7 +181,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.btnC,{backgroundColor:!botoncontinuar?"rgba(91, 41, 137, 0.58)":"#5b298a"}]}
-                    activeOpacity={0.9}
+                    activeOpacity={0.5}
                     disabled={!botoncontinuar}
                     onPress={() => navigation.navigate('CrearPass')} 
                 >

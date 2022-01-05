@@ -180,7 +180,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     <View>
                         <TouchableOpacity
                             style={styles.btnC}
-                            activeOpacity={0.9}
+                            activeOpacity={0.5}
                             onPress={() => validarPassword()}
                         >
                             <Text style={styles.textCI}>CONFIRMAR</Text>

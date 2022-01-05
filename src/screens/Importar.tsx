@@ -320,7 +320,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                     <TextInput style={styles.inputmail} value={pubKey} placeholder="DIRECCIÓN: Ezq3cnFnLi3xXxxxXXXxx..." onChangeText={text => setPubKey(text)}/>
                                 </View>
                                 <View style={styles.cqr}>
-                                    <TouchableOpacity style={styles.btnqr}  activeOpacity={0.9} onPress={() => navigation.navigate('QrReader')} >
+                                    <TouchableOpacity style={styles.btnqr}  activeOpacity={0.5} onPress={() => navigation.navigate('QrReader')} >
                                         <Image style={styles.imgqr} source={require('./img/qr.png')}  />
                                     </TouchableOpacity>
                                 </View>                      
@@ -336,7 +336,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                         <Text style={styles.textcnd}>CNDR</Text>
                                     </View>
                                     <View style={styles.cbtnmax}>
-                                        <TouchableOpacity style={styles.btnmax} onPress={() => setMax()} activeOpacity={0.9}> 
+                                        <TouchableOpacity style={styles.btnmax} onPress={() => setMax()} activeOpacity={0.5}> 
                                             <Text style={styles.txtmax}>MAX</Text>                        
                                         </TouchableOpacity>
                                     </View>                                
@@ -345,12 +345,12 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                             {/* BotonVolverConfirmar */}
                             <View style={styles.dcVC}>
                                 <View style={styles.dcV}>
-                                    <TouchableOpacity style={styles.btnVC} activeOpacity={0.9} onPress={() => navigation.navigate('Balance')}>
+                                    <TouchableOpacity style={styles.btnVC} activeOpacity={0.5} onPress={() => navigation.navigate('Balance')}>
                                         <Text style={styles.textbtnVC}>VOLVER</Text> 
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.dcC}>
-                                    <TouchableOpacity style={styles.btnVC}  activeOpacity={0.9} onPress={() => enviarToken(pubKey,Number(amounToken))}>
+                                    <TouchableOpacity style={styles.btnVC}  activeOpacity={0.5} onPress={() => enviarToken(pubKey,Number(amounToken))}>
                                         <Text style={styles.textbtnVC}>CONFIRMAR</Text> 
                                     </TouchableOpacity>  
                                 </View>         
@@ -363,7 +363,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
 
     )
     
-    }
+}
  
 
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
