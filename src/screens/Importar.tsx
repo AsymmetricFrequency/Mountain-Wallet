@@ -325,10 +325,11 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                     </TouchableOpacity>
                                 </View>                      
                             </View>
+
                             {/*Importe*/}
                             <View style={styles.tablaimp} >
                                 <View style={styles.cuadroimp}>
-                                    <TextInput style={styles.inputimp}  placeholder="IMPORTE" value={amounToken} onChangeText={text => setAmounToken(text)} />
+                                    <TextInput style={styles.inputimp} keyboardType="numeric" placeholder="IMPORTE" value={amounToken} onChangeText={text => setAmounToken(text)} />
                                 </View>
                                 <View style={styles.cmax}>
                                     <View style={styles.ccnd}>
@@ -366,6 +367,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
  
 
 const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const alturabotones = Platform.OS === 'ios' ? 45 : 50;
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const heightlogo = Platform.OS === 'ios' ? 0.287 : 0.272;
 const styles = StyleSheet.create({
@@ -408,31 +410,27 @@ const styles = StyleSheet.create({
         fontSize:RFValue(15),
     },
     cuadro:{
-        paddingLeft: RFValue(15),
-        paddingRight: RFValue(paddinrightios),
-        marginTop: RFValue(12),
-        alignItems: 'center',
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
-        height: windowHeight*0.8,
+        backgroundColor:'white',
+        marginTop: RFValue(15),
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        paddingHorizontal:RFValue(10),
+        height: windowHeight*0.7,
+        paddingVertical:RFValue(50),
         width: "100%",
-        backgroundColor: 'white',
     },
     tablamail:{
-        marginTop:RFValue(25),
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
         height: windowHeight*0.09,
         flexDirection:'row',
         paddingLeft:RFValue(10),
-        paddingRight:'3.5%',
-        paddingTop:'0%'
+        paddingRight:RFValue(10),
     },
     cuadromail:{
-        width:windowWidth*0.62,
+        width:"80%",
         justifyContent: 'center',
-        paddingLeft: '2%'
     },
     inputmail:{
         fontWeight: 'bold',
@@ -440,7 +438,7 @@ const styles = StyleSheet.create({
         color: '#5a5959',
     },
     cqr:{
-        width:windowWidth*0.15,
+        width:"20%",
         alignItems: 'flex-end',
         justifyContent: 'center',
     },
@@ -458,18 +456,24 @@ const styles = StyleSheet.create({
         height: 20,
         resizeMode: 'contain',
     },
+
+
+
+
+
+
     tablaimp:{
-        marginTop:RFValue(25),
+        marginTop: RFValue(25),
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
-        height: 50,
+        height: windowHeight*0.09,
         flexDirection:'row',
-        paddingLeft:'2.5%',
-        paddingRight:'3.5%',
+        paddingLeft:RFValue(10),
+        paddingRight:RFValue(10),
     },
     cuadroimp:{
-        width:windowWidth*0.55,
+        width:"68%",
         justifyContent: 'center',
         // paddingLeft: '2%'
     },
@@ -479,11 +483,11 @@ const styles = StyleSheet.create({
         color: '#5a5959',
     },
     cmax:{
-        width:RFValue(85),
+        width:"32%",
         flexDirection:'row',
     },
     ccnd:{
-        width:RFValue(45),
+        width:"50%",
         justifyContent:"center",
         alignItems:'flex-end',
         paddingRight:3
@@ -493,7 +497,7 @@ const styles = StyleSheet.create({
         fontSize:RFValue(13)
     },
     cbtnmax:{
-        width:RFValue(42),
+        width:"50%",
         justifyContent:'center',
     },
     btnmax:{
@@ -513,14 +517,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: RFValue(15),
         borderRadius: 10,
-        marginTop:RFValue(20)
+        marginTop:RFValue(alturabotones)
         
     },
     dcV:{
-        width: RFValue(143),
+        width: "50%",
     },
     dcC:{
-        width: RFValue(143),
+        width: "50%",
     },
     btnVC:{
         backgroundColor:'#5b298a',
