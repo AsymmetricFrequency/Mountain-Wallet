@@ -64,19 +64,14 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
 
         //si el permiso es falso
         if(hasPermission === false){
-            return(
-                <View style={styles.containeruno}>
-                    <View style={styles.barcodebox}>
-                        
-                    </View>
-                </View>
-            )
+            
         }
 
         //boton volver
         function regresar () {
             setScanned(false);
-            navigation.navigate('Enviar')
+            navigation.navigate('Enviar');
+
         }
         
         //si el permiso es verdadero
@@ -115,12 +110,12 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                                         {/* Botones modal */}
                                         <View style={styles.dcVC}>
                                             <View style={styles.dcV}>
-                                                <TouchableOpacity style={styles.btnVC} activeOpacity={0.9} onPress={() =>[setScanned(false),setaprobado(false)]}>
+                                                <TouchableOpacity style={styles.btnVC} activeOpacity={0.5} onPress={() =>[setScanned(false),setaprobado(false)]}>
                                                     <Text style={styles.textbtnVC}>REESCANEAR</Text> 
                                                 </TouchableOpacity>
                                             </View>
                                             <View style={styles.dcC}>
-                                                <TouchableOpacity style={styles.btnVC}  activeOpacity={0.9} onPress={() => regresar()}>
+                                                <TouchableOpacity style={styles.btnVC}  activeOpacity={0.5} onPress={() => regresar()}>
                                                     <Text style={styles.textbtnVC}>CONFIRMAR</Text> 
                                                 </TouchableOpacity>  
                                             </View>         
@@ -143,7 +138,7 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                         >
                         </Animatable.View>
                         <View style={styles.cajavolver}>
-                            <TouchableOpacity style={styles.btnvolver}  activeOpacity={0.9} onPress={() => regresar()}>
+                            <TouchableOpacity style={styles.btnvolver}  activeOpacity={0.5} onPress={() => regresar()}>
                                     <Text style={styles.txtvolver}>VOLVER</Text> 
                             </TouchableOpacity>       
                         </View> 
@@ -153,7 +148,39 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
         
         }
         return(
-            <Text>Permiso nulo</Text>
+            // permiso denegado
+            
+            <View style={styles.cajaqra}>
+                <Animatable.View animation={"fadeInDownBig"} duration= {600}>
+                    <View>
+                        <View style={styles.ventanaqra}>
+                            <View style={styles.contenedortextfulla}>
+                                <Text style={styles.texticonfulla}>Permiso Denegado</Text>
+                            </View>
+                            {/* Lottie */}
+                            <View>                                            
+                                <LottieView
+                                    style={styles.lottieqr}                                            
+                                    source={require("../screens/Lottie/error.json")}
+                                    speed={2}
+                                    autoPlay
+                                />
+                            </View>   
+                            <View>
+                                <Text style={styles.notificacionfulla}>
+                                    Revisa los permisos de la cámara en configuración
+                                </Text>
+                            </View> 
+                            <View style={styles.cajav}>
+                                <TouchableOpacity style={styles.btnv}  activeOpacity={0.5} onPress={() => regresar()}>
+                                        <Text style={styles.txtv}>VOLVER</Text> 
+                                </TouchableOpacity>       
+                            </View>
+                        </View>
+                    </View>
+                </Animatable.View>
+            </View>   
+            
         )
 
         // +++++++++++++++++++++++++++++++++++++++++Qr para Android+++++++++++++++++++++++++++++++++++++++++
@@ -164,7 +191,7 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
         const [scanned,setScanned] = useState(false)
         //Constantes modales
         const [anmt,setanmt]= useState("");
-        const [aprobado,setaprobado] = useState(true);
+        const [aprobado,setaprobado] = useState(false);
         const [MostrarError, setError] = useState("");
         const [lottie, setLottie] = useState(<Lotierror/>);
         const [mostrartitulo, setmostrartitulo] = useState("");
@@ -184,13 +211,52 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
         }, []);
 
         if (hasPermission === null) {
-            return <View />;
+            return (
+                <View style={styles.cajaqra}>
+                    <Text>No access nulla</Text>
+                </View>
+            
+            );
         }
         if (hasPermission === false) {
-            return <Text>No access to camera</Text>;
+            return(
+                        <View style={styles.cajaqra}>
+                            <Animatable.View animation={"fadeInDownBig"} duration= {600}>
+                                <View>
+                                    <View style={styles.ventanaqra}>
+                                        <View style={styles.contenedortextfulla}>
+                                            <Text style={styles.texticonfulla}>Permiso Denegado</Text>
+                                        </View>
+                                        {/* Lottie */}
+                                        <View>                                            
+                                            <LottieView
+                                                style={styles.lottieqr}                                            
+                                                source={require("../screens/Lottie/error.json")}
+                                                speed={2}
+                                                autoPlay
+                                            />
+                                        </View>   
+                                        <View>
+                                            <Text style={styles.notificacionfulla}>
+                                                El permiso de la cámara ha sido denegado
+                                            </Text>
+                                        </View> 
+                                        <View style={styles.cajav}>
+                                            <TouchableOpacity style={styles.btnv}  activeOpacity={0.5} onPress={() => regresar()}>
+                                                    <Text style={styles.txtv}>VOLVER</Text> 
+                                            </TouchableOpacity>       
+                                        </View>
+                                    </View>
+                                </View>
+                            </Animatable.View>
+                        </View>         
+            );
+           
+            
         }
         if (scanned == true) {
             return(
+                
                         <View style={styles.cajaqra}>
                             <Animatable.View animation={"fadeInDownBig"} duration= {600}>
                                 <View>
@@ -218,12 +284,12 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                                         {/* Botones modal */}
                                         <View style={styles.dcVCa }>                                            
                                             <View style={styles.dcVa}>
-                                                <TouchableOpacity style={[styles.btnVCa,{zIndex:999}]} activeOpacity={0.9} onPress={() =>[setScanned(false),setaprobado(false)]}>
+                                                <TouchableOpacity style={[styles.btnVCa,{zIndex:999}]} activeOpacity={0.5} onPress={() =>[setScanned(false),setaprobado(false)]}>
                                                     <Text style={styles.textbtnVCa}>REESCANEAR</Text> 
                                                 </TouchableOpacity>
                                             </View>
                                             <View style={styles.dcCa}>
-                                                <TouchableOpacity style={styles.btnVCa}  activeOpacity={0.9} onPress={() => regresar()}>
+                                                <TouchableOpacity style={styles.btnVCa}  activeOpacity={0.5} onPress={() => regresar()}>
                                                     <Text style={styles.textbtnVCa}>CONFIRMAR</Text> 
                                                 </TouchableOpacity>  
                                             </View>         
@@ -258,12 +324,14 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                         iterationCount={"infinite"}
                     ></Animatable.View>
                     <View style={styles.cajavolvera}>
-                        <TouchableOpacity style={styles.btnvolvera}  activeOpacity={0.9} onPress={() => regresar()}>
+                        <TouchableOpacity style={styles.btnvolvera}  activeOpacity={0.8} onPress={() => regresar()}>
                                 <Text style={styles.txtvolvera}>VOLVER</Text> 
                         </TouchableOpacity>       
                     </View> 
                 </Camera>
+                
             </View>
+            
         );  
     }
 }
@@ -533,6 +601,28 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     txtvolvera:{
+        color:'#5b298a',
+        fontWeight: 'bold',
+        fontSize:RFValue(12),
+    },
+
+
+    cajav:{
+        alignItems: 'center',
+    },
+    btnv:{
+        backgroundColor:'white',
+        alignItems:'center',
+        paddingHorizontal: RFValue(50),
+        paddingVertical: RFValue(15),
+        borderRadius: 20,
+        elevation: 10,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+    },
+    txtv:{
         color:'#5b298a',
         fontWeight: 'bold',
         fontSize:RFValue(12),

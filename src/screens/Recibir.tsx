@@ -109,14 +109,14 @@ const Recibir = ({navigation}: {navigation: any}) => {
                             </ScrollView>
                             </View>
                             <View style={styles.cbtncop}>
-                                    <TouchableOpacity style={styles.btncop}  activeOpacity={0.9} onPress={() => CopyToClipboard()}> 
+                                    <TouchableOpacity style={styles.btncop}  activeOpacity={0.5} onPress={() => CopyToClipboard()}> 
                                         <Icon name ="copy-outline" size={25} color="white"/>
                                     </TouchableOpacity>
                             </View>                    
                         </View> 
                         {/*Boton volver*/}       
                         <View>
-                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.9} onPress={() => navigation.goBack()} >
+                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.5} onPress={() => navigation.goBack()} >
                                     <Text style={styles.textCI} >VOLVER</Text> 
                                 </TouchableOpacity> 
                         </View>             
