@@ -7,8 +7,6 @@ import * as Animatable from 'react-native-animatable';
 import { Lotierror,Lotieqr } from './component/lottie';
 import LottieView from 'lottie-react-native';
 
-
-
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
@@ -139,13 +137,12 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                         </Animatable.View>
                         <View style={styles.cajavolver}>
                             <TouchableOpacity style={styles.btnvolver}  activeOpacity={0.5} onPress={() => regresar()}>
-                                    <Text style={styles.txtvolver}>VOLVER</Text> 
+                                <Text style={styles.txtvolver}>VOLVER</Text> 
                             </TouchableOpacity>       
                         </View> 
                     </BarCodeScanner>
                 </View>
             )
-        
         }
         return(
             // permiso denegado
@@ -168,12 +165,12 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                             </View>   
                             <View>
                                 <Text style={styles.notificacionfulla}>
-                                    Revisa los permisos de la cámara en configuración
+                                    Revisa los permisos de la cámara ingresando en configuración, privacidad y cámara.
                                 </Text>
                             </View> 
                             <View style={styles.cajav}>
                                 <TouchableOpacity style={styles.btnv}  activeOpacity={0.5} onPress={() => regresar()}>
-                                        <Text style={styles.txtv}>VOLVER</Text> 
+                                    <Text style={styles.txtv}>VOLVER</Text> 
                                 </TouchableOpacity>       
                             </View>
                         </View>
@@ -243,61 +240,58 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                                         </View> 
                                         <View style={styles.cajav}>
                                             <TouchableOpacity style={styles.btnv}  activeOpacity={0.5} onPress={() => regresar()}>
-                                                    <Text style={styles.txtv}>VOLVER</Text> 
+                                                <Text style={styles.txtv}>VOLVER</Text> 
                                             </TouchableOpacity>       
                                         </View>
                                     </View>
                                 </View>
                             </Animatable.View>
                         </View>         
-            );
-           
-            
+            );   
         }
         if (scanned == true) {
             return(
-                
-                        <View style={styles.cajaqra}>
-                            <Animatable.View animation={"fadeInDownBig"} duration= {600}>
-                                <View>
-                                    <View style={styles.ventanaqra}>
-                                        <View style={styles.contenedortextfulla}>
-                                            <Text style={styles.texticonfulla}>QR Scaneado</Text>
-                                        </View>
-                                        {/* Lottie */}
-                                        <View>                                            
-                                            <LottieView
-                                                style={styles.lottieqr}                                            
-                                                source={require("../screens/Lottie/qrscan2.json")}
-                                                speed={1}
-                                                autoPlay
-                                            />
-                                        </View>   
-                                        
-                                        <View>
-                                            <Text style={styles.notificacionfulla}>
-                                                Llave pública copiada en el portapapeles:
-                                            </Text>
-                                        </View> 
-                                        {/* Texto copiado */}
-                                        <Text style={styles.copiadotxta}>{text}</Text>
-                                        {/* Botones modal */}
-                                        <View style={styles.dcVCa }>                                            
-                                            <View style={styles.dcVa}>
-                                                <TouchableOpacity style={[styles.btnVCa,{zIndex:999}]} activeOpacity={0.5} onPress={() =>[setScanned(false),setaprobado(false)]}>
-                                                    <Text style={styles.textbtnVCa}>REESCANEAR</Text> 
-                                                </TouchableOpacity>
-                                            </View>
-                                            <View style={styles.dcCa}>
-                                                <TouchableOpacity style={styles.btnVCa}  activeOpacity={0.5} onPress={() => regresar()}>
-                                                    <Text style={styles.textbtnVCa}>CONFIRMAR</Text> 
-                                                </TouchableOpacity>  
-                                            </View>         
-                                        </View> 
-                                    </View>
+                <View style={styles.cajaqra}>
+                    <Animatable.View animation={"fadeInDownBig"} duration= {600}>
+                        <View>
+                            <View style={styles.ventanaqra}>
+                                <View style={styles.contenedortextfulla}>
+                                    <Text style={styles.texticonfulla}>QR Scaneado</Text>
                                 </View>
-                            </Animatable.View>
-                        </View>         
+                                {/* Lottie */}
+                                <View>                                            
+                                    <LottieView
+                                        style={styles.lottieqr}                                            
+                                        source={require("../screens/Lottie/qrscan2.json")}
+                                        speed={1}
+                                        autoPlay
+                                    />
+                                </View>   
+                                        
+                                <View>
+                                    <Text style={styles.notificacionfulla}>
+                                        Llave pública copiada en el portapapeles:
+                                    </Text>
+                                </View> 
+                                {/* Texto copiado */}
+                                <Text style={styles.copiadotxta}>{text}</Text>
+                                    {/* Botones modal */}
+                                    <View style={styles.dcVCa }>                                            
+                                        <View style={styles.dcVa}>
+                                            <TouchableOpacity style={[styles.btnVCa,{zIndex:999}]} activeOpacity={0.5} onPress={() =>[setScanned(false),setaprobado(false)]}>
+                                                <Text style={styles.textbtnVCa}>REESCANEAR</Text> 
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={styles.dcCa}>
+                                            <TouchableOpacity style={styles.btnVCa}  activeOpacity={0.5} onPress={() => regresar()}>
+                                                <Text style={styles.textbtnVCa}>CONFIRMAR</Text> 
+                                            </TouchableOpacity>  
+                                        </View>         
+                                    </View> 
+                            </View>
+                        </View>
+                    </Animatable.View>
+                </View>         
             );
         }
         return(
@@ -325,66 +319,65 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
                     ></Animatable.View>
                     <View style={styles.cajavolvera}>
                         <TouchableOpacity style={styles.btnvolvera}  activeOpacity={0.8} onPress={() => regresar()}>
-                                <Text style={styles.txtvolvera}>VOLVER</Text> 
+                            <Text style={styles.txtvolvera}>VOLVER</Text> 
                         </TouchableOpacity>       
                     </View> 
                 </Camera>
-                
-            </View>
-            
+            </View>  
         );  
     }
 }
   
+
 const styles = StyleSheet.create({
     // Style iOS
     containeruno:{
+        alignItems:'center',
         height: windowHeight,
-        width: windowWidth,
         paddingTop: RFValue(35),
         paddingLeft: RFValue(15),
         paddingRight: RFValue(15),
-        alignItems:'center',
+        width: windowWidth,
     },
     tituloqr:{
-        position: 'absolute',
         alignItems: 'center',
-        top:RFValue(60),
         backgroundColor: 'rgba(29, 29, 27, 0.45)',
+        borderRadius:15,
+        position: 'absolute',
         padding: RFValue(20),
-        borderRadius:15
+        top:RFValue(60),
     },
     textqr: {
         color:"white",
     },
     colorqr:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         paddingLeft: '5%',
         paddingRight: '4%',
 
     },
     barcodebox:{
         alignItems: 'center',
-        height: windowHeight*0.5,
-        width: windowWidth*0.9,
         borderRadius:15,
         borderWidth: 5,
-        borderColor: 'rgba(255, 255, 255, 0.45)', 
+        borderColor: 'rgba(255, 255, 255, 0.45)',
+        height: windowHeight*0.5,
+        width: windowWidth*0.9,
            
     },
     cajavolver:{
-        position: 'absolute',
-        bottom:RFValue(60),
         alignItems: 'center',
+        bottom:RFValue(60),
+        position: 'absolute',
     },
     btnvolver:{
-        backgroundColor:'white',
         alignItems:'center',
-        paddingHorizontal: RFValue(50),
-        paddingVertical: RFValue(15),
+        backgroundColor:'white',
         borderRadius: 20,
         elevation: 10,
+        paddingHorizontal: RFValue(50),
+        paddingVertical: RFValue(15),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
@@ -396,42 +389,39 @@ const styles = StyleSheet.create({
         fontSize:RFValue(12),
     },
 
-    
-
     // Modal
     cajafull:{
         flex: 1,
+        alignItems: 'center',
         backgroundColor:"rgba(91, 41, 137, 1)",
         justifyContent: 'center',
-        alignItems: 'center',
     },
     ventanafull: {
-        width: windowWidth*0.95,
+        alignItems: 'center',
         height: windowHeight*0.15,
         flexDirection: "column",
-        alignItems: 'center',
+        width: windowWidth*0.95,
     },
     contenedortextfull: {
         justifyContent: 'center',
     },
     texticonfull: {
+        color:'white',
         fontSize:RFValue(25),
         fontWeight: "bold",
-        color:'white',
         top:RFValue(-140),
- 
     },
     icontextfull: {
         alignItems: 'center',
         top:RFValue(-150)
     },
     contenedorlottiefull:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
     },  
     notificacionfull:{
-        fontSize:RFValue(16),
         color:'white',
+        fontSize:RFValue(16),
         textAlign:'center',
         top:RFValue(-80)
     },
@@ -442,9 +432,9 @@ const styles = StyleSheet.create({
         top:RFValue(-70)
     },
     dcVC:{
+        borderRadius: 10,
         flexDirection: 'row',
         padding: RFValue(15),
-        borderRadius: 10,
         top:RFValue(-50) , 
 
     },
@@ -457,19 +447,18 @@ const styles = StyleSheet.create({
 
     },
     btnVC:{
-        backgroundColor:'white',
         alignItems:'center',
+        backgroundColor:'white',
+        borderRadius: 20,
+        elevation: 10,
         marginRight: RFValue(15),
         marginLeft: RFValue(15),
         paddingTop: RFValue(12),
         paddingBottom: RFValue(12),
-        borderRadius: 20,
-        elevation: 10,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
         shadowRadius: 5,
-
     },
     textbtnVC:{
         color:'#5b298a',
@@ -477,74 +466,69 @@ const styles = StyleSheet.create({
         fontSize:RFValue(11.5),
     },
 
-
-
     // Style Android
     container: {
         flex: 1,
     },
     cajaqra:{
-        width:windowWidth,
-        height:windowHeight,
-        backgroundColor:"rgba(91, 41, 137, 1)",
-        justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor:"rgba(91, 41, 137, 1)",
+        height:windowHeight,
+        justifyContent: 'center',
+        width:windowWidth,
     },
     ventanaqra:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center', 
     },
     contenedortextfulla: {
         justifyContent: 'center',
         top:RFValue(0)  
     },
     texticonfulla: {
+        color:'white',
         fontSize:RFValue(25),
         fontWeight: "bold",
-        color:'white',
     },
     lottieqr: {
-        width:380,
         height:380,
-
+        width:380,
     },
     notificacionfulla:{
-        fontSize:RFValue(16),
         color:'white',
+        fontSize:RFValue(16), 
+        paddingHorizontal:RFValue(12),
         textAlign:'center',
         top: RFValue(-50),
-        paddingHorizontal:RFValue(12)
-
     },
     copiadotxta: {
         color:'#b9b8b8',
         fontSize:RFValue(16),
+        paddingHorizontal:RFValue(20),
         textAlign:"center",
         top: RFValue(-40),
-        paddingHorizontal:RFValue(20)
     },
     dcVCa:{
-        flexDirection: 'row',
-        padding: RFValue(15),
         borderRadius: 10,
         bottom:RFValue(0),
+        flexDirection: 'row',
+        padding: RFValue(15),
     },
     dcVa:{
         width: RFValue(143),
-
     },
     dcCa:{
         width: RFValue(143),
     },
     btnVCa:{
-        backgroundColor:'white',
         alignItems:'center',
+        backgroundColor:'white',
+        borderRadius: 20,
+        elevation: 10,
         marginRight: RFValue(15),
         marginLeft: RFValue(15),
         paddingTop: RFValue(12),
         paddingBottom: RFValue(12),
-        borderRadius: 20,
-        elevation: 10,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
@@ -559,18 +543,18 @@ const styles = StyleSheet.create({
 
     //camara
     colorqra:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         paddingLeft: '5%',
         paddingRight: '4%',
 
     },
     tituloqra:{
         alignItems: 'center',
-        top:RFValue(-40),
+        borderRadius:15,
         backgroundColor: 'rgba(29, 29, 27, 0.45)',
         padding: RFValue(20),
-        borderRadius:15,
+        top:RFValue(-40),
     },
     textqra: {
         color:"white",
@@ -585,16 +569,16 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(255, 255, 255, 0.45)',    
     },
     cajavolvera:{
-        bottom:RFValue(-40),
         alignItems: 'center',
+        bottom:RFValue(-40),
     },
     btnvolvera:{
-        backgroundColor:'white',
         alignItems:'center',
-        paddingHorizontal: RFValue(50),
-        paddingVertical: RFValue(15),
+        backgroundColor:'white',
         borderRadius: 20,
         elevation: 10,
+        paddingHorizontal: RFValue(50),
+        paddingVertical: RFValue(15),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
@@ -605,18 +589,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFValue(12),
     },
-
-
     cajav:{
         alignItems: 'center',
     },
     btnv:{
-        backgroundColor:'white',
         alignItems:'center',
-        paddingHorizontal: RFValue(50),
-        paddingVertical: RFValue(15),
+        backgroundColor:'white',
         borderRadius: 20,
         elevation: 10,
+        paddingHorizontal: RFValue(50),
+        paddingVertical: RFValue(15),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
@@ -627,14 +609,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize:RFValue(12),
     },
-
-
-
-
-
-
-
-
 })
 
 export default QrReader;

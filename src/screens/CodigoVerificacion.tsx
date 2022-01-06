@@ -41,8 +41,8 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
 
         function validarPassword() {
             if(pin1 === cof1 && pin2 === cof2 && pin3 === cof3 && pin4 === cof4 && pin1 != "" && pin2 != "" && pin3 != "" && pin4 != ""){
-                //Entonces aqui ya guardariamos el password y pasariamos al Balance
-                //Para guardar el password pues si hay que concatenar pin1+pin2+pin3+pin4 en un solo string
+                //---Entonces aqui ya guardariamos el password y pasariamos al Balance---//
+                //---Para guardar el password pues si hay que concatenar pin1+pin2+pin3+pin4 en un solo string---//
                 const password = pin1+pin2+pin3+pin4
                 savePassword(password)
                 navigation.navigate('PantallaCarga')
@@ -116,7 +116,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
-                                        <Text style={styles.texticon}>Error</Text>
+                                    <Text style={styles.texticon}>Error</Text>
                                 </View>
                                 <View>
                                     <Text style={styles.notificacion}>Los codigos no coinciden</Text>
@@ -149,7 +149,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
-                                        <Text style={styles.texticon}>Error</Text>
+                                    <Text style={styles.texticon}>Error</Text>
                                 </View>
                                 <View>
                                     <Text style={styles.notificacion}>Algunos de los campos estan vacios</Text>
@@ -293,91 +293,93 @@ const styles = StyleSheet.create({
         width: windowWidth,
     },
     containeruno: {
-        paddingTop: RFValue(35),
         alignItems:'center',
+        paddingTop: RFValue(35),
     },
     logo: {
+        height: windowHeight*0.2,
         resizeMode: 'contain',
         width: windowWidth*0.5,
-        height: windowHeight*0.2
     },
     containerBlanco: {
-        paddingLeft: RFValue(15),
-        paddingRight: RFValue(paddinrightios),
-        marginTop: RFValue(12),
         alignItems: 'center',
+        backgroundColor: 'white',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        height: windowHeight*0.8,
-        width: windowWidth,
-        backgroundColor: 'white',
         elevation:24,
+        height: windowHeight*0.8,
+        marginTop: RFValue(12),
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
-        shadowRadius: 5,    
+        shadowRadius: 5,
+        width: windowWidth,    
     },
     imgmano: {
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         marginTop:RFValue(20),
     },
     logomano: {
-        width: RFValue(110), 
         height: RFValue(110),
         resizeMode: 'contain',
+        width: RFValue(110),
     },
     containerunorama: {
         flexDirection: 'row',
     },
     textuno: {
-        marginTop: RFValue(25),
+        color: '#625d5b',
+        fontFamily:'opensans-regular',
         fontSize:RFValue(13),
         fontWeight: 'bold',
-        color: '#625d5b',
-        fontFamily:'opensans-regular'
+        marginTop: RFValue(25),
     }, 
     textdos: {
-        marginTop: RFValue(25),
+        color: '#625d5b',
+        fontFamily:'opensans-regular',
         fontSize:RFValue(13),
         fontWeight: 'bold',
-        color: '#625d5b',
-        fontFamily:'opensans-regular'
+        marginTop: RFValue(25),
     },
     TextInput1: {
-        marginTop: RFValue(12),
-        width: RFValue(cuadroios),
-        height: RFValue(cuadroios), 
-        borderWidth: 1,
+
         borderColor: 'purple',
-        margin: RFValue(5),
-        justifyContent: 'center',
-        textAlign: 'center',
         borderRadius: 10,
+        borderWidth: 1,
         fontSize:RFValue(15),
+        height: RFValue(cuadroios),
+        justifyContent: 'center',
+        margin: RFValue(5),
+        marginTop: RFValue(12),
+        textAlign: 'center',
+        width: RFValue(cuadroios),
     },
     TextInput2: {
-        marginTop: RFValue(12),
-        width: RFValue(cuadroios),
-        height: RFValue(cuadroios), 
-        borderWidth: 1,
+
         borderColor: 'purple',
-        margin: RFValue(5),
-        justifyContent: 'center',
-        textAlign: 'center',
         borderRadius: 10,
+        borderWidth: 1,
         fontSize:RFValue(15),
+        height: RFValue(cuadroios),
+        justifyContent: 'center',
+        margin: RFValue(5),
+        marginTop: RFValue(12),
+        textAlign: 'center',
+        width: RFValue(cuadroios),
     },
     btnC:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
+        backgroundColor:'#5b298a',
+        borderRadius: 20,
+        elevation:24,
+        marginTop: RFValue(25),
+        paddingBottom: RFValue(12),
         paddingLeft: RFValue(80),
         paddingRight: RFValue(80),
         paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
-        borderRadius: 20,
-        marginTop: RFValue(25),
-        elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -385,27 +387,27 @@ const styles = StyleSheet.create({
     },
     textCI:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',
     },
 
     //Modal
     bodymodal: {
-        flex: 1,
         alignItems: 'center',
+        flex: 1,
     },
     ventanamodal: {
-        width: windowWidth*0.95,
-        height: windowHeight*0.1,
+        alignItems: 'center',
         backgroundColor: '#5B298A',
-        borderWidth: 0.5,
         borderColor: 'black',
         borderRadius: 20,
+        borderWidth: 0.5,
+        flexDirection: 'row',
+        height: windowHeight*0.1,
         paddingLeft:RFValue(12),
         paddingRight:RFValue(12),
-        flexDirection: 'row',
-        alignItems: 'center',
-        top:alturaios
+        top:alturaios,
+        width: windowWidth*0.95,
     },
     icontext: {
         alignItems: 'center',
@@ -414,24 +416,24 @@ const styles = StyleSheet.create({
 
     },
     contenedorlottie:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
     },
     lottie: {
-        width:60,
         height:60,
+        width:60,
     },
     contenedortext: {
         justifyContent: 'center',
     },
     texticon: {
+        color:'white',
         fontSize:RFValue(18),
         fontWeight: "bold",
-        color:'white'
     },
     notificacion:{
+        color:'white',
         fontSize:RFValue(12),
-        color:'white'
     },
 })
 export default CodigoVerificacion

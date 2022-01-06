@@ -37,13 +37,11 @@ const PantallaCarga = ({navigation}: {navigation: any}) => {
     
     return (
         <View style={styles.body}>
-            
                 <LottieView
                     style={styles.lottie}
                     source={require("./Lottie/flowerCarga.json")}
                     autoPlay
-                />
-            
+                />  
         </View>
     )
 }
@@ -53,27 +51,28 @@ export default PantallaCarga
 const styles = StyleSheet.create({
 
     body: {
-        width: '100%',
-        height: '100%',
         flex: 1,
         alignItems:'center',
-        justifyContent:'center'
+        height: '100%',
+        justifyContent:'center',
+        width: '100%',
     },
     txtcarga: {
-        top: RFValue(90),
         fontSize:RFValue(18),
+        top: RFValue(90),
     },
     fondo:{
-        width: '100%',
-        height: '100%',
         alignItems:'center',
-        justifyContent:'center'
+        height: '100%',
+        justifyContent:'center',
+        width: '100%',
     },
     lottie: {
-        width:200,
-        height:200,
         alignItems:'center',
-        justifyContent:'center'
+        height:200,
+        justifyContent:'center',
+        width:200,
+        
     },
 })
 

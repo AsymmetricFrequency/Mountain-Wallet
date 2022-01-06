@@ -18,30 +18,32 @@ export default EnviarAnimado
 const styles = StyleSheet.create({
     
     body: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        paddingTop: '8%',
         alignItems:'center',
-        justifyContent:'center'
+        flex: 1,
+        height: '100%',
+        justifyContent:'center',
+        paddingTop: '8%',
+        width: '100%',
     },
     fondo:{
-        width: '100%',
-        height: '100%',
         alignItems:'center',
-        justifyContent:'center'
+        height: '100%',
+        justifyContent:'center',
+        width: '100%',
+        
     },
     textocarga: {
-        top: "-10%",
-        fontWeight:'bold',
         fontFamily:'OpenSans',
-        fontSize: 20
+        fontSize: 20,
+        fontWeight:'bold',
+        top: "-10%",
+        
     },
     enviar: {
         alignItems: 'center',
-        width: '100%',
         height: '100%',
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        width: '100%',
     },
 
 })
