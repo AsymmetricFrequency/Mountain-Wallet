@@ -30,7 +30,6 @@ const Home = ({navigation}: {navigation: any}) => {
             //Fuente
             'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
         });
-
         setFontsLoaded(true);
     }
 
@@ -87,60 +86,60 @@ const styles = StyleSheet.create({
         width: windowWidth,
     },
     containeruno:{
-        paddingTop: RFValue(35),
+        alignItems:'center',
         paddingLeft: RFValue(15),
         paddingRight: RFValue(paddinrightios),
-        alignItems:'center',
+        paddingTop: RFValue(35),
     },
     fondo:{
         height: windowHeight,
-        width: windowWidth,
         margin:0,
         resizeMode: 'contain',
+        width: windowWidth,
     },
     logo:{
+        height: windowHeight*0.2,
         resizeMode: 'contain',
         width: windowWidth*0.5,
-        height: windowHeight*0.2
     },
     botonesCI:{
         backgroundColor:'white',
-        marginTop: RFValue(15),
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        padding: RFValue(10),
         height: windowHeight*0.8,
-        width: '100%',  
         justifyContent: 'center',
+        marginTop: RFValue(15),
+        padding: RFValue(10),
+        width: '100%',
     },
     botones:{
         height: windowHeight*0.8,
         paddingTop: windowHeight*0.3
     },
     btnC:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
-        marginRight: RFValue(30),
-        marginLeft: RFValue(30),
-        paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
+        backgroundColor:'#5b298a',
         borderRadius: 20,
         elevation:24,
+        marginLeft: RFValue(30),
+        marginRight: RFValue(30),
+        paddingTop: RFValue(12),
+        paddingBottom: RFValue(12),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
         shadowRadius: 8,
     },
     btnI:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
+        backgroundColor:'#5b298a',
+        borderRadius: 20,
+        elevation:24,
+        marginTop: RFValue(18),
         marginRight: RFValue(30),
         marginLeft: RFValue(30),
-        paddingTop: RFValue(12),
         paddingBottom: RFValue(12),
-        borderRadius: 20,
-        marginTop: RFValue(18),
-        elevation:24,
+        paddingTop: RFValue(12), 
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -148,23 +147,23 @@ const styles = StyleSheet.create({
     },
     textCI:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',
     },
     Developed:{
-        justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute', 
-        left: 0, 
-        right: 0, 
         bottom: bottomdevelopios,
-        paddingTop: 0
+        left: 0, 
+        justifyContent: 'center',
+        paddingTop: 0,
+        position: 'absolute', 
+        right: 0,
     },
     textDeveloped:{
         color:'#e0e0e0',
-        fontWeight:'bold',
         fontSize:RFValue(8),
-        fontFamily: 'opensans-regular'
+        fontFamily: 'opensans-regular',
+        fontWeight:'bold',
     },
     //Boton pagina
     Developed2:{
@@ -172,15 +171,15 @@ const styles = StyleSheet.create({
     },
     fab: {
         backgroundColor: '#5b298a',  
-        width: 60,
-        height: 60,
         borderRadius:50,
-        justifyContent: 'center'
+        height: 60,
+        justifyContent: 'center',
+        width: 60,
     },
     miniLogo: {
-        width: windowWidth*0.12,
         alignSelf: 'center',
         resizeMode: 'contain',
+         width: windowWidth*0.12,
     },
 })
 export default Home

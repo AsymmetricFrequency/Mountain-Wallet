@@ -121,8 +121,8 @@ const Balance = ({navigation}: {navigation: any}) => {
                     {/* Cuadro recibir y enviar */}
                     <View style={styles.dcER}>
                         <View style={styles.dcR}>
-                            <TouchableOpacity style=
-                                {styles.btnR} 
+                            <TouchableOpacity 
+                                style= {styles.btnR} 
                                 activeOpacity={0.5} 
                                 onPress={() => navigation.navigate('Recibir')}
                             >
@@ -130,8 +130,8 @@ const Balance = ({navigation}: {navigation: any}) => {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.dcE}>
-                            <TouchableOpacity style=
-                                {styles.btnR} 
+                            <TouchableOpacity 
+                                style={styles.btnR} 
                                 activeOpacity={0.5} 
                                 onPress={() => navigation.navigate('Enviar')}
                             >
@@ -255,15 +255,15 @@ const styles = StyleSheet.create({
     },
     moneda:{
         alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: 'white',
-        marginVertical:"6%",
         borderRadius:5,
+        justifyContent: 'center',
+        marginVertical:"6%",
         width:"10%",
     },
     txtmoneda:{
-        fontSize:RFValue(10),
         color:'#5b298a',
+        fontSize:RFValue(10),
         fontWeight:'bold',
     },
     // doscolumnasB:{
@@ -296,11 +296,11 @@ const styles = StyleSheet.create({
     //     fontWeight:'bold',
     // },
     dcER:{
-        flexDirection: 'row',
         backgroundColor: 'white',
-        padding: RFValue(15),
         borderRadius: 10,
+        flexDirection: 'row',
         marginTop: RFValue(5),
+        padding: RFValue(15),
     },
     dcR:{
         width: '50%',
@@ -309,14 +309,14 @@ const styles = StyleSheet.create({
         width:'50%',
     },
     btnR:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
-        marginRight: RFValue(15),
-        marginLeft: RFValue(15),
-        paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
+        backgroundColor:'#5b298a',
         borderRadius: 20,
         elevation:24,
+        marginLeft: RFValue(15),
+        marginRight: RFValue(15),
+        paddingBottom: RFValue(12),
+        paddingTop: RFValue(12),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -324,67 +324,68 @@ const styles = StyleSheet.create({
     },
     textbtnR:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',
     },
     balancecry:{
         backgroundColor:'white',
-        marginTop: RFValue(15),
-        borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        padding: RFValue(10),
+        borderTopRightRadius: 20,
         height: windowHeight*0.7,
+        marginTop: RFValue(15),
+        padding: RFValue(10),
+        
     },
     tablacry:{
-        marginTop:RFValue(10),
-        borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
+        borderWidth: 0.8,
         height: windowHeight*0.08,
         flexDirection:'row',
+        marginTop:RFValue(10),
         paddingLeft: RFValue(10),
         paddingRight: RFValue(12),
     },
     logocry:{
-        width:'15%',
         justifyContent: 'center',
+        width:'15%',
     },
     imgcry:{
-        width: windowWidth*0.12,
         height: windowHeight*0.12,
         resizeMode: 'contain',
+        width: windowWidth*0.12,
     },
     nombrecry:{
-        width:'40%',
         justifyContent: 'center',
         paddingLeft: RFValue(8),
+        width:'40%', 
     },
     ntxtcry:{
-        fontWeight: 'bold',
-        fontSize:RFValue(14),
         color: '#8d8c8c',
-        fontFamily: 'opensans-regular'
+        fontFamily: 'opensans-regular',
+        fontSize:RFValue(14),
+        fontWeight: 'bold',
     },
     smcry:{
-        width:'45%',
         alignItems: 'flex-end',
         justifyContent: 'center',
+        width:'45%', 
     },
     saldocry:{
-        justifyContent: 'center',
         alignItems: 'flex-end',
+        justifyContent: 'center', 
     },
     stxtcry:{
-        fontSize:RFValue(18),
         color: '#8d8c8c',
+        fontSize:RFValue(18),
     },
     monedacry:{
         justifyContent: 'center',
     },
     mtxtcry:{
+        color: '#8d8c8c',
         fontFamily: 'Roboto',
         fontSize:RFValue(13),
-        color: '#8d8c8c',
     },
 })
 export default Balance

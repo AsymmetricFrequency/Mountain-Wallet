@@ -72,7 +72,7 @@ const Recibir = ({navigation}: {navigation: any}) => {
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
-                                        <Text style={styles.texticon}>Texto Copiado</Text>
+                                    <Text style={styles.texticon}>Texto Copiado</Text>
                                 </View>
                                 <View>
                                     <Text style={styles.notificacion}>Ya puedes compartir tu dirección</Text>
@@ -109,16 +109,16 @@ const Recibir = ({navigation}: {navigation: any}) => {
                             </ScrollView>
                             </View>
                             <View style={styles.cbtncop}>
-                                    <TouchableOpacity style={styles.btncop}  activeOpacity={0.5} onPress={() => CopyToClipboard()}> 
-                                        <Icon name ="copy-outline" size={25} color="white"/>
-                                    </TouchableOpacity>
+                                <TouchableOpacity style={styles.btncop}  activeOpacity={0.5} onPress={() => CopyToClipboard()}> 
+                                    <Icon name ="copy-outline" size={25} color="white"/>
+                                </TouchableOpacity>
                             </View>                    
                         </View> 
                         {/*Boton volver*/}       
                         <View>
-                                <TouchableOpacity style={styles.btnC}  activeOpacity={0.5} onPress={() => navigation.goBack()} >
-                                    <Text style={styles.textCI} >VOLVER</Text> 
-                                </TouchableOpacity> 
+                            <TouchableOpacity style={styles.btnC}  activeOpacity={0.5} onPress={() => navigation.goBack()} >
+                                <Text style={styles.textCI} >VOLVER</Text> 
+                            </TouchableOpacity> 
                         </View>             
                         <Text>{copiedText}</Text>
                     </View>
@@ -143,81 +143,82 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     containeruno:{
-        paddingTop: RFValue(35),
+        alignItems:'center',
         paddingLeft: RFValue(15),
         paddingRight: RFValue(paddinrightios),
-        alignItems:'center',
+        paddingTop: RFValue(35), 
     },
     fondo:{
         height: windowHeight,
-        width: windowWidth,
         margin:0,
         resizeMode: 'contain',
+        width: windowWidth,
     },
     contenedorlogo:{
+        alignItems: 'center',
         height: windowHeight*heightlogo,
         justifyContent: 'center',
-        alignItems: 'center',
     },
     logo:{
         resizeMode: 'contain',
         width: windowWidth*0.9,        
     },
     cuadroR:{
+        alignItems: 'center',
         backgroundColor: 'white',
         borderRadius: 10,
-        width: '100%',
-        padding: RFValue(25),
         justifyContent: 'center',
-        alignItems: 'center',
+        padding: RFValue(25),
+        width: '100%',
     },
     textbtnR:{
         color:'#5b298a',
-        fontWeight: 'bold',
         fontSize:RFValue(15),
+        fontWeight: 'bold',   
     },
     cuadro:{
         backgroundColor:'white',
-        marginTop: RFValue(15),
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
+        height: windowHeight*0.7,
+        marginTop: RFValue(15),
         padding: RFValue(10),
-        height: windowHeight*0.7
     },
     cuadroQR:{
         alignItems:'center',
-        marginTop:RFValue(10),
         justifyContent: 'center',
+        marginTop:RFValue(10),
     },
     tablaqr:{
-        borderWidth: 0.8,
         borderColor: '#e0e0e0',
+        borderWidth: 0.8,
         borderRadius:10,
         height: windowHeight*0.08,
         flexDirection:'row',
+        marginTop: RFValue(12),
         paddingLeft: RFValue(10),
         paddingRight: RFValue(12),
-        marginTop: RFValue(12),
     },
     cuadroqr:{
-        width:'80%',
         justifyContent: 'center',
+        width:'80%',  
     },
-    inputqr:{
-        fontWeight: 'bold',
+    inputqr:{ 
+        color: '#5a5959',
         fontSize:RFValue(13),
-        color: '#5a5959',},
+        fontWeight: 'bold',
+    },
     cbtncop:{
         width:'20%',
         alignItems:'center',
         justifyContent: 'center',
     },
     btncop:{
-        backgroundColor:'#5b298a',
-        padding: RFValue(5),
-        borderRadius: 10,
         alignItems:'center',
-        left: RFValue(5)
+        backgroundColor:'#5b298a',
+        borderRadius: 10,
+        left: RFValue(5),
+        padding: RFValue(5),   
     },
     txtcop:{
         color:'white',
@@ -225,15 +226,15 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(1.5),
     },
     btnC:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
-        marginRight: RFValue(30),
-        marginLeft: RFValue(30),
-        paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
+        backgroundColor:'#5b298a',
         borderRadius: 20,
-        marginTop: RFValue(15),
         elevation:10,
+        marginLeft: RFValue(30),
+        marginRight: RFValue(30),
+        marginTop: RFValue(15),
+        paddingBottom: RFValue(12),
+        paddingTop: RFValue(12),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -241,8 +242,8 @@ const styles = StyleSheet.create({
     },
     textCI:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',
     },
 
     //Modal
@@ -251,43 +252,43 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     ventanamodal: {
-        width: windowWidth*0.95,
-        height: windowHeight*0.1,
+        alignItems: 'center',
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
         borderColor: 'white',
         borderRadius: 20,
+        flexDirection: 'row',
+        height: windowHeight*0.1,
         paddingLeft:RFValue(12),
         paddingRight:RFValue(12),
-        flexDirection: 'row',
-        alignItems: 'center',
-        top:alturaios
+        top:alturaios,
+        width: windowWidth*0.95,
     },
     icontext: {
         alignItems: 'center',
     },
     textnoti: {
-
+        //--- No borrar ---//
     },
     contenedorlottie:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
     },
     lottie: {
-        width:60,
         height:60,
+        width:60,  
     },
     contenedortext: {
         justifyContent: 'center',
     },
     texticon: {
+        color:'white',
         fontSize:RFValue(18),
-        fontWeight: "bold",
-        color:'white'
+        fontWeight: "bold",  
     },
     notificacion:{
-        fontSize:RFValue(12),
-        color:'white'
+        color:'white',
+        fontSize:RFValue(12), 
     },
 })
 export default Recibir

@@ -48,7 +48,6 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
     
     const loadFonts = async () => {
         await Font.loadAsync({
-
             //Fuente
             'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
         });
@@ -88,8 +87,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                 setTimeout( () => {
                     setCopiadoModal(false);
                 }, 100 )
-            },900)
-            
+            },900) 
         } 
     };   
 
@@ -117,7 +115,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
-                                        <Text style={styles.texticon}>Error</Text>
+                                    <Text style={styles.texticon}>Error</Text>
                                 </View>
                                 <View>
                                     <Text style={styles.notificacion}>No has generado las 12 palabras</Text>
@@ -151,7 +149,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
-                                        <Text style={styles.texticon}>Texto Copiado</Text>
+                                    <Text style={styles.texticon}>Texto Copiado</Text>
                                 </View>
                                 <View>
                                     <Text style={styles.notificacion}>Guarda las 12 palabras</Text>
@@ -204,56 +202,56 @@ const styles = StyleSheet.create({
         width: windowWidth,
     },
     containeruno: {
-        paddingTop: RFValue(35),
         alignItems:'center',
+        paddingTop: RFValue(35), 
     },
     logo: {
+        height: windowHeight*0.2,
         resizeMode: 'contain',
         width: windowWidth*0.5,
-        height: windowHeight*0.2
     },
     containerBlanco: {
-        paddingLeft: RFValue(15),
-        paddingRight: RFValue(paddinrightios),
-        marginTop: RFValue(12),
         alignItems: 'center',
+        backgroundColor: 'white',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        height: windowHeight*0.8,
-        width: windowWidth,
-        backgroundColor: 'white',
         elevation:24,
+        height: windowHeight*0.8,
+        marginTop: RFValue(12),
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
-        shadowRadius: 5,    
+        shadowRadius: 5, 
+        width: windowWidth,
     },
     textuno: {
-        marginTop:RFValue(20),
+        color: '#616161',
+        fontFamily:'opensans-regular',
         fontSize:RFValue(16),
         fontWeight: 'bold',
-        color: '#616161',
-        fontFamily:'opensans-regular'
+        marginTop:RFValue(20),
     },
     labeluno: {
-        margin:RFValue(15),
-        fontSize: RFValue(15),
-        marginRight: RFValue(20),
-        marginLeft: RFValue(20),
-        textAlign: 'justify',
         color: '#b1b1b1',
-        fontFamily:'opensans-regular'
+        fontFamily:'opensans-regular',
+        fontSize: RFValue(15),
+        margin:RFValue(15),
+        marginLeft: RFValue(20),
+        marginRight: RFValue(20),
+        textAlign: 'justify',
     },
     btnG:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
+        backgroundColor:'#5b298a',
+        borderRadius: 20,
+        elevation:24,
+        marginTop: RFValue(5),
+        paddingBottom: RFValue(12),
         paddingLeft: RFValue(85),
         paddingRight: RFValue(85),
         paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
-        borderRadius: 20,
-        marginTop: RFValue(5),
-        elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -261,36 +259,36 @@ const styles = StyleSheet.create({
     },
     textG:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',
     },
     TextInput: {
-        margin: RFValue(15),
-        width: RFValue(300),
-        height: RFValue(200),
+        alignItems: 'center',
         borderWidth: 0.8,
         borderColor: 'purple',
         borderRadius: 20,
-        padding: RFValue(25),
-        alignItems: 'center',
+        height: RFValue(200),
         justifyContent: 'center',
+        margin: RFValue(15),
+        padding: RFValue(25),
+        width: RFValue(300),
     },
     labeldos: {
-        margin: 8,
-        fontWeight: 'bold',
         fontSize:RFValue(15),
+        fontWeight: 'bold',
+        margin: 8,
         textAlign: 'justify'  
     },    
     btnC:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
+        backgroundColor:'#5b298a',
+        borderRadius: 20,
+        elevation:24,
+        marginTop: RFValue(5),
+        paddingBottom: RFValue(12),
         paddingLeft: RFValue(80),
         paddingRight: RFValue(80),
         paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
-        borderRadius: 20,
-        marginTop: RFValue(5),
-        elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -298,27 +296,29 @@ const styles = StyleSheet.create({
     },
     textC:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',   
     },
 
     //Modal
     bodymodal: {
-        flex: 1,
         alignItems: 'center',
+        flex: 1,
     },
     ventanamodal: {
-        width: windowWidth*0.95,
-        height: windowHeight*0.1,
+
+        alignItems: 'center',
+        
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
         borderColor: 'black',
         borderRadius: 20,
+        height: windowHeight*0.1,
+        flexDirection: 'row',
         paddingLeft:RFValue(12),
         paddingRight:RFValue(12),
-        flexDirection: 'row',
-        alignItems: 'center',
-        top:alturaios
+        top:alturaios,
+        width: windowWidth*0.95,
     },
     icontext: {
         alignItems: 'center',
@@ -327,24 +327,25 @@ const styles = StyleSheet.create({
 
     },
     contenedorlottie:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
     },
     lottie: {
-        width:60,
         height:60,
+        width:60,   
     },
     contenedortext: {
         justifyContent: 'center',
     },
     texticon: {
+        color:'white',
         fontSize:RFValue(18),
         fontWeight: "bold",
-        color:'white'
+        
     },
     notificacion:{
+        color:'white',
         fontSize:RFValue(12),
-        color:'white'
     },
 })
 export default Crearcuenta

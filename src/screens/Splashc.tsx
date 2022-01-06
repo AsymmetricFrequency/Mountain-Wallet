@@ -42,39 +42,41 @@ const Splashc = () => {
 
 export default Splashc
 
+
 const styles = StyleSheet.create({
 
   body: {
-      width: '100%',
-      height: '100%',
-      flex: 1,
-      justifyContent: 'center',
+    flex: 1,
+    height: '100%',
+    justifyContent: 'center',
+    width: '100%',
   },
   containeruno:{
-      paddingLeft: '5%',
-      paddingRight: '4%',
-      alignItems:'center',
+    alignItems:'center',
+    paddingLeft: '5%',
+    paddingRight: '4%',
+      
   },
   logorigin:{
-      width: 250,
-      height: 250,
-      resizeMode: 'contain',
+    height: 250,
+    resizeMode: 'contain',
+    width: 250,
   },
   logo:{
-    width: 250,
     height: 250,
     resizeMode: 'contain',
     top: '100%',
+    width: 250,
   },
   logo2:{
-      width: 250,
       height: 250,
       resizeMode: 'contain',
+      width: 250,
   },
   letras: {
-      width: 250,
-      height: 250,
-      resizeMode: 'contain',
-      top: '-50%',
+    height: 250,
+    resizeMode: 'contain',
+    top: '-50%',
+    width: 250,
   },
 })

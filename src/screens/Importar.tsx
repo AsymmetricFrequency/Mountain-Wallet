@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react'
-
-import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image,Button , Alert, TextInput, BackHandler,Modal,Platform,Dimensions,} from 'react-native'
-
+import React, { useState} from 'react'
+import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image, TextInput, Modal,Platform,Dimensions,} from 'react-native'
 import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-// import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 import { Lotierror,Lotiexito } from './component/lottie';
 
-
-
-
-
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-
-
 
 const Importar = ({route,navigation}: {route:any,navigation: any}) => {
 
@@ -114,94 +105,90 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                 mnemonic.then((value) => {
                     const docePalabras = mnemonicToSeed(value)
                     docePalabras.then((value) => {
-                    const acc = createAccount(value)
-                        acc.then((value) => {
-    
-                            enviarTrans(value,pubKey,amount).then((value) => {
-                                // La cuenta no ha sido fondeada
-                                if (value == 'Error: Failed to find account') {
-                                    setenviarT(false)
-                                    console.log('Error, la cuenta no ha sido fondeada')
-                                    setmostrartitulo("Error");
-                                    setError("La cuenta no ha sido fondeada");
-                                    setModal(true);
-                                    setLottie(<Lotierror/>)
-                                    setanmt("fadeInDownBig");
-                                    setTimeout( () => {
-                                        setanmt("fadeOutUp");
+                        const acc = createAccount(value)
+                            acc.then((value) => {
+                                enviarTrans(value,pubKey,amount).then((value) => {
+                                    // La cuenta no ha sido fondeada
+                                    if (value == 'Error: Failed to find account') {
+                                        setenviarT(false)
+                                        console.log('Error, la cuenta no ha sido fondeada')
+                                        setmostrartitulo("Error");
+                                        setError("La cuenta no ha sido fondeada");
+                                        setModal(true);
+                                        setLottie(<Lotierror/>)
+                                        setanmt("fadeInDownBig");
                                         setTimeout( () => {
-                                            setModal(false);
-                                        }, 100 )
-                                    },1000)  
-                                // La public key ingresada esta paila
-                                } else if (value == 'Error: Invalid public key input') {
-                                    setenviarT(false)
-                                    console.log('Error, la billetera destino no existe')
-                                    setmostrartitulo("Error");
-                                    setError("La billetera destino no existe");
-                                    setModal(true);
-                                    setLottie(<Lotierror/>)
-                                    setanmt("fadeInDownBig");
-                                    setTimeout( () => {
-                                        setanmt("fadeOutUp");
+                                            setanmt("fadeOutUp");
+                                            setTimeout( () => {
+                                                setModal(false);
+                                            }, 100 )
+                                        },1000)  
+                                    // La public key ingresada esta paila
+                                    } else if (value == 'Error: Invalid public key input') {
+                                        setenviarT(false)
+                                        console.log('Error, la billetera destino no existe')
+                                        setmostrartitulo("Error");
+                                        setError("La billetera destino no existe");
+                                        setModal(true);
+                                        setLottie(<Lotierror/>)
+                                        setanmt("fadeInDownBig");
                                         setTimeout( () => {
-                                            setModal(false);
-                                        }, 100 )
-                                    },2500) 
-                                } else if(value == 'Error: Non-base58 character') {
-                                    setenviarT(false)
-                                    console.log('La direccion no puede contener espacios')
-                                    setmostrartitulo("Error");
-                                    setError("La direccion no puede contener espacios");
-                                    setModal(true);
-                                    setLottie(<Lotierror/>)
-                                    setanmt("fadeInDownBig");
-                                    setTimeout( () => {
-                                        setanmt("fadeOutUp");
+                                            setanmt("fadeOutUp");
+                                            setTimeout( () => {
+                                                setModal(false);
+                                            }, 100 )
+                                        },2500) 
+                                    } else if(value == 'Error: Non-base58 character') {
+                                        setenviarT(false)
+                                        console.log('La direccion no puede contener espacios')
+                                        setmostrartitulo("Error");
+                                        setError("La direccion no puede contener espacios");
+                                        setModal(true);
+                                        setLottie(<Lotierror/>)
+                                        setanmt("fadeInDownBig");
                                         setTimeout( () => {
-                                            setModal(false);
-                                        }, 100 )
-                                    },2000) 
-                                } else if(value == 'signature') {
-                                    console.log('Transacción exitosa')
-                                    //animacion transacccion exitosa
-                                    setenviarT(false)
-                                    setaprobado(true);
-                                    setmostrartitulo("Transaccion Exitosa");
-                                    setError("Todo salio correcto");
-                                    setLottie(<Lotiexito/>)
-                                    setanmt("fadeInDownBig");
-                                    setAmounToken("");
-                                    setTimeout( () => {
-                                        setanmt("fadeOutUp");
+                                            setanmt("fadeOutUp");
+                                            setTimeout( () => {
+                                                setModal(false);
+                                            }, 100 )
+                                        },2000) 
+                                    } else if(value == 'signature') {
+                                        console.log('Transacción exitosa')
+                                        //animacion transacccion exitosa
+                                        setenviarT(false)
+                                        setaprobado(true);
+                                        setmostrartitulo("Transaccion Exitosa");
+                                        setError("Todo salio correcto");
+                                        setLottie(<Lotiexito/>)
+                                        setanmt("fadeInDownBig");
+                                        setAmounToken("");
                                         setTimeout( () => {
-                                            setaprobado(false);
-                                        }, 100 )                                        
-                                    },3000) 
-                                    // navigation.navigate('Balance')
-
-                                    
-                                } else {
-                                    setenviarT(false)
-                                    console.log('Aqui si ya paso algo muy raro'+value)
-                                    setmostrartitulo("Error");
-                                    setError("Aqui si ya paso algo muy raro");
-                                    setModal(true);
-                                    setLottie(<Lotierror/>)
-                                    setanmt("fadeInDownBig");
-                                    setTimeout( () => {
-                                        setanmt("fadeOutUp");
+                                            setanmt("fadeOutUp");
+                                            setTimeout( () => {
+                                                setaprobado(false);
+                                            }, 100 )                                        
+                                        },3000) 
+                                        // navigation.navigate('Balance')
+                                    } else {
+                                        setenviarT(false)
+                                        console.log('Aqui si ya paso algo muy raro'+value)
+                                        setmostrartitulo("Error");
+                                        setError("Aqui si ya paso algo muy raro");
+                                        setModal(true);
+                                        setLottie(<Lotierror/>)
+                                        setanmt("fadeInDownBig");
                                         setTimeout( () => {
-                                            setModal(false);
-                                        }, 100 )
-                                    },1000) 
-                                }
+                                            setanmt("fadeOutUp");
+                                            setTimeout( () => {
+                                                setModal(false);
+                                            }, 100 )
+                                        },1000) 
+                                    }
+                                })
                             })
-    
-                        })
                     })
                 }) 
-            }
+        }
         // Si alguno de los inputs esta vacio
         } else {
             setenviarT(false)
@@ -237,8 +224,8 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
 
     return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={styles.body}
-        scrollEnabled={false}>
+            contentContainerStyle={styles.body}
+            scrollEnabled={false}>
                 <Modal
                     visible={MostrarModal}
                     transparent
@@ -258,7 +245,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                     </View>   
                                     <View style={styles.textnoti}>
                                         <View style={styles.contenedortext}>
-                                                <Text style={styles.texticon}>{mostrartitulo}</Text>
+                                            <Text style={styles.texticon}>{mostrartitulo}</Text>
                                         </View>
                                         <View>
                                             <Text style={styles.notificacion}>
@@ -282,7 +269,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                 >
                     <View style={styles.cajafull}>
                         <Animatable.View animation={anmt} duration= {600}>
-                            <View style={styles.bodyfull}>
                                 <View style={styles.ventanafull}>
                                     <View style={styles.icontextfull}>
                                         <View style={styles.contenedorlottiefull}>
@@ -298,11 +284,9 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                         </Text>
                                     </View>
                                 </View>
-                            </View>
                         </Animatable.View>
                     </View>         
                 </Modal>
-
 
                 <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
                     <View style={styles.containeruno}>
@@ -311,7 +295,7 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                         </View>
                         {/*Boton Depositar */}
                         <View style={styles.cuadroE}>
-                                <Text style={styles.textbtnE}>ENVIAR</Text> 
+                            <Text style={styles.textbtnE}>ENVIAR</Text> 
                         </View>                    
                         <View style={styles.cuadro}>
                             {/* Email */}
@@ -357,12 +341,9 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                             </View> 
                         </View>
                     </View>             
-
                 </ImageBackground>  
         </KeyboardAwareScrollView>
-
     )
-    
 }
  
 
@@ -370,72 +351,73 @@ const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
 const alturabotones = Platform.OS === 'ios' ? 45 : 50;
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
 const heightlogo = Platform.OS === 'ios' ? 0.287 : 0.272;
+
 const styles = StyleSheet.create({
     body: {
         height: windowHeight,
         width: windowWidth,
     },
     containeruno:{
-        paddingTop: RFValue(35),
+        alignItems:'center',
         paddingLeft: RFValue(15),
         paddingRight: RFValue(paddinrightios),
-        alignItems:'center',
+        paddingTop: RFValue(35),
     },
     fondo:{
         height: windowHeight,
-        width: windowWidth,
         margin:0,
         resizeMode: 'contain',
+        width: windowWidth,
     },
     contenedorlogo:{
+        alignItems: 'center',
         height: windowHeight*heightlogo,
         justifyContent: 'center',
-        alignItems: 'center',
     },
     logo:{
         resizeMode: 'contain',
         width: windowWidth*0.9,        
     },
     cuadroE:{
+        alignItems: 'center',
         backgroundColor: 'white',
         borderRadius: 10,
-        width: '100%',
-        padding: RFValue(25),
         justifyContent: 'center',
-        alignItems: 'center',
+        padding: RFValue(25),
+        width: '100%',
     },
     textbtnE:{
         color:'#5b298a',
-        fontWeight: 'bold',
         fontSize:RFValue(15),
+        fontWeight: 'bold',
     },
     cuadro:{
         backgroundColor:'white',
-        marginTop: RFValue(15),
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        paddingHorizontal:RFValue(10),
         height: windowHeight*0.7,
+        marginTop: RFValue(15),
+        paddingHorizontal:RFValue(10),
         paddingVertical:RFValue(50),
         width: "100%",
     },
     tablamail:{
-        borderWidth: 0.8,
         borderColor: '#e0e0e0',
+        borderWidth: 0.8,
         borderRadius:10,
-        height: windowHeight*0.09,
         flexDirection:'row',
+        height: windowHeight*0.09,
         paddingLeft:RFValue(10),
         paddingRight:RFValue(10),
     },
     cuadromail:{
-        width:"80%",
         justifyContent: 'center',
+        width:"80%",
     },
     inputmail:{
+        color: '#5a5959',
         fontWeight: 'bold',
         fontSize:RFPercentage(1.8),
-        color: '#5a5959',
     },
     cqr:{
         width:"20%",
@@ -443,55 +425,47 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     btnqr:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
-        paddingTop: RFValue(10),
+        backgroundColor:'#5b298a',
+        borderRadius: 10,
         paddingBottom: RFValue(10),
         paddingLeft: RFValue(13),
         paddingRight: RFValue(13),
-        borderRadius: 10,
+        paddingTop: RFValue(10),   
     },
     imgqr:{
-        width: 20,
         height: 20,
         resizeMode: 'contain',
+        width: 20,
     },
-
-
-
-
-
-
     tablaimp:{
-        marginTop: RFValue(25),
         borderWidth: 0.8,
         borderColor: '#e0e0e0',
         borderRadius:10,
-        height: windowHeight*0.09,
         flexDirection:'row',
+        height: windowHeight*0.09,
+        marginTop: RFValue(25),
         paddingLeft:RFValue(10),
         paddingRight:RFValue(10),
     },
     cuadroimp:{
-        width:"68%",
         justifyContent: 'center',
-        // paddingLeft: '2%'
+        width:"68%",
     },
     inputimp:{
-        fontWeight: 'bold',
-        fontSize:RFPercentage(1.8),
         color: '#5a5959',
+        fontSize:RFPercentage(1.8),
+        fontWeight: 'bold',  
     },
     cmax:{
-        width:"32%",
         flexDirection:'row',
+        width:"32%",  
     },
-    ccnd:{
-        width:"50%",
-        justifyContent:"center",
+    ccnd:{ 
         alignItems:'flex-end',
-        paddingRight:3
-        
+        justifyContent:"center",
+        paddingRight:3,
+        width:"50%",
     },
     textcnd:{
         fontSize:RFValue(13)
@@ -501,24 +475,23 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     btnmax:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
-        paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
+        backgroundColor:'#5b298a',
         borderRadius: 10,
+        paddingBottom: RFValue(12),
+        paddingTop: RFValue(12),
     },
     txtmax:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFPercentage(1.5),
+        fontWeight: 'bold',
     },
     dcVC:{
-        flexDirection: 'row',
         backgroundColor: 'white',
-        padding: RFValue(15),
         borderRadius: 10,
-        marginTop:RFValue(alturabotones)
-        
+        flexDirection: 'row',
+        marginTop:RFValue(alturabotones),
+        padding: RFValue(15),  
     },
     dcV:{
         width: "50%",
@@ -527,33 +500,32 @@ const styles = StyleSheet.create({
         width: "50%",
     },
     btnVC:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
-        marginRight: RFValue(15),
-        marginLeft: RFValue(15),
-        paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
+        backgroundColor:'#5b298a',
         borderRadius: 20,
         elevation: 10,
+        paddingBottom: RFValue(12),
+        marginLeft: RFValue(15),
+        marginRight: RFValue(15),
+        paddingTop: RFValue(12),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
         shadowRadius: 5,
-
     },
     textbtnVC:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',
     },
     enviar: {
         alignItems: 'center',
-        width: '100%',
         height: '100%',
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        width: '100%',
     },
 
-    //Modal
+    //---Modal---//
     cajamodal:{
         flex: 1,
     },
@@ -563,17 +535,17 @@ const styles = StyleSheet.create({
 
     },
     ventanamodal: {
-        width: windowWidth*0.95,
-        height: windowHeight*0.1,
+        alignItems: 'center',
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
         borderColor: 'white',
         borderRadius: 20,
+        height: windowHeight*0.1,
+        flexDirection: 'row',
         paddingLeft:RFValue(12),
         paddingRight:RFValue(12),
-        flexDirection: 'row',
-        alignItems: 'center',
-        top:alturaios
+        top:alturaios,
+        width: windowWidth*0.95,
     },
     icontext: {
         alignItems: 'center',
@@ -582,34 +554,30 @@ const styles = StyleSheet.create({
 
     },
     contenedorlottie:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center', 
     },
     contenedortext: {
         justifyContent: 'center',
     },
     texticon: {
+        color:'white',
         fontSize:RFValue(18),
         fontWeight: "bold",
-        color:'white'
     },
     notificacion:{
+        color:'white',
         fontSize:RFValue(12),
-        color:'white'
     },
- 
 
-
-    // aprobadomodal
+    //---aprobadomodal---//
     cajafull:{
         flex: 1,
+        alignItems: 'center',
         backgroundColor:"rgba(91, 41, 137, 0.83)",
         justifyContent: 'center',
-        alignItems: 'center',
     },
-    bodyfull: {
-
-    },
+    
     ventanafull: {
         width: windowWidth*0.95,
         height: windowHeight*0.15,

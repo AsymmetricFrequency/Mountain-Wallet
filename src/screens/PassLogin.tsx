@@ -54,7 +54,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
             }
         }
 
-    //Función fuentes tipograficas
+    //--- Función fuentes tipograficas ---//
 
     const[fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -68,7 +68,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
             //Fuente
             'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
         });
-
         setFontsLoaded(true);
     }
 
@@ -102,7 +101,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                             </View>   
                             <View style={styles.textnoti}>
                                 <View style={styles.contenedortext}>
-                                        <Text style={styles.texticon}>Error</Text>
+                                    <Text style={styles.texticon}>Error</Text>
                                 </View>
                                 <View>
                                     <Text style={styles.notificacion}>Contraseña incorrecta</Text>
@@ -121,7 +120,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                     <View style={styles.imgmano}>
                         <Image source={require('./img/logmanito.png')} style={styles.logomano} />
                     </View>
-
                     {/* Codigo seguridad */}
                     <Text style={styles.textuno} numberOfLines={2}>INGRESA TU CÓDIGO DE SEGURIDAD</Text>
                     <View style={styles.containerunorama}>  
@@ -160,8 +158,7 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
                                         setPin3(text)
                                     }                                  
                             }}
-                        />
-                        
+                        />                       
                         <TextInput style={styles.TextInput1} maxLength={1} keyboardType="numeric" secureTextEntry={true} 
                             ref={pin4Ref}
                             value={pin4}
@@ -204,74 +201,75 @@ const styles = StyleSheet.create({
         width: windowWidth,
     },
     containeruno: {
-        paddingTop: RFValue(35),
         alignItems:'center',
+        paddingTop: RFValue(35),
+        
     },
     logo: {
+        height: windowHeight*0.2,
         resizeMode: 'contain',
         width: windowWidth*0.5,
-        height: windowHeight*0.2
     },
     containerBlanco: {
-        paddingLeft: RFValue(15),
-        paddingRight: RFValue(paddinrightios),
-        marginTop: RFValue(12),
         alignItems: 'center',
+        backgroundColor: 'white',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-        height: windowHeight*0.8,
-        width: windowWidth,
-        backgroundColor: 'white',
         elevation:24,
+        height: windowHeight*0.8,
+        marginTop: RFValue(12),
+        paddingLeft: RFValue(15),
+        paddingRight: RFValue(paddinrightios),
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.1,
         shadowRadius: 5,    
+        width: windowWidth,
     },
     imgmano: {
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         marginTop:RFValue(100),
     },
     logomano: {
-        width: RFValue(110), 
         height: RFValue(110),
         resizeMode: 'contain',
+        width: RFValue(110),
     },
     textuno: {
-        marginTop: RFValue(25),
+        color: '#625d5b',
+        fontFamily: 'opensans-regular',
         fontSize:RFValue(13),
         fontWeight: 'bold',
-        color: '#625d5b',
-        fontFamily: 'opensans-regular'
+        marginTop: RFValue(25),
     }, 
     
     containerunorama: {
         flexDirection: 'row',
     },
     TextInput1: {
-        marginTop: RFValue(12),
-        width: RFValue(cuadroios),
-        height: RFValue(cuadroios), 
-        borderWidth: 1,
         borderColor: 'purple',
-        margin: RFValue(5),
-        justifyContent: 'center',
-        textAlign: 'center',
         borderRadius: 10,
+        borderWidth: 1,
         fontSize:RFValue(15),
         fontWeight: 'bold',
+        height: RFValue(cuadroios),
+        justifyContent: 'center',
+        margin: RFValue(5),
+        marginTop: RFValue(12),
+        textAlign: 'center',
+        width: RFValue(cuadroios),
     },
     btnC:{
-        backgroundColor:'#5b298a',
         alignItems:'center',
+        backgroundColor:'#5b298a',
+        borderRadius: 20,
+        elevation:24,
+        marginTop: RFValue(25),
+        paddingBottom: RFValue(12),
         paddingLeft: RFValue(80),
         paddingRight: RFValue(80),
         paddingTop: RFValue(12),
-        paddingBottom: RFValue(12),
-        borderRadius: 20,
-        marginTop: RFValue(25),
-        elevation:24,
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 0.5,
@@ -279,8 +277,8 @@ const styles = StyleSheet.create({
     },
     textCI:{
         color:'white',
-        fontWeight: 'bold',
         fontSize:RFValue(11.5),
+        fontWeight: 'bold',
     },
 
     //Modal
@@ -289,43 +287,46 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     ventanamodal: {
-        width: windowWidth*0.95,
-        height: windowHeight*0.1,
+        alignItems: 'center',
         backgroundColor: '#5B298A',
         borderWidth: 0.5,
         borderColor: 'black',
         borderRadius: 20,
+        flexDirection: 'row',
+        height: windowHeight*0.1,
         paddingLeft:RFValue(12),
         paddingRight:RFValue(12),
-        flexDirection: 'row',
-        alignItems: 'center',
-        top:alturaios
+        top:alturaios,
+        width: windowWidth*0.95,
     },
     icontext: {
         alignItems: 'center',
     },
     textnoti: {
-
+        //--- No borrar ---//
     },
     contenedorlottie:{
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
+        
     },
     lottie: {
-        width:60,
         height:60,
+        width:60,
     },
     contenedortext: {
         justifyContent: 'center',
     },
     texticon: {
+        color:'white',
         fontSize:RFValue(18),
         fontWeight: "bold",
-        color:'white'
+        
     },
     notificacion:{
+        color:'white',
         fontSize:RFValue(12),
-        color:'white'
+        
     },
 })
 export default CodigoVerificacion
