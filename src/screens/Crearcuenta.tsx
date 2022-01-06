@@ -64,7 +64,8 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
         memo.then((value) => {
             console.log(value);
             setWords(value)
-        });setbotonpalabras(true);     
+        });setbotonpalabras(true);
+        setbotoncontinuar(true);     
     }
     const CopyToClipboard = () => {
         //Si no genera las 12 palabras
@@ -88,7 +89,7 @@ const Crearcuenta = ({navigation}: {navigation: any}) => {
                     setCopiadoModal(false);
                 }, 100 )
             },900)
-            setbotoncontinuar(true);
+            
         } 
     };   
 
