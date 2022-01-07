@@ -26,8 +26,6 @@ const CodigoVerificacion = ({navigation}: {navigation: any}) => {
         const [storedPass, setStoredPass] = useState("")
 
         readPassword().then((val)=>{
-            console.log("PASSWORD:");
-            console.log(val);
             setStoredPass(val)
         })
 
