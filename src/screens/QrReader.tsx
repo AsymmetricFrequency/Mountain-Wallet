@@ -326,6 +326,8 @@ const QrReader = ({navigation}: {navigation: any}) =>  {
             </View>  
         );  
     }
+
+    return null
 }
   
 
