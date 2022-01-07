@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {  Dimensions,ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image, Platform } from 'react-native'
+import {  Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native'
 import { getBalance, getToken, readPublicKey } from '../../api';
 import { RFValue } from "react-native-responsive-fontsize";
 import { ScrollView } from "react-native-web-hover";
@@ -16,15 +16,11 @@ const Balance = ({navigation}: {navigation: any}) => {
 
     async function obtenerBalance(publicKey: string) {
         getBalance(publicKey).then((value) => {
-            console.log(value)
             setBalance(value)
         }).catch((error) => {
-            console.log(error)
             return "error"
         })
     }
-
-    //value textinput
 
     //Funcion de obtener splToken
     const [tokenBalance, setTokenBalance] = useState(0)
@@ -32,7 +28,6 @@ const Balance = ({navigation}: {navigation: any}) => {
     async function obtenerTokenB(publicKey:string, mint:string) {
         const bala = getToken(publicKey, mint).then((value) => {
             setTokenBalance(value)
-            console.log(value)
         })
     }
 
@@ -42,15 +37,12 @@ const Balance = ({navigation}: {navigation: any}) => {
     async function obtenerTokenBUSDT(publicKey:string, mint:string) {
         const bala = getToken(publicKey, mint).then((value) => {
             setTokenBalanceUSDT(value)
-            console.log(value)
         })
     }
 
     //funcion obtener llave publica
     const [pKey,setPKey] = useState("")
     readPublicKey().then((val)=>{
-        console.log("PUBLIC KEY:")
-        console.log(val)
         setPKey(val)
     })
 
@@ -189,7 +181,7 @@ const Balance = ({navigation}: {navigation: any}) => {
                             </View>
                             <View style={styles.smcry}>
                                 <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>{balance}</Text>
+                                    <Text style={styles.stxtcry}>{tokenBalanceUSDT}</Text>
                                 </View>
                                 <View style={styles.monedacry}>
                                     <Text style={styles.mtxtcry}>USDT</Text>
