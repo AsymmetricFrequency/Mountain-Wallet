@@ -9,10 +9,7 @@ import { Lotierror,Lotiexito } from './component/lottie';
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const Importar = ({route,navigation}: {route:any,navigation: any}) => {
-
-    //props cam
-    const qr = route.params
+const Importar = ({navigation}: {navigation: any}) => {
     
     //traer account
     const [pubKey,setPubKey] = useState("")
@@ -23,16 +20,13 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
 
     async function obtenerTokenB(publicKey:string, mint:string) {
         const bala = getToken(publicKey, mint).then((value) => {
-        setTokenBalance(value)
-        console.log(value)
+            setTokenBalance(value)
         })
     }
 
     const [pKey,setPKey] = useState("")
 
     readPublicKey().then((val)=>{
-        console.log("PUBLIC KEY:");
-        console.log(val);
         setPKey(val)
     })
 
@@ -40,11 +34,9 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
 
     async function obtenerBalance(publicKey: string) {
         getBalance(publicKey).then((value) => {
-        console.log(value)
-        setBalance(value)
+            setBalance(value)
         }).catch((error) => {
-        console.log(error);
-        return "error"
+            return "error"
         })
     }
 
@@ -74,7 +66,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
             // Si lo que deseo enviar es mayor a lo que tengo
             if(tengo < necesito){
                 setenviarT(false)
-                console.log('No tienes CNDR suficiente')
                 setmostrartitulo("Error");
                 setError("No tienes CNDR suficiente");
                 setModal(true);
@@ -88,7 +79,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                 },2500)  
             } else if(balance == 0){
                 setenviarT(false)
-                console.log('No tienes SOL suficiente');
                 setmostrartitulo("Error");
                 setError("No tienes SOL suficiente");
                 setModal(true);
@@ -111,7 +101,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                     // La cuenta no ha sido fondeada
                                     if (value == 'Error: Failed to find account') {
                                         setenviarT(false)
-                                        console.log('Error, la cuenta no ha sido fondeada')
                                         setmostrartitulo("Error");
                                         setError("La cuenta no ha sido fondeada");
                                         setModal(true);
@@ -126,7 +115,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                     // La public key ingresada esta paila
                                     } else if (value == 'Error: Invalid public key input') {
                                         setenviarT(false)
-                                        console.log('Error, la billetera destino no existe')
                                         setmostrartitulo("Error");
                                         setError("La billetera destino no existe");
                                         setModal(true);
@@ -140,7 +128,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                         },2500) 
                                     } else if(value == 'Error: Non-base58 character') {
                                         setenviarT(false)
-                                        console.log('La direccion no puede contener espacios')
                                         setmostrartitulo("Error");
                                         setError("La direccion no puede contener espacios");
                                         setModal(true);
@@ -153,7 +140,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                             }, 100 )
                                         },2000) 
                                     } else if(value == 'signature') {
-                                        console.log('Transacción exitosa')
                                         //animacion transacccion exitosa
                                         setenviarT(false)
                                         setaprobado(true);
@@ -171,9 +157,8 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
                                         // navigation.navigate('Balance')
                                     } else {
                                         setenviarT(false)
-                                        console.log('Aqui si ya paso algo muy raro'+value)
                                         setmostrartitulo("Error");
-                                        setError("Aqui si ya paso algo muy raro");
+                                        setError("Ha ocurrido un error inesperado");
                                         setModal(true);
                                         setLottie(<Lotierror/>)
                                         setanmt("fadeInDownBig");
@@ -192,7 +177,6 @@ const Importar = ({route,navigation}: {route:any,navigation: any}) => {
         // Si alguno de los inputs esta vacio
         } else {
             setenviarT(false)
-            console.log('Revisa los datos ingresados');
             setmostrartitulo("Error");
             setError('Revisa los datos ingresados');
             setModal(true);

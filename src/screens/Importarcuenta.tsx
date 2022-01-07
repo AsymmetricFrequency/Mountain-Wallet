@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Modal, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { RFValue } from "react-native-responsive-fontsize";
-import { mnemonicToSeed, createAccount, savePublicKey, saveMmemonic } from '../../api';
+import { saveMmemonic } from '../../api';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 import { Dimensions } from 'react-native';
@@ -14,17 +14,6 @@ const windowHeight = Dimensions.get('screen').height;
 const ImportarCuenta = ({navigation}: {navigation: any}) => {
 
     const [twelfString, setTwelfString] = useState('')
-
-    async function crearCuenta(twelf: string) {
-        const docePalabras = mnemonicToSeed(twelf)
-        docePalabras.then((value) => {
-            const acc = createAccount(value)
-            acc.then((value) => {
-                navigation.navigate('PantallaCarga')
-                savePublicKey(value.publicKey.toString())
-            })
-        })
-    }
 
     const [anmt,setanmt]= useState("");
     const [vacioModal, setVacioModal] = useState(false);
