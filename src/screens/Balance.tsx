@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {  Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image, Platform } from 'react-native'
+import {  Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image, Platform, BackHandler} from 'react-native'
 import { getBalance, getToken, readPublicKey } from '../../api';
 import { RFValue } from "react-native-responsive-fontsize";
 import { ScrollView } from "react-native-web-hover";
@@ -10,6 +10,11 @@ const windowWidth = Dimensions.get('screen').width
 const windowHeight = Dimensions.get('screen').height
 
 const Balance = ({navigation}: {navigation: any}) => {
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+        return () => backHandler.remove()
+      }, [])
 
     //Funcion obtener balance
     const [balance, setBalance] = useState(0)
@@ -89,7 +94,7 @@ const Balance = ({navigation}: {navigation: any}) => {
                         <View style={styles.balance}>
                             <View style={styles.cajabalance}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                    <Text style={styles.txtbalance} numberOfLines={1} ellipsizeMode='middle'>{balance}</Text>
+                                    <Text style={styles.txtbalance} numberOfLines={1} ellipsizeMode='middle'>{tokenBalance}</Text>
                                 </ScrollView>
                             </View>
                         </View>
