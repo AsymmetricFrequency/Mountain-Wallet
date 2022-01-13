@@ -21,7 +21,7 @@ const ImportarCuenta = ({navigation}: {navigation: any}) => {
     function continuar() {
         if (twelfString != "") {
             saveMmemonic(twelfString)
-            navigation.navigate('PantallaCarga')
+            navigation.navigate('CrearPass')
         } else {
             setVacioModal(true);
             setanmt("fadeInDownBig");            
