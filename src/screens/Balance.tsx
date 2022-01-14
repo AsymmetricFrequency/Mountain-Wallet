@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import {  Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image, Platform, BackHandler} from 'react-native'
+import {  Dimensions, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Image, Platform, BackHandler, ScrollView,RefreshControl,SafeAreaView,StatusBar } from 'react-native'
 import { getBalance, getToken, readPublicKey } from '../../api';
 import { RFValue } from "react-native-responsive-fontsize";
-import { ScrollView } from "react-native-web-hover";
+
 // Fuente
 import * as Font from 'expo-font'
 
 const windowWidth = Dimensions.get('screen').width
 const windowHeight = Dimensions.get('screen').height
+const screenHeight = Dimensions.get('window').height
+const spaceH = windowHeight - screenHeight
+
 
 const Balance = ({navigation}: {navigation: any}) => {
 
@@ -71,145 +74,182 @@ const Balance = ({navigation}: {navigation: any}) => {
         } 
     })
     
-        const loadFonts = async () => {
+    const loadFonts = async () => {
     
-            await Font.loadAsync({
-                //Fuente
-                'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
-            })
-            setFontsLoaded(true)
-        }
-
-    if (!fontsLoaded) {
-        return(<View/>)
+        await Font.loadAsync({
+            //Fuente
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),           
+        })
+        setFontsLoaded(true)
     }
 
+    // if (!fontsLoaded) {
+    //     return(<View/>)
+    // }
+
+    // // refresco
+    const [refresh, setRefresh] = useState(false);
+
+    const onRefre = () => {
+        setRefresh(true)
+
+        setTimeout( () => {
+            setRefresh(false)
+        },1000) 
+    }
+
+
     return (
-        <View style={styles.body}>
-            <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} >
+        <View style={styles.body} >  
+            <ImageBackground source={require('./img/fondo.png')} style={styles.fondo} > 
                 <View style={styles.containeruno}>
-                    <Image style={styles.logo} source={require('./img/logoblanco.png')}  />
-                    <View style={styles.divisor}>
-                        <View style={styles.balanceaux}></View>
-                        <View style={styles.balance}>
-                            <View style={styles.cajabalance}>
-                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                    <Text style={styles.txtbalance} numberOfLines={1} ellipsizeMode='middle'>{tokenBalance}</Text>
+                    <SafeAreaView>
+                            <View style={styles.logoimg}>
+                                <Image style={styles.logo} source={require('./img/logoblanco.png')}  />
+                            </View>
+                            <View style={styles.divisor}>
+                                <View style={styles.balanceaux}></View>
+
+                                <View style={styles.balance}>
+                                    <View style={styles.cajabalance}>
+                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                            <Text style={styles.txtbalance} numberOfLines={1} ellipsizeMode='middle'>{tokenBalance}</Text>
+                                        </ScrollView>
+                                    </View>
+                                </View>
+                                <View style={styles.balancemoneda}>
+                                    <View style={styles.moneda}>
+                                        <Text style={styles.txtmoneda}>CNDR</Text>
+                                    </View>
+                                </View>
+                                
+                            </View>
+                            {/* <Text style={styles.txtbalance}>{balance}</Text> */}
+
+                            {/* <View style={styles.doscolumnasB} >
+
+                            <View style={styles.doscolumnasB} >
+
+                                <View style={styles.columnaunoB}>
+                                    <Text style={styles.txtinferiorL}></Text>
+                                </View>
+                                <View style={styles.columnadosB}>
+                                    <Text style={styles.txtinferiorR}></Text>
+                                </View>
+                            </View> */}
+                            {/* Cuadro recibir y enviar */}
+                            <View style={styles.dcER}>
+                                <View style={styles.dcR}>
+                                    <TouchableOpacity 
+                                        style= {styles.btnR} 
+                                        activeOpacity={0.5} 
+                                        onPress={() => navigation.navigate('Recibir')}
+                                    >
+                                        <Text style={styles.textbtnR}>RECIBIR</Text> 
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.dcE}>
+                                    <TouchableOpacity 
+                                        style={styles.btnR} 
+                                        activeOpacity={0.5} 
+                                        onPress={() => navigation.navigate('Enviar')}
+                                    >
+                                        <Text style={styles.textbtnR}>ENVIAR</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        
+                            {/* tabla de criptos */}
+                            <SafeAreaView style={styles.balancecry}>
+                            
+                                <ScrollView
+                                    style={styles.scrollview}
+                                    refreshControl={
+                                        <RefreshControl
+                                            refreshing={refresh}
+                                            onRefresh={onRefre}
+                                            tintColor="#5b298a"
+                                            colors={["#5b298a","#7e54a7"]}
+                                        />
+                                    }
+                                    horizontal={false}
+                                    showsVerticalScrollIndicator={false}
+                                >                        
+                                    {/* CONDOR */}
+                                    <View style={styles.tablacry} >
+                                        <View style={styles.logocry}>
+                                            <Image style={styles.imgcry} source={require('./img/billeteras/logocondor.png')}  />
+                                        </View>
+                                        <View style={styles.nombrecry}>
+                                            <Text style={styles.ntxtcry}>CONDORCOIN</Text>
+                                        </View>
+                                        <View style={styles.smcry}>
+                                            <View style={styles.saldocry}> 
+                                                <Text numberOfLines={1} style={styles.stxtcry} >{tokenBalance}</Text>
+                                            </View>
+                                            <View style={styles.monedacry}>
+                                                <Text style={styles.mtxtcry}>CNDR</Text>
+                                            </View>
+                                        </View>                           
+                                    </View>  
+
+                                    {/* SOLANA */}
+                                    <View style={styles.tablacry} >
+                                        <View style={styles.logocry}>
+                                            <Image style={styles.imgcry} source={require('./img/billeteras/solana.png')}  />
+                                        </View>
+                                        <View style={styles.nombrecry}>
+                                            <Text style={styles.ntxtcry}>SOLANA</Text>
+                                        </View>
+                                        <View style={styles.smcry}>
+                                            <View style={styles.saldocry}>
+                                                <Text style={styles.stxtcry}>{balance}</Text>
+                                            </View>
+                                            <View style={styles.monedacry}>
+                                                <Text style={styles.mtxtcry}>SOL</Text>
+                                            </View>
+                                        </View>                           
+                                    </View>
+
+                                    {/* USDT */}
+                                    <View style={styles.tablacry} >
+                                        <View style={styles.logocry}>
+                                            <Image style={styles.imgcry} source={require('./img/billeteras/usdtDos.png')}  />
+                                        </View>
+                                        <View style={styles.nombrecry}>
+                                            <Text style={styles.ntxtcry}>TETHER</Text>
+                                        </View>
+                                        <View style={styles.smcry}>
+                                            <View style={styles.saldocry}>
+                                                <Text style={styles.stxtcry}>{tokenBalanceUSDT}</Text>
+                                            </View>
+                                            <View style={styles.monedacry}>
+                                                <Text style={styles.mtxtcry}>USDT</Text>
+                                            </View>
+                                        </View>                           
+                                    </View>
                                 </ScrollView>
-                            </View>
-                        </View>
-                        <View style={styles.moneda}>
-                            <Text style={styles.txtmoneda}>CNDR</Text>
-                        </View>
-                    </View>
-                    {/* <Text style={styles.txtbalance}>{balance}</Text> */}
-
-                    {/* <View style={styles.doscolumnasB} >
-
-                    <View style={styles.doscolumnasB} >
-
-                        <View style={styles.columnaunoB}>
-                            <Text style={styles.txtinferiorL}></Text>
-                        </View>
-                        <View style={styles.columnadosB}>
-                            <Text style={styles.txtinferiorR}></Text>
-                        </View>
-                    </View> */}
-                    {/* Cuadro recibir y enviar */}
-                    <View style={styles.dcER}>
-                        <View style={styles.dcR}>
-                            <TouchableOpacity 
-                                style= {styles.btnR} 
-                                activeOpacity={0.5} 
-                                onPress={() => navigation.navigate('Recibir')}
-                            >
-                                <Text style={styles.textbtnR}>RECIBIR</Text> 
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.dcE}>
-                            <TouchableOpacity 
-                                style={styles.btnR} 
-                                activeOpacity={0.5} 
-                                onPress={() => navigation.navigate('Enviar')}
-                            >
-                                <Text style={styles.textbtnR}>ENVIAR</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    {/* tabla de criptos */}
-                    <View style={styles.balancecry}>
-                    
-                        {/* CONDOR */}
-                        <View style={styles.tablacry} >
-                            <View style={styles.logocry}>
-                                <Image style={styles.imgcry} source={require('./img/billeteras/logocondor.png')}  />
-                            </View>
-                            <View style={styles.nombrecry}>
-                                <Text style={styles.ntxtcry}>CONDORCOIN</Text>
-                            </View>
-                            <View style={styles.smcry}>
-                                <View style={styles.saldocry}> 
-                                    <Text numberOfLines={1} style={styles.stxtcry} >{tokenBalance}</Text>
-                                </View>
-                                <View style={styles.monedacry}>
-                                    <Text style={styles.mtxtcry}>CNDR</Text>
-                                </View>
-                            </View>                           
-                        </View>  
-
-                        {/* SOLANA */}
-                        <View style={styles.tablacry} >
-                            <View style={styles.logocry}>
-                                <Image style={styles.imgcry} source={require('./img/billeteras/solana.png')}  />
-                            </View>
-                            <View style={styles.nombrecry}>
-                                <Text style={styles.ntxtcry}>SOLANA</Text>
-                            </View>
-                            <View style={styles.smcry}>
-                                <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>{balance}</Text>
-                                </View>
-                                <View style={styles.monedacry}>
-                                    <Text style={styles.mtxtcry}>SOL</Text>
-                                </View>
-                            </View>                           
-                        </View>
-
-                        {/* USDT */}
-                        <View style={styles.tablacry} >
-                            <View style={styles.logocry}>
-                                <Image style={styles.imgcry} source={require('./img/billeteras/usdtDos.png')}  />
-                            </View>
-                            <View style={styles.nombrecry}>
-                                <Text style={styles.ntxtcry}>TETHER</Text>
-                            </View>
-                            <View style={styles.smcry}>
-                                <View style={styles.saldocry}>
-                                    <Text style={styles.stxtcry}>{tokenBalanceUSDT}</Text>
-                                </View>
-                                <View style={styles.monedacry}>
-                                    <Text style={styles.mtxtcry}>USDT</Text>
-                                </View>
-                            </View>                           
-                        </View>
-                    </View>
-                </View>             
-            </ImageBackground>   
+                            </SafeAreaView >
+                    </SafeAreaView>
+                </View> 
+            </ImageBackground>  
         </View>
     )
 }
 
 
-const alturaios = Platform.OS === 'ios' ? '11%' : '2%';
+const alturaios = Platform.OS === 'ios' ? 18 : 0;
 const anchocaja = Platform.OS === 'ios' ? 115 : 124;
 const paddinrightios = Platform.OS === 'ios' ? 15 : 12;
+const barios = Platform.OS === 'ios' ? 15 : 40;
+const barios2 = Platform.OS === 'ios' ? 15 : 0;
+
 
 const styles = StyleSheet.create({
 
     body:{
-        height: windowHeight,
-        width: windowWidth,
+        height: spaceH,
+        width: windowWidth, 
     },
     containeruno:{
         alignItems:'center',
@@ -217,21 +257,29 @@ const styles = StyleSheet.create({
         paddingLeft: RFValue(15),
         paddingRight: RFValue(paddinrightios),
     },
+    scrollview:{
+        padding: RFValue(alturaios)
+    },
     fondo:{
         height: windowHeight,
         margin:0,
         resizeMode: 'contain',
         width: windowWidth,
     },
+    logoimg:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     logo:{
         height: windowHeight*0.2,
         resizeMode: 'contain',
         width: windowWidth*0.5,
+
         
     },
     divisor: {
         flexDirection: 'row',
-        width: windowWidth,
+        width: "100%",
     },
     balanceaux:{
         width:"30%",
@@ -250,13 +298,17 @@ const styles = StyleSheet.create({
         fontSize:RFValue(45),
         fontWeight:'bold',
     },
+    balancemoneda:{
+        width:"30%",
+        justifyContent: 'center',
+    },
     moneda:{
         alignItems: 'center',
         backgroundColor: 'white',
         borderRadius:5,
-        justifyContent: 'center',
+        left:RFValue(3),
         marginVertical:"6%",
-        width:"10%",
+        width:"35%",
     },
     txtmoneda:{
         color:'#5b298a',
@@ -326,12 +378,13 @@ const styles = StyleSheet.create({
     },
     balancecry:{
         backgroundColor:'white',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderRadius: 20,
         height: windowHeight*0.7,
-        marginTop: RFValue(15),
+        bottom : StatusBar.currentHeight,
+        marginTop: RFValue(barios),
+        marginBottom: RFValue(barios2),
         padding: RFValue(10),
-        
+        flex:1
     },
     tablacry:{
         borderColor: '#e0e0e0',
@@ -339,7 +392,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.8,
         height: windowHeight*0.08,
         flexDirection:'row',
-        marginTop:RFValue(10),
+        marginBottom: RFValue(10),
         paddingLeft: RFValue(10),
         paddingRight: RFValue(12),
     },
