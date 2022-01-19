@@ -19,6 +19,8 @@ import Splashc from './src/screens/Splashc';
 import PassLogin from './src/screens/PassLogin'
 import QrReader from './src/screens/QrReader';
 import PantallaCarga from './src/screens/PantallaCarga';
+import Slider from './src/screens/Slider';
+
 
 
 export default function App() { 
@@ -50,6 +52,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Splash" component={Splashc} options={{headerShown: false}}/>
           <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
+          <Stack.Screen name="Slider" component={Slider} options={{headerShown: false}}/>
           <Stack.Screen name="ImportarCuenta" component={ImportarCuenta} options={{headerShown: false}}/>
           <Stack.Screen name="Crear" component={Crearcuenta} options={{headerShown: false}}/>
           <Stack.Screen name="PantallaCarga" component={PantallaCarga} options={{headerShown: false}}/>

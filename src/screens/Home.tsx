@@ -47,7 +47,7 @@ const Home = ({navigation}: {navigation: any}) => {
                     source={require('./img/logocolor.png')}
                 />
                 <View style={styles.btncr}>
-                    <TouchableOpacity style={styles.btnc}  activeOpacity={0.5} onPress={() => navigation.navigate('Crear')}>
+                    <TouchableOpacity style={styles.btnc}  activeOpacity={0.5} onPress={() => navigation.navigate('Slider')}>
                         <Text style={styles.txtc}>CREAR NUEVA CARTERA</Text>
                     </TouchableOpacity>
 

@@ -47,7 +47,7 @@ const Slider = ({navigation}: {navigation: any}) => {
         {
             item.key == 's3' && (
                 <View style={{alignItems: 'center'}}>
-                    <TouchableOpacity style={styles.btnDone} activeOpacity={0.5} onPress={() => navigation.navigate('Balance')}>
+                    <TouchableOpacity style={styles.btnDone} activeOpacity={0.5} onPress={() => navigation.navigate('Crear')}>
                         <Text style={styles.txtDone}>Continuar</Text>
                     </TouchableOpacity>
                 </View>
