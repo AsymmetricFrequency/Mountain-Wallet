@@ -6,12 +6,16 @@ const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
 const screenHeight = Dimensions.get("window").height;
 const spaceH = windowHeight - screenHeight;
-
+const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const radios = Platform.OS === "ios" ? 10 : 15;
-const fontios = Platform.OS === "ios" ? 12 : 14;
-const fontdeios = Platform.OS === "ios" ? 9 : 10;
-const deios = Platform.OS === "ios" ? -30 : -38;
-const cirios = Platform.OS === "ios" ? -160 : -215;
+const topios = Platform.OS === "ios" ? 20 : 60;
+const bottomios = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
+const cirios = Platform.OS === "ios" ? 50 : 40;
+
+const SLIDER_WIDTH = Dimensions.get("screen").width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
+
 export const styles = StyleSheet.create({
   body: {
     backgroundColor: "#FBF7FF",
@@ -19,38 +23,32 @@ export const styles = StyleSheet.create({
     width: windowWidth,
   },
   completo: {
-    paddingTop: RFValue(31),
-    paddingLeft: RFValue(49),
-    paddingRight: RFValue(49),
-  },
-  caja: {
-    display: "flex",
-    flexDirection: "column",
     alignItems: "center",
+    bottom: StatusBar.currentHeight,
+    flex: 1,
+    flexDirection: "column",
+    paddingTop: topios,
   },
   logocolor: {
-    width: RFValue(244),
-    height: RFValue(244),
-    marginBottom: RFValue(9),
+    marginTop: RFValue(70),
+    width: RFValue(336),
+    height: RFValue(289),
     resizeMode: "contain",
   },
   btncr: {
-    width: RFValue(202),
-    height: RFValue(134),
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: RFValue(205),
+    marginTop: RFValue(17),
   },
   btnc: {
     backgroundColor: "#440577",
     borderRadius: radios,
-    marginBottom: RFValue(34),
-    width: RFValue(202),
-    height: RFValue(46),
+    width: RFValue(245),
+    height: RFValue(48.44),
     justifyContent: "center",
   },
   txtc: {
-    fontSize: RFValue(fontios),
+    fontSize: RFValue(17),
     fontWeight: "400",
     color: "#FBF7FF",
     textAlign: "center",
@@ -58,97 +56,233 @@ export const styles = StyleSheet.create({
   btnr: {
     backgroundColor: "#440577",
     borderRadius: radios,
-    width: RFValue(202),
-    height: RFValue(46),
+    width: RFValue(245),
+    height: RFValue(48.44),
     justifyContent: "center",
+    marginTop: RFValue(42),
   },
   txtr: {
-    fontSize: RFValue(fontios),
+    fontSize: RFValue(17),
     textAlign: "center",
     fontWeight: "400",
     color: "#FBF7FF",
   },
   cajadevep: {
-    bottom: deios,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 68,
   },
   txtdevep: {
-    fontSize: RFValue(fontdeios),
+    fontSize: RFValue(14),
     fontWeight: "400",
-    color: "rgba(207,195,228,1)",
+    color: "#CFC3E4",
     textAlign: "center",
     justifyContent: "center",
   },
 
   // Slider
-  sli:{
-    flex:1,
-    alignItems: 'center', 
-    paddingTop:RFValue(89),
-  },
   introImageStyle: {
-    width: RFValue(166),
-    height: RFValue(197),
-    resizeMode: 'contain',
+    width: RFValue(185),
+    height: RFValue(184.5),
+    resizeMode: "contain",
+    marginTop: RFValue(64.18),
   },
-  cajatitle:{
+  cajatitle: {
+    marginTop: RFValue(49.9),
+    width: RFValue(229),
+    height: RFValue(118),
+    alignItems: "center",
     justifyContent: "center",
-    width: RFValue(225),
-    height: RFValue(122),
-    marginBottom: RFValue(35),
   },
   introTitleStyle: {
-    //30
-    fontSize:RFValue(25),
-    fontWeight: 'bold',
+    fontSize: RFValue(23),
+    fontWeight: "bold",
     color: "#4D4D4D",
     textAlign: "center",
   },
-  cajatxt:{
+  cajatxt: {
     justifyContent: "center",
-    width: RFValue(218),
-    height: RFValue(66),
-    marginBottom: RFValue(120),
+    width: RFValue(217),
+    height: RFValue(68.4),
+    marginTop: RFValue(53),
   },
   introTextStyle: {
-    //16
     fontSize: RFValue(13),
     fontWeight: "400",
     color: "#4D4D4D",
     textAlign: "center",
     justifyContent: "center",
   },
-  btnDone: {
-    borderRadius: 15,
-    backgroundColor: "rgba(68,5,119,1)",
-    width: 200,
-    height: 42,
+  cajadone: {
+    position: "absolute",
+    right:RFValue(20),
+    zIndex: 3,
+    elevation: 3,
+    top:topios,
+    marginTop:RFValue(53)
+  },
+  btndo: {
+    alignItems: "center",
+    backgroundColor: "#E2DBEE",
+    borderRadius: 30,
+    width: RFValue(40),
+    height: RFValue(40),
     justifyContent: "center",
-    elevation: 5,
+    zIndex: 3,
+    elevation: 3,
+  },
+  dotst: {
+    backgroundColor: "#C4C4C4",
+    width: RFValue(28),
+    height: RFValue(28),
+    borderRadius: 25,
+    marginHorizontal: RFValue(21),
+    bottom: StatusBar.currentHeight,
+    marginBottom: RFValue(50),
+  },
+  actist: {
+    backgroundColor: "#440577",
+    width: RFValue(28),
+    height: RFValue(28),
+    borderRadius: 25,
+    marginHorizontal: RFValue(21),
+    bottom: StatusBar.currentHeight,
+    marginBottom: RFValue(50),
+  },
+  //Fin Slider
+  //Modal
+  bodymodal: {
+    alignItems: "center",
+    flex: 1,
+  },
+  ventanamodal: {
+    alignItems: "center",
+    backgroundColor: "#5B298A",
+    borderWidth: 0.5,
+    borderColor: "black",
+    borderRadius: 20,
+    height: windowHeight * 0.1,
+    flexDirection: "row",
+    paddingLeft: RFValue(12),
+    paddingRight: RFValue(12),
+    top: alturaios,
+    width: windowWidth * 0.95,
+  },
+  icontext: {
+    alignItems: "center",
+  },
+  textnoti: {},
+  contenedorlottie: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  lottie: {
+    height: 60,
+    width: 60,
+  },
+  contenedortext: {
+    justifyContent: "center",
+  },
+  texticon: {
+    color: "white",
+    fontSize: RFValue(18),
+    fontWeight: "bold",
+  },
+  notificacion: {
+    color: "white",
+    fontSize: RFValue(12),
+  },
+  //Fin Modal
+  //Crear Cuenta
+  cajacc: {
+    alignItems: "center",
+    bottom: StatusBar.currentHeight,
+    flexDirection: "column",
+    paddingTop: topios,
+  },
+  cajaatras:{
+    position: "absolute",
+    left:RFValue(20),
+    zIndex: 3,
+    elevation: 3,
+    top:topios,
+    marginTop:RFValue(53)
+  },
+  titlecc: {
+    marginTop:RFValue(53),
+    width: "100%",
+    height: RFValue(40),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  titletx: {
+    color: "#440577",
+    fontSize: RFValue(23),
+    fontWeight: "bold",
+  },
+  txtcc: {
+    marginTop: RFValue(84),
+    width: RFValue(212),
+    height: RFValue(95),
+    alignItems: "center",
+  },
+  txttx: {
+    color: "#4D4D4D",
+    fontSize: RFValue(23),
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  carusel:{
+    alignItems: "center", 
+    marginTop: RFValue(123),
+    justifyContent: "center",
+  },
+  itemContainer: {
+    width: ITEM_WIDTH,
+    height: RFValue(40),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  itemLabel: {
+    color: "#4D4D4D",
+    fontSize: RFValue(28),
+    fontWeight: "bold",
+  },
+  txtpag:{
+    marginTop: RFValue(56),
+    width:RFValue(90),
+    height:RFValue(25),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  counter: {
+    color: "#440577",
+    fontSize: RFValue(17),
+    textAlign: "center",
+  },
+  cajabtn:{
+    alignItems: "center", 
+    zIndex: 3,
+    elevation: 3,
+    bottom:RFValue(-70),
+  },
+  btnDone: {
+    backgroundColor: "#440577",
+    borderRadius: 15,
+    width: RFValue(201),
+    height: RFValue(41.7),
+    justifyContent: "center",
+    elevation: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
   },
   txtDone: {
     color: "#fff",
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: RFValue(21),
     textAlign: "center",
     justifyContent: "center",
   },
-  dotst:{
-    backgroundColor: '#C4C4C4',
-    width:RFValue(28), 
-    height:RFValue(28), 
-    borderRadius:25,
-    marginHorizontal:RFValue(21),
-    bottom : StatusBar.currentHeight,
-    marginBottom:RFValue(190)
-  },
-  actist:{
-    backgroundColor: '#440577',
-    width:RFValue(28), 
-    height:RFValue(28), 
-    borderRadius:25,
-    marginHorizontal:RFValue(21),
-    bottom : StatusBar.currentHeight,
-    marginBottom:RFValue(190)
-  },
-
 });
