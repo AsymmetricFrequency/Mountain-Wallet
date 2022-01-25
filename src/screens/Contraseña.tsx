@@ -159,15 +159,14 @@ export const Contraseña = ({navigation}: {navigation: any}) => {
                         <Text style={styles.headerTitle}>Ingrese una contraseña</Text>
                     </View>
                 </View>
-                <View style={styles.contenedorCajaF}>
-                    <Image style={styles.cajaF} source={require('./img/CAJA-FUERTE.png')}/>
+                <View style={styles.contenedorIcon}>
+                    <Image style={styles.icon} source={require('./img/password.png')}/>
                 </View>
                 
                 <View style={styles.headerCirculos}>
                     {/* PRUEBA BOTON BACKGROUND */}
                     <TouchableOpacity style={[styles.circUno, { backgroundColor: colour }]} onPress={handleClickUno} disabled={true}/>
 
-                    
                     <TouchableOpacity style={[styles.circUno, { backgroundColor: colourDos }]} onPress={handleClickDos} disabled={true}/>
 
                     <TouchableOpacity style={[styles.circUno, { backgroundColor: colourTres }]} onPress={handleClickTres} disabled={true}/>
@@ -294,11 +293,12 @@ const styles = StyleSheet.create({
         color: '#440577',
         
     },
-    contenedorCajaF: {
+    contenedorIcon: {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    cajaF: {
+    icon: {
+        bottom: RFValue(15),
         height: 150,
         width: 150,
     },

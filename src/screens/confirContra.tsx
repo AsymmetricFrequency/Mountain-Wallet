@@ -154,8 +154,8 @@ export const confirContra = ({navigation}: {navigation: any}) => {
                         <Text style={styles.headerTitle}>Confirmar contraseña</Text>
                     </View>
                 </View>
-                <View style={styles.contenedorCajaF}>
-                    <Image style={styles.cajaF} source={require('./img/CAJA-FUERTE.png')}/>
+                <View style={styles.contenedorIcon}>
+                    <Image style={styles.icon} source={require('./img/password.png')}/>
                 </View>
                 
                 <View style={styles.headerCirculos}>
@@ -289,11 +289,12 @@ const styles = StyleSheet.create({
         color: '#440577',
         
     },
-    contenedorCajaF: {
+    contenedorIcon: {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    cajaF: {
+    icon: {
+        bottom: RFValue(15),
         height: 150,
         width: 150,
     },
