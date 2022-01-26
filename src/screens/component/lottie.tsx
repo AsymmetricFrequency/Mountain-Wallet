@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import LottieView from 'lottie-react-native';
+import { styles } from "../../theme/appTheme";
 
 
 
@@ -42,21 +43,20 @@ const Lotieqr = () => {
 }
 
 
-const styles = StyleSheet.create({
-    lottie: {
-        width:60,
-        height:60,
-    },
-    lottiexito: {
-        width:200,
-        height:200,
-    },
-    lottieqr: {
-        width:380,
-        height:380,
+const Lotiesplash = () => {
+    return (
+        <LottieView
+            style={styles.lottiesplash}                                            
+            source={require("../Lottie/logocolor.json")}
+            autoPlay
+            // loop={false}
+        />
+    )
+    
+}
 
-    },
-})
 
-export {Lotierror, Lotiexito, Lotieqr};
+
+
+export {Lotierror, Lotiexito, Lotieqr,Lotiesplash};
 

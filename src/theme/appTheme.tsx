@@ -177,10 +177,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  lottie: {
-    height: 60,
-    width: 60,
-  },
   contenedortext: {
     justifyContent: "center",
   },
@@ -285,4 +281,26 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
   },
+  //Fin Crearcuenta
+  //Lottie
+  lottie: {
+    width:60,
+    height:60,
+  },
+  lottiexito: {
+      width:200,
+      height:200,
+  },
+  lottieqr: {
+      width:380,
+      height:380,
+
+  },
+  lottiesplash: {
+    width: RFValue(336),
+    height: RFValue(289),
+  },
+  //Fin lottie
+
+
 });
