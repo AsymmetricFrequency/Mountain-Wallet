@@ -9,12 +9,18 @@ const spaceH = windowHeight - screenHeight;
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const radios = Platform.OS === "ios" ? 10 : 15;
 const topios = Platform.OS === "ios" ? 0 : 28;
-const bottomios = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
-const cirios = Platform.OS === "ios" ? 50 : 40;
+const bottomios = Platform.OS === "ios" ? 60 : StatusBar.currentHeight;
+const cirios = Platform.OS === "ios" ? 0 : 25;
 
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
+
+// balance
+const anchocaja = Platform.OS === "ios" ? 115 : 124;
+const paddinrightios = Platform.OS === "ios" ? 15 : 12;
+const barios = Platform.OS === "ios" ? 15 : 40;
+const barios2 = Platform.OS === "ios" ? 15 : 0;
 
 export const styles = StyleSheet.create({
   body: {
@@ -70,7 +76,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: RFValue(58)
+    bottom: RFValue(58),
   },
   txtdevep: {
     fontSize: RFValue(14),
@@ -115,10 +121,10 @@ export const styles = StyleSheet.create({
   },
   cajadone: {
     position: "absolute",
-    right:RFValue(20),
+    right: RFValue(20),
     zIndex: 3,
     elevation: 3,
-    marginTop:RFValue(53)
+    marginTop: RFValue(53),
   },
   btndo: {
     alignItems: "center",
@@ -193,15 +199,15 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     // paddingTop: topios,
   },
-  cajaatras:{
+  cajaatras: {
     position: "absolute",
-    left:RFValue(20),
+    left: RFValue(20),
     zIndex: 3,
     elevation: 3,
-    marginTop:RFValue(53)
+    marginTop: RFValue(53),
   },
   titlecc: {
-    marginTop:RFValue(53),
+    marginTop: RFValue(53),
     width: "100%",
     height: RFValue(40),
     alignItems: "center",
@@ -224,8 +230,8 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  carusel:{
-    alignItems: "center", 
+  carusel: {
+    alignItems: "center",
     marginTop: RFValue(123),
     justifyContent: "center",
   },
@@ -240,10 +246,10 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(25),
     fontWeight: "bold",
   },
-  txtpag:{
+  txtpag: {
     marginTop: RFValue(56),
-    width:RFValue(90),
-    height:RFValue(25),
+    width: RFValue(90),
+    height: RFValue(25),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -252,11 +258,11 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(17),
     textAlign: "center",
   },
-  cajabtn:{
-    alignItems: "center", 
+  cajabtn: {
+    alignItems: "center",
     zIndex: 3,
     elevation: 3,
-    bottom:RFValue(-70),
+    bottom: RFValue(-70),
   },
   btnDone: {
     backgroundColor: "#440577",
@@ -279,17 +285,16 @@ export const styles = StyleSheet.create({
   //Fin Crearcuenta
   //Lottie
   lottie: {
-    width:60,
-    height:60,
+    width: 60,
+    height: 60,
   },
   lottiexito: {
-      width:200,
-      height:200,
+    width: 200,
+    height: 200,
   },
   lottieqr: {
-      width:380,
-      height:380,
-
+    width: 380,
+    height: 380,
   },
   lottiesplash: {
     width: RFValue(336),
@@ -297,7 +302,73 @@ export const styles = StyleSheet.create({
   },
   //Fin lottie
   //Balance
-  
-  //Fin balance
+  logocolorB: {
+    width: RFValue(192),
+    height: RFValue(192),
+    resizeMode: "contain",
+    marginTop: RFValue(47),
+  },
+  balancecry: {
+    flex: 1,
+    paddingHorizontal:RFValue(17),
+    marginTop:RFValue(35),
+  },
+  tablacry: {
+    borderColor: "#e0e0e0",
+    borderRadius: 26,
+    borderWidth: 0.8,
+    height: RFValue(60),
+    flexDirection: "row",
+    marginVertical: RFValue(9),
+    paddingLeft: RFValue(10),
+    paddingRight: RFValue(20),
+    backgroundColor:'#E2DBEE'
+  },
+  logocry: {
+    justifyContent: "center",
+    width: "15%",
+    alignItems: "center",
+  },
+  imgcry: {
+    height: windowHeight * 0.12,
+    resizeMode: "contain",
+    width: windowWidth * 0.12,
+  },
+  nombrecry: {
+    justifyContent: "center",
+    paddingLeft: RFValue(8),
+    width: "40%",
+  },
+  ntxtcry: {
+    color: "#000",
+    fontFamily: "opensans-regular",
+    fontSize: RFValue(15),
+    fontWeight: "500",
+  },
+  smcry: {
+    alignItems: "flex-end",
+    justifyContent: "center",
+    width: "45%",
+  },
+  saldocry: {
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+  stxtcry: {
+    color: "#440577",
+    fontSize: RFValue(23),
+    fontWeight: "400",
+  },
+  monedacry: {
+    justifyContent: "center",
+  },
+  mtxtcry: {
+    color: "#440577",
+    fontFamily: "Roboto",
+    fontSize: RFValue(8.5),
+    fontWeight: "400",
 
+  },
+
+  //Fin balance
 });
