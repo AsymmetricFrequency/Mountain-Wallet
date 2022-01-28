@@ -3,12 +3,12 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 export const colores = {};
 const windowWidth = Dimensions.get("screen").width;
-const windowHeight = Dimensions.get("screen").height;
+const windowHeight = Dimensions.get("window").height;
 const screenHeight = Dimensions.get("window").height;
 const spaceH = windowHeight - screenHeight;
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const radios = Platform.OS === "ios" ? 10 : 15;
-const topios = Platform.OS === "ios" ? 20 : 60;
+const topios = Platform.OS === "ios" ? 0 : 28;
 const bottomios = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
 const cirios = Platform.OS === "ios" ? 50 : 40;
 
@@ -21,13 +21,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "#FBF7FF",
     height: windowHeight,
     width: windowWidth,
+    // flex:1
   },
   completo: {
+    backgroundColor: "#FBF7FF",
     alignItems: "center",
-    bottom: StatusBar.currentHeight,
     flex: 1,
-    flexDirection: "column",
-    paddingTop: topios,
   },
   logocolor: {
     marginTop: RFValue(70),
@@ -71,7 +70,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: 68,
+    bottom: RFValue(58)
   },
   txtdevep: {
     fontSize: RFValue(14),
@@ -119,7 +118,6 @@ export const styles = StyleSheet.create({
     right:RFValue(20),
     zIndex: 3,
     elevation: 3,
-    top:topios,
     marginTop:RFValue(53)
   },
   btndo: {
@@ -138,7 +136,6 @@ export const styles = StyleSheet.create({
     height: RFValue(28),
     borderRadius: 25,
     marginHorizontal: RFValue(21),
-    bottom: StatusBar.currentHeight,
     marginBottom: RFValue(50),
   },
   actist: {
@@ -147,7 +144,6 @@ export const styles = StyleSheet.create({
     height: RFValue(28),
     borderRadius: 25,
     marginHorizontal: RFValue(21),
-    bottom: StatusBar.currentHeight,
     marginBottom: RFValue(50),
   },
   //Fin Slider
@@ -193,16 +189,15 @@ export const styles = StyleSheet.create({
   //Crear Cuenta
   cajacc: {
     alignItems: "center",
-    bottom: StatusBar.currentHeight,
+    // bottom: StatusBar.currentHeight,
     flexDirection: "column",
-    paddingTop: topios,
+    // paddingTop: topios,
   },
   cajaatras:{
     position: "absolute",
     left:RFValue(20),
     zIndex: 3,
     elevation: 3,
-    top:topios,
     marginTop:RFValue(53)
   },
   titlecc: {
@@ -242,7 +237,7 @@ export const styles = StyleSheet.create({
   },
   itemLabel: {
     color: "#4D4D4D",
-    fontSize: RFValue(28),
+    fontSize: RFValue(25),
     fontWeight: "bold",
   },
   txtpag:{
@@ -301,6 +296,8 @@ export const styles = StyleSheet.create({
     height: RFValue(289),
   },
   //Fin lottie
-
+  //Balance
+  
+  //Fin balance
 
 });
