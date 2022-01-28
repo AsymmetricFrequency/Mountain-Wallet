@@ -1,36 +1,32 @@
 import React, { useEffect, useState } from "react";
 import {
-  ImageBackground,
-  StyleSheet,
+
   Text,
   View,
   TouchableOpacity,
   Image,
-  Linking,
-  Platform,
-  Dimensions,
+  BackHandler,
+  StatusBar,
+  SafeAreaView,
 } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
-import * as Animatable from "react-native-animatable";
-import { generateMnemonic } from "../../api";
+
 // Fuente
 import * as Font from "expo-font";
 
 import { styles } from "../theme/appTheme";
 
-const windowWidth = Dimensions.get("screen").width;
-const windowHeight = Dimensions.get("screen").height;
-
 const Home = ({ navigation }: { navigation: any }) => {
   function generarMnemonic() {
-    const memo = generateMnemonic();
-    memo.then((value) => {
-      console.log(value);
-      setTimeout(() => {
-        navigation.navigate("Slider");
-      }, 100);
-    });
+    navigation.navigate("Slider");
   }
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => true
+    );
+    return () => backHandler.remove();
+  }, []);
 
   //Función fuentes tipograficas
 
@@ -54,7 +50,8 @@ const Home = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <View style={styles.body}>
+    <SafeAreaView style={styles.body}>
+      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.completo}>
         <Image
           style={styles.logocolor}
@@ -82,7 +79,7 @@ const Home = ({ navigation }: { navigation: any }) => {
           <Text style={styles.txtdevep}>DEVELOPED BY CONDOR LAB</Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

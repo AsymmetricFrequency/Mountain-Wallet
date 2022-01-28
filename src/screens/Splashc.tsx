@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, SafeAreaView, StatusBar } from "react-native";
 import { readKey } from "../../api";
 import { useNavigation } from "@react-navigation/native";
 import { Lotiesplash } from "./component/lottie";
@@ -20,7 +20,8 @@ const Splashc = () => {
   }, 2500);
 
   return (
-    <View style={styles.body}>
+    <SafeAreaView style={styles.body}>
+      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View
         style={[
           styles.completo,
@@ -29,7 +30,7 @@ const Splashc = () => {
       >
         <Lotiesplash />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

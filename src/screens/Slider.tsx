@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { View, Text, Image, TouchableOpacity, Platform } from "react-native";
+import { View, Text, Image, TouchableOpacity, Platform,SafeAreaView,StatusBar  } from "react-native";
 
 //import AppIntroSlider to use it
 import AppIntroSlider from "react-native-app-intro-slider";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
+import { generateMnemonic } from "../../api";
 
 const Slider = ({ navigation }: { navigation: any }) => {
-  const [showRealApp, setShowRealApp] = useState(false);
+
+
+  function generarMnemonic() {
+    const memo = generateMnemonic();
+    memo.then((value) => {
+      console.log(value);
+      setTimeout(() => {
+        navigation.navigate("Crear");
+      }, 100);
+    });
+  }
 
   const RenderItem = ({ item }) => {
     return (
-      <View style={styles.body}>
+      <SafeAreaView  style={styles.body}>
+        <StatusBar backgroundColor="#FBF7FF" barStyle={'dark-content'} />
         <View style={styles.completo}>
           <Image style={styles.introImageStyle} source={item.image} />
           <View style={styles.cajatitle}>
@@ -27,14 +39,14 @@ const Slider = ({ navigation }: { navigation: any }) => {
               <TouchableOpacity
                 activeOpacity={0.5}
                 style={styles.btndo}
-                onPress={() => navigation.navigate("Crear")}
+                onPress={() => generarMnemonic()}
               >
                 <Icon name="arrow-right" size={altura} color="#440577" />
               </TouchableOpacity>
             </View>
           )}
         </View>
-      </View>
+      </SafeAreaView >
     );
   };
 

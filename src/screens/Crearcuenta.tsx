@@ -1,11 +1,13 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import {
   Text,
   View,
   TouchableOpacity,
   Dimensions,
   Platform,
+  SafeAreaView,
+  StatusBar
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { readMnemonic } from "../../api";
@@ -17,49 +19,39 @@ import {
   animatedStyles,
 } from "../screens/utils/animations";
 import Carousel from "react-native-snap-carousel";
+import { appendFile } from "fs/promises";
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
 const altura = Platform.OS === "ios" ? 22 : 25;
 
 const elements: string[] = [];
-async function leerMnemonic() {
+
+function leerMnemonic() {
   const mnemonic = readMnemonic();
   mnemonic.then((value) => {
-    const docePalabras = value;
+    const docePalabras = value;    
     const words = docePalabras.split(" ");
-    for (let index = 0; index < words.length; index++) {
+    for (let index = 0; index < 12; index++) {
       elements.push(words[index]);
     }
   });
+
 }
 leerMnemonic();
-
+ 
 const Crearcuenta = ({ navigation }: { navigation: any }) => {
+  
   const [numero, setNumero] = useState(1);
+  
+  //Funcion usuario de cero
+  if (elements.length === 0) {
+    leerMnemonic();
+  }else{
+    console.log('Lleno');  
+  }
 
-  // Prepare elements and position tracker
 
-  // //Función fuentes tipograficas
-  // const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  // useEffect(() => {
-  //   if (!fontsLoaded) {
-  //     loadFonts();
-  //   }
-  // });
-
-  // const loadFonts = async () => {
-  //   await Font.loadAsync({
-  //     //Fuente
-  //     "opensans-regular": require("../../assets/fonts/OpenSans-Regular.ttf"),
-  //   });
-  //   setFontsLoaded(true);
-  // };
-
-  // if (!fontsLoaded) {
-  //   return <View />;
-  // }
 
   const RenderItem = ({ item }) => {
     return (
@@ -70,7 +62,8 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <View style={styles.body}>
+    <SafeAreaView style={styles.body}>
+      <StatusBar backgroundColor="#FBF7FF" barStyle={'dark-content'} />
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Crear nueva cartera</Text>
@@ -94,9 +87,9 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           activeSlideAlignment={"center"}
           renderItem={RenderItem}
           sliderWidth={SLIDER_WIDTH}
-          itemWidth={140}
+          itemWidth={145}
           slideStyle={styles.carusel}
-          inactiveSlideShift={10}
+          // inactiveSlideShift={10}
           inactiveSlideOpacity={0.1}
           scrollInterpolator={scrollInterpolator}
           slideInterpolatedStyle={animatedStyles}
@@ -104,6 +97,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           onSnapToItem={(index) => setNumero(index + 1)}
           enableMomentum={true}
         />
+
         <View style={styles.txtpag}>
           <Text style={styles.counter}>{numero} de 12</Text>
         </View>
@@ -120,7 +114,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           </View>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
