@@ -7,18 +7,24 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from 'react-native-animatable';
 import LottieView from 'lottie-react-native';
 import { readPassword } from '../../api';
+import { confirContra } from './confirContra';
 
 // import { useCalculadora } from '../hooks/useCalculadora';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
+
+
 //backgroud contraseña
 const colours = ['white', '#440577'];
 const getColour = () => colours[Math.floor(Math.random() * colours.length)];
 
 export const Contraseña = ({navigation}: {navigation: any}) => {
+
+    const[password1,setPassword1] = useState ({pass1:""})
     
+
     //Estado background
 
     const [colour, setColourUno] = useState('white')
@@ -33,43 +39,18 @@ export const Contraseña = ({navigation}: {navigation: any}) => {
     //Modales
     const [anmt,setanmt]= useState("");
     const [vacioModal, setVacioModal] = useState(false);
+    
 
-    const [storedPass, setStoredPass] = useState("")
+   
 
-    readPassword().then((val)=>{
-        setStoredPass(val)
-    })
-
-    function validarPassword() {
-        const password = pin1+pin2+pin3+pin4
-        if (password == storedPass) {
-            navigation.navigate('confirContra')
-        } else {
-            setVacioModal(true);
-            setanmt("fadeInDownBig");            
-            setTimeout( () => {
-            setanmt("fadeOutUp");
-                setTimeout( () => {
-                    setVacioModal(false);
-                }, 100 ) 
-            },900)
-            //seteo variables contraseña incorrecta
-            setPin1("")
-            setPin2("")
-            setPin3("")
-            setPin4("") 
-            setColourUno('white')
-            setColourDos('white')
-            setColourTres('white')
-            setColourCuatro('white')
-        }
-    }
-
-    // Referencias para salto input
-    const pin1Ref = useRef(null)
-    const pin2Ref = useRef(null)
-    const pin3Ref = useRef(null)
-    const pin4Ref = useRef(null)
+    function genPassword() {
+    
+        password1.pass1 = pin1+pin2+pin3+pin4
+        const antipass  = password1.pass1 
+        console.log(antipass);
+        navigation.navigate("confirContra",{prePassword:antipass})
+        
+    } 
 
     const [pin1, setPin1] = useState("");
     const [pin2, setPin2] = useState("");
@@ -110,9 +91,16 @@ export const Contraseña = ({navigation}: {navigation: any}) => {
             console.log('====================================');
             console.log("No hay nada que borrar");
             console.log('====================================');
+           
+            
+            
+            
+            
         }
     }
-
+   
+    
+    
     return (
      
         <View style={styles.container}>
@@ -253,7 +241,7 @@ export const Contraseña = ({navigation}: {navigation: any}) => {
                 <View style={styles.contBtn}>
                     <TouchableOpacity 
                         style={styles.btnCont}
-                        onPress={() => validarPassword()}
+                        onPress={() => genPassword() }
                     >
                         <Text style={styles.textbtnR}>CONTINUAR</Text>
                     </TouchableOpacity>

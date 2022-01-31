@@ -7,15 +7,27 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from 'react-native-animatable';
 import LottieView from 'lottie-react-native';
 import { readPassword } from '../../api';
+import { savePassword } from '../../api';
+
+
+ 
 // import { useCalculadora } from '../hooks/useCalculadora';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
+
+
+    
 const colours = ['white', '#440577'];
 const getColour = () => colours[Math.floor(Math.random() * colours.length)];
 
-export const confirContra = ({navigation}: {navigation: any}) => {
+export  const confirContra = ({navigation , route}: {navigation: any , route : any}) => {
+
+    // Variable importada desde contraseña 
+    const {prePassword}=route.params 
+    console.log(prePassword);
+    
     //estado background
 
     const [colour, setColourUno] = useState('white')
@@ -31,17 +43,16 @@ export const confirContra = ({navigation}: {navigation: any}) => {
     //Modales
     const [anmt,setanmt]= useState("");
     const [vacioModal, setVacioModal] = useState(false);
-
     const [storedPass, setStoredPass] = useState("")
 
-    readPassword().then((val)=>{
-        setStoredPass(val)
-    })
-
+   // Funcion para validar si la contraseñas coinciden 
     function validarPassword() {
-        const password = pin1+pin2+pin3+pin4
-        if (password == storedPass) {
-            navigation.navigate('Balance')
+        const postPassword = pin1+pin2+pin3+pin4
+        savePassword(prePassword)
+
+        if (postPassword === prePassword) {
+            alert("Contraseñas correctas");
+            navigation.navigate("Balance")
         } else {
             setVacioModal(true);
             setanmt("fadeInDownBig");            
@@ -60,15 +71,13 @@ export const confirContra = ({navigation}: {navigation: any}) => {
             setColourDos('white')
             setColourTres('white')
             setColourCuatro('white')
+
+            alert("las contraseñas no coinciden");
+            
+            
         }
     }
-
-    // Referencias para salto input
-    const pin1Ref = useRef(null)
-    const pin2Ref = useRef(null)
-    const pin3Ref = useRef(null)
-    const pin4Ref = useRef(null)
-
+   // Variables de PIN numerico  
     const [pin1, setPin1] = useState("");
     const [pin2, setPin2] = useState("");
     const [pin3, setPin3] = useState("");
@@ -108,6 +117,9 @@ export const confirContra = ({navigation}: {navigation: any}) => {
             console.log('====================================');
             console.log("No hay nada que borrar");
             console.log('====================================');
+
+          
+            
         }
     }
 
@@ -249,7 +261,7 @@ export const confirContra = ({navigation}: {navigation: any}) => {
                 <View style={styles.contBtn}>
                     <TouchableOpacity 
                         style={styles.btnR}
-                        onPress={() => validarPassword()} 
+                        onPress={() => validarPassword() }
                     >
                         <Text style={styles.textbtnR}>CONFIRMAR</Text>
                     </TouchableOpacity>
