@@ -17,6 +17,9 @@ import { styles } from "../theme/appTheme";
 import * as Font from "expo-font";
 
 const Balance = ({ navigation }: { navigation: any }) => {
+  
+
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
@@ -103,10 +106,16 @@ const Balance = ({ navigation }: { navigation: any }) => {
     }, 1000);
   };
 
+  const Monedas = ()=>{
+    return (
+      <Text style={styles.montxt}>Condor</Text>
+    )
+  };
+  
   return (
     <SafeAreaView style={styles.body}>
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
-      <View style={[styles.completo, { paddingBottom: 60 }]}>
+      <View style={styles.completo}>
         <Image
           style={styles.logocolorB}
           source={require("./img/logocolor.png")}
@@ -125,7 +134,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             showsVerticalScrollIndicator={false}
           >
             {/* CONDOR */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda")}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -148,7 +157,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* SOLANA */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda")}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -160,7 +169,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
               </View>
               <View style={styles.smcry}>
                 <View style={styles.saldocry}>
-                  <Text style={styles.stxtcry}>{balance}</Text>
+                  <Text numberOfLines={1} style={styles.stxtcry}>{balance}</Text>
                 </View>
                 <View style={styles.monedacry}>
                   <Text style={styles.mtxtcry}>SOL</Text>
@@ -169,7 +178,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* USDT */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda")}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -181,16 +190,17 @@ const Balance = ({ navigation }: { navigation: any }) => {
               </View>
               <View style={styles.smcry}>
                 <View style={styles.saldocry}>
-                  <Text style={styles.stxtcry}>{tokenBalanceUSDT}</Text>
+                  <Text numberOfLines={1} style={styles.stxtcry}>{tokenBalanceUSDT}</Text>
                 </View>
                 <View style={styles.monedacry}>
                   <Text style={styles.mtxtcry}>USDT</Text>
                 </View>
               </View>
-            </TouchableOpacity>
-
-            {/* Agregar token */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5}>
+            </TouchableOpacity>           
+          </ScrollView>
+        </SafeAreaView>
+          {/* Agregar token */}
+          <TouchableOpacity style={[styles.tablacry,styles.sombras]} activeOpacity={0.5}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -201,8 +211,6 @@ const Balance = ({ navigation }: { navigation: any }) => {
                 <Text style={styles.ntxtcry}>Agregar Token</Text>
               </View>
             </TouchableOpacity>
-          </ScrollView>
-        </SafeAreaView>
       </View>
     </SafeAreaView>
   );
