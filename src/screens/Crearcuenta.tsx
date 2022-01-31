@@ -27,7 +27,7 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const elements: string[] = [];
 
-function leerMnemonic() {
+ async function leerMnemonic() {
   const mnemonic = readMnemonic();
   mnemonic.then((value) => {
     const docePalabras = value;    
@@ -107,7 +107,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
             <TouchableOpacity
               style={styles.btnDone}
               activeOpacity={0.5}
-              onPress={() => navigation.navigate("Crear")}
+              onPress={() => navigation.navigate("PantallaCarga")}
             >
               <Text style={styles.txtDone}>Continuar</Text>
             </TouchableOpacity>
