@@ -14,10 +14,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { readMnemonic } from "../../api";
-import LottieView from "lottie-react-native";
-import { ScrollView } from "react-native-web-hover";
 import { Lotierror, Lotiexito } from "./component/lottie";
-import { watchFile } from "fs";
 
 const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;

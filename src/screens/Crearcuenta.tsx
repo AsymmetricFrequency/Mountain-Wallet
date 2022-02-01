@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -7,7 +7,7 @@ import {
   Dimensions,
   Platform,
   SafeAreaView,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { readMnemonic } from "../../api";
@@ -27,31 +27,27 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const elements: string[] = [];
 
- async function leerMnemonic() {
+async function leerMnemonic() {
   const mnemonic = readMnemonic();
   mnemonic.then((value) => {
-    const docePalabras = value;    
+    const docePalabras = value;
     const words = docePalabras.split(" ");
     for (let index = 0; index < 12; index++) {
       elements.push(words[index]);
     }
   });
-
 }
 leerMnemonic();
- 
+
 const Crearcuenta = ({ navigation }: { navigation: any }) => {
-  
   const [numero, setNumero] = useState(1);
-  
+
   //Funcion usuario de cero
   if (elements.length === 0) {
     leerMnemonic();
-  }else{
-    console.log('Lleno');  
+  } else {
+    console.log("Lleno");
   }
-
-
 
   const RenderItem = ({ item }) => {
     return (
@@ -63,7 +59,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
-      <StatusBar backgroundColor="#FBF7FF" barStyle={'dark-content'} />
+      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Crear nueva cartera</Text>
@@ -107,7 +103,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
             <TouchableOpacity
               style={styles.btnDone}
               activeOpacity={0.5}
-              onPress={() => navigation.navigate("PantallaCarga")}
+              onPress={() => navigation.navigate("DocePalabras")}
             >
               <Text style={styles.txtDone}>Continuar</Text>
             </TouchableOpacity>
