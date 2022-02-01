@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import { ImageBackground,StyleSheet, Text, View,TouchableOpacity, Image, TextInput, Modal,Platform,Dimensions,} from 'react-native'
-import { mnemonicToSeed, createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';
+import { createAccount, enviarTrans, readMnemonic, getToken, readPublicKey, getBalance } from '../../api';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import * as Animatable from 'react-native-animatable';
@@ -92,10 +92,8 @@ const Importar = ({navigation}: {navigation: any}) => {
                 },2500)  
             }  else {
                 const mnemonic = readMnemonic()
-                mnemonic.then((value) => {
-                    const docePalabras = mnemonicToSeed(value)
-                    docePalabras.then((value) => {
-                        const acc = createAccount(value)
+                mnemonic.then(() => {
+                        const acc = createAccount()
                             acc.then((value) => {
                                 enviarTrans(value,pubKey,amount).then((value) => {
                                     // La cuenta no ha sido fondeada
@@ -172,7 +170,6 @@ const Importar = ({navigation}: {navigation: any}) => {
                                 })
                             })
                     })
-                }) 
         }
         // Si alguno de los inputs esta vacio
         } else {
