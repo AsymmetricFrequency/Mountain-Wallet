@@ -1,45 +1,91 @@
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import { StyleSheet,Image } from 'react-native';
 import "react-native-url-polyfill/auto";
 
-import { readKey } from "./api";
+import { readKey } from './api';
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //screens
-import Balance from "./src/screens/Balance";
-import Crearcuenta from "./src/screens/Crearcuenta";
-import Home from "./src/screens/Home";
-import ImportarCuenta from "./src/screens/Importarcuenta";
-import Importar from "./src/screens/Importar";
-import CodigoVerificacion from "./src/screens/CodigoVerificacion";
-import Recibir from "./src/screens/Recibir";
-import Splashc from "./src/screens/Splashc";
-import QrReader from "./src/screens/QrReader";
-import PantallaCarga from "./src/screens/PantallaCarga";
-import Slider from "./src/screens/Slider";
+import Balance from './src/screens/Balance';
+import Crearcuenta from './src/screens/Crearcuenta';
+import Home from './src/screens/Home';
+import ImportarCuenta from './src/screens/Importarcuenta';
+import Importar from './src/screens/Importar';
+import CodigoVerificacion from './src/screens/CodigoVerificacion'
+import Recibir from './src/screens/Recibir';
+import Splashc from './src/screens/Splashc';
+import QrReader from './src/screens/QrReader';
+import PantallaCarga from './src/screens/PantallaCarga';
+import Swap from './src/screens/Swap';
+import Ajustes from './src/screens/Ajustes';
+import Slider from './src/screens/Slider';
+import Moneda from './src/screens/Moneda';
 import { Contraseña } from "./src/screens/Contraseña";
-import { PassLogin } from "./src/screens/PassLogin";
 import DocePalabras from "./src/screens/DocePalabras";
-import EnviarCantidad from "./src/screens/EnviarCantidad";
-import EnviarDireccion from "./src/screens/EnviarDireccion";
-import { ConfirContra } from "./src/screens/ConfirContra";
-import Moneda from "./src/screens/Moneda";
+import { ConfirContra } from "./src/screens/confirContra";
+import { PassLogin } from "./src/screens/PassLogin";
+
+
+
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+const Tab = createBottomTabNavigator();
+
+function Barra(){
+  return(
+    <Tab.Navigator
+          screenOptions={({ route }) => ({
+            headerShown: false,
+            tabBarShowLabel:false,
+            tabBarStyle: {height:65,backgroundColor:'#FBF7FF'},
+            tabBarIcon: ({ focused}) => {
+              let imagenes;
+              if (route.name === 'Balance') {
+                imagenes = focused
+                  ? require('./src/screens/img/walletcolor.png')
+                  :  require('./src/screens/img/walletblanco.png');
+              } else if (route.name === 'Swap') {
+                imagenes = focused
+                ?  require('./src/screens/img/swapcolor.png')
+                :  require('./src/screens/img/swapblanco.png');
+              } else if (route.name === 'Ajustes') {
+                imagenes = focused
+                  ?  require('./src/screens/img/settingscolor.png')
+                  :  require('./src/screens/img/settingsblanco.png');
+              }
+              return (
+                <Image
+                    source={imagenes}
+                    style={{height:46, width:40, resizeMode: "contain",}}
+                />
+              )
+            },
+
+          })}
+        >
+          <Tab.Screen name="Balance" component={Balance}/>
+          <Tab.Screen name="Swap" component={Swap} />
+          <Tab.Screen name="Ajustes" component={Ajustes} />
+        </Tab.Navigator>
+  )
+}
 
 export default function App() {
+
   const Stack = createNativeStackNavigator();
 
-  const [llave, setLlave] = useState("");
+  const [llave, setLlave] = useState("")
 
   readKey().then((value) => {
-    setLlave(value);
-  });
+    setLlave(value)
+  })
 
-  if (llave != null && llave != "" && llave != undefined) {
+  if (llave != null && llave != '' && llave != undefined) {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
           <Stack.Screen
             name="Splash"
             component={Splashc}
@@ -51,8 +97,8 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Balance"
-            component={Balance}
+            name="Barra"
+            component={Barra}
             options={{ headerShown: false, gestureEnabled: false }}
           />
           <Stack.Screen
@@ -70,7 +116,6 @@ export default function App() {
             component={QrReader}
             options={{ headerShown: false }}
           />
-        </Stack.Navigator>
       </NavigationContainer>
     );
   } else {
@@ -123,8 +168,8 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Balance"
-            component={Balance}
+            name="Barra"
+            component={Barra}
             options={{ headerShown: false, gestureEnabled: false }}
           />
           <Stack.Screen
@@ -151,17 +196,18 @@ export default function App() {
       </NavigationContainer>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 30,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 30
   },
   boton: {
-    marginTop: 50,
-  },
+    marginTop: 50
+  }
 });
