@@ -26,7 +26,7 @@ const PantallaCarga = ({ navigation }: { navigation: any }) => {
     acc.then((value) => {
         savePublicKey(value)
         setTimeout(() => {
-            navigation.navigate('Balance')
+            navigation.navigate('Barra')
         }, 2000)
     })
 }

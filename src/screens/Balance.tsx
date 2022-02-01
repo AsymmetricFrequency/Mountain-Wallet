@@ -106,11 +106,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
     }, 1000);
   };
 
-  const Monedas = ()=>{
-    return (
-      <Text style={styles.montxt}>Condor</Text>
-    )
-  };
+
   
   return (
     <SafeAreaView style={styles.body}>
@@ -134,7 +130,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             showsVerticalScrollIndicator={false}
           >
             {/* CONDOR */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda")}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)"})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -157,7 +153,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* SOLANA */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda")}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Solana", mon:"(SOL)"})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -178,7 +174,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* USDT */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda")}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Tether", mon:"(USDT)"})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
