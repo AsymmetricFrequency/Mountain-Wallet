@@ -300,6 +300,10 @@ export const styles = StyleSheet.create({
     width: RFValue(336),
     height: RFValue(289),
   },
+  lottiecopy: {
+    width: 53,
+    height: 53
+  },
   //Fin lottie
   //Balance
   logocolorB: {
@@ -425,7 +429,8 @@ export const styles = StyleSheet.create({
   },
   cajasf:{
     marginTop:RFValue(15),
-    width: windowWidth*saldoios,
+    // width: windowWidth*saldoios,
+    marginHorizontal:RFValue(25.5),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -439,6 +444,62 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-  }
+  },
   //FinMoneda
+  //Recibir
+  logorb:{
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: RFValue(12.5),
+  },
+  cuadroQR: {
+    width:RFValue(161),
+    height:RFValue(161),
+    borderColor: "#E2DBEE",
+    borderWidth: 3,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: RFValue(25),
+  },
+  cajadirecc: {
+    width:RFValue(171),
+    height:RFValue(21.7),
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop:RFValue(36),
+  },
+  txtdirecc: {
+    fontSize:RFValue(11.5),
+    fontWeight:"500",
+    color: "#B3B3B3",
+  },
+  tablaqr: {
+    flexDirection: "row",
+    width:RFValue(238),
+    height:RFValue(64),
+    marginTop:RFValue(29),
+    paddingHorizontal:RFValue(8),
+  },
+  cbtncop: {
+    width: "25%",
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+  btncop: {
+    alignItems: "center",
+    borderRadius: 10,
+    padding: RFValue(5),
+  },
+  cuadroqr: {
+    justifyContent: "center",
+    width: "72%",
+  },
+  txtqr: {
+    color: "#440577",
+    fontSize: RFValue(13),
+    fontWeight: "500",
+  },
+  
+  //FinRecibir
 });

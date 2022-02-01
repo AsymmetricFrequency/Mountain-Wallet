@@ -56,7 +56,21 @@ const Lotiesplash = () => {
 }
 
 
+const Lotiecopy = () => {
+    return (
+        <LottieView
+            style={styles.lottiecopy}                                            
+            source={require("../Lottie/copy.json")}
+            speed={2.5}
+            autoPlay
+            loop={true}
+        />
+    )
+    
+}
 
 
-export {Lotierror, Lotiexito, Lotieqr,Lotiesplash};
+
+
+export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy};
 
