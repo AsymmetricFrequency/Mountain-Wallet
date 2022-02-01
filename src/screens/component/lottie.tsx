@@ -8,7 +8,7 @@ const Lotierror = () => {
     <LottieView
       style={styles.lottie}
       speed={2}
-      source={require("../Lottie/error.json")}
+      source={require("../Lottie/error_anim.json")}
       autoPlay
     />
   );
@@ -18,7 +18,6 @@ const Lotiexito = () => {
     <LottieView
       style={styles.lottiexito}
       source={require("../Lottie/sucess.json")}
-      speed={2.5}
       autoPlay
       loop={false}
     />

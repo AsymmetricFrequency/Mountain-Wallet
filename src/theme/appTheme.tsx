@@ -289,8 +289,8 @@ export const styles = StyleSheet.create({
     height: 60,
   },
   lottiexito: {
-    width: 200,
-    height: 200,
+    width: 60,
+    height: 60,
   },
   lottieqr: {
     width: 380,
@@ -395,50 +395,49 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: RFValue(20),
     paddingVertical: RFValue(12),
-    borderTopColor:'#E2DBEE',
-    borderTopWidth:1,
-    borderBottomColor:'#E2DBEE',
-    borderBottomWidth:1,
-    marginHorizontal:RFValue(25.5),
+    borderTopColor: "#E2DBEE",
+    borderTopWidth: 1,
+    borderBottomColor: "#E2DBEE",
+    borderBottomWidth: 1,
+    marginHorizontal: RFValue(25.5),
   },
   dcR: {
     width: "50%",
-    alignItems:'flex-end'
+    alignItems: "flex-end",
   },
   dcE: {
     width: "50%",
-    alignItems:'flex-start'
+    alignItems: "flex-start",
   },
   btnR: {
     width: RFValue(121),
-    height:RFValue(37.5),
+    height: RFValue(37.5),
     alignItems: "center",
     backgroundColor: "#5b298a",
     borderRadius: 10,
     justifyContent: "center",
-
   },
   textbtnR: {
     color: "white",
     fontSize: RFValue(21.25),
     fontWeight: "400",
   },
-  cajasf:{
-    marginTop:RFValue(15),
-    width: windowWidth*saldoios,
+  cajasf: {
+    marginTop: RFValue(15),
+    width: windowWidth * saldoios,
     alignItems: "center",
     justifyContent: "center",
   },
   saldofull: {
-    fontSize:RFValue(20),
-    color:"#440577",
+    fontSize: RFValue(20),
+    color: "#440577",
   },
-  sombras:{
+  sombras: {
     elevation: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-  }
+  },
   //FinMoneda
 });
