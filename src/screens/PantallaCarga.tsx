@@ -4,7 +4,6 @@ import {
   readMnemonic,
   createAccount,
   savePublicKey,
-  mnemonicToSeed,
 } from "../../api";
 import LottieView from "lottie-react-native";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -22,21 +21,18 @@ const PantallaCarga = ({ navigation }: { navigation: any }) => {
   leerMnemonic();
 
   //Crear cuenta
-  async function crearCuenta(palabras: string) {
-    const docePalabras = mnemonicToSeed(palabras);
-    docePalabras.then((value) => {
-      const acc = createAccount(value);
-      acc.then((value) => {
-        savePublicKey(value.publicKey.toString());
+  async function crearCuenta() {
+    const acc = createAccount()
+    acc.then((value) => {
+        savePublicKey(value)
         setTimeout(() => {
-          navigation.navigate("Balance");
-        }, 2000);
-      });
-    });
-  }
+            navigation.navigate('Balance')
+        }, 2000)
+    })
+}
 
   setTimeout(() => {
-    crearCuenta(palabras);
+    crearCuenta();
   }, 2000);
 
   return (

@@ -4,11 +4,6 @@ import { PublicKey, Keypair } from '@solana/web3.js';
 
 import  AsyncStorage  from "@react-native-async-storage/async-storage";
 
-import * as Random from "expo-random"
-import { ethers } from "ethers"
-import { Buffer } from "buffer"
-import nacl from "tweetnacl"
-
 //variables
 const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
@@ -108,33 +103,34 @@ async function readPassword(){
 }
 
 
+let mnemonic = ""
 //generar mnemonic
 async function generateMnemonic() {
-    const randomBytes = await Random.getRandomBytesAsync(16);
-    const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
-    //guardando mnemonic en asyncStorage
-    saveMmemonic(mnemonic)     
-    return mnemonic
+  fetch("http://10.10.18.13:3000/mnemonic").then(
+      res => res.text()
+  ).then(
+      data =>{
+        mnemonic = data
+        //guardando mnemonic en asyncStorage
+        saveMmemonic(mnemonic) 
+        return mnemonic
+          }   
+      )
 }
 
-
-//mnemonic a semilla
-const mnemonicToSeed = async (mnemonic: string) => {
-    try {
-        return ethers.utils.mnemonicToSeed(mnemonic).toString()
-    } catch (error) {
-        console.log(error);
-        return "error"
-    }
-}
-
-//crear cuenta
-async function createAccount(seed: string) {
-    const hex = Uint8Array.from(Buffer.from(seed))
-    const keyPair = nacl.sign.keyPair.fromSeed(hex.slice(0, 32));
-    const acc = new solanaWeb3.Account(keyPair.secretKey);
-    saveKey(keyPair.secretKey.toString())
-    return acc
+let keypair_public_key = ""
+//Crear cuenta (public key)
+async function createAccount() {
+  fetch("http://10.10.18.13:3000/keypair_public_key").then(
+      res => res.text()
+  ).then(
+      data =>{
+        keypair_public_key = data
+        //guardando public_key en asyncStorage
+        savePublicKey(keypair_public_key)
+        return keypair_public_key
+          }   
+      )
 }
 
 //crear conexion
@@ -248,7 +244,6 @@ export {
   savePublicKey,
   readPublicKey,
   generateMnemonic,
-  mnemonicToSeed,
   createAccount,
   getBalance,
   getToken,
