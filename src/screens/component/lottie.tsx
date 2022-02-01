@@ -37,14 +37,33 @@ const Lotieqr = () => {
 };
 
 const Lotiesplash = () => {
-  return (
-    <LottieView
-      style={styles.lottiesplash}
-      source={require("../Lottie/logocolor.json")}
-      autoPlay
-      // loop={false}
-    />
-  );
-};
 
-export { Lotierror, Lotiexito, Lotieqr, Lotiesplash };
+    return (
+        <LottieView
+            style={styles.lottiesplash}                                            
+            source={require("../Lottie/logocolor.json")}
+            autoPlay
+            // loop={false}
+        />
+    )
+    
+}
+
+
+const Lotiecopy = () => {
+    return (
+        <LottieView
+            style={styles.lottiecopy}                                            
+            source={require("../Lottie/copy.json")}
+            speed={2.5}
+            autoPlay
+            loop={true}
+        />
+    )
+    
+}
+
+
+
+
+export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy};
