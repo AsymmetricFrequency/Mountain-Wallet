@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   Platform,
   Dimensions,
   Modal,
+  RefreshControl,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
@@ -16,21 +17,22 @@ import { readMnemonic } from "../../api";
 import LottieView from "lottie-react-native";
 import { ScrollView } from "react-native-web-hover";
 import { Lotierror, Lotiexito } from "./component/lottie";
+import { watchFile } from "fs";
 
 const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
 
 const elements: string[] = [];
 const doceIncompleta: string[] = [];
-const arr = [];
+const arr: number[] = [];
 
-async function leerMnemonic() {
+function leerMnemonic() {
   const mnemonic = readMnemonic();
 
   mnemonic.then((value) => {
     const docePalabras = value;
     const words = docePalabras.split(" ");
-    for (let index = 0; index < words.length; index++) {
+    for (let index = 0; index < 12; index++) {
       elements.push(words[index]);
       doceIncompleta.push(words[index]);
     }
@@ -44,11 +46,23 @@ async function leerMnemonic() {
         doceIncompleta[r] = "";
       }
     }
-  }, 10);
+  }, 1);
 }
-leerMnemonic();
 
-export const DocePalabras = ({ navigation }: { navigation: any }) => {
+const DocePalabras = ({ navigation }: { navigation: any }) => {
+  const [content, setContent] = React.useState();
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  useEffect(() => {
+    setRefreshing(true);
+    leerMnemonic();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 5);
+  }, []);
+
+  console.log("print elements", elements);
+
   //Modal
   const [anmt, setanmt] = useState("");
   const [MostrarModal, setModal] = useState(false);
@@ -116,11 +130,14 @@ export const DocePalabras = ({ navigation }: { navigation: any }) => {
     }
   }
 
-  // console.log(doceIncompleta);
-  // console.log(elements);
-
   return (
     <SafeAreaView style={styles.container}>
+      <RefreshControl
+        refreshing={refreshing}
+        tintColor="#5b298a"
+        colors={["#5b298a", "#7e54a7"]}
+      />
+
       <Modal
         visible={MostrarModal}
         transparent
@@ -151,7 +168,7 @@ export const DocePalabras = ({ navigation }: { navigation: any }) => {
         </Text>
       </View>
       <View style={styles.headerPrimario}>
-        {doceIncompleta.map((inp, index) => {
+        {doceIncompleta.map((j, index) => {
           if (doceIncompleta[index] === "") {
             return (
               <TextInput
@@ -286,3 +303,5 @@ const styles = StyleSheet.create({
     fontSize: RFValue(12),
   },
 });
+
+export default DocePalabras;
