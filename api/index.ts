@@ -106,7 +106,7 @@ async function readPassword(){
 let mnemonic = ""
 //generar mnemonic
 async function generateMnemonic() {
-  fetch("http://10.10.18.13:3000/mnemonic").then(
+  fetch("http://10.10.18.14:3000/mnemonic").then(
       res => res.text()
   ).then(
       data =>{
@@ -121,7 +121,7 @@ async function generateMnemonic() {
 let keypair_public_key = ""
 //Crear cuenta (public key)
 async function createAccount() {
-  fetch("http://10.10.18.13:3000/keypair_public_key").then(
+  fetch("http://10.10.18.14:3000/keypair_public_key").then(
       res => res.text()
   ).then(
       data =>{
