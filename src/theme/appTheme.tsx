@@ -519,6 +519,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   fondoFrases: {
+    color:"#440577",
     textAlign: "center",
     borderRadius: 3,
     backgroundColor: "#FBF7FF",
@@ -528,6 +529,9 @@ export const styles = StyleSheet.create({
     marginHorizontal: RFValue(5),
     width: RFValue(99.05),
     height: RFValue(24.22),
+    fontWeight: "bold",
+    fontFamily: "Roboto",
+    
   },
   contenImg: {
     alignItems: "center",
@@ -553,7 +557,7 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   txtDoceIncompleta: {
-    color: "#440577",
+    color: "#AEA3C6",
     fontSize: RFValue(13),
     fontWeight: "700",
   },

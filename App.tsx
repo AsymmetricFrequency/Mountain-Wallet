@@ -24,7 +24,7 @@ import Slider from './src/screens/Slider';
 import Moneda from './src/screens/Moneda';
 import { Contraseña } from "./src/screens/Contraseña";
 import DocePalabras from "./src/screens/DocePalabras";
-import { ConfirContra } from "./src/screens/confirContra";
+import { ConfirContra } from "./src/screens/ConfirContra";
 import { PassLogin } from "./src/screens/PassLogin";
 
 
