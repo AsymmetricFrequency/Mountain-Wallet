@@ -8,6 +8,8 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
+  ScrollView,
+  RefreshControl
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { readMnemonic } from "../../api";
@@ -41,23 +43,26 @@ async function leerMnemonic() {
 
 const Crearcuenta = ({ navigation }: { navigation: any }) => {
   const [numero, setNumero] = useState(1);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
-    //Funcion usuario de cero
+    setRefreshing(true);
     if (elements.length > 12){
-      for (let index = 0; index < elements.length; index++) {
-        elements.splice(0, elements.length);
-      }
-      leerMnemonic() 
-    }else{
-      console.log();
-      for (let index = 0; index < elements.length; index++) {
-        elements.splice(0, elements.length);
-      }
-      leerMnemonic();
-    }
+          for (let index = 0; index < elements.length; index++) {
+            elements.splice(0, elements.length);
+          }
+          leerMnemonic() 
+        }else{
+          console.log();
+          for (let index = 0; index < elements.length; index++) {
+            elements.splice(0, elements.length);
+          }
+          leerMnemonic();
+        }
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 5);
   }, []);
-  
 
   const RenderItem = ({ item }) => {
     return (
@@ -68,7 +73,20 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
   };
 
   return (
+    
     <SafeAreaView style={styles.body}>
+      <SafeAreaView>
+        <ScrollView
+          style={{ backgroundColor: "red" }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              tintColor="#5b298a"
+              colors={["#5b298a", "#7e54a7"]}
+            />
+          }
+        ></ScrollView>
+      </SafeAreaView>
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
