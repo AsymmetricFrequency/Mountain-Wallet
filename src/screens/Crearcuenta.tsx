@@ -37,17 +37,27 @@ async function leerMnemonic() {
     }
   });
 }
-leerMnemonic();
+
 
 const Crearcuenta = ({ navigation }: { navigation: any }) => {
   const [numero, setNumero] = useState(1);
 
-  //Funcion usuario de cero
-  if (elements.length === 0) {
-    leerMnemonic();
-  } else {
-    console.log("Lleno");
-  }
+  useEffect(() => {
+    //Funcion usuario de cero
+    if (elements.length > 12){
+      for (let index = 0; index < elements.length; index++) {
+        elements.splice(0, elements.length);
+      }
+      leerMnemonic() 
+    }else{
+      console.log();
+      for (let index = 0; index < elements.length; index++) {
+        elements.splice(0, elements.length);
+      }
+      leerMnemonic();
+    }
+  }, []);
+  
 
   const RenderItem = ({ item }) => {
     return (
