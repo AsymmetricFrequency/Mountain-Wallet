@@ -8,16 +8,15 @@ import {
   Dimensions,
   Modal,
   RefreshControl,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { readMnemonic } from "../../api";
 import { Lotierror, Lotiexito } from "./component/lottie";
-
-const windowWidth = Dimensions.get("screen").width;
-const windowHeight = Dimensions.get("screen").height;
+import { styles } from "../theme/appTheme";
 
 const elements: string[] = [];
 const doceIncompleta: string[] = [];
@@ -128,13 +127,19 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <RefreshControl
-        refreshing={refreshing}
-        tintColor="#5b298a"
-        colors={["#5b298a", "#7e54a7"]}
-      />
-
+    <SafeAreaView style={styles.body}>
+      <SafeAreaView>
+        <ScrollView
+          style={{ backgroundColor: "red" }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              tintColor="#5b298a"
+              colors={["#5b298a", "#7e54a7"]}
+            />
+          }
+        ></ScrollView>
+      </SafeAreaView>
       <Modal
         visible={MostrarModal}
         transparent
@@ -159,39 +164,51 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
           </View>
         </Animatable.View>
       </Modal>
-      <View style={styles.headerDos}>
-        <Text style={styles.headerTitle}>
-          Escribe las tres palabras faltantes en tu frase de respaldo.
-        </Text>
-      </View>
-      <View style={styles.headerPrimario}>
-        {doceIncompleta.map((j, index) => {
-          if (doceIncompleta[index] === "") {
-            return (
-              <TextInput
-                style={styles.fondoFrases}
-                onChangeText={(text) =>
-                  handleChange(text, "vacio[" + index + "]")
-                }
-              >
-                <Text style={styles.txt}>{doceIncompleta[index]}</Text>
-              </TextInput>
-            );
-          } else {
-            return (
-              <TextInput style={styles.fondoFrases} editable={false}>
-                <Text style={styles.txt}>{doceIncompleta[index]}</Text>
-              </TextInput>
-            );
-          }
-        })}
-        <View>
-          <TouchableOpacity
-            style={styles.btnR}
-            onPress={() => addTresFaltantes()}
-          >
-            <Text style={styles.txtContinuar}>Continuar</Text>
-          </TouchableOpacity>
+      <View style={styles.completo}>
+        <View style={styles.headerDos}>
+          <Text style={styles.headerTitle}>
+            Escribe las tres palabras faltantes en tu frase de respaldo.
+          </Text>
+        </View>
+        <View style={styles.headerPrimario}>
+          {doceIncompleta.map((j, index) => {
+            if (doceIncompleta[index] === "") {
+              return (
+                <TextInput
+                  style={styles.fondoFrases}
+                  onChangeText={(text) =>
+                    handleChange(text, "vacio[" + index + "]")
+                  }
+                >
+                  <Text style={styles.txtDoceIncompleta}>
+                    {doceIncompleta[index]}
+                  </Text>
+                </TextInput>
+              );
+            } else {
+              return (
+                <TextInput style={styles.fondoFrases} editable={false}>
+                  <Text style={styles.txtDoceIncompleta}>
+                    {doceIncompleta[index]}
+                  </Text>
+                </TextInput>
+              );
+            }
+          })}
+          <View style={styles.contenImg}>
+            <Image
+              style={styles.imgRestaurar}
+              source={require("./img/opacity-rerstaurar-mnemonic.png")}
+            />
+          </View>
+          <View>
+            <TouchableOpacity
+              style={styles.btnContinuar}
+              onPress={() => addTresFaltantes()}
+            >
+              <Text style={styles.txtContinuar}>Continuar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -200,105 +217,5 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
 
 const cuadroios = Platform.OS === "ios" ? 55 : 45;
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  headerDos: {
-    margin: 20,
-    justifyContent: "center",
-  },
-  headerTitle: {
-    color: "#5B2388",
-    fontSize: 20,
-    fontWeight: "700",
-    marginTop: RFValue(10),
-  },
-
-  headerPrimario: {
-    justifyContent: "center",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    top: RFValue(80),
-  },
-  fondoFrases: {
-    textAlign: "center",
-    borderRadius: 20,
-    backgroundColor: "#EDE3F4",
-    borderWidth: 5,
-    borderColor: "white",
-    padding: RFValue(10),
-    marginVertical: RFValue(5),
-    marginHorizontal: RFValue(5),
-    width: windowWidth * 0.3,
-  },
-
-  btnR: {
-    top: RFValue(180),
-    alignItems: "center",
-    backgroundColor: "#440577",
-    borderRadius: 20,
-    height: RFValue(50),
-    justifyContent: "center",
-    width: windowWidth * 0.7,
-  },
-  txtContinuar: {
-    color: "white",
-    fontSize: RFValue(20),
-    fontWeight: "400",
-  },
-  txt: {
-    //color: "#000",
-    fontSize: RFValue(18),
-    fontWeight: "400",
-  },
-
-  //Modal
-  bodymodal: {
-    flex: 1,
-    alignItems: "center",
-  },
-  ventanamodal: {
-    alignItems: "center",
-    backgroundColor: "#5B298A",
-    borderWidth: 0.5,
-    borderColor: "black",
-    borderRadius: 20,
-    flexDirection: "row",
-    height: windowHeight * 0.1,
-    paddingLeft: RFValue(12),
-    paddingRight: RFValue(12),
-    top: alturaios,
-    width: windowWidth * 0.95,
-  },
-  icontext: {
-    alignItems: "center",
-  },
-  textnoti: {
-    //--- No borrar ---//
-  },
-  contenedorlottie: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  lottie: {
-    height: 60,
-    width: 60,
-  },
-  contenedortext: {
-    justifyContent: "center",
-  },
-  texticon: {
-    color: "white",
-    fontSize: RFValue(18),
-    fontWeight: "bold",
-  },
-  notificacion: {
-    color: "white",
-    fontSize: RFValue(12),
-  },
-});
 
 export default DocePalabras;

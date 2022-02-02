@@ -302,7 +302,7 @@ export const styles = StyleSheet.create({
   },
   lottiecopy: {
     width: 53,
-    height: 53
+    height: 53,
   },
   //Fin lottie
   //Balance
@@ -427,8 +427,8 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   cajasf: {
-    marginTop:RFValue(15),
-    marginHorizontal:RFValue(25.5),
+    marginTop: RFValue(15),
+    marginHorizontal: RFValue(25.5),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -445,14 +445,14 @@ export const styles = StyleSheet.create({
   },
   //FinMoneda
   //Recibir
-  logorb:{
+  logorb: {
     alignItems: "center",
     justifyContent: "center",
     marginTop: RFValue(12.5),
   },
   cuadroQR: {
-    width:RFValue(161),
-    height:RFValue(161),
+    width: RFValue(161),
+    height: RFValue(161),
     borderColor: "#E2DBEE",
     borderWidth: 3,
     borderRadius: 10,
@@ -461,23 +461,23 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(25),
   },
   cajadirecc: {
-    width:RFValue(171),
-    height:RFValue(21.7),
+    width: RFValue(171),
+    height: RFValue(21.7),
     alignItems: "center",
     justifyContent: "center",
-    marginTop:RFValue(36),
+    marginTop: RFValue(36),
   },
   txtdirecc: {
-    fontSize:RFValue(11.5),
-    fontWeight:"500",
+    fontSize: RFValue(11.5),
+    fontWeight: "500",
     color: "#B3B3B3",
   },
   tablaqr: {
     flexDirection: "row",
-    width:RFValue(238),
-    height:RFValue(64),
-    marginTop:RFValue(29),
-    paddingHorizontal:RFValue(8),
+    width: RFValue(238),
+    height: RFValue(64),
+    marginTop: RFValue(29),
+    paddingHorizontal: RFValue(8),
   },
   cbtncop: {
     width: "25%",
@@ -498,6 +498,63 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(13),
     fontWeight: "500",
   },
-  
+
   //FinRecibir
+  //Doce Palabras
+  headerDos: {
+    height: RFValue(45.93),
+    width: RFValue(320.46),
+    marginTop: RFValue(51.625),
+    justifyContent: "center",
+  },
+  headerTitle: {
+    color: "#5B2388",
+    fontSize: RFValue(17),
+    fontWeight: "700",
+  },
+  headerPrimario: {
+    marginTop: 54,
+    justifyContent: "center",
+    flexWrap: "wrap",
+    flexDirection: "row",
+  },
+  fondoFrases: {
+    textAlign: "center",
+    borderRadius: 3,
+    backgroundColor: "#FBF7FF",
+    borderWidth: 1,
+    borderColor: "#5B2388",
+    marginVertical: RFValue(10),
+    marginHorizontal: RFValue(5),
+    width: RFValue(99.05),
+    height: RFValue(24.22),
+  },
+  contenImg: {
+    alignItems: "center",
+    marginTop: RFValue(40.5),
+  },
+  imgRestaurar: {
+    height: RFValue(228.86),
+    width: RFValue(266.08),
+    resizeMode: "contain",
+  },
+  btnContinuar: {
+    marginTop: RFValue(27.125),
+    alignItems: "center",
+    backgroundColor: "#440577",
+    borderRadius: 10,
+    height: RFValue(49.28),
+    justifyContent: "center",
+    width: RFValue(134.98),
+  },
+  txtContinuar: {
+    color: "#FBF7FF",
+    fontSize: RFValue(21.25),
+    fontWeight: "400",
+  },
+  txtDoceIncompleta: {
+    color: "#440577",
+    fontSize: RFValue(13),
+    fontWeight: "700",
+  },
 });
