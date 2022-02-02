@@ -175,6 +175,7 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
             if (doceIncompleta[index] === "") {
               return (
                 <TextInput
+                  autoCapitalize="none"
                   style={styles.fondoFrases}
                   onChangeText={(text) =>
                     handleChange(text, "vacio[" + index + "]")
