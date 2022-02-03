@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { WebView } from 'react-native-webview';
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -119,7 +120,14 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.graf}>
+          <WebView
+            source={{ uri: `https://condorcoinco.github.io/charts/${msg}.html` }}
+            style={{flex:1, backgroundColor: '#FBF7FF'}}
+          />
+        </View>
         </ScrollView>
+        
       </View>
     </SafeAreaView>
   );

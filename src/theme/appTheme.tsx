@@ -441,6 +441,9 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
   },
+  graf:{
+    height: 400
+  },
   //FinMoneda
   //Recibir
   logorb: {
@@ -615,11 +618,46 @@ export const styles = StyleSheet.create({
     width: "20%",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "column",  
+    height: "100%"
   },
   switchMode: {
     transform: [{ scaleX: swichTios }, { scaleY: swichTios }],
     left:swichLios
   },
-
   //FinAjustes
+  //Exclave
+  imgex:{
+    width: RFValue(201),
+    height:RFValue(201),
+    marginTop:20
+  },
+  cajaex:{
+    width:RFValue(245.4),
+    height:RFValue(235),
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth:1,
+    borderColor:'#440577',
+    borderRadius:6,
+    marginTop:RFValue(12.5)
+  },
+  cajabtnex:{
+    alignItems: "center",
+    zIndex: 3,
+    elevation: 3,
+    marginTop:RFValue(42)
+  },
+  txtDonex:{
+    color: "#fff",
+    fontSize: RFValue(15),
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  titlex:{
+    color: "#440577",
+    fontSize: RFValue(20),
+    fontWeight: "bold",
+  }
+  //FinExclave
 });

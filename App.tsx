@@ -26,6 +26,9 @@ import { Contraseña } from "./src/screens/Contraseña";
 import DocePalabras from "./src/screens/DocePalabras";
 import { ConfirContra } from "./src/screens/ConfirContra";
 import { PassLogin } from "./src/screens/PassLogin";
+import Editar from "./src/screens/Edituser";
+import Exclave from "./src/screens/Exclave";
+
 
 
 
@@ -191,6 +194,16 @@ export default function App() {
             name="QrReader"
             component={QrReader}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Editar"
+            component={Editar}
+            options={{ headerShown: false, gestureEnabled: false }}
+          />
+           <Stack.Screen
+            name="Exclave"
+            component={Exclave}
+            options={{ headerShown: false, gestureEnabled: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
