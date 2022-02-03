@@ -58,9 +58,9 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
     }
   };
 
-  const [anmt, setanmt] = useState("");
   const [copiadoModal, setCopiadoModal] = useState(false);
   const [animacion, setAnimacion] = useState(false);
+  
   const CopyToClipboard = () => {
     Clipboard.setString("8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ");
     setAnimacion(true);
@@ -76,27 +76,23 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
     if (Platform.OS === "android") {
       number= 2000
     } else if (Platform.OS === "ios") {
-      number = 1000
+      number = 3000
     }
     return number
   }
 
   React.useEffect(() => {
-    if (animacion == true) {
-      animation.current.play(0, 50);
+    if (animacion === true) {
+      animation.current.play(0,50);
       setTimeout(() => {
         setAnimacion(false);
       },amj());
-    } else {
-
-
-
+    } else if (animacion === false) {
       if (Platform.OS === "android") {
         animation.current.play(18,18);
       } else if (Platform.OS === "ios"){
         animation.current.play(18,50);
       }
-      
     }
   }, [animacion]);
 

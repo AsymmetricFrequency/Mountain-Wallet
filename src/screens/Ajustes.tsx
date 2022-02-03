@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, Image, ScrollView, Platform, TouchableOpacity, Switch } from 'react-native';
+import { View, Text, StatusBar, Image, ScrollView, Platform, TouchableOpacity, Switch, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -9,7 +9,7 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 
 
-const Ajustes = () => {
+const Ajustes = ({ navigation }: { navigation: any }) => {
 
   // Concatenar pkey
   var str = '8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ';
@@ -22,7 +22,7 @@ const Ajustes = () => {
 
 
   return (
-    <View style={styles.body}>
+    <SafeAreaView  style={styles.body}>
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.completo}>
         <View style={styles.titlecc}>
@@ -32,7 +32,7 @@ const Ajustes = () => {
           style={styles.logosintxt}
           source={require("./img/mountain-enviar.png")}
         />
-        <ScrollView horizontal={false}>
+        <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
 
           <View style={styles.cajaaj}>
             <View style={styles.useraj}>
@@ -44,11 +44,12 @@ const Ajustes = () => {
               <Text style={styles.contaj}>Usuario condor</Text>
               <Text style={styles.contuaj}>{concatenado}</Text>
             </View>
-            <TouchableOpacity style={styles.editaj} activeOpacity={0.5}>
+            <TouchableOpacity style={styles.editaj} activeOpacity={0.5} onPress={() => navigation.navigate("Editar")}>
               <View>
                 <Icons name="pencil" size={altura} color="#E2DBEE" />
               </View>
             </TouchableOpacity>
+        
           </View>
 
           <View style={styles.cajaaj}>
@@ -78,7 +79,7 @@ const Ajustes = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cajaaj} activeOpacity={0.5}>
+          <TouchableOpacity style={styles.cajaaj} activeOpacity={0.5} onPress={() => navigation.navigate("Exclave")}>
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icons name="cellphone-key" size={altura} color="#440577" />
@@ -99,18 +100,12 @@ const Ajustes = () => {
               <Text style={styles.contaj}>Cerrar Sesion</Text>
             </View>
           </TouchableOpacity>
-          
-       
         </ScrollView>
-
-        
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default Ajustes;
-function useColorMode(): { colorMode: any; toggleColorMode: any; } {
-  throw new Error('Function not implemented.');
-}
+
 
