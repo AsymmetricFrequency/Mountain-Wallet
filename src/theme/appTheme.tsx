@@ -8,8 +8,8 @@ const screenHeight = Dimensions.get("window").height;
 const spaceH = windowHeight - screenHeight;
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const radios = Platform.OS === "ios" ? 10 : 15;
-const saldoios = Platform.OS === "ios" ? 0.87 : 0.85;
-const bottomios = Platform.OS === "ios" ? 60 : StatusBar.currentHeight;
+const swichLios = Platform.OS === "ios" ? -5 : 0;
+const swichTios = Platform.OS === "ios" ? 0.8 : 1;
 const cirios = Platform.OS === "ios" ? 0 : 25;
 
 const SLIDER_WIDTH = Dimensions.get("screen").width;
@@ -195,9 +195,7 @@ export const styles = StyleSheet.create({
   //Crear Cuenta
   cajacc: {
     alignItems: "center",
-    // bottom: StatusBar.currentHeight,
     flexDirection: "column",
-    // paddingTop: topios,
   },
   cajaatras: {
     position: "absolute",
@@ -519,7 +517,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   fondoFrases: {
-    color:"#440577",
+    color: "#440577",
     textAlign: "center",
     borderRadius: 3,
     backgroundColor: "#FBF7FF",
@@ -531,7 +529,6 @@ export const styles = StyleSheet.create({
     height: RFValue(24.22),
     fontWeight: "bold",
     fontFamily: "Roboto",
-    
   },
   contenImg: {
     alignItems: "center",
@@ -561,4 +558,68 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(13),
     fontWeight: "700",
   },
+  //FinDocePalabras
+  //Ajustes
+  logosintxt: {
+    resizeMode: "contain",
+    height: RFValue(94.3),
+    marginVertical: RFValue(2.5),
+  },
+  cajaaj: {
+    flexDirection: "row",
+    height: RFValue(81.8),
+    width: RFValue(280),
+    borderTopColor: "#E2DBEE",
+    borderTopWidth: 1,
+  },
+  imgaj: {
+    width: "20%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  btnaj: {
+    alignItems: "center",
+    backgroundColor: "#E2DBEE",
+    borderRadius: 30,
+    width: RFValue(43.4),
+    height: RFValue(43.4),
+    justifyContent: "center",
+  },
+  txtaj: {
+    width: "80%",
+    justifyContent: "center",
+    left: RFValue(3.8),
+  },
+  contaj: {
+    fontSize: RFValue(17),
+    color: "#440577",
+    fontWeight: "500",
+  },
+  contuaj: {
+    fontSize: RFValue(8.4),
+    color: "#440577",
+    fontWeight: "500",
+  },
+  useraj: {
+    width: "20%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  txtuaj: {
+    width: "60%",
+    justifyContent: "center",
+    left: RFValue(3.8),
+    flexDirection: "column",
+  },
+  editaj: {
+    width: "20%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  switchMode: {
+    transform: [{ scaleX: swichTios }, { scaleY: swichTios }],
+    left:swichLios
+  },
+
+  //FinAjustes
 });
