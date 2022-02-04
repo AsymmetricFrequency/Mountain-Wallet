@@ -29,7 +29,8 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const elements: string[] = [];
 
-async function leerMnemonic() {
+function leerMnemonic() {
+  
   const mnemonic = readMnemonic();
   mnemonic.then((value) => {
     const docePalabras = value;
@@ -40,40 +41,28 @@ async function leerMnemonic() {
   });
 }
 
-
 const Crearcuenta = ({ navigation }: { navigation: any }) => {
+  
   const [numero, setNumero] = useState(1);
   const [refreshing, setRefreshing] = React.useState(false);
-
-  useEffect(() => {
+  
+  const Palabras = () =>{
     setRefreshing(true);
-    if (elements.length > 12){
-          for (let index = 0; index < elements.length; index++) {
-            elements.splice(0, elements.length);
-          }
-          leerMnemonic() 
-        }else{
-          console.log();
-          for (let index = 0; index < elements.length; index++) {
-            elements.splice(0, elements.length);
-          }
-          leerMnemonic();
-        }
+      leerMnemonic() 
     setTimeout(() => {
       setRefreshing(false);
     }, 5);
-  }, []);
-
-  const RenderItem = ({ item }) => {
-    return (
-      <View style={styles.itemContainer}>
-        <Text style={styles.itemLabel}>{`${item}`}</Text>
-      </View>
-    );
+    }
+    
+  const RenderItem =  ({ item }) => {
+      return (
+        <View style={styles.itemContainer}>
+          <Text style={styles.itemLabel}>{`${item}`}</Text>
+        </View>
+      );
   };
 
   return (
-    
     <SafeAreaView style={styles.body}>
       <SafeAreaView>
         <ScrollView
@@ -86,7 +75,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
             />
           }
         ></ScrollView>
-      </SafeAreaView>
+      </SafeAreaView> 
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
@@ -106,6 +95,13 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
             Escribe tu frase de respaldo en un lugar seguro
           </Text>
         </View>
+        <TouchableOpacity
+              style={styles.btnDone}
+              activeOpacity={0.5}
+              onPress={() => Palabras()}
+            >
+              <Text style={styles.txtDone}>Crear 12 palabras</Text>
+            </TouchableOpacity>
         <Carousel
           data={elements}
           activeSlideAlignment={"center"}
@@ -121,11 +117,9 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           onSnapToItem={(index) => setNumero(index + 1)}
           enableMomentum={true}
         />
-
         <View style={styles.txtpag}>
           <Text style={styles.counter}>{numero} de 12</Text>
         </View>
-
         {numero == 12 && (
           <View style={styles.cajabtn}>
             <TouchableOpacity
@@ -137,6 +131,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
           </View>
         )}
+      
       </View>
     </SafeAreaView>
   );
