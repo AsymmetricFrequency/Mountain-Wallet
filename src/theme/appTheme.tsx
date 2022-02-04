@@ -14,7 +14,8 @@ const cirios = Platform.OS === "ios" ? 0 : 25;
 const cantidadios = Platform.OS === "ios" ? -25 : -40;
 const cntdadios = Platform.OS === "ios" ? 10 : -2;
 const alturaBtnEnviar = Platform.OS === "ios" ? 130 : 120;
-
+const swichLios = Platform.OS === "ios" ? -5 : 0;
+const swichTios = Platform.OS === "ios" ? 0.8 : 1;
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
@@ -450,6 +451,9 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
   },
+  graf:{
+    height: 400
+  },
   //FinMoneda
   //Recibir
   logorb: {
@@ -815,6 +819,98 @@ export const styles = StyleSheet.create({
     color: "#440577",
     fontSize: RFValue(20),
     fontWeight: "bold",
+  },
+  //Ajustes
+  logosintxt: {
+    resizeMode: "contain",
+    height: RFValue(94.3),
+    marginVertical: RFValue(2.5),
+  },
+  cajaaj: {
+    flexDirection: "row",
+    height: RFValue(81.8),
+    width: RFValue(280),
+    borderTopColor: "#E2DBEE",
+    borderTopWidth: 1,
+  },
+  imgaj: {
+    width: "20%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  btnaj: {
+    alignItems: "center",
+    backgroundColor: "#E2DBEE",
+    borderRadius: 30,
+    width: RFValue(43.4),
+    height: RFValue(43.4),
+    justifyContent: "center",
+  },
+  txtaj: {
+    width: "80%",
+    justifyContent: "center",
+    left: RFValue(3.8),
+  },
+  contaj: {
+    fontSize: RFValue(17),
+    color: "#440577",
+    fontWeight: "500",
+  },
+  contuaj: {
+    fontSize: RFValue(8.4),
+    color: "#440577",
+    fontWeight: "500",
+  },
+  useraj: {
+    width: "20%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  txtuaj: {
+    width: "60%",
+    justifyContent: "center",
+    left: RFValue(3.8),
+    flexDirection: "column",
+  },
+  editaj: {
+    width: "20%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",  
+    height: "100%"
+  },
+  switchMode: {
+    transform: [{ scaleX: swichTios }, { scaleY: swichTios }],
+    left:swichLios
+  },
+  //FinAjustes
+  //Exclave
+  imgex:{
+    width: RFValue(201),
+    height:RFValue(201),
+    marginTop:20
+  },
+  cajaex:{
+    width:RFValue(245.4),
+    height:RFValue(235),
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth:1,
+    borderColor:'#440577',
+    borderRadius:6,
+    marginTop:RFValue(12.5)
+  },
+  cajabtnex:{
+    alignItems: "center",
+    zIndex: 3,
+    elevation: 3,
+    marginTop:RFValue(42)
+  },
+  txtDonex:{
+    color: "#fff",
+    fontSize: RFValue(15),
+    textAlign: "center",
+    justifyContent: "center",
   },
   //FinExclave
 
