@@ -8,8 +8,9 @@ import {
   StatusBar,
   ScrollView,
   RefreshControl,
+  FlatList,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { WebView } from 'react-native-webview';
@@ -18,16 +19,25 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
 
-  const { msg,mon } = route.params;
-  const moneda = () => {
-    if (msg == "Condorcoin") {
-      return <Text style={styles.cndr}>CNDR</Text>;
-    } else if (msg == "Solana") {
-      return <Text style={styles.cndr}>SOL</Text>;
-    } else if (msg == "Tether") {
-      return <Text style={styles.cndr}>TETHER</Text>;
-    }
+  const [coins, setCoins] = useState();
+  const [refreshing, setRefreshing] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const loadData = async () => {
+    const res = await fetch(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=solana&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h"
+    );
+    const data = await res.json();
+    setCoins(data);
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+  
+
+  const { msg,mon } = route.params;
+  
 
   const ima = () =>{
     if (msg == "Condorcoin") {
@@ -68,6 +78,7 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
+      
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.completo}>
         <View style={styles.cajaatras}>
@@ -79,6 +90,7 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
             <Icon name="arrow-left" size={altura} color="#440577" />
           </TouchableOpacity>
         </View>
+     
         <ScrollView
             refreshControl={
               <RefreshControl
@@ -102,25 +114,29 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
             <Text style={styles.montxt}>{(mon)}</Text>
           </View>
         </View>
-        
+        <View style={{alignItems:"center"}}>
+          <FlatList
+            data={coins}
+            refreshing = {refresh}
+            renderItem={({ item }) =>{
+              return <Text>{item.current_price}</Text>
+            }}>
+          </FlatList>
+        </View>
         <View style={styles.cajasf}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <Text numberOfLines={1} style={styles.saldofull}>0</Text>
           </ScrollView>
+          
         </View>
         <View style={styles.dcER}>
             <View style={styles.dcE}>
             <TouchableOpacity
               style={[styles.btnR,styles.sombras]}
               activeOpacity={0.5}
-              onPress={() =>
-                navigation.navigate("EnviarCantidad", {
-                  pmsg: msg,
-                  mon: moneda(),
-                })
-              }
+              // onPress={() => navigation.navigate("Enviar")}
             >
-              <Text style={styles.textbtnR}>Enviar</Text>
+             <Text style={styles.textbtnR}>Enviar</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.dcR}>
@@ -133,6 +149,7 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
             </TouchableOpacity>
           </View>
         </View>
+        
         <View style={styles.graf}>
           <WebView
             source={{ uri: `https://condorcoinco.github.io/charts/${msg}.html` }}
@@ -140,7 +157,9 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
           />
         </View>
         </ScrollView>
-      </View>
+      
+      </View> 
+      
     </SafeAreaView>
   );
 };
