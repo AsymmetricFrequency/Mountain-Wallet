@@ -8,9 +8,12 @@ const screenHeight = Dimensions.get("window").height;
 const spaceH = windowHeight - screenHeight;
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const radios = Platform.OS === "ios" ? 10 : 15;
-const swichLios = Platform.OS === "ios" ? -5 : 0;
-const swichTios = Platform.OS === "ios" ? 0.8 : 1;
+const saldoios = Platform.OS === "ios" ? 0.87 : 0.85;
+const bottomios = Platform.OS === "ios" ? 60 : StatusBar.currentHeight;
 const cirios = Platform.OS === "ios" ? 0 : 25;
+const cantidadios = Platform.OS === "ios" ? -25 : -40;
+const cntdadios = Platform.OS === "ios" ? 10 : -2;
+const alturaBtnEnviar = Platform.OS === "ios" ? 130 : 120;
 
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -195,7 +198,9 @@ export const styles = StyleSheet.create({
   //Crear Cuenta
   cajacc: {
     alignItems: "center",
+    // bottom: StatusBar.currentHeight,
     flexDirection: "column",
+    // paddingTop: topios,
   },
   cajaatras: {
     position: "absolute",
@@ -441,9 +446,6 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
   },
-  graf:{
-    height: 400
-  },
   //FinMoneda
   //Recibir
   logorb: {
@@ -520,7 +522,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   fondoFrases: {
-    color: "#440577",
     textAlign: "center",
     borderRadius: 3,
     backgroundColor: "#FBF7FF",
@@ -530,8 +531,6 @@ export const styles = StyleSheet.create({
     marginHorizontal: RFValue(5),
     width: RFValue(99.05),
     height: RFValue(24.22),
-    fontWeight: "bold",
-    fontFamily: "Roboto",
   },
   contenImg: {
     alignItems: "center",
@@ -557,107 +556,255 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   txtDoceIncompleta: {
-    color: "#AEA3C6",
+    color: "#440577",
     fontSize: RFValue(13),
     fontWeight: "700",
   },
-  //FinDocePalabras
-  //Ajustes
-  logosintxt: {
-    resizeMode: "contain",
-    height: RFValue(94.3),
-    marginVertical: RFValue(2.5),
-  },
-  cajaaj: {
-    flexDirection: "row",
-    height: RFValue(81.8),
-    width: RFValue(280),
-    borderTopColor: "#E2DBEE",
-    borderTopWidth: 1,
-  },
-  imgaj: {
-    width: "20%",
-    alignItems: "flex-start",
-    justifyContent: "center",
-  },
-  btnaj: {
-    alignItems: "center",
+  //Fin Doce Palabras
+
+  // Enviar cantidad
+  header: {
     backgroundColor: "#E2DBEE",
-    borderRadius: 30,
-    width: RFValue(43.4),
-    height: RFValue(43.4),
+    borderRadius: 100,
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "center",
+    height: RFValue(48),
+    marginVertical: RFValue(10),
+    marginHorizontal: RFValue(10),
+    width: RFValue(48),
   },
-  txtaj: {
-    width: "80%",
-    justifyContent: "center",
-    left: RFValue(3.8),
+
+  headerLogo: {
+    marginTop: RFValue(-45),
+    alignItems: "center",
   },
-  contaj: {
-    fontSize: RFValue(17),
-    color: "#440577",
+  LogoCondor: {
+    height: RFValue(170),
+    width: RFValue(170),
+  },
+  textInput: {
+    alignItems: "center",
+    borderWidth: 3,
+    borderColor: "#E2DBEE",
+    borderRadius: 20,
+    height: RFValue(129.46),
+    marginTop: 35,
+    width: RFValue(173.82),
+  },
+  icnt: {
+    color: "#B3B3B3",
+    fontSize: RFValue(11.5),
     fontWeight: "500",
+    marginTop: 15,
   },
-  contuaj: {
-    fontSize: RFValue(8.4),
+  txtAjustable: {
+    marginTop: cantidadios,
+  },
+  cantidadRecibe: {
     color: "#440577",
+    fontSize: RFValue(38.33),
+    fontWeight: "400",
+  },
+  contenedorCndr: {
+    alignItems: "center",
+    bottom: 45,
+  },
+  cndr: {
+    //backgroundColor: "green",
+    justifyContent: "center",
+    color: "#440577",
+    fontSize: RFValue(8.5),
+    fontWeight: "400",
+    top: 96,
+  },
+  valor: {
+    //backgroundColor: "yellow",
+    color: "#B3B3B3",
+    fontSize: RFValue(13.8),
     fontWeight: "500",
+    top: 95,
   },
-  useraj: {
-    width: "20%",
-    alignItems: "flex-start",
-    justifyContent: "center",
+  //Contenedor pad numerico
+  tecladoIngresar: {
+    backgroundColor: "#E2DBEE",
+    borderRadius: 15,
+    height: RFValue(210.29),
+    width: RFValue(291.47),
+    top: 33,
+    flexDirection: "row",
   },
-  txtuaj: {
-    width: "60%",
-    justifyContent: "center",
-    left: RFValue(3.8),
-    flexDirection: "column",
+  //pad numerico
+  numpadUno: {
+    flexDirection: "row",
+    marginHorizontal: 19,
+    top: 17,
   },
-  editaj: {
-    width: "20%",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",  
-    height: "100%"
+  numpadDos: {
+    flexDirection: "row",
+    marginHorizontal: 19,
+    top: 34,
   },
-  switchMode: {
-    transform: [{ scaleX: swichTios }, { scaleY: swichTios }],
-    left:swichLios
+  numpadTres: {
+    flexDirection: "row",
+    marginHorizontal: 19,
+    top: 51,
   },
-  //FinAjustes
-  //Exclave
-  imgex:{
-    width: RFValue(201),
-    height:RFValue(201),
-    marginTop:20
+  numpadCuatro: {
+    flexDirection: "row",
+    marginHorizontal: 25,
+    top: 68,
   },
-  cajaex:{
-    width:RFValue(245.4),
-    height:RFValue(235),
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth:1,
-    borderColor:'#440577',
-    borderRadius:6,
-    marginTop:RFValue(12.5)
+  numpadBorrar: {
+    flexDirection: "row",
+    marginHorizontal: 20,
   },
-  cajabtnex:{
-    alignItems: "center",
-    zIndex: 3,
-    elevation: 3,
-    marginTop:RFValue(42)
+  number: {
+    color: "#440577",
+    fontWeight: "bold",
+    flexDirection: "row",
+    fontSize: RFValue(20),
+    marginHorizontal: 20,
   },
-  txtDonex:{
-    color: "#fff",
-    fontSize: RFValue(15),
-    textAlign: "center",
-    justifyContent: "center",
+  punto: {
+    color: "#440577",
+    fontWeight: "bold",
+    flexDirection: "row",
+    fontSize: RFValue(20),
+    marginHorizontal: 20,
+    marginBottom: 20,
+    height: 30,
   },
-  titlex:{
+  numberCero: {
+    top: 4,
+    color: "#440577",
+    fontWeight: "bold",
+    fontSize: RFValue(20),
+    marginHorizontal: 22,
+  },
+  btnBorrar: {
     color: "#440577",
     fontSize: RFValue(20),
+    marginTop: 9,
+    marginHorizontal: 8,
+  },
+  //bloque derecho panel inferior
+  logoMountain: {
+    width: "50%",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  mountainLogo: {
+    width: 110,
+    height: 110,
+  },
+  ingresar: {
+    marginTop: 0,
+    //bottom: 15,
+    justifyContent: "center",
+    backgroundColor: "#440577",
+    borderRadius: 15,
+    height: 105,
+    width: 90,
+  },
+  txtingresar: {
+    color: "white",
+    fontSize: RFValue(14),
+    fontWeight: "500",
+    textAlign: "center",
+  },
+
+  imgCondor: {
+    width: 179,
+    height: 179,
+  },
+  //Fin EnviarCantidad
+
+  //EnviarDireccion
+  contCndr: {
+    alignItems: "center",
+    bottom: 90,
+  },
+  cntdRecibe: {
+    color: "#440577",
+    fontSize: RFValue(38.33),
+    fontWeight: "400",
+  },
+  txtAjustables: {
+    marginTop: cntdadios,
+  },
+  txtAjust: {
+    marginTop: -8,
+  },
+  labeldos: {
+    fontSize: RFValue(15),
     fontWeight: "bold",
-  }
-  //FinExclave
+    margin: 8,
+    textAlign: "justify",
+  },
+  cantidadRecib: {},
+  //Contenedor pegar dirección
+  pegarDireccion: {
+    backgroundColor: "#E2DBEE",
+    borderRadius: 15,
+    height: RFValue(46.5),
+    width: RFValue(307),
+    top: RFValue(45),
+    flexDirection: "row",
+  },
+  pegaDir: {
+    fontSize: 17,
+    height: 20,
+    margin: 20,
+    width: 200,
+  },
+  cndrR: {
+    justifyContent: "center",
+    color: "#440577",
+    fontSize: RFValue(8.5),
+    fontWeight: "400",
+    top: 37,
+  },
+  valorR: {
+    color: "#B3B3B3",
+    fontSize: RFValue(13.8),
+    fontWeight: "500",
+    top: 36,
+  },
+
+  //bloque derecho panel inferior
+  iconos: {
+    width: "50%",
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: RFValue(65),
+  },
+  clipboard: {
+    height: RFValue(35),
+    width: RFValue(35),
+  },
+  qr: {
+    height: RFValue(29),
+    marginLeft: RFValue(5),
+    width: RFValue(25),
+  },
+  btnEnviar: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: alturaBtnEnviar,
+  },
+  btnCont: {
+    alignItems: "center",
+    backgroundColor: "#440577",
+    borderRadius: 15,
+    height: 59,
+    justifyContent: "center",
+
+    width: 99,
+  },
+  txtEnviar: {
+    color: "white",
+    fontSize: RFValue(23),
+    fontWeight: "400",
+  },
 });
