@@ -127,7 +127,6 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
           />
         </View>
         </ScrollView>
-        
       </View>
     </SafeAreaView>
   );
