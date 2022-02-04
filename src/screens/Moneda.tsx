@@ -19,7 +19,15 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
 
   const { msg,mon } = route.params;
-  
+  const moneda = () => {
+    if (msg == "Condorcoin") {
+      return <Text style={styles.cndr}>CNDR</Text>;
+    } else if (msg == "Solana") {
+      return <Text style={styles.cndr}>SOL</Text>;
+    } else if (msg == "Tether") {
+      return <Text style={styles.cndr}>TETHER</Text>;
+    }
+  };
 
   const ima = () =>{
     if (msg == "Condorcoin") {
@@ -105,7 +113,12 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
             <TouchableOpacity
               style={[styles.btnR,styles.sombras]}
               activeOpacity={0.5}
-              // onPress={() => navigation.navigate("Enviar")}
+              onPress={() =>
+                navigation.navigate("EnviarCantidad", {
+                  pmsg: msg,
+                  mon: moneda(),
+                })
+              }
             >
               <Text style={styles.textbtnR}>Enviar</Text>
             </TouchableOpacity>
