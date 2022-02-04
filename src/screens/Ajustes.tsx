@@ -16,7 +16,6 @@ const Ajustes = ({ navigation }: { navigation: any }) => {
   Appearance.addChangeListener((scheme)=>{
     setTheme(scheme.colorScheme);
   })
-
   // Concatenar pkey
   var str = '8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ';
   var strFirstThree = str.substring(0,5);
