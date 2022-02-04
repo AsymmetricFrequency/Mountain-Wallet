@@ -1,15 +1,21 @@
-import { View, Text, StatusBar, Image, ScrollView, Platform, TouchableOpacity, Switch, SafeAreaView } from 'react-native';
-import React, { useState } from 'react';
+import { Appearance, View, Text, StatusBar, Image, ScrollView, Platform, TouchableOpacity, Switch, SafeAreaView } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
+import { NavigationContainer, NavigationRouteContext } from '@react-navigation/native';
+
 
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
-
-
 const Ajustes = ({ navigation }: { navigation: any }) => {
+
+  //Detecta el modo del sistema
+  const [theme,setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme)=>{
+    setTheme(scheme.colorScheme);
+  })
 
   // Concatenar pkey
   var str = '8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ';
@@ -18,13 +24,28 @@ const Ajustes = ({ navigation }: { navigation: any }) => {
   var concatenado = `${strFirstThree}...${strLastThree}`
 
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+    isEnabled === true ? setTheme("light") : setTheme("dark")
+    console.log("togle bb",theme);
+    
+  }
+  
 
+  //Cambia estado del toggle con el theme
+  React.useEffect(() => {
+    if (theme == "light") {
+      setIsEnabled(false);
+    }else{
+      setIsEnabled(true);      
+    } 
+  }, [theme]);
 
   return (
     <SafeAreaView  style={styles.body}>
+      
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
-      <View style={styles.completo}>
+      <View style={theme == 'light'? styles.completo:styles.completodark}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Configuración</Text>
         </View>
@@ -64,11 +85,13 @@ const Ajustes = ({ navigation }: { navigation: any }) => {
               />
             </View>
             <TouchableOpacity style={styles.txtaj} activeOpacity={0.5} onPress={toggleSwitch}>
-              <Text style={styles.contaj}>Apariencia</Text>
+              {/* <Text style={styles.contaj}>Apariencia</Text> */}
+              <Text style={[theme === "light" ? styles.light : styles.dark]}>Apariencia</Text>
+
             </TouchableOpacity>
           </View>
           
-          <TouchableOpacity style={styles.cajaaj} activeOpacity={0.5}>
+          <TouchableOpacity style={styles.cajaaj} activeOpacity={0.5}  >
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icon name="arrow-down" size={altura} color="#440577" />

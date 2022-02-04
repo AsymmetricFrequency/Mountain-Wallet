@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, SafeAreaView, StatusBar } from "react-native";
 import {
   readMnemonic,
   createAccount,
   savePublicKey,
 } from "../../api";
 import LottieView from "lottie-react-native";
-import { RFValue } from "react-native-responsive-fontsize";
-
+import { styles } from "../theme/appTheme";
 const PantallaCarga = ({ navigation }: { navigation: any }) => {
   const [palabras, setPalabras] = useState("");
 
@@ -36,40 +35,19 @@ const PantallaCarga = ({ navigation }: { navigation: any }) => {
   }, 2000);
 
   return (
-    <View style={styles.body}>
-      <LottieView
-        style={styles.lottie}
-        source={require("./Lottie/flowerCarga.json")}
-        autoPlay
-      />
-    </View>
+    <SafeAreaView style={styles.body}>
+      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
+      <View style={[styles.completo,{justifyContent: "center"}]}>
+        <LottieView
+          style={styles.lottiecarga}
+          source={require("./Lottie/pantallacarga.json")}
+          autoPlay
+          speed={0.85}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default PantallaCarga;
 
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    alignItems: "center",
-    height: "100%",
-    justifyContent: "center",
-    width: "100%",
-  },
-  txtcarga: {
-    fontSize: RFValue(18),
-    top: RFValue(90),
-  },
-  fondo: {
-    alignItems: "center",
-    height: "100%",
-    justifyContent: "center",
-    width: "100%",
-  },
-  lottie: {
-    alignItems: "center",
-    height: 200,
-    justifyContent: "center",
-    width: 200,
-  },
-});

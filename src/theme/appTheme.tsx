@@ -307,6 +307,10 @@ export const styles = StyleSheet.create({
     width: 53,
     height: 53,
   },
+  lottiecarga:{
+    width:220,
+    height: 220,
+  },
   //Fin lottie
   //Balance
   logocolorB: {
@@ -807,4 +811,22 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(23),
     fontWeight: "400",
   },
+  titlex:{
+    color: "#440577",
+    fontSize: RFValue(20),
+    fontWeight: "bold",
+  },
+  //FinExclave
+
+  dark:{
+    color:"#E2DBEE"
+  },
+  light:{
+    color:"#440577"
+  },
+  completodark:{
+    backgroundColor: "#440577",
+    alignItems: "center",
+    flex: 1,
+  }
 });

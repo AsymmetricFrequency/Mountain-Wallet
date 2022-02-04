@@ -1,5 +1,6 @@
 {
   "expo": {
+    "userInterfaceStyle": "automatic",
     "name": "MountainWallet",
     "slug": "Mountain",
     "version": "1.0.0",
@@ -9,6 +10,7 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+      
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,12 +20,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.barneyeldinosaurio.MountainWallet"
+      "bundleIdentifier": "com.barneyeldinosaurio.MountainWallet",
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FFFFFF",
+        "userInterfaceStyle": "automatic"
       },
       "package": "com.barneyeldinosaurio.MountainWallet",
       "permissions": ["CAMERA", "READ_PHONE_STATE", "RECORD_AUDIO", "READ_CONTACTS"]
@@ -31,5 +35,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+
   }
 }
