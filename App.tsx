@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Image, useColorScheme, Appearance} from "react-native";
+import { Image, useColorScheme, Appearance } from "react-native";
 import "react-native-url-polyfill/auto";
 
 import { readKey } from "./api";
@@ -33,12 +33,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EnviarCantidad from "./src/screens/EnviarCantidad";
 import EnviarDireccion from "./src/screens/EnviarDireccion";
 
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import { useTheme } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import { RFValue } from "react-native-responsive-fontsize";
-
-
-
 
 const Tab = createBottomTabNavigator();
 //Detecta el sistema en navigator
@@ -47,9 +44,9 @@ const darkTheme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary:"#00FFFF",
+    primary: "#00FFFF",
     text: "#E2DBEE",
-    background:'#440577',
+    background: "#440577",
   },
 };
 
@@ -58,47 +55,59 @@ const lightTheme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary:"#E2DBEE",
+    primary: "#E2DBEE",
     text: "#440577",
-    background:'#FBF7FF',
-
+    background: "#FBF7FF",
   },
 };
-
-
 
 function Barra() {
   const { colors } = useTheme();
   //Detecta el modo del sistema
-  const [theme,setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme)=>{
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
-  })
+  });
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { height: RFValue(65), backgroundColor: colors.background, borderTopColor: colors.background,elevation:0 },
+        tabBarStyle: {
+          height: RFValue(65),
+          backgroundColor: colors.background,
+          borderTopColor: colors.background,
+          elevation: 0,
+        },
         tabBarIcon: ({ focused }) => {
           let imagenes;
           if (route.name === "Balance") {
             imagenes = focused
-              ? theme == 'dark' ? require("./src/screens/img/walletcolorDark.png") : require("./src/screens/img/walletcolor.png")
+              ? theme == "dark"
+                ? require("./src/screens/img/walletcolorDark.png")
+                : require("./src/screens/img/walletcolor.png")
               : require("./src/screens/img/walletblanco.png");
           } else if (route.name === "Swap") {
             imagenes = focused
-              ? theme == 'dark' ? require("./src/screens/img/swapcolorDark.png") : require("./src/screens/img/swapcolor.png")
+              ? theme == "dark"
+                ? require("./src/screens/img/swapcolorDark.png")
+                : require("./src/screens/img/swapcolor.png")
               : require("./src/screens/img/swapblanco.png");
           } else if (route.name === "Ajustes") {
             imagenes = focused
-              ? theme == 'dark' ? require("./src/screens/img/settingscolorDark.png") : require("./src/screens/img/settingscolor.png")
+              ? theme == "dark"
+                ? require("./src/screens/img/settingscolorDark.png")
+                : require("./src/screens/img/settingscolor.png")
               : require("./src/screens/img/settingsblanco.png");
           }
           return (
             <Image
               source={imagenes}
-              style={{ height: RFValue(34.4), width: RFValue(33.3), resizeMode: "contain" }}
+              style={{
+                height: RFValue(34.4),
+                width: RFValue(33.3),
+                resizeMode: "contain",
+              }}
             />
           );
         },
@@ -110,8 +119,6 @@ function Barra() {
     </Tab.Navigator>
   );
 }
-
-
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -161,10 +168,10 @@ export default function App() {
     );
   } else {
     return (
-      <PaperProvider theme={scheme === 'dark' ? darkTheme : lightTheme}>
+      <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
         <NavigationContainer>
           <Stack.Navigator>
-            {/* <Stack.Screen
+            <Stack.Screen
               name="Splash"
               component={Splashc}
               options={{ headerShown: false }}
@@ -208,7 +215,7 @@ export default function App() {
               name="PantallaCarga"
               component={PantallaCarga}
               options={{ headerShown: false }}
-            /> */}
+            />
             <Stack.Screen
               name="Barra"
               component={Barra}
@@ -260,4 +267,3 @@ export default function App() {
     );
   }
 }
-

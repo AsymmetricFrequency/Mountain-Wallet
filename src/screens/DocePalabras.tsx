@@ -17,10 +17,14 @@ import * as Animatable from "react-native-animatable";
 import { readMnemonic } from "../../api";
 import { Lotierror, Lotiexito } from "./component/lottie";
 import { styles } from "../theme/appTheme";
+import Icon from "react-native-vector-icons/Feather";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const elements: string[] = [];
 const doceIncompleta: string[] = [];
 const arr: number[] = [];
+
+const altura = Platform.OS === "ios" ? 22 : 25;
 
 function leerMnemonic() {
   const mnemonic = readMnemonic();
@@ -127,19 +131,17 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <SafeAreaView style={styles.body}>
-      <SafeAreaView>
-        <ScrollView
-          style={{ backgroundColor: "red" }}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              tintColor="#5b298a"
-              colors={["#5b298a", "#7e54a7"]}
-            />
-          }
-        ></ScrollView>
-      </SafeAreaView>
+    <KeyboardAwareScrollView style={styles.body}>
+      <ScrollView
+        style={{ backgroundColor: "red" }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            tintColor="#5b298a"
+            colors={["#5b298a", "#7e54a7"]}
+          />
+        }
+      ></ScrollView>
       <Modal
         visible={MostrarModal}
         transparent
@@ -165,9 +167,19 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
         </Animatable.View>
       </Modal>
       <View style={styles.completo}>
+        <View style={styles.cajaatras}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.btndo}
+            onPress={() => navigation.goBack()}
+          >
+            <Icon name="arrow-left" size={altura} color="#440577" />
+          </TouchableOpacity>
+        </View>
         <View style={styles.headerDos}>
           <Text style={styles.headerTitle}>
-            Escribe las tres palabras faltantes en tu frase de respaldo.
+            Escribe las tres palabras {"\n"}faltantes en tu frase de {"\n"}
+            respaldo.
           </Text>
         </View>
         <View style={styles.headerPrimario}>
@@ -196,23 +208,17 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
               );
             }
           })}
-          <View style={styles.contenImg}>
-            <Image
-              style={styles.imgRestaurar}
-              source={require("./img/opacity-rerstaurar-mnemonic.png")}
-            />
-          </View>
-          <View>
-            <TouchableOpacity
-              style={styles.btnContinuar}
-              onPress={() => addTresFaltantes()}
-            >
-              <Text style={styles.txtContinuar}>Continuar</Text>
-            </TouchableOpacity>
-          </View>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.btnContinuar}
+            onPress={() => addTresFaltantes()}
+          >
+            <Text style={styles.txtContinuar}>Continuar</Text>
+          </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 };
 
