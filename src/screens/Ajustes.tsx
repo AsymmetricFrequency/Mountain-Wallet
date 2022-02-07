@@ -4,6 +4,8 @@ import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer, NavigationRouteContext } from '@react-navigation/native';
+import { useTheme } from 'react-native-paper';
+
 
 
 
@@ -30,8 +32,10 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
     
   }
   
-
-
+  const { colors } = useTheme();
+  
+  console.log(colors);
+  
   //Cambia estado del toggle con el theme
   React.useEffect(() => {
     if (theme == "light") {
@@ -42,28 +46,31 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
   }, [theme]);
 
   return (
-    <SafeAreaView  style={styles.body}>
+    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
      
-      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
-      <View style={theme == 'light'? styles.completo:styles.completodark}>
+      <StatusBar 
+        backgroundColor= {colors.background}
+        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
+      />
+      <View style={[styles.completo,{backgroundColor:colors.background}]}>
         <View style={styles.titlecc}>
-          <Text style={styles.titletx}>Configuración</Text>
+          <Text style={[styles.titletx,{color:colors.text}]}>Configuración</Text>
         </View>
         <Image
           style={styles.logosintxt}
-          source={require("./img/mountain-enviar.png")}
+          source={theme === "light" ? require("./img/mountain-enviar.png") : require("./img/mountain-enviarDark.png")}
         />
         <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
 
-          <View style={styles.cajaaj}>
+          <View style={[[styles.cajaaj,{borderTopColor:colors.primary}],{borderTopColor:colors.primary}]}>
             <View style={styles.useraj}>
               <View style={styles.btnaj}>
                 <Icon name="user-circle" size={altura} color="#440577" />
               </View>
             </View>
             <View style={styles.txtuaj}>
-              <Text style={styles.contaj}>Usuario condor</Text>
-              <Text style={styles.contuaj}>{concatenado}</Text>
+              <Text style={[styles.contaj,{color:colors.text}]}>Usuario condor</Text>
+              <Text style={[styles.contuaj,{color:colors.text}]}>{concatenado}</Text>
             </View>
             <TouchableOpacity style={styles.editaj} activeOpacity={0.5} onPress={() => navigation.navigate("Editar")}>
               <View>
@@ -73,7 +80,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
         
           </View>
 
-          <View style={styles.cajaaj}>
+          <View style={[styles.cajaaj,{borderTopColor:colors.primary}]}>
             <View style={styles.imgaj}>
               <Switch
                 style={styles.switchMode}
@@ -85,42 +92,41 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
               />
             </View>
             <TouchableOpacity style={styles.txtaj} activeOpacity={0.5} onPress={toggleSwitch}>
-              {/* <Text style={styles.contaj}>Apariencia</Text> */}
-              <Text style={[theme === "light" ? styles.light : styles.dark]}>Apariencia</Text>
-
+              <Text style={[styles.contaj,{color:colors.text}]}>Apariencia</Text>
+              {/* <Text style={[theme === "light" ? styles.light : styles.dark]}>Apariencia</Text> */}
             </TouchableOpacity>
           </View>
           
-          <TouchableOpacity style={styles.cajaaj} activeOpacity={0.5}  >
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.primary}]} activeOpacity={0.5}  >
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icon name="arrow-down" size={altura} color="#440577" />
               </View>
             </View>
             <View style={styles.txtaj}>
-              <Text style={styles.contaj}>Exportar frase de respaldo</Text>
+              <Text style={[styles.contaj,{color:colors.text}]}>Exportar frase de respaldo</Text>
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cajaaj} activeOpacity={0.5} onPress={() => navigation.navigate("Exclave")}>
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.primary}]} activeOpacity={0.5} onPress={() => navigation.navigate("Exclave")}>
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icons name="cellphone-key" size={altura} color="#440577" />
               </View>
             </View>
             <View style={styles.txtaj}>
-              <Text style={styles.contaj}>Exportar llave privada</Text>
+              <Text style={[styles.contaj,{color:colors.text}]}>Exportar llave privada</Text> 
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cajaaj} activeOpacity={0.5}>
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.primary}]} activeOpacity={0.5}>
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icons name="logout" size={altura} color="#440577" />
               </View>
             </View>
             <View style={styles.txtaj}>
-              <Text style={styles.contaj}>Cerrar Sesion</Text>
+              <Text style={[styles.contaj,{color:colors.text}]}>Cerrar Sesion</Text>
             </View>
           </TouchableOpacity>
         </ScrollView>
