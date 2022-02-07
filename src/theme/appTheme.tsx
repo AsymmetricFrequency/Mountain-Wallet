@@ -1,4 +1,5 @@
-import { StyleSheet, Platform, Dimensions, StatusBar } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Platform, Dimensions, StatusBar, Appearance } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 export const colores = {};
@@ -25,6 +26,9 @@ const anchocaja = Platform.OS === "ios" ? 115 : 124;
 const paddinrightios = Platform.OS === "ios" ? 15 : 12;
 const barios = Platform.OS === "ios" ? 15 : 40;
 const barios2 = Platform.OS === "ios" ? 15 : 0;
+
+
+
 
 export const styles = StyleSheet.create({
   body: {
@@ -913,6 +917,29 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   //FinExclave
+  //Edituser
+  cajauser:{
+    width:RFValue(292.2),
+    height:RFValue(41.7),
+    marginTop:RFValue(42),    
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingHorizontal:10,
+    borderColor:"#440577",
+    borderWidth:1,
+    borderRadius:10,
+  },
+  inputuser:{
+    width:"100%",
+    fontSize:RFValue(17),
+    height:"100%"
+  },
+  cajabtneuser:{
+    alignItems: "center",
+    position: "absolute",
+    bottom: RFValue(70),
+  },
+  //FinEdituser
 
   dark:{
     color:"#E2DBEE"
