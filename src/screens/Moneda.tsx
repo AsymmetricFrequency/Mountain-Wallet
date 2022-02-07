@@ -19,9 +19,44 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
 
+  const { msg, mon } = route.params;
+
+  const ima = () => {
+    if (msg == "Condorcoin") {
+      return (
+        <Image
+          style={styles.imgmoneda}
+          source={require("./img/billeteras/logocondor.png")}
+        />
+      );
+    } else if (msg == "Solana") {
+      return (
+        <Image
+          style={styles.imgmoneda}
+          source={require("./img/billeteras/solana.png")}
+        />
+      );
+    } else if (msg == "Tether") {
+      return (
+        <Image
+          style={styles.imgmoneda}
+          source={require("./img/billeteras/tether.png")}
+        />
+      );
+    }
+  };
+
+  const moneda = () => {
+    if (msg == "Condorcoin") {
+      return <Text style={styles.cndr}>CNDR</Text>;
+    } else if (msg == "Solana") {
+      return <Text style={styles.cndr}>SOL</Text>;
+    } else if (msg == "Tether") {
+      return <Text style={styles.cndr}>TETHER</Text>;
+    }
+  };
+
   const [coins, setCoins] = useState();
-  const [refreshing, setRefreshing] = useState(false);
-  const [search, setSearch] = useState("");
 
   const loadData = async () => {
     const res = await fetch(
@@ -34,35 +69,6 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
   useEffect(() => {
     loadData();
   }, []);
-  
-
-  const { msg,mon } = route.params;
-  
-
-  const ima = () =>{
-    if (msg == "Condorcoin") {
-        return(
-          <Image
-            style={styles.imgmoneda}
-            source={require("./img/billeteras/logocondor.png")}
-          />
-        )
-    }else if (msg == "Solana"){
-      return(
-        <Image
-          style={styles.imgmoneda}
-          source={require("./img/billeteras/solana.png")}
-        />
-      )
-    }else if(msg == "Tether"){
-      return(
-        <Image
-          style={styles.imgmoneda}
-          source={require("./img/billeteras/tether.png")}
-        />
-      )
-    }
-  };
 
     // // refresco
     const [refresh, setRefresh] = useState(false);
@@ -123,6 +129,7 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
             }}>
           </FlatList>
         </View>
+        {/* <Text>{coins}</Text> */}
         <View style={styles.cajasf}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <Text numberOfLines={1} style={styles.saldofull}>0</Text>
@@ -134,7 +141,10 @@ const Moneda = ({ navigation, route }: { navigation: any, route: any }) => {
             <TouchableOpacity
               style={[styles.btnR,styles.sombras]}
               activeOpacity={0.5}
-              // onPress={() => navigation.navigate("Enviar")}
+              onPress={() => navigation.navigate("EnviarCantidad", {
+                pmsg: msg,
+                mon: moneda(),
+              })}
             >
              <Text style={styles.textbtnR}>Enviar</Text>
             </TouchableOpacity>
