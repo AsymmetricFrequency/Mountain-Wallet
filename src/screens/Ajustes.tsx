@@ -9,7 +9,7 @@ import { NavigationContainer, NavigationRouteContext } from '@react-navigation/n
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
-const Ajustes = ({ navigation }: { navigation: any }) => {
+const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
 
   //Detecta el modo del sistema
   const [theme,setTheme] = useState(Appearance.getColorScheme());
@@ -31,18 +31,19 @@ const Ajustes = ({ navigation }: { navigation: any }) => {
   }
   
 
+
   //Cambia estado del toggle con el theme
   React.useEffect(() => {
     if (theme == "light") {
       setIsEnabled(false);
     }else{
-      setIsEnabled(true);      
+      setIsEnabled(true);
     } 
   }, [theme]);
 
   return (
     <SafeAreaView  style={styles.body}>
-      
+     
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={theme == 'light'? styles.completo:styles.completodark}>
         <View style={styles.titlecc}>
