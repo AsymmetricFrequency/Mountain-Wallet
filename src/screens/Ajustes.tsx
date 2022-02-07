@@ -34,8 +34,6 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
   
   const { colors } = useTheme();
   
-  console.log(colors);
-  
   //Cambia estado del toggle con el theme
   React.useEffect(() => {
     if (theme == "light") {
@@ -47,7 +45,6 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
 
   return (
     <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
-     
       <StatusBar 
         backgroundColor= {colors.background}
         barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
@@ -62,7 +59,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
         />
         <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
 
-          <View style={[[styles.cajaaj,{borderTopColor:colors.primary}],{borderTopColor:colors.primary}]}>
+          <View style={[[styles.cajaaj,{borderTopColor:colors.primary}],{borderTopColor:colors.surface}]}>
             <View style={styles.useraj}>
               <View style={styles.btnaj}>
                 <Icon name="user-circle" size={altura} color="#440577" />
@@ -80,7 +77,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
         
           </View>
 
-          <View style={[styles.cajaaj,{borderTopColor:colors.primary}]}>
+          <View style={[styles.cajaaj,{borderTopColor:colors.surface}]}>
             <View style={styles.imgaj}>
               <Switch
                 style={styles.switchMode}
@@ -97,7 +94,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
             </TouchableOpacity>
           </View>
           
-          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.primary}]} activeOpacity={0.5}  >
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5}  >
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icon name="arrow-down" size={altura} color="#440577" />
@@ -108,7 +105,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.primary}]} activeOpacity={0.5} onPress={() => navigation.navigate("Exclave")}>
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5} onPress={() => navigation.navigate("Exclave")}>
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icons name="cellphone-key" size={altura} color="#440577" />
@@ -119,7 +116,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.primary}]} activeOpacity={0.5}>
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5}>
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icons name="logout" size={altura} color="#440577" />

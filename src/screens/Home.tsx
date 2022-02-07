@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-
   Text,
   View,
   TouchableOpacity,
@@ -8,7 +7,10 @@ import {
   BackHandler,
   StatusBar,
   SafeAreaView,
+  Appearance,
 } from "react-native";
+import { useTheme } from 'react-native-paper';
+
 
 // Fuente
 import * as Font from "expo-font";
@@ -16,9 +18,17 @@ import * as Font from "expo-font";
 import { styles } from "../theme/appTheme";
 
 const Home = ({ navigation }: { navigation: any }) => {
+
+  //Detecta el modo del sistema
+  const [theme,setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme)=>{
+    setTheme(scheme.colorScheme);
+  })
+  const { colors } = useTheme();
+
   function generarMnemonic() {
     navigation.navigate("Slider");
-  }
+  };
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -47,32 +57,37 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   if (!fontsLoaded) {
     return <View />;
-  }
+  };
+
+
+ 
 
   return (
-    <SafeAreaView style={styles.body}>
-      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
-      <View style={styles.completo}>
+    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
+      <StatusBar 
+        backgroundColor= {colors.background}
+        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
+      />
+      <View style={[styles.completo,{backgroundColor:colors.background}]}>
         <Image
           style={styles.logocolor}
-          source={require("./img/logocolor.png")}
+          source={theme === "light" ? require("./img/logocolor.png") : require("./img/logocolorDark.png")}
         />
-
         <View style={styles.btncr}>
           <TouchableOpacity
-            style={styles.btnc}
+            style={[styles.btnc,{backgroundColor:colors.text}]}
             activeOpacity={0.5}
             onPress={() => generarMnemonic()}
           >
-            <Text style={styles.txtc}>CREAR NUEVA CARTERA</Text>
+            <Text style={[styles.txtc,{color:colors.background}]}>CREAR NUEVA CARTERA</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.btnr}
+            style={[styles.btnr,{backgroundColor:colors.text}]}
             activeOpacity={0.5}
             onPress={() => navigation.navigate("ImportarCuenta")}
           >
-            <Text style={styles.txtr}>RESTAURAR CARTERA</Text>
+            <Text style={[styles.txtr,{color:colors.background}]}>RESTAURAR CARTERA</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.cajadevep}>
