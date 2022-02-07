@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Image } from "react-native";
+import {Image, useColorScheme, Appearance} from "react-native";
 import "react-native-url-polyfill/auto";
 
 import { readKey } from "./api";
@@ -33,34 +33,72 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EnviarCantidad from "./src/screens/EnviarCantidad";
 import EnviarDireccion from "./src/screens/EnviarDireccion";
 
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
+import { RFValue } from "react-native-responsive-fontsize";
+
+
+
+
 const Tab = createBottomTabNavigator();
+//Detecta el sistema en navigator
+const darkTheme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary:"#00FFFF",
+    text: "#E2DBEE",
+    background:'#440577',
+  },
+};
+
+const lightTheme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary:"#E2DBEE",
+    text: "#440577",
+    background:'#FBF7FF',
+
+  },
+};
+
+
 
 function Barra() {
+  const { colors } = useTheme();
+  //Detecta el modo del sistema
+  const [theme,setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme)=>{
+    setTheme(scheme.colorScheme);
+  })
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { height: 65, backgroundColor: "#FBF7FF" },
+        tabBarStyle: { height: RFValue(65), backgroundColor: colors.background, borderTopColor: colors.background,elevation:0 },
         tabBarIcon: ({ focused }) => {
           let imagenes;
           if (route.name === "Balance") {
             imagenes = focused
-              ? require("./src/screens/img/walletcolor.png")
+              ? theme == 'dark' ? require("./src/screens/img/walletcolorDark.png") : require("./src/screens/img/walletcolor.png")
               : require("./src/screens/img/walletblanco.png");
           } else if (route.name === "Swap") {
             imagenes = focused
-              ? require("./src/screens/img/swapcolor.png")
+              ? theme == 'dark' ? require("./src/screens/img/swapcolorDark.png") : require("./src/screens/img/swapcolor.png")
               : require("./src/screens/img/swapblanco.png");
           } else if (route.name === "Ajustes") {
             imagenes = focused
-              ? require("./src/screens/img/settingscolor.png")
+              ? theme == 'dark' ? require("./src/screens/img/settingscolorDark.png") : require("./src/screens/img/settingscolor.png")
               : require("./src/screens/img/settingsblanco.png");
           }
           return (
             <Image
               source={imagenes}
-              style={{ height: 46, width: 40, resizeMode: "contain" }}
+              style={{ height: RFValue(34.4), width: RFValue(33.3), resizeMode: "contain" }}
             />
           );
         },
@@ -73,6 +111,8 @@ function Barra() {
   );
 }
 
+
+
 export default function App() {
   const Stack = createNativeStackNavigator();
 
@@ -81,6 +121,8 @@ export default function App() {
   readKey().then((value) => {
     setLlave(value);
   });
+
+  const scheme = useColorScheme();
 
   if (llave != null && llave != "" && llave != undefined) {
     return (
@@ -119,113 +161,103 @@ export default function App() {
     );
   } else {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Splash"
-            component={Splashc}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Slider"
-            component={Slider}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ImportarCuenta"
-            component={ImportarCuenta}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Crear"
-            component={Crearcuenta}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="DocePalabras"
-            component={DocePalabras}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Contraseña"
-            component={Contraseña}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ConfirContra"
-            component={ConfirContra}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="PantallaCarga"
-            component={PantallaCarga}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Barra"
-            component={Barra}
-            options={{ headerShown: false, gestureEnabled: false }}
-          />
-          <Stack.Screen
-            name="Moneda"
-            component={Moneda}
-            options={{ headerShown: false, gestureEnabled: false }}
-          />
-          <Stack.Screen
-            name="Recibir"
-            component={Recibir}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EnviarCantidad"
-            component={EnviarCantidad}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EnviarDireccion"
-            component={EnviarDireccion}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Enviar"
-            component={Importar}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="QrReader"
-            component={QrReader}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Editar"
-            component={Editar}
-            options={{ headerShown: false, gestureEnabled: false }}
-          />
-          <Stack.Screen
-            name="Exclave"
-            component={Exclave}
-            options={{ headerShown: false, gestureEnabled: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PaperProvider theme={scheme === 'dark' ? darkTheme : lightTheme}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Splash"
+              component={Splashc}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Slider"
+              component={Slider}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ImportarCuenta"
+              component={ImportarCuenta}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Crear"
+              component={Crearcuenta}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="DocePalabras"
+              component={DocePalabras}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Contraseña"
+              component={Contraseña}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ConfirContra"
+              component={ConfirContra}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="PantallaCarga"
+              component={PantallaCarga}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Barra"
+              component={Barra}
+              options={{ headerShown: false, gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name="Moneda"
+              component={Moneda}
+              options={{ headerShown: false, gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name="Recibir"
+              component={Recibir}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EnviarCantidad"
+              component={EnviarCantidad}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EnviarDireccion"
+              component={EnviarDireccion}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Enviar"
+              component={Importar}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="QrReader"
+              component={QrReader}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Editar"
+              component={Editar}
+              options={{ headerShown: false, gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name="Exclave"
+              component={Exclave}
+              options={{ headerShown: false, gestureEnabled: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 30,
-  },
-  boton: {
-    marginTop: 50,
-  },
-});
