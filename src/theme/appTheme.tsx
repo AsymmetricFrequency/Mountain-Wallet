@@ -37,13 +37,11 @@ const barios2 = Platform.OS === "ios" ? 15 : 0;
 
 export const styles = StyleSheet.create({
   body: {
-    backgroundColor: "#FBF7FF",
     height: windowHeight,
     width: windowWidth,
     flex: 1,
   },
   completo: {
-    backgroundColor: "#FBF7FF",
     alignItems: "center",
     flex: 1,
   },
@@ -59,7 +57,6 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(17),
   },
   btnc: {
-    backgroundColor: "#440577",
     borderRadius: radios,
     width: RFValue(245),
     height: RFValue(48.44),
@@ -68,7 +65,6 @@ export const styles = StyleSheet.create({
   txtc: {
     fontSize: RFValue(17),
     fontWeight: "400",
-    color: "#FBF7FF",
     textAlign: "center",
   },
   btnr: {
@@ -116,7 +112,7 @@ export const styles = StyleSheet.create({
   introTitleStyle: {
     fontSize: RFValue(23),
     fontWeight: "bold",
-    color: "#4D4D4D",
+    // color: "#4D4D4D",
     textAlign: "center",
   },
   cajatxt: {
@@ -208,9 +204,7 @@ export const styles = StyleSheet.create({
   //Crear Cuenta
   cajacc: {
     alignItems: "center",
-    // bottom: StatusBar.currentHeight,
     flexDirection: "column",
-    // paddingTop: topios,
   },
   cajaatras: {
     position: "absolute",
@@ -227,7 +221,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   titletx: {
-    color: "#440577",
     fontSize: RFValue(23),
     fontWeight: "bold",
   },
@@ -238,7 +231,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   txttx: {
-    color: "#4D4D4D",
     fontSize: RFValue(23),
     fontWeight: "bold",
     textAlign: "center",
@@ -255,7 +247,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   itemLabel: {
-    color: "#4D4D4D",
     fontSize: RFValue(25),
     fontWeight: "bold",
   },
@@ -267,7 +258,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   counter: {
-    color: "#440577",
     fontSize: RFValue(17),
     textAlign: "center",
   },
@@ -278,7 +268,6 @@ export const styles = StyleSheet.create({
     bottom: RFValue(-70),
   },
   btnDone: {
-    backgroundColor: "#440577",
     borderRadius: 15,
     width: RFValue(201),
     height: RFValue(41.7),
@@ -290,7 +279,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   txtDone: {
-    color: "#fff",
     fontSize: RFValue(21),
     textAlign: "center",
     justifyContent: "center",
@@ -434,7 +422,6 @@ export const styles = StyleSheet.create({
     width: RFValue(121),
     height: RFValue(37.5),
     alignItems: "center",
-    backgroundColor: "#5b298a",
     borderRadius: 10,
     justifyContent: "center",
   },
@@ -830,8 +817,8 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(23),
     fontWeight: "400",
   },
-  titlex: {
-    color: "#440577",
+
+  titlex:{
     fontSize: RFValue(20),
     fontWeight: "bold",
   },
@@ -935,10 +922,10 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(42),
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingHorizontal: 10,
-    borderColor: "#440577",
-    borderWidth: 1,
-    borderRadius: 10,
+    paddingHorizontal:10,
+    borderWidth:1,
+    borderRadius:10,
+
   },
   inputuser: {
     width: "100%",

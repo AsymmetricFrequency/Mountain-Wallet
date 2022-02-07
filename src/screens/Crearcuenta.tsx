@@ -9,7 +9,8 @@ import {
   SafeAreaView,
   StatusBar,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  Appearance
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { readMnemonic } from "../../api";
@@ -22,6 +23,8 @@ import {
 } from "../screens/utils/animations";
 import Carousel from "react-native-snap-carousel";
 import { appendFile } from "fs/promises";
+import { useTheme } from 'react-native-paper';
+
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
@@ -43,6 +46,13 @@ function leerMnemonic() {
 
 const Crearcuenta = ({ navigation }: { navigation: any }) => {
   
+  //Detecta el modo del sistema
+  const [theme,setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme)=>{
+    setTheme(scheme.colorScheme);
+  })
+  const { colors } = useTheme();
+
   const [numero, setNumero] = useState(1);
   const [refreshing, setRefreshing] = React.useState(false);
   
@@ -57,13 +67,17 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
   const RenderItem =  ({ item }) => {
       return (
         <View style={styles.itemContainer}>
-          <Text style={styles.itemLabel}>{`${item}`}</Text>
+          <Text style={[styles.itemLabel,{color:colors.text}]}>{`${item}`}</Text>
         </View>
       );
   };
 
   return (
-    <SafeAreaView style={styles.body}>
+    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
+      <StatusBar 
+        backgroundColor= {colors.background}
+        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
+      />
       <SafeAreaView>
         <ScrollView
           style={{ backgroundColor: "red" }}
@@ -76,10 +90,9 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           }
         ></ScrollView>
       </SafeAreaView> 
-      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
-          <Text style={styles.titletx}>Crear nueva cartera</Text>
+          <Text style={[styles.titletx,{color:colors.text}]}>Crear nueva cartera</Text>
         </View>
         <View style={styles.cajaatras}>
           <TouchableOpacity
@@ -91,16 +104,16 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.txtcc}>
-          <Text style={styles.txttx}>
+          <Text style={[styles.txttx,{color:colors.accent}]}>
             Escribe tu frase de respaldo en un lugar seguro
           </Text>
         </View>
         <TouchableOpacity
-              style={styles.btnDone}
+              style={[styles.btnDone,{ backgroundColor:colors.text}]}
               activeOpacity={0.5}
               onPress={() => Palabras()}
             >
-              <Text style={styles.txtDone}>Crear 12 palabras</Text>
+              <Text style={[styles.txtDone,{color:colors.background}]}>Crear 12 palabras</Text>
             </TouchableOpacity>
         <Carousel
           data={elements}
@@ -118,16 +131,16 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           enableMomentum={true}
         />
         <View style={styles.txtpag}>
-          <Text style={styles.counter}>{numero} de 12</Text>
+          <Text style={[styles.counter,{color:colors.text}]}>{numero} de 12</Text>
         </View>
         {numero == 12 && (
           <View style={styles.cajabtn}>
             <TouchableOpacity
-              style={styles.btnDone}
+              style={[styles.btnDone,{ backgroundColor:colors.text}]}
               activeOpacity={0.5}
               onPress={() => navigation.navigate("DocePalabras")}
             >
-              <Text style={styles.txtDone}>Continuar</Text>
+              <Text style={[styles.txtDone,{color:colors.background}]}>Continuar</Text>
             </TouchableOpacity>
           </View>
         )}
