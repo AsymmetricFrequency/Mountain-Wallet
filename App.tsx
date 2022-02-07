@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Image, useColorScheme, Appearance} from "react-native";
+import {Image, useColorScheme, Appearance, Platform} from "react-native";
 import "react-native-url-polyfill/auto";
 
 import { readKey } from "./api";
@@ -47,9 +47,16 @@ const darkTheme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary:"#00FFFF",
+    //slider
+    primary:"#8B39CD",
+    //contrario
     text: "#E2DBEE",
+    //igual
     background:'#440577',
+    //negro
+    accent: "#FBF7FF",
+    //bordeazul
+    surface:"#00FFFF"
   },
 };
 
@@ -58,13 +65,15 @@ const lightTheme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary:"#E2DBEE",
+    primary:"#440577",
     text: "#440577",
     background:'#FBF7FF',
-
+    accent: "#4D4D4D",
+    surface:"#E2DBEE"
   },
 };
 
+const barios = Platform.OS === "ios" ? 65 :54;
 
 
 function Barra() {
@@ -79,7 +88,7 @@ function Barra() {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { height: RFValue(65), backgroundColor: colors.background, borderTopColor: colors.background,elevation:0 },
+        tabBarStyle: { height: RFValue(barios), backgroundColor: colors.background, borderTopColor: colors.background,elevation:0 },
         tabBarIcon: ({ focused }) => {
           let imagenes;
           if (route.name === "Balance") {
@@ -164,7 +173,7 @@ export default function App() {
       <PaperProvider theme={scheme === 'dark' ? darkTheme : lightTheme}>
         <NavigationContainer>
           <Stack.Navigator>
-            {/* <Stack.Screen
+            <Stack.Screen
               name="Splash"
               component={Splashc}
               options={{ headerShown: false }}
@@ -208,7 +217,7 @@ export default function App() {
               name="PantallaCarga"
               component={PantallaCarga}
               options={{ headerShown: false }}
-            /> */}
+            />
             <Stack.Screen
               name="Barra"
               component={Barra}
