@@ -164,7 +164,7 @@ export default function App() {
       <PaperProvider theme={scheme === 'dark' ? darkTheme : lightTheme}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen
+            {/* <Stack.Screen
               name="Splash"
               component={Splashc}
               options={{ headerShown: false }}
@@ -208,7 +208,7 @@ export default function App() {
               name="PantallaCarga"
               component={PantallaCarga}
               options={{ headerShown: false }}
-            />
+            /> */}
             <Stack.Screen
               name="Barra"
               component={Barra}
