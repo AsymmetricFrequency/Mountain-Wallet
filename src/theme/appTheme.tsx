@@ -25,6 +25,7 @@ const topDocePios = Platform.OS === "ios" ? 50 : 55;
 const panelDoceios = Platform.OS === "ios" ? 60 : 94;
 const swichLios = Platform.OS === "ios" ? -5 : 0;
 const swichTios = Platform.OS === "ios" ? 0.8 : 1;
+const btnCntRestios = Platform.OS === "ios" ? 0 : 20;
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
@@ -818,7 +819,7 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
 
-  titlex:{
+  titlex: {
     fontSize: RFValue(20),
     fontWeight: "bold",
   },
@@ -922,10 +923,9 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(42),
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingHorizontal:10,
-    borderWidth:1,
-    borderRadius:10,
-
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 10,
   },
   inputuser: {
     width: "100%",
@@ -950,4 +950,63 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
+
+  //Restaurar
+  contenedorCajaRest: {
+    backgroundColor: "#EDE3F4",
+    borderRadius: 5,
+    marginTop: RFValue(122),
+    height: RFValue(158),
+    width: RFValue(310),
+    flexDirection: "column",
+  },
+  txtInputRest: {
+    color: "#440577",
+    fontSize: 20,
+    fontWeight: "700",
+    marginLeft: 12,
+    marginRight: 62,
+    marginTop: 12,
+  },
+  cntdrNameBll: {
+    backgroundColor: "#EDE3F4",
+    borderRadius: 5,
+    height: 58,
+    marginTop: RFValue(15),
+    width: RFValue(310),
+  },
+  txtNombreBll: {
+    //backgroundColor: "green",
+    color: "#440577",
+    fontSize: 20,
+    fontWeight: "700",
+    marginLeft: 12,
+    marginRight: 62,
+    marginTop: 17,
+  },
+  cntdClipboard: {
+    height: 40,
+    width: 40,
+  },
+
+  imgRestau: {
+    //backgroundColor: "red",
+    height: RFValue(228.86),
+    width: RFValue(229),
+    marginTop: 10,
+    resizeMode: "contain",
+  },
+  cntdrBtnRest: {
+    alignContent: "center",
+    marginTop: btnCntRestios,
+  },
+  btnCntRest: {
+    alignItems: "center",
+    backgroundColor: "#440577",
+    borderRadius: 10,
+    height: 59,
+    justifyContent: "center",
+    width: 139,
+  },
+  //Fin Restaurar
 });
