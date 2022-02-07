@@ -36,6 +36,7 @@ import EnviarDireccion from "./src/screens/EnviarDireccion";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { useTheme } from "react-native-paper";
 import { RFValue } from "react-native-responsive-fontsize";
+import Restaurar from "./src/screens/Restaurar";
 
 const Tab = createBottomTabNavigator();
 //Detecta el sistema en navigator
@@ -187,10 +188,15 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="Restaurar"
+              component={Restaurar}
+              options={{ headerShown: false }}
+            />
+            {/* <Stack.Screen
               name="ImportarCuenta"
               component={ImportarCuenta}
               options={{ headerShown: false }}
-            />
+            /> */}
             <Stack.Screen
               name="Crear"
               component={Crearcuenta}
