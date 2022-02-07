@@ -819,7 +819,7 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
 
-  titlex:{
+  titlex: {
     fontSize: RFValue(20),
     fontWeight: "bold",
   },
@@ -923,10 +923,9 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(42),
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingHorizontal:10,
-    borderWidth:1,
-    borderRadius:10,
-
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 10,
   },
   inputuser: {
     width: "100%",
@@ -1009,4 +1008,5 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     width: 139,
   },
+  //Fin Restaurar
 });

@@ -16,7 +16,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { saveMmemonic } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
-
+//
 const Restaurar = ({ navigation }: { navigation: any }) => {
   const [values, setValues] = useState({
     mnemonic: "",
