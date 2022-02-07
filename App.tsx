@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import {Image, useColorScheme, Appearance, Platform} from "react-native";
+
 import "react-native-url-polyfill/auto";
 
 import { readKey } from "./api";
@@ -33,12 +35,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EnviarCantidad from "./src/screens/EnviarCantidad";
 import EnviarDireccion from "./src/screens/EnviarDireccion";
 
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import { useTheme } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import { RFValue } from "react-native-responsive-fontsize";
-
-
-
 
 const Tab = createBottomTabNavigator();
 //Detecta el sistema en navigator
@@ -57,6 +56,7 @@ const darkTheme = {
     accent: "#FBF7FF",
     //bordeazul
     surface:"#00FFFF"
+
   },
 };
 
@@ -65,6 +65,7 @@ const lightTheme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
+
     primary:"#440577",
     text: "#440577",
     background:'#FBF7FF',
@@ -79,35 +80,47 @@ const barios = Platform.OS === "ios" ? 65 :54;
 function Barra() {
   const { colors } = useTheme();
   //Detecta el modo del sistema
-  const [theme,setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme)=>{
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
-  })
+  });
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
+
         tabBarStyle: { height: RFValue(barios), backgroundColor: colors.background, borderTopColor: colors.background,elevation:0 },
+
         tabBarIcon: ({ focused }) => {
           let imagenes;
           if (route.name === "Balance") {
             imagenes = focused
-              ? theme == 'dark' ? require("./src/screens/img/walletcolorDark.png") : require("./src/screens/img/walletcolor.png")
+              ? theme == "dark"
+                ? require("./src/screens/img/walletcolorDark.png")
+                : require("./src/screens/img/walletcolor.png")
               : require("./src/screens/img/walletblanco.png");
           } else if (route.name === "Swap") {
             imagenes = focused
-              ? theme == 'dark' ? require("./src/screens/img/swapcolorDark.png") : require("./src/screens/img/swapcolor.png")
+              ? theme == "dark"
+                ? require("./src/screens/img/swapcolorDark.png")
+                : require("./src/screens/img/swapcolor.png")
               : require("./src/screens/img/swapblanco.png");
           } else if (route.name === "Ajustes") {
             imagenes = focused
-              ? theme == 'dark' ? require("./src/screens/img/settingscolorDark.png") : require("./src/screens/img/settingscolor.png")
+              ? theme == "dark"
+                ? require("./src/screens/img/settingscolorDark.png")
+                : require("./src/screens/img/settingscolor.png")
               : require("./src/screens/img/settingsblanco.png");
           }
           return (
             <Image
               source={imagenes}
-              style={{ height: RFValue(34.4), width: RFValue(33.3), resizeMode: "contain" }}
+              style={{
+                height: RFValue(34.4),
+                width: RFValue(33.3),
+                resizeMode: "contain",
+              }}
             />
           );
         },
@@ -119,8 +132,6 @@ function Barra() {
     </Tab.Navigator>
   );
 }
-
-
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -170,7 +181,7 @@ export default function App() {
     );
   } else {
     return (
-      <PaperProvider theme={scheme === 'dark' ? darkTheme : lightTheme}>
+      <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
@@ -269,4 +280,3 @@ export default function App() {
     );
   }
 }
-

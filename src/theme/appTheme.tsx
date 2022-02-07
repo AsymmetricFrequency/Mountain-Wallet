@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { StyleSheet, Platform, Dimensions, StatusBar, Appearance } from "react-native";
+import {
+  StyleSheet,
+  Platform,
+  Dimensions,
+  StatusBar,
+  Appearance,
+} from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 export const colores = {};
@@ -15,6 +21,8 @@ const cirios = Platform.OS === "ios" ? 0 : 25;
 const cantidadios = Platform.OS === "ios" ? -25 : -40;
 const cntdadios = Platform.OS === "ios" ? 10 : -2;
 const alturaBtnEnviar = Platform.OS === "ios" ? 130 : 120;
+const topDocePios = Platform.OS === "ios" ? 50 : 55;
+const panelDoceios = Platform.OS === "ios" ? 60 : 94;
 const swichLios = Platform.OS === "ios" ? -5 : 0;
 const swichTios = Platform.OS === "ios" ? 0.8 : 1;
 const SLIDER_WIDTH = Dimensions.get("screen").width;
@@ -26,9 +34,6 @@ const anchocaja = Platform.OS === "ios" ? 115 : 124;
 const paddinrightios = Platform.OS === "ios" ? 15 : 12;
 const barios = Platform.OS === "ios" ? 15 : 40;
 const barios2 = Platform.OS === "ios" ? 15 : 0;
-
-
-
 
 export const styles = StyleSheet.create({
   body: {
@@ -300,8 +305,8 @@ export const styles = StyleSheet.create({
     width: 53,
     height: 53,
   },
-  lottiecarga:{
-    width:220,
+  lottiecarga: {
+    width: 220,
     height: 220,
   },
   //Fin lottie
@@ -442,8 +447,8 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
   },
-  graf:{
-    height: 400
+  graf: {
+    height: 400,
   },
   //FinMoneda
   //Recibir
@@ -504,32 +509,38 @@ export const styles = StyleSheet.create({
   //FinRecibir
   //Doce Palabras
   headerDos: {
-    height: RFValue(45.93),
-    width: RFValue(320.46),
-    marginTop: RFValue(51.625),
+    //backgroundColor: "blue",
+    height: RFValue(82.69),
+    width: RFValue(290.35),
+    marginLeft: 71,
+    marginTop: topDocePios,
     justifyContent: "center",
   },
   headerTitle: {
     color: "#5B2388",
     fontSize: RFValue(17),
     fontWeight: "700",
+    paddingLeft: 10,
   },
   headerPrimario: {
-    marginTop: 54,
+    //backgroundColor: "green",
+    marginTop: panelDoceios,
     justifyContent: "center",
     flexWrap: "wrap",
     flexDirection: "row",
   },
   fondoFrases: {
     textAlign: "center",
-    borderRadius: 3,
+    borderRadius: 4,
     backgroundColor: "#FBF7FF",
     borderWidth: 1,
-    borderColor: "#5B2388",
-    marginVertical: RFValue(10),
-    marginHorizontal: RFValue(5),
-    width: RFValue(99.05),
-    height: RFValue(24.22),
+    borderColor: "#440577",
+    marginTop: 26,
+    marginHorizontal: 15,
+    width: 120,
+    height: 28,
+    color: "#440577",
+    fontWeight: "bold",
   },
   contenImg: {
     alignItems: "center",
@@ -541,7 +552,7 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   btnContinuar: {
-    marginTop: RFValue(27.125),
+    marginTop: RFValue(87),
     alignItems: "center",
     backgroundColor: "#440577",
     borderRadius: 10,
@@ -555,9 +566,9 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   txtDoceIncompleta: {
-    color: "#440577",
+    color: "#AEA3C6",
     fontSize: RFValue(13),
-    fontWeight: "700",
+    fontWeight: "500",
   },
   //Fin Doce Palabras
 
@@ -806,6 +817,7 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(23),
     fontWeight: "400",
   },
+
   titlex:{
     fontSize: RFValue(20),
     fontWeight: "bold",
@@ -866,37 +878,37 @@ export const styles = StyleSheet.create({
     width: "20%",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column",  
-    height: "100%"
+    flexDirection: "column",
+    height: "100%",
   },
   switchMode: {
     transform: [{ scaleX: swichTios }, { scaleY: swichTios }],
-    left:swichLios
+    left: swichLios,
   },
   //FinAjustes
   //Exclave
-  imgex:{
+  imgex: {
     width: RFValue(201),
-    height:RFValue(201),
-    marginTop:20
+    height: RFValue(201),
+    marginTop: 20,
   },
-  cajaex:{
-    width:RFValue(245.4),
-    height:RFValue(235),
+  cajaex: {
+    width: RFValue(245.4),
+    height: RFValue(235),
     alignItems: "center",
     justifyContent: "center",
-    borderWidth:1,
-    borderColor:'#440577',
-    borderRadius:6,
-    marginTop:RFValue(12.5)
+    borderWidth: 1,
+    borderColor: "#440577",
+    borderRadius: 6,
+    marginTop: RFValue(12.5),
   },
-  cajabtnex:{
+  cajabtnex: {
     alignItems: "center",
     zIndex: 3,
     elevation: 3,
-    marginTop:RFValue(42)
+    marginTop: RFValue(42),
   },
-  txtDonex:{
+  txtDonex: {
     color: "#fff",
     fontSize: RFValue(15),
     textAlign: "center",
@@ -904,37 +916,38 @@ export const styles = StyleSheet.create({
   },
   //FinExclave
   //Edituser
-  cajauser:{
-    width:RFValue(292.2),
-    height:RFValue(41.7),
-    marginTop:RFValue(42),    
+  cajauser: {
+    width: RFValue(292.2),
+    height: RFValue(41.7),
+    marginTop: RFValue(42),
     justifyContent: "center",
     alignItems: "flex-start",
     paddingHorizontal:10,
     borderWidth:1,
     borderRadius:10,
+
   },
-  inputuser:{
-    width:"100%",
-    fontSize:RFValue(17),
-    height:"100%"
+  inputuser: {
+    width: "100%",
+    fontSize: RFValue(17),
+    height: "100%",
   },
-  cajabtneuser:{
+  cajabtneuser: {
     alignItems: "center",
     position: "absolute",
     bottom: RFValue(70),
   },
   //FinEdituser
 
-  dark:{
-    color:"#E2DBEE"
+  dark: {
+    color: "#E2DBEE",
   },
-  light:{
-    color:"#440577"
+  light: {
+    color: "#440577",
   },
-  completodark:{
+  completodark: {
     backgroundColor: "#440577",
     alignItems: "center",
     flex: 1,
-  }
+  },
 });
