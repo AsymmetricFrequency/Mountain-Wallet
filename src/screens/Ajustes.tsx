@@ -18,31 +18,13 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
   Appearance.addChangeListener((scheme)=>{
     setTheme(scheme.colorScheme);
   })
+  const { colors } = useTheme();
   // Concatenar pkey
   var str = '8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ';
   var strFirstThree = str.substring(0,5);
   var strLastThree = str.substring(str.length-5,str.length);
   var concatenado = `${strFirstThree}...${strLastThree}`
-
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => {
-    setIsEnabled(previousState => !previousState);
-    isEnabled === true ? setTheme("light") : setTheme("dark")
-    console.log("togle bb",theme);
-    
-  }
   
-  const { colors } = useTheme();
-  
-  //Cambia estado del toggle con el theme
-  React.useEffect(() => {
-    if (theme == "light") {
-      setIsEnabled(false);
-    }else{
-      setIsEnabled(true);
-    } 
-  }, [theme]);
-
   return (
     <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
       <StatusBar 
@@ -76,25 +58,8 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
             </TouchableOpacity>
         
           </View>
-
-          <View style={[styles.cajaaj,{borderTopColor:colors.surface}]}>
-            <View style={styles.imgaj}>
-              <Switch
-                style={styles.switchMode}
-                trackColor={{ false: "#E2DBEE", true: "#522E7C" }}
-                thumbColor={isEnabled ? "#00FFFF" : "#440577"}
-                ios_backgroundColor="#E2DBEE"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-            <TouchableOpacity style={styles.txtaj} activeOpacity={0.5} onPress={toggleSwitch}>
-              <Text style={[styles.contaj,{color:colors.text}]}>Apariencia</Text>
-              {/* <Text style={[theme === "light" ? styles.light : styles.dark]}>Apariencia</Text> */}
-            </TouchableOpacity>
-          </View>
           
-          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5}  >
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5} onPress={() => navigation.navigate("ExFrase")} >
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icon name="arrow-down" size={altura} color="#440577" />

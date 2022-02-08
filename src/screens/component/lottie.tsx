@@ -41,7 +41,7 @@ const Lotiesplash = () => {
     return (
         <LottieView
             style={styles.lottiesplash}                                            
-            source={require("../Lottie/logocolor.json")}
+            source={require("../Lottie/spashcndr.json")}
             autoPlay
             // loop={false}
         />

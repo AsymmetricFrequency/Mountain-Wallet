@@ -26,7 +26,7 @@ const Splashc = () => {
       navigation.navigate("Pass" as any);
     }
     navigation.navigate("Home" as any);
-  }, 2500);
+  }, 3500);
 
 
 
