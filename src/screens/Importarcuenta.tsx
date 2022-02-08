@@ -36,18 +36,6 @@ const ImportarCuenta = ({ navigation }: { navigation: any }) => {
       })
   }
 
-  const enviarMnemonic = () =>{
-      fetch('http://10.10.18.13:3000/enviar_mnemonic', {
-          method: 'POST',
-          headers: {
-              'Content-Type':'application/json'
-          },
-          body: JSON.stringify({mnemonic:values.mnemonic})
-      })
-      .then(resp => resp.json())
-      .catch(error => console.log(error))
-  }
-
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
 
@@ -123,7 +111,7 @@ const ImportarCuenta = ({ navigation }: { navigation: any }) => {
         <Text style={styles.labeluno} numberOfLines={4}>
           Ingrese sus 12 palabras de respaldo en minusculas
         </Text>
-        <TouchableOpacity style={styles.btnC} onPress={() => [continuar(), enviarMnemonic()]}>
+        <TouchableOpacity style={styles.btnC} onPress={() => continuar()}>
           <Text style={styles.textC}>ACEPTAR</Text>
         </TouchableOpacity>
       </View>
