@@ -31,6 +31,18 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 const windowWidth = Dimensions.get("screen").width;
 
 const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
+
+  const [publicKey, setPublicKey] = useState("")
+
+  async function setearPubKey() {
+    const llavePublica = readPublicKey()
+    llavePublica.then((value) => {
+      setPublicKey(value)
+    })
+  }
+
+  setearPubKey()
+  
   const { pmsg, mon } = route.params;
 
   const ima = () => {
@@ -150,7 +162,7 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
             </View>
             <View style={styles.cuadroqr}>
               <Text numberOfLines={3} style={styles.txtqr}>
-                8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ
+                {publicKey}
               </Text>
 
               {/* <TextInput style={styles.inputqr} value={pKey} editable={false}/> */}

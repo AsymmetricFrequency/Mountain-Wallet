@@ -4,10 +4,17 @@ import { PublicKey, Keypair } from '@solana/web3.js';
 
 import  AsyncStorage  from "@react-native-async-storage/async-storage";
 
+import * as Random from "expo-random"
+import { ethers } from "ethers"
+import { Buffer } from "buffer"
+import nacl from "tweetnacl"
+
 //variables
 const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 const LAMPORTS_PER_SOL = solanaWeb3.LAMPORTS_PER_SOL                                                                     
+
+
 
 //Funcion guardar llave
 async function saveKey(data){
@@ -72,8 +79,7 @@ async function readMnemonic(){
   try {    
     console.log("READ MNEMONIC:");
     const key = await AsyncStorage.getItem('@storage_Mnemonic')
-    console.log(key) 
-    return key 
+    console.log(key)  
   } catch (e) { 
        // saving error  
   }
@@ -95,42 +101,39 @@ async function readPassword(){
   //obteniendo contra
   try {    
     console.log("READ PASSWORD:");
-    const password = await AsyncStorage.getItem('@storage_Pass')
-    return password  
+    console.log(await AsyncStorage.getItem('@storage_Pass'))  
   } catch (e) { 
        // saving error  
   }
 }
 
 
-let mnemonic = ""
 //generar mnemonic
 async function generateMnemonic() {
-  fetch("#link_api#/mnemonic").then(
-      res => res.text()
-  ).then(
-      data =>{
-        mnemonic = data
-        //guardando mnemonic en asyncStorage
-        saveMmemonic(mnemonic) 
-        return mnemonic
-          }   
-      )
+    const randomBytes = await Random.getRandomBytesAsync(16);
+    const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
+    //guardando mnemonic en asyncStorage
+    saveMmemonic(mnemonic)     
+    return mnemonic
 }
 
-let keypair_public_key = ""
-//Crear cuenta (public key)
-async function createAccount() {
-  fetch("#link_api#/keypair_public_key").then(
-      res => res.text()
-  ).then(
-      data =>{
-        keypair_public_key = data
-        //guardando public_key en asyncStorage
-        savePublicKey(keypair_public_key)
-        return keypair_public_key
-          }   
-      )
+//mnemonic a semilla
+const mnemonicToSeed = async (mnemonic: string) => {
+    try {
+        return ethers.utils.mnemonicToSeed(mnemonic).toString()
+    } catch (error) {
+        console.log(error);
+        return "error"
+    }
+};
+
+//crear cuenta
+async function createAccount(seed: string) {
+    const hex = Uint8Array.from(Buffer.from(seed))
+    const keyPair = nacl.sign.keyPair.fromSeed(hex.slice(0, 32));
+    const acc = new solanaWeb3.Account(keyPair.secretKey);
+    saveKey(keyPair.secretKey.toString())
+    return acc
 }
 
 //crear conexion
@@ -180,26 +183,37 @@ async function getToken(publicKey: string, splToken: string){
 
 }
 
-async function enviarTrans(fromWallet,toPublic,amount){
+//enviar transaccion
+async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
   const connection = createConnection("devnet")
-  const myMint = new solanaWeb3.PublicKey("7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
 
-  try {
-    var myToken = new Token(
-      connection,
-      myMint,
-      TOKEN_PROGRAM_ID,
-      fromWallet
-    )
-            
-    var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-      fromWallet.publicKey
-    )
-    var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-      new solanaWeb3.PublicKey(toPublic)
-    )
+  //prueba con la llave
+  const DEMO_WALLET_SECRET_KEY = new Uint8Array([245,227,241,78,52,86,34,249,154,108,11,238,175,182,30,183,142,181,39,114,135,60,106,146,197,188,205,100,79,22,57,64,51,190,81,228,64,115,0,1,93,168,72,53,238,168,60,211,151,35,252,21,100,240,0,176,228,240,105,206,47,68,116,28]); 
+  var fromWallet = new solanaWeb3.Account(DEMO_WALLET_SECRET_KEY);
+  console.log(fromWallet.publicKey.toString());
+  console.log(readMnemonic());
   
-    var transaction = new solanaWeb3.Transaction()
+  
+  //const fromWallet = wallet
+  const toWallet = new solanaWeb3.PublicKey(toPublic)
+  const myMint = new solanaWeb3.PublicKey(splToken)
+
+  var myToken = new Token(
+    connection,
+    myMint,
+    TOKEN_PROGRAM_ID,
+    fromWallet
+  );
+
+   // Create associated token accounts for my token if they don't exist yet
+   var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
+    fromWallet.publicKey
+  )
+  var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
+    new solanaWeb3.PublicKey(toPublic)
+  )
+
+  var transaction = new solanaWeb3.Transaction()
     .add(
       Token.createTransferInstruction(
         TOKEN_PROGRAM_ID,
@@ -210,18 +224,17 @@ async function enviarTrans(fromWallet,toPublic,amount){
         amount * LAMPORTS_PER_SOL
       )
     )
+  
+  var signature = await solanaWeb3.sendAndConfirmTransaction(
+    connection,
+    transaction,
+    [fromWallet]
+  );
+  console.log("SIGNATURE", signature);
+  console.log("SUCCESS");
 
-    var signature = await solanaWeb3.sendAndConfirmTransaction(
-      connection,
-      transaction,
-      [fromWallet]
-    ).catch((err) => {
-      console.log(err)
-    })
-    return "signature"
-    } catch (error) {
-      return error
-  }
+
+  
 }
 
 // funcion para obtener el historial de transacciones
@@ -240,19 +253,4 @@ return history;
 }
 
 
-export { 
-  savePublicKey,
-  readPublicKey,
-  generateMnemonic,
-  createAccount,
-  getBalance,
-  getToken,
-  saveKey,
-  readKey,
-  getHistory,
-  saveMmemonic,
-  readMnemonic,
-  savePassword, 
-  readPassword,
-  enviarTrans 
-}
+export { savePublicKey,readPublicKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic }
