@@ -59,7 +59,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
         
           </View>
           
-          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5}  >
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5} onPress={() => navigation.navigate("ExFrase")} >
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icon name="arrow-down" size={altura} color="#440577" />
