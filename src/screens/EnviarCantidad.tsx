@@ -177,7 +177,7 @@ const EnviarCantidad = ({
           <View style={styles.logoMountain}>
             <Image
               style={styles.mountainLogo}
-              source={require("./img/mountain-enviar.png")}
+              source={require("./img/logocolor.png")}
             />
             <TouchableOpacity
               style={styles.ingresar}
