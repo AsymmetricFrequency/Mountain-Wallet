@@ -4,22 +4,14 @@ import { PublicKey, Keypair } from '@solana/web3.js';
 
 import  AsyncStorage  from "@react-native-async-storage/async-storage";
 
-import * as Random from "expo-random"
-import { ethers } from "ethers"
-import { Buffer } from "buffer"
-import nacl from "tweetnacl"
-
 //variables
 const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 const LAMPORTS_PER_SOL = solanaWeb3.LAMPORTS_PER_SOL                                                                     
 
-
-
 //Funcion guardar llave
 async function saveKey(data){
-  try {     
-    console.log("KEY:");
+  try {
     console.log(await AsyncStorage.setItem('@storage_Key', data))  
   } catch (e) { 
        // saving error  
@@ -29,10 +21,8 @@ async function saveKey(data){
 //Funcion leer llave
 async function readKey(){
   //obteniendo llave
-  try {    
-    console.log("READ KEY:");
+  try {
     const key = await AsyncStorage.getItem('@storage_Key')
-    console.log(key) 
     return key 
   } catch (e) { 
        // saving error  
@@ -41,8 +31,7 @@ async function readKey(){
 
 //Funcion guardar llave
 async function savePublicKey(data){
-  try {     
-    console.log("SAVE PUBLIC KEY:");
+  try {
     console.log(await AsyncStorage.setItem('@storage_PublicKey', data))  
   } catch (e) { 
        // saving error  
@@ -52,10 +41,8 @@ async function savePublicKey(data){
 //Leer la public key de la cuenta
 async function readPublicKey(){
   //obteniendo llave
-  try {    
-    console.log("READ PUBLIC KEY:");
+  try {
     const key = await AsyncStorage.getItem('@storage_PublicKey')
-    console.log(key) 
     return key 
   } catch (e) { 
        // saving error  
@@ -65,8 +52,7 @@ async function readPublicKey(){
 
 //Funcion guardar llave
 async function saveMmemonic(data){
-  try {     
-    console.log("MNEMONIC:");
+  try {   
     console.log(await AsyncStorage.setItem('@storage_Mnemonic', data))  
   } catch (e) { 
        // saving error  
@@ -76,10 +62,9 @@ async function saveMmemonic(data){
 //Funcion leer llave
 async function readMnemonic(){
   //obteniendo llave
-  try {    
-    console.log("READ MNEMONIC:");
+  try {
     const key = await AsyncStorage.getItem('@storage_Mnemonic')
-    console.log(key)  
+    return key 
   } catch (e) { 
        // saving error  
   }
@@ -88,8 +73,7 @@ async function readMnemonic(){
 
 //Funcion guardar contra
 async function savePassword(data){
-  try {    
-    console.log("PASSWORD:");
+  try {
     console.log(await AsyncStorage.setItem('@storage_Pass', data))  
   } catch (e) { 
        // saving error  
@@ -99,57 +83,59 @@ async function savePassword(data){
 //Funcion guardar contra
 async function readPassword(){
   //obteniendo contra
-  try {    
-    console.log("READ PASSWORD:");
-    console.log(await AsyncStorage.getItem('@storage_Pass'))  
+  try {
+    const password = await AsyncStorage.getItem('@storage_Pass')
+    return password  
   } catch (e) { 
        // saving error  
   }
 }
 
+////////////////////////////////////////////////////////////
+//  Funciones de Solana-web3 para la creacion de cuentas  //
+////  obtener el balance y transferir SOL y SPL Tokens  ////
+////////////////////////////////////////////////////////////
+
 
 //generar mnemonic
 async function generateMnemonic() {
-    const randomBytes = await Random.getRandomBytesAsync(16);
-    const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
-    //guardando mnemonic en asyncStorage
-    saveMmemonic(mnemonic)     
-    return mnemonic
+  fetch("https://apiwalletnode.herokuapp.com/mnemonic").then(
+      res => res.text()
+  ).then(
+    data =>{
+      //guardando mnemonic en asyncStorage
+      saveMmemonic(data) 
+      return data
+        }   
+    )
 }
 
-//mnemonic a semilla
-const mnemonicToSeed = async (mnemonic: string) => {
-    try {
-        return ethers.utils.mnemonicToSeed(mnemonic).toString()
-    } catch (error) {
-        console.log(error);
-        return "error"
-    }
-};
-
-//crear cuenta
-async function createAccount(seed: string) {
-    const hex = Uint8Array.from(Buffer.from(seed))
-    const keyPair = nacl.sign.keyPair.fromSeed(hex.slice(0, 32));
-    const acc = new solanaWeb3.Account(keyPair.secretKey);
-    saveKey(keyPair.secretKey.toString())
-    return acc
+//Crear cuenta (public key)
+async function createAccount(mnemonic: string) {
+  fetch(`https://apiwalletnode.herokuapp.com/keypair_public_key/${mnemonic}`).then(
+      res => res.text()
+  ).then(
+    data =>{
+      savePublicKey(data)
+      return data
+      }   
+    )
 }
 
 //crear conexion
 function createConnection(cluster:string) {
-    return new solanaWeb3.Connection(solanaWeb3.clusterApiUrl(cluster))
+  return new solanaWeb3.Connection(solanaWeb3.clusterApiUrl(cluster))
 }
 
 //obtener balance de Solanas
 async function getBalance(publicKey: string) {
-    const connection = createConnection("devnet")
-    const lamports = await connection.getBalance(new solanaWeb3.PublicKey(publicKey)).catch((err) => {
-        console.log(err);
-    })
+  const connection = createConnection("devnet")
+  const lamports = await connection.getBalance(new solanaWeb3.PublicKey(publicKey)).catch((err) => {
+    console.log(err);
+  })
 
-    const sol = lamports / LAMPORTS_PER_SOL
-    return sol
+  const sol = lamports / LAMPORTS_PER_SOL
+  return sol
 } 
 
 //buscar cuentas asociadas a tokens
@@ -183,37 +169,26 @@ async function getToken(publicKey: string, splToken: string){
 
 }
 
-//enviar transaccion
-async function sendTokenTransaction( toPublic: string, splToken: string, amount: number) {
+async function enviarTrans(fromWallet,toPublic,amount){
   const connection = createConnection("devnet")
+  const myMint = new solanaWeb3.PublicKey("7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
 
-  //prueba con la llave
-  const DEMO_WALLET_SECRET_KEY = new Uint8Array([245,227,241,78,52,86,34,249,154,108,11,238,175,182,30,183,142,181,39,114,135,60,106,146,197,188,205,100,79,22,57,64,51,190,81,228,64,115,0,1,93,168,72,53,238,168,60,211,151,35,252,21,100,240,0,176,228,240,105,206,47,68,116,28]); 
-  var fromWallet = new solanaWeb3.Account(DEMO_WALLET_SECRET_KEY);
-  console.log(fromWallet.publicKey.toString());
-  console.log(readMnemonic());
+  try {
+    var myToken = new Token(
+      connection,
+      myMint,
+      TOKEN_PROGRAM_ID,
+      fromWallet
+    )
+            
+    var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
+      fromWallet.publicKey
+    )
+    var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
+      new solanaWeb3.PublicKey(toPublic)
+    )
   
-  
-  //const fromWallet = wallet
-  const toWallet = new solanaWeb3.PublicKey(toPublic)
-  const myMint = new solanaWeb3.PublicKey(splToken)
-
-  var myToken = new Token(
-    connection,
-    myMint,
-    TOKEN_PROGRAM_ID,
-    fromWallet
-  );
-
-   // Create associated token accounts for my token if they don't exist yet
-   var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-    fromWallet.publicKey
-  )
-  var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-    new solanaWeb3.PublicKey(toPublic)
-  )
-
-  var transaction = new solanaWeb3.Transaction()
+    var transaction = new solanaWeb3.Transaction()
     .add(
       Token.createTransferInstruction(
         TOKEN_PROGRAM_ID,
@@ -224,17 +199,18 @@ async function sendTokenTransaction( toPublic: string, splToken: string, amount:
         amount * LAMPORTS_PER_SOL
       )
     )
-  
-  var signature = await solanaWeb3.sendAndConfirmTransaction(
-    connection,
-    transaction,
-    [fromWallet]
-  );
-  console.log("SIGNATURE", signature);
-  console.log("SUCCESS");
 
-
-  
+    var signature = await solanaWeb3.sendAndConfirmTransaction(
+      connection,
+      transaction,
+      [fromWallet]
+    ).catch((err) => {
+      console.log(err)
+    })
+    return "signature"
+    } catch (error) {
+      return error
+  }
 }
 
 // funcion para obtener el historial de transacciones
@@ -248,9 +224,24 @@ async function getHistory(pubKey:string,options = { limit: 20 }){
 
   console.log(history);
   
-return history;
+  return history;
 
 }
 
 
-export { savePublicKey,readPublicKey, generateMnemonic, mnemonicToSeed, createAccount, getBalance, getToken, sendTokenTransaction, saveKey, readKey, getHistory,saveMmemonic,readMnemonic }
+export { 
+  savePublicKey,
+  readPublicKey,
+  generateMnemonic,
+  createAccount,
+  getBalance,
+  getToken,
+  saveKey,
+  readKey,
+  getHistory,
+  saveMmemonic,
+  readMnemonic,
+  savePassword, 
+  readPassword,
+  enviarTrans 
+}
