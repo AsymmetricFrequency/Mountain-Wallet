@@ -6,18 +6,27 @@ import {
   StatusBar,
   TouchableOpacity,
   Platform,
+  Appearance,
 } from "react-native";
 import React, { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import Icon from "react-native-vector-icons/Feather";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { styles } from "../theme/appTheme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import { saveMmemonic } from "../../api";
+import { useTheme } from "react-native-paper";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 //
 const Restaurar = ({ navigation }: { navigation: any }) => {
+  //Detecta el modo del sistema
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
+    setTheme(scheme.colorScheme);
+  });
+  const { colors } = useTheme();
+
   const [values, setValues] = useState({
     mnemonic: "",
   });
@@ -70,8 +79,18 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <KeyboardAwareScrollView style={styles.body}>
-      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
+    <KeyboardAwareScrollView
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={[
+        styles.body,
+        { backgroundColor: colors.background },
+      ]}
+      scrollEnabled={false}
+    >
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={theme === "dark" ? "light-content" : "dark-content"}
+      />
       <View style={styles.completo}>
         <View style={styles.cajaatras}>
           <TouchableOpacity
@@ -83,7 +102,7 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.contenedorCajaRest}>
-          <View style={{ height: "80%" }}>
+          <View style={styles.cajaFrase}>
             <TextInput
               style={styles.txtInputRest}
               multiline={true}
@@ -95,48 +114,38 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
               {copiedText}
             </TextInput>
           </View>
-          <View
-            style={{
-              //backgroundColor: "green",
-              height: "20%",
-              alignItems: "flex-end",
-              paddingRight: 5,
-              bottom: 5,
-            }}
-          >
+          <View style={styles.btnCopiar}>
             <TouchableOpacity
               style={styles.cntdClipboard}
               onPress={() => fetchCopiedText()}
             >
               <Image
-                style={styles.clipboard}
+                style={styles.clipboardRes}
                 source={require("./img/Paste-clipboard.png")}
               ></Image>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.cntdrNameBll}>
-          <View style={{ height: "100%" }}>
-            <TextInput
-              style={styles.txtNombreBll}
-              autoCapitalize="none"
-              placeholder={"Nombre de la billetera"}
-              placeholderTextColor="#AEA3C6"
-            ></TextInput>
-          </View>
+          <TextInput
+            style={styles.txtNombreBll}
+            placeholder={"Nombre de la billetera"}
+            placeholderTextColor="#AEA3C6"
+          ></TextInput>
         </View>
-        <View>
+        <View style={styles.escudo}>
           <Image
             style={styles.imgRestau}
             source={require("./img/opacity-rerstaurar-mnemonic.png")}
           ></Image>
         </View>
-        <View style={styles.cntdrBtnRest}>
-          <TouchableOpacity style={styles.btnCntRest}>
-            <Text
-              style={styles.txtContinuar}
-              onPress={() => [continuar(), enviarMnemonic()]}
-            >
+        <View style={styles.cajabtnRest}>
+          <TouchableOpacity
+            style={[styles.btnDone, { backgroundColor: colors.text }]}
+            activeOpacity={0.5}
+            onPress={() => [continuar(), enviarMnemonic()]}
+          >
+            <Text style={[styles.txtDone, { color: colors.background }]}>
               Continuar
             </Text>
           </TouchableOpacity>

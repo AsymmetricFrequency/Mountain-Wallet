@@ -9,8 +9,7 @@ import {
   SafeAreaView,
   Appearance,
 } from "react-native";
-import { useTheme } from 'react-native-paper';
-
+import { useTheme } from "react-native-paper";
 
 // Fuente
 import * as Font from "expo-font";
@@ -18,17 +17,16 @@ import * as Font from "expo-font";
 import { styles } from "../theme/appTheme";
 
 const Home = ({ navigation }: { navigation: any }) => {
-
   //Detecta el modo del sistema
-  const [theme,setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme)=>{
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
-  })
+  });
   const { colors } = useTheme();
 
   function generarMnemonic() {
     navigation.navigate("Slider");
-  };
+  }
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -57,37 +55,42 @@ const Home = ({ navigation }: { navigation: any }) => {
 
   if (!fontsLoaded) {
     return <View />;
-  };
-
-
- 
+  }
 
   return (
-    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
-      <StatusBar 
-        backgroundColor= {colors.background}
-        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
+    <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={theme === "dark" ? "light-content" : "dark-content"}
       />
-      <View style={[styles.completo,{backgroundColor:colors.background}]}>
+      <View style={[styles.completo, { backgroundColor: colors.background }]}>
         <Image
           style={styles.logocolor}
-          source={theme === "light" ? require("./img/logocolor.png") : require("./img/logocolorDark.png")}
+          source={
+            theme === "light"
+              ? require("./img/logocolor.png")
+              : require("./img/logocolorDark.png")
+          }
         />
         <View style={styles.btncr}>
           <TouchableOpacity
-            style={[styles.btnc,{backgroundColor:colors.text}]}
+            style={[styles.btnc, { backgroundColor: colors.text }]}
             activeOpacity={0.5}
             onPress={() => generarMnemonic()}
           >
-            <Text style={[styles.txtc,{color:colors.background}]}>CREAR NUEVA CARTERA</Text>
+            <Text style={[styles.txtc, { color: colors.background }]}>
+              CREAR NUEVA CARTERA
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.btnr,{backgroundColor:colors.text}]}
+            style={[styles.btnr, { backgroundColor: colors.text }]}
             activeOpacity={0.5}
-            onPress={() => navigation.navigate("ImportarCuenta")}
+            onPress={() => navigation.navigate("Restaurar")}
           >
-            <Text style={[styles.txtr,{color:colors.background}]}>RESTAURAR CARTERA</Text>
+            <Text style={[styles.txtr, { color: colors.background }]}>
+              RESTAURAR CARTERA
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.cajadevep}>
