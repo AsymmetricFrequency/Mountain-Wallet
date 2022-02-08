@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import {Image, useColorScheme, Appearance, Platform} from "react-native";
+import { Image, useColorScheme, Appearance, Platform } from "react-native";
 
 import "react-native-url-polyfill/auto";
 
@@ -39,6 +39,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { useTheme } from "react-native-paper";
 import { RFValue } from "react-native-responsive-fontsize";
 import Restaurar from "./src/screens/Restaurar";
+import ExFrase from "./src/screens/ExFrase";
 
 const Tab = createBottomTabNavigator();
 //Detecta el sistema en navigator
@@ -48,16 +49,15 @@ const darkTheme = {
   colors: {
     ...DefaultTheme.colors,
     //slider
-    primary:"#8B39CD",
+    primary: "#8B39CD",
     //contrario
     text: "#E2DBEE",
     //igual
-    background:'#440577',
+    background: "#440577",
     //negro
     accent: "#FBF7FF",
     //bordeazul
-    surface:"#00FFFF"
-
+    surface: "#00FFFF",
   },
 };
 
@@ -67,16 +67,15 @@ const lightTheme = {
   colors: {
     ...DefaultTheme.colors,
 
-    primary:"#440577",
+    primary: "#440577",
     text: "#440577",
-    background:'#FBF7FF',
+    background: "#FBF7FF",
     accent: "#4D4D4D",
-    surface:"#E2DBEE"
+    surface: "#E2DBEE",
   },
 };
 
-const barios = Platform.OS === "ios" ? 65 :54;
-
+const barios = Platform.OS === "ios" ? 65 : 54;
 
 function Barra() {
   const { colors } = useTheme();
@@ -91,7 +90,12 @@ function Barra() {
         headerShown: false,
         tabBarShowLabel: false,
 
-        tabBarStyle: { height: RFValue(barios), backgroundColor: colors.background, borderTopColor: colors.background,elevation:0 },
+        tabBarStyle: {
+          height: RFValue(barios),
+          backgroundColor: colors.background,
+          borderTopColor: colors.background,
+          elevation: 0,
+        },
 
         tabBarIcon: ({ focused }) => {
           let imagenes;
@@ -278,6 +282,11 @@ export default function App() {
             <Stack.Screen
               name="Exclave"
               component={Exclave}
+              options={{ headerShown: false, gestureEnabled: false }}
+            />
+            <Stack.Screen
+              name="ExFrase"
+              component={ExFrase}
               options={{ headerShown: false, gestureEnabled: false }}
             />
           </Stack.Navigator>

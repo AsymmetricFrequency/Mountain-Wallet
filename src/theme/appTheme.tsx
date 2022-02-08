@@ -1009,4 +1009,13 @@ export const styles = StyleSheet.create({
     width: 139,
   },
   //Fin Restaurar
+
+  //ExFrase
+  titlexx: {
+    fontSize: RFValue(20),
+    fontWeight: "bold",
+    color: "#440577",
+    marginLeft: 63,
+  },
+  //Fin ExFrase
 });
