@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
   Text,
-  StyleSheet,
   View,
   TouchableOpacity,
   Platform,
-  Dimensions,
   Modal,
   RefreshControl,
   Image,
@@ -212,7 +210,7 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
         <View>
           <TouchableOpacity
             style={styles.btnContinuar}
-            onPress={() => addTresFaltantes()}
+            onPress={() => navigation.navigate("Contraseña")}
           >
             <Text style={styles.txtContinuar}>Continuar</Text>
           </TouchableOpacity>

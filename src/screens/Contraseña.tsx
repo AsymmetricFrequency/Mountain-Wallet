@@ -136,7 +136,7 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
           </Animatable.View>
         </Modal>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate("DocePalabras")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon name="arrow-back-outline" size={40} color={"#440577"} />
           </TouchableOpacity>
         </View>
@@ -226,7 +226,7 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
         <View style={styles.contBtn}>
           <TouchableOpacity
             style={styles.btnCont}
-            onPress={() => genPassword()}
+            onPress={() => navigation.navigate("ConfirContra")}
           >
             <Text style={styles.textbtnR}>CONTINUAR</Text>
           </TouchableOpacity>

@@ -24,10 +24,6 @@ const Home = ({ navigation }: { navigation: any }) => {
   });
   const { colors } = useTheme();
 
-  function generarMnemonic() {
-    navigation.navigate("Slider");
-  }
-
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
@@ -36,26 +32,6 @@ const Home = ({ navigation }: { navigation: any }) => {
     return () => backHandler.remove();
   }, []);
 
-  //Función fuentes tipograficas
-
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!fontsLoaded) {
-      loadFonts();
-    }
-  });
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      //Fuente
-      "opensans-regular": require("../../assets/fonts/OpenSans-Regular.ttf"),
-    });
-    setFontsLoaded(true);
-  };
-
-  if (!fontsLoaded) {
-    return <View />;
-  }
 
   return (
     <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
@@ -76,7 +52,7 @@ const Home = ({ navigation }: { navigation: any }) => {
           <TouchableOpacity
             style={[styles.btnc, { backgroundColor: colors.text }]}
             activeOpacity={0.5}
-            onPress={() => generarMnemonic()}
+            onPress={() => navigation.navigate("Slider")}
           >
             <Text style={[styles.txtc, { color: colors.background }]}>
               CREAR NUEVA CARTERA
