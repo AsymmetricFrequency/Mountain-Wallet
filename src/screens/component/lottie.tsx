@@ -64,6 +64,20 @@ const Lotiecopy = () => {
 }
 
 
+const Lotiecarga = () => {
+  return (
+      <LottieView
+          style={styles.lottiecopy}                                            
+          source={require("../Lottie/pantallacarga.json")}
+          speed={2.5}
+          autoPlay
+          loop={true}
+      />
+  )
+  
+}
+
+
 
 
 export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy};

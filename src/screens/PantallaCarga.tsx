@@ -1,14 +1,23 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, Appearance, SafeAreaView, StatusBar } from "react-native";
 import {
   readMnemonic,
   createAccount,
   savePublicKey,
 } from "../../api";
 import LottieView from "lottie-react-native";
-import { RFValue } from "react-native-responsive-fontsize";
+import { useTheme } from 'react-native-paper';
+import { styles } from "../theme/appTheme";
+
 
 const PantallaCarga = ({ navigation }: { navigation: any }) => {
+  //Detecta el modo del sistema
+  const [theme,setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme)=>{
+    setTheme(scheme.colorScheme);
+  })
+  const { colors } = useTheme();
+
   const [palabras, setPalabras] = useState("");
 
   async function leerMnemonic() {
@@ -35,40 +44,22 @@ const PantallaCarga = ({ navigation }: { navigation: any }) => {
   }, 2000);
 
   return (
-    <View style={styles.body}>
-      <LottieView
-        style={styles.lottie}
-        source={require("./Lottie/flowerCarga.json")}
-        autoPlay
+    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
+      <StatusBar 
+        backgroundColor= {colors.background}
+        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
       />
-    </View>
+      <View style={[styles.completo,{backgroundColor:colors.background,justifyContent: "center",alignItems: "center"}]}>
+        <LottieView
+          style={styles.lottiecarga}
+          source={require("./Lottie/pantallacarga.json")}
+          autoPlay
+          speed={1.1}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default PantallaCarga;
 
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    alignItems: "center",
-    height: "100%",
-    justifyContent: "center",
-    width: "100%",
-  },
-  txtcarga: {
-    fontSize: RFValue(18),
-    top: RFValue(90),
-  },
-  fondo: {
-    alignItems: "center",
-    height: "100%",
-    justifyContent: "center",
-    width: "100%",
-  },
-  lottie: {
-    alignItems: "center",
-    height: 200,
-    justifyContent: "center",
-    width: 200,
-  },
-});
