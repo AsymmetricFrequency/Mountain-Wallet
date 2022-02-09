@@ -45,10 +45,8 @@ const Lotiesplash = () => {
             autoPlay
             // loop={false}
         />
-    )
-    
+    ) 
 }
-
 
 const Lotiecopy = () => {
     return (
@@ -59,25 +57,32 @@ const Lotiecopy = () => {
             autoPlay
             loop={true}
         />
-    )
-    
+    ) 
 }
-
 
 const Lotiecarga = () => {
   return (
-      <LottieView
-          style={styles.lottiecopy}                                            
-          source={require("../Lottie/pantallacarga.json")}
-          speed={2.5}
-          autoPlay
-          loop={true}
-      />
+    <LottieView
+      style={styles.lottiecarga}
+      source={require("../Lottie/pantallacarga.json")}
+      autoPlay
+      speed={1.1}
+    />
   )
-  
+}
+
+const LotiecargaDark = () => {
+  return (
+    <LottieView
+      style={styles.lottiecarga}
+      source={require("../Lottie/pantallacargaDark.json")}
+      autoPlay
+      speed={1.1}
+    />
+  )
 }
 
 
 
 
-export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy};
+export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy,Lotiecarga,LotiecargaDark};
