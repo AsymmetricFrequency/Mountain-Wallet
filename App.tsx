@@ -58,6 +58,8 @@ const darkTheme = {
     accent: "#FBF7FF",
     //bordeazul
     surface: "#00FFFF",
+    //Morado negro
+    disabled: "#FBF7FF",
   },
 };
 
@@ -72,6 +74,7 @@ const lightTheme = {
     background: "#FBF7FF",
     accent: "#4D4D4D",
     surface: "#E2DBEE",
+    disabled: "#4D4D4D",
   },
 };
 
@@ -209,11 +212,11 @@ export default function App() {
               component={Restaurar}
               options={{ headerShown: false }}
             />
-            {/* <Stack.Screen
+            <Stack.Screen
               name="ImportarCuenta"
               component={ImportarCuenta}
               options={{ headerShown: false }}
-            /> */}
+            />
             <Stack.Screen
               name="Crear"
               component={Crearcuenta}

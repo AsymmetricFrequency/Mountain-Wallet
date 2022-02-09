@@ -401,9 +401,15 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: RFValue(23),
   },
+  price: {
+    marginTop: RFValue(4),
+    alignItems: "center",
+    justifyContent: "center",
+    height: RFValue(18),
+  },
   dcER: {
     flexDirection: "row",
-    marginTop: RFValue(20),
+    marginTop: RFValue(10),
     paddingVertical: RFValue(12),
     borderTopColor: "#E2DBEE",
     borderTopWidth: 1,
@@ -427,19 +433,17 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textbtnR: {
-    color: "white",
     fontSize: RFValue(21.25),
     fontWeight: "400",
   },
   cajasf: {
-    marginTop: RFValue(15),
+    marginTop: RFValue(10),
     marginHorizontal: RFValue(25.5),
     alignItems: "center",
     justifyContent: "center",
   },
   saldofull: {
     fontSize: RFValue(20),
-    color: "#440577",
   },
   sombras: {
     elevation: 2,
@@ -449,7 +453,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   graf: {
-    height: 400,
+    height: 430,
   },
   //FinMoneda
   //Recibir
