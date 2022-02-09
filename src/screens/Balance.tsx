@@ -9,16 +9,26 @@ import {
   RefreshControl,
   SafeAreaView,
   StatusBar,
+  Appearance,
 } from "react-native";
 import { getBalance, getToken, readPublicKey } from "../../api";
 import { styles } from "../theme/appTheme";
+import { useTheme } from 'react-native-paper';
 
-// Fuente
-import * as Font from "expo-font";
 
 const Balance = ({ navigation }: { navigation: any }) => {
   
-
+  //Detecta el modo del sistema
+  const [theme,setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme)=>{
+    setTheme(scheme.colorScheme);
+  })
+  const { colors } = useTheme();
+  // Concatenar pkey
+  var str = '8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ';
+  var strFirstThree = str.substring(0,5);
+  var strLastThree = str.substring(str.length-5,str.length);
+  var concatenado = `${strFirstThree}...${strLastThree}`
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -74,27 +84,6 @@ const Balance = ({ navigation }: { navigation: any }) => {
     obtenerBalance(pKey);
   });
 
-  //Función fuentes tipograficas
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!fontsLoaded) {
-      loadFonts();
-    }
-  });
-
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      //Fuente
-      "opensans-regular": require("../../assets/fonts/OpenSans-Regular.ttf"),
-    });
-    setFontsLoaded(true);
-  };
-
-  // if (!fontsLoaded) {
-  //     return(<View/>)
-  // }
-
   // // refresco
   const [refresh, setRefresh] = useState(false);
 
@@ -109,9 +98,12 @@ const Balance = ({ navigation }: { navigation: any }) => {
 
   
   return (
-    <SafeAreaView style={styles.body}>
-      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
-      <View style={styles.completo}>
+    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
+      <StatusBar 
+        backgroundColor= {colors.background}
+        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
+      />
+      <View style={[styles.completo,{backgroundColor:colors.background}]}>
         <Image
           style={styles.logocolorB}
           source={require("./img/logocolor.png")}
