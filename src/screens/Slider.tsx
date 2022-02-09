@@ -10,8 +10,6 @@ import { generateMnemonic } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
-
-
 const Slider = ({ navigation }: { navigation: any }) => {
   //Detecta el modo del sistema
   const [theme,setTheme] = useState(Appearance.getColorScheme());
@@ -50,7 +48,7 @@ const Slider = ({ navigation }: { navigation: any }) => {
               <TouchableOpacity
                 activeOpacity={0.5}
                 style={styles.btndo}
-                onPress={() => generarMnemonic()}
+                onPress={() => navigation.navigate("Crear")}
               >
                 <Icon name="arrow-right" size={altura} color="#440577" />
               </TouchableOpacity>

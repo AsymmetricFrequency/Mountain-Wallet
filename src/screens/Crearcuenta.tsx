@@ -98,7 +98,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
           <TouchableOpacity
             activeOpacity={0.5}
             style={styles.btndo}
-            onPress={() => navigation.navigate("Slider")}
+            onPress={() => navigation.goBack()}
           >
             <Icon name="arrow-left" size={altura} color="#440577" />
           </TouchableOpacity>
@@ -111,7 +111,7 @@ const Crearcuenta = ({ navigation }: { navigation: any }) => {
         <TouchableOpacity
               style={[styles.btnDone,{ backgroundColor:colors.text}]}
               activeOpacity={0.5}
-              onPress={() => Palabras()}
+              onPress={() => navigation.navigate("DocePalabras")}
             >
               <Text style={[styles.txtDone,{color:colors.background}]}>Crear 12 palabras</Text>
             </TouchableOpacity>
