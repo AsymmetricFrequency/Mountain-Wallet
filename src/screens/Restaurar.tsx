@@ -143,7 +143,8 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
           <TouchableOpacity
             style={[styles.btnDone, { backgroundColor: colors.text }]}
             activeOpacity={0.5}
-            onPress={() => [continuar(), enviarMnemonic()]}
+            // onPress={() => [continuar(), enviarMnemonic()]}
+            onPress={() => navigation.navigate("Contraseña")}
           >
             <Text style={[styles.txtDone, { color: colors.background }]}>
               Continuar
