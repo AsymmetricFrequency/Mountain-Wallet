@@ -13,9 +13,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Balance from "./src/screens/Balance";
 import Crearcuenta from "./src/screens/Crearcuenta";
 import Home from "./src/screens/Home";
-import ImportarCuenta from "./src/screens/Importarcuenta";
-import Importar from "./src/screens/Importar";
-import CodigoVerificacion from "./src/screens/CodigoVerificacion";
 import Recibir from "./src/screens/Recibir";
 import Splashc from "./src/screens/Splashc";
 import QrReader from "./src/screens/QrReader";
@@ -176,11 +173,6 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Enviar"
-          component={Importar}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="QrReader"
           component={QrReader}
           options={{ headerShown: false }}
@@ -210,11 +202,6 @@ export default function App() {
             <Stack.Screen
               name="Restaurar"
               component={Restaurar}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ImportarCuenta"
-              component={ImportarCuenta}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -265,11 +252,6 @@ export default function App() {
             <Stack.Screen
               name="EnviarDireccion"
               component={EnviarDireccion}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Enviar"
-              component={Importar}
               options={{ headerShown: false }}
             />
             <Stack.Screen
