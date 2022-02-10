@@ -52,12 +52,29 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
 
+  function validadorPassword() {
+    setColourCuatro("white");
+    setColourTres("white");
+    setColourDos("white");
+    setColourUno("white");
+    setPin1("")
+    setPin2("")
+    setPin3("")
+    setPin4("")
+  }
+
   function genPassword() {
     password1.pass1 = pin1 + pin2 + pin3 + pin4;
     const antipass = password1.pass1;
     console.log(antipass);
-    navigation.navigate("ConfirContra", { prePassword: antipass });
-  }
+    if (antipass.length === 4) {
+      navigation.navigate("ConfirContra", { prePassword: antipass });
+    }
+    else{
+      validadorPassword()
+      alert("Porfavor digite 4 numeros") 
+        }
+  }   
 
   const [pin1, setPin1] = useState("");
   const [pin2, setPin2] = useState("");
@@ -226,7 +243,7 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
         <View style={styles.contBtn}>
           <TouchableOpacity
             style={styles.btnCont}
-            onPress={() => navigation.navigate("ConfirContra")}
+            onPress={() => genPassword()}
           >
             <Text style={styles.textbtnR}>CONTINUAR</Text>
           </TouchableOpacity>

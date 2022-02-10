@@ -32,9 +32,9 @@ export const ConfirContra = ({
   navigation: any;
   route: any;
 }) => {
-  // Variable importada desde contraseña
-  // const { prePassword } = route.params;
-  // console.log(prePassword);
+  //Variable importada desde contraseña
+  const { prePassword } = route.params;
+  console.log(prePassword);
 
   //estado background
 
@@ -60,34 +60,39 @@ export const ConfirContra = ({
   const [vacioModal, setVacioModal] = useState(false);
   const [storedPass, setStoredPass] = useState("");
 
-  // Funcion para validar si la contraseñas coinciden
-  // function validarPassword() {
-  //   const postPassword = pin1 + pin2 + pin3 + pin4;
-  //   savePassword(prePassword);
+  function validadorPassword() {
+    setColourCuatro("white");
+    setColourTres("white");
+    setColourDos("white");
+    setColourUno("white");
+    setPin1("")
+    setPin2("")
+    setPin3("")
+    setPin4("")
+  }
 
-  //   if (postPassword === prePassword) {
+  // Funcion validador de contraseñas
+  function validarPassword() {
+    const postPassword = pin1 + pin2 + pin3 + pin4;
+    savePassword(postPassword);
+
+    
+    if (postPassword === prePassword) {
       
-  //     navigation.navigate("PantallaCarga");
-  //   } else {
-  //     setVacioModal(true);
-  //     setanmt("fadeInDownBig");
-  //     setTimeout(() => {
-  //       setanmt("fadeOutUp");
-  //       setTimeout(() => {
-  //         setVacioModal(false);
-  //       }, 100);
-  //     }, 900);
-  //     //seteo variables contraseña incorrecta
-  //     setPin1("");
-  //     setPin2("");
-  //     setPin3("");
-  //     setPin4("");
-  //     setColourUno("white");
-  //     setColourDos("white");
-  //     setColourTres("white");
-  //     setColourCuatro("white");
-  //   }
-  // }
+      navigation.navigate("PantallaCarga");
+    } else {
+      setVacioModal(true);
+      setanmt("fadeInDownBig");
+      setTimeout(() => {
+        setanmt("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 900);
+      //seteo variables contraseña incorrecta
+      validadorPassword()
+    }
+  }
   // Variables de PIN numerico
   const [pin1, setPin1] = useState("");
   const [pin2, setPin2] = useState("");
@@ -252,7 +257,7 @@ export const ConfirContra = ({
         <View style={styles.contBtn}>
           <TouchableOpacity
             style={styles.btnR}
-            onPress={() => navigation.navigate("PantallaCarga")}
+            onPress={() => validarPassword()}
           >
             <Text style={styles.textbtnR}>CONFIRMAR</Text>
           </TouchableOpacity>
