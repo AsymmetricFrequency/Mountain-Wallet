@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, SafeAreaView, StatusBar, Appearance } from "react-native";
-import { readPassword } from "../../api";
+import { readKey } from "../../api";
 import { useNavigation } from "@react-navigation/native";
 import { Lotiesplash } from "./component/lottie";
 import { styles } from "../theme/appTheme";
@@ -17,7 +17,7 @@ const Splashc = () => {
 
   const navigation = useNavigation();
   const [llave, setLlave] = useState("");
-  readPassword().then((value) => {
+  readKey().then((value) => {
     setLlave(value);
   });
 
@@ -25,8 +25,7 @@ const Splashc = () => {
     if (llave != null && llave != "" && llave != undefined) {
       navigation.navigate("Pass" as any);
     }
-      navigation.navigate("Home" as any);
-    
+    navigation.navigate("Home" as any);
   }, 3500);
 
 

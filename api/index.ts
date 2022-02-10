@@ -112,7 +112,7 @@ async function generateMnemonic() {
 
 //Crear cuenta (public key)
 async function createAccount(mnemonic: string) {
-  fetch(`#API#/keypair_public_key/${mnemonic}`).then(
+  fetch(`https://apiwalletnode.herokuapp.com/keypair_public_key/${mnemonic}`).then(
       res => res.text()
   ).then(
     data =>{
@@ -123,7 +123,7 @@ async function createAccount(mnemonic: string) {
 }
 
 async function fetchSecret(mnemonic: string) {
-  fetch(`#API#/keypair_secret_key/${mnemonic}`).then(
+  fetch(`https://apiwalletnode.herokuapp.com/keypair_secret_key/${mnemonic}`).then(
       res => res.text()
   ).then(
     data =>{

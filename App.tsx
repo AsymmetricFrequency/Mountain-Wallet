@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import { Image, useColorScheme, Appearance, Platform,Text } from "react-native";
+import { Image, useColorScheme, Appearance, Platform } from "react-native";
 
 import "react-native-url-polyfill/auto";
 
-import { readPassword } from "./api";
+import { readKey } from "./api";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -136,52 +136,48 @@ function Barra() {
       <Tab.Screen name="Ajustes" component={Ajustes} />
     </Tab.Navigator>
   );
-};
+}
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const [llave, setLlave] = useState("");
-  const scheme = useColorScheme();
 
-  readPassword().then((value) => {
+  const [llave, setLlave] = useState("");
+
+  readKey().then((value) => {
     setLlave(value);
   });
 
-  
+  const scheme = useColorScheme();
+
   if (llave != null && llave != "" && llave != undefined) {
     return (
-        <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Splash"
-              component={Splashc}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Pass"
-              component={PassLogin}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Barra"
-              component={Barra}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
-            <Stack.Screen
-              name="Recibir"
-              component={Recibir}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="QrReader"
-              component={QrReader}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-        </PaperProvider>
-
+      <NavigationContainer>
+        <Stack.Screen
+          name="Splash"
+          component={Splashc}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Pass"
+          component={PassLogin}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Barra"
+          component={Barra}
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
+        <Stack.Screen
+          name="Recibir"
+          component={Recibir}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="QrReader"
+          component={QrReader}
+          options={{ headerShown: false }}
+        />
+      </NavigationContainer>
     );
   } else {
     return (
