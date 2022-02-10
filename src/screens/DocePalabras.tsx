@@ -50,13 +50,19 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
 
   useEffect(() => {
     setRefreshing(true);
-    leerMnemonic();
+    
+    if (elements.length === 0){
+      leerMnemonic();
+      
+    }else{
+      console.log('lleno');
+    }
     setTimeout(() => {
       setRefreshing(false);
     }, 5);
   }, []);
 
-  console.log("print elements", elements);
+  console.log(elements);
 
   //Modal
   const [anmt, setanmt] = useState("");
@@ -182,6 +188,7 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
             if (doceIncompleta[index] === "") {
               return (
                 <TextInput
+                  key={index}
                   autoCapitalize="none"
                   style={styles.fondoFrases}
                   onChangeText={(text) =>
@@ -195,7 +202,7 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
               );
             } else {
               return (
-                <TextInput style={styles.fondoFrases} editable={false}>
+                <TextInput key={index} style={styles.fondoFrases} editable={false}>
                   <Text style={styles.txtDoceIncompleta}>
                     {doceIncompleta[index]}
                   </Text>
