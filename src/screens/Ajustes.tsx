@@ -1,17 +1,29 @@
 import { Appearance, View, Text, StatusBar, Image, ScrollView, Platform, TouchableOpacity, Switch, SafeAreaView } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationContainer, NavigationRouteContext } from '@react-navigation/native';
 import { useTheme } from 'react-native-paper';
 
+import { readPublicKey } from '../../api';
 
 
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
+
+  const [publicKey, setPublicKey] = useState("")
+
+  async function setearPubKey() {
+    const llavePublica = readPublicKey()
+    llavePublica.then((value) => {
+      setPublicKey(value)
+    })
+  }
+
+  setearPubKey()
+
 
   //Detecta el modo del sistema
   const [theme,setTheme] = useState(Appearance.getColorScheme());
@@ -20,7 +32,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
   })
   const { colors } = useTheme();
   // Concatenar pkey
-  var str = '8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ';
+  var str = publicKey;
   var strFirstThree = str.substring(0,5);
   var strLastThree = str.substring(str.length-5,str.length);
   var concatenado = `${strFirstThree}...${strLastThree}`
