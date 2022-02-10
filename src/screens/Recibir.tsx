@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import {
-  ImageBackground,
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
   Image,
-  TextInput,
   Clipboard,
-  Modal,
   Platform,
   Dimensions,
-  ScrollView,
   SafeAreaView,
   StatusBar,
   ToastAndroid,
@@ -20,30 +15,20 @@ import {
 import { readPublicKey } from "../../api";
 
 import LottieView from "lottie-react-native";
-import * as Animatable from "react-native-animatable";
-import Icont from "react-native-vector-icons/Ionicons";
 import QRCode from "react-native-qrcode-svg";
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Lotiecopy } from "./component/lottie";
+
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 const windowWidth = Dimensions.get("screen").width;
 
 const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
 
-  const [publicKey, setPublicKey] = useState("")
+  const { pmsg, publicKey } = route.params;
 
-  async function setearPubKey() {
-    const llavePublica = readPublicKey()
-    llavePublica.then((value) => {
-      setPublicKey(value)
-    })
-  }
-
-  setearPubKey()
+  console.log(publicKey);
   
-  const { pmsg, mon } = route.params;
 
   const ima = () => {
     if (pmsg == "Condorcoin") {
@@ -74,7 +59,7 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
   const [animacion, setAnimacion] = useState(false);
   
   const CopyToClipboard = () => {
-    Clipboard.setString("8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ");
+    Clipboard.setString(publicKey);
     setAnimacion(true);
     if (Platform.OS === "android") {
       ToastAndroid.show("Dirección copiada", ToastAndroid.SHORT);
@@ -143,7 +128,7 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
         {/* cuadro blanco */}
         {/* Imagen QR */}
         <View style={styles.cuadroQR}>
-          <QRCode size={windowWidth * 0.35} value={"Hola Mundo"} />
+          <QRCode size={windowWidth * 0.35} value={publicKey} />
         </View>
         {/* Direccion y Copiar */}
         <View style={styles.cajadirecc}>
