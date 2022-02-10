@@ -17,9 +17,23 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { WebView } from "react-native-webview";
 import { useTheme } from "react-native-paper";
 
+import { readPublicKey } from "../../api";
+
 const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
+
+  const [publicKey, setPublicKey] = useState("")
+
+  async function setearPubKey() {
+    const llavePublica = readPublicKey()
+    llavePublica.then((value) => {
+      setPublicKey(value)
+    })
+  }
+
+  setearPubKey()
+
   //Detecta el modo del sistema
   const [theme, setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme) => {
@@ -192,7 +206,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                   { backgroundColor: colors.text },
                 ]}
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate("Recibir", { pmsg: msg })}
+                onPress={() => navigation.navigate("Recibir", { pmsg: msg, publicKey: publicKey })}
               >
                 <Text style={[styles.textbtnR, { color: colors.background }]}>
                   Recibir
