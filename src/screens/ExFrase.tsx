@@ -1,8 +1,6 @@
 import {
   View,
   Text,
-  SafeAreaView,
-  StatusBar,
   TouchableOpacity,
   Platform,
   TextInput,
@@ -18,7 +16,8 @@ import { readMnemonic } from "../../api";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
 import LottieView from "lottie-react-native";
-import { useTheme } from "react-native-paper";
+
+import { readPublicKey } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -50,21 +49,28 @@ function leerMnemonic() {
 }
 
 const ExFrase = ({ navigation }: { navigation: any }) => {
+
+
   const [refreshing, setRefreshing] = React.useState(false);
   const [animacion, setAnimacion] = useState(false);
 
   useEffect(() => {
-    setRefreshing(false);
-    leerMnemonic();
+    setRefreshing(true);
+    if (elements.length === 0){
+      leerMnemonic();
+    }else{
+      console.log('lleno');
+      
+    }
     setTimeout(() => {
       setRefreshing(false);
     }, 5);
   }, []);
 
-  console.log("print elements", elements);
+  const frase = `${elements[0]} ${elements[1]} ${elements[2]} ${elements[3]} ${elements[4]} ${elements[5]} ${elements[6]} ${elements[7]} ${elements[8]} ${elements[9]} ${elements[10]} ${elements[11]}`
 
   const CopyToClipboard = async () => {
-    Clipboard.setString("Hola mundo");
+    Clipboard.setString(frase);
     setAnimacion(true);
     if (Platform.OS === "android") {
       ToastAndroid.show("Frase de respaldo copiada", ToastAndroid.SHORT);
