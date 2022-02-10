@@ -7,7 +7,11 @@ import { useTheme } from 'react-native-paper';
 const altura = Platform.OS === "ios" ? 22 : 25;
 
 
-const Exclave = ({ navigation }: { navigation: any }) => {
+const Exclave = ({ navigation, route }: { navigation: any, route: any }) => {
+
+  const secretKey = route.params?.llave_privada;
+  
+
   //Detecta el modo del sistema
   const [theme,setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme)=>{
@@ -47,7 +51,7 @@ const Exclave = ({ navigation }: { navigation: any }) => {
             />
             <View style={[styles.cajaex,{borderColor:colors.text}]}> 
               { cambio === true ?
-                <Text style={{color:colors.text}}>Solo sé, que no sé nada</Text>
+                <Text style={{color:colors.text}}>{secretKey}</Text>
                 :
                 <Text></Text>
               }

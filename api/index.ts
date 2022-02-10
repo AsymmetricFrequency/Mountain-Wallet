@@ -99,7 +99,7 @@ async function readPassword(){
 
 //generar mnemonic
 async function generateMnemonic() {
-  fetch("#API#/mnemonic").then(
+  fetch("https://apiwalletnode.herokuapp.com/mnemonic").then(
       res => res.text()
   ).then(
     data =>{
@@ -117,6 +117,17 @@ async function createAccount(mnemonic: string) {
   ).then(
     data =>{
       savePublicKey(data)
+      return data
+      }   
+    )
+}
+
+async function fetchSecret(mnemonic: string) {
+  fetch(`#API#/keypair_secret_key/${mnemonic}`).then(
+      res => res.text()
+  ).then(
+    data =>{
+      saveKey(data)
       return data
       }   
     )
@@ -243,5 +254,6 @@ export {
   readMnemonic,
   savePassword, 
   readPassword,
-  enviarTrans 
+  enviarTrans,
+  fetchSecret 
 }
