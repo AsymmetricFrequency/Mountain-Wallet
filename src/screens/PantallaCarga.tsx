@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Appearance, SafeAreaView, StatusBar } from "react-native";
-import { readMnemonic, createAccount, savePublicKey } from "../../api";
+import { readMnemonic, createAccount } from "../../api";
 import { useTheme } from "react-native-paper";
 import { styles } from "../theme/appTheme";
 import { Lotiecarga, LotiecargaDark } from "./component/lottie";

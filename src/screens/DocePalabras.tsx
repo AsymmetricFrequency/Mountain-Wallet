@@ -5,12 +5,9 @@ import {
   TouchableOpacity,
   Platform,
   Modal,
-  RefreshControl,
-  Image,
+  RefreshControl
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
-import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import { readMnemonic } from "../../api";
 import { Lotierror, Lotiexito } from "./component/lottie";
@@ -48,7 +45,7 @@ function leerMnemonic() {
 }
 
 const DocePalabras = ({ navigation }: { navigation: any }) => {
-  const [content, setContent] = React.useState();
+  
   const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
@@ -210,7 +207,7 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
         <View>
           <TouchableOpacity
             style={styles.btnContinuar}
-            onPress={() => navigation.navigate("Contraseña")}
+            onPress={() => addTresFaltantes()}
           >
             <Text style={styles.txtContinuar}>Continuar</Text>
           </TouchableOpacity>

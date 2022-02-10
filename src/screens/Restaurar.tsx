@@ -12,10 +12,10 @@ import React, { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { styles } from "../theme/appTheme";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import { saveMmemonic } from "../../api";
 import { useTheme } from "react-native-paper";
+
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 //
@@ -41,17 +41,6 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
     });
   }
 
-  const enviarMnemonic = () => {
-    fetch("http://10.10.18.13:3000/enviar_mnemonic", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ mnemonic: values.mnemonic }),
-    })
-      .then((resp) => resp.json())
-      .catch((error) => console.log(error));
-  };
 
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
@@ -143,8 +132,7 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
           <TouchableOpacity
             style={[styles.btnDone, { backgroundColor: colors.text }]}
             activeOpacity={0.5}
-            // onPress={() => [continuar(), enviarMnemonic()]}
-            onPress={() => navigation.navigate("Contraseña")}
+            onPress={() => continuar()}
           >
             <Text style={[styles.txtDone, { color: colors.background }]}>
               Continuar

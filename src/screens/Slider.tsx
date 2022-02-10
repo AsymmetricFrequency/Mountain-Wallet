@@ -6,11 +6,11 @@ import { View, Text, Image, TouchableOpacity, Platform,SafeAreaView,StatusBar, A
 //import AppIntroSlider to use it
 import AppIntroSlider from "react-native-app-intro-slider";
 import { useTheme } from 'react-native-paper';
-import { generateMnemonic } from "../../api";
+import { readMnemonic } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
-const Slider = ({ navigation }: { navigation: any }) => {
+const Slider = ({ navigation, route }: { navigation: any; route: any }) => {
   //Detecta el modo del sistema
   const [theme,setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme)=>{
@@ -18,15 +18,17 @@ const Slider = ({ navigation }: { navigation: any }) => {
   })
   const { colors } = useTheme();
 
-  function generarMnemonic() {
-    const memo = generateMnemonic();
-    memo.then((value) => {
-      console.log(value);
-      setTimeout(() => {
-        navigation.navigate("Crear");
-      }, 100);
-    });
-  }
+  const [mnemonic, setMnemonic] = useState("")
+
+
+async function leerMnemonic() {
+  const frase = readMnemonic();
+  frase.then((value) =>{
+    setMnemonic(value)
+  })
+}
+
+leerMnemonic()
 
   const RenderItem = ({ item }) => {
     return (
@@ -48,7 +50,7 @@ const Slider = ({ navigation }: { navigation: any }) => {
               <TouchableOpacity
                 activeOpacity={0.5}
                 style={styles.btndo}
-                onPress={() => navigation.navigate("Crear")}
+                onPress={() => navigation.navigate("Crear",{msg:mnemonic})}
               >
                 <Icon name="arrow-right" size={altura} color="#440577" />
               </TouchableOpacity>
