@@ -9,8 +9,7 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Exclave = ({ navigation, route }: { navigation: any, route: any }) => {
 
-  const secretKey = route.params?.llave_privada;
-  
+  const secretKey = route.params?.llave_privada
 
   //Detecta el modo del sistema
   const [theme,setTheme] = useState(Appearance.getColorScheme());
@@ -51,7 +50,7 @@ const Exclave = ({ navigation, route }: { navigation: any, route: any }) => {
             />
             <View style={[styles.cajaex,{borderColor:colors.text}]}> 
               { cambio === true ?
-                <Text style={{color:colors.text}}>{secretKey}</Text>
+                <Text style={{color:colors.text}}>[{secretKey}]</Text>
                 :
                 <Text></Text>
               }
