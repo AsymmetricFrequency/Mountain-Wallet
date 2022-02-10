@@ -10,13 +10,21 @@ import {
   Appearance,
 } from "react-native";
 import { useTheme } from "react-native-paper";
-
-// Fuente
-import * as Font from "expo-font";
+import { generateMnemonic } from "../../api";
 
 import { styles } from "../theme/appTheme";
 
 const Home = ({ navigation }: { navigation: any }) => {
+
+  function crearMnemonic() {
+    const memo = generateMnemonic();
+    memo.then((value) => {
+      console.log(value);
+      setTimeout(() => {
+        navigation.navigate("Slider");
+      }, 1000);
+    });
+  }
   //Detecta el modo del sistema
   const [theme, setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme) => {
@@ -52,7 +60,7 @@ const Home = ({ navigation }: { navigation: any }) => {
           <TouchableOpacity
             style={[styles.btnc, { backgroundColor: colors.text }]}
             activeOpacity={0.5}
-            onPress={() => navigation.navigate("Slider")}
+            onPress={() => crearMnemonic()}
           >
             <Text style={[styles.txtc, { color: colors.background }]}>
               CREAR NUEVA CARTERA
