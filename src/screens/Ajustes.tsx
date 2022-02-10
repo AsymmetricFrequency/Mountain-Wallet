@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTheme } from 'react-native-paper';
 
-import { readPublicKey } from '../../api';
+import { readPublicKey, readKey } from '../../api';
 
 
 
@@ -14,15 +14,20 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
 
   const [publicKey, setPublicKey] = useState("")
+  const [secretKey, setSecretKey] = useState("")
 
-  async function setearPubKey() {
+  async function setearLlaves() {
     const llavePublica = readPublicKey()
+    const llavePrivada = readKey()
     llavePublica.then((value) => {
       setPublicKey(value)
     })
+    llavePrivada.then((value) => {
+      setSecretKey(value)
+    })
   }
 
-  setearPubKey()
+  setearLlaves()
 
 
   //Detecta el modo del sistema
@@ -82,7 +87,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5} onPress={() => navigation.navigate("Exclave")}>
+          <TouchableOpacity style={[styles.cajaaj,{borderTopColor:colors.surface}]} activeOpacity={0.5} onPress={() => navigation.navigate("Exclave", {llave_privada:secretKey})}>
             <View style={styles.imgaj}>
               <View style={styles.btnaj}>
                 <Icons name="cellphone-key" size={altura} color="#440577" />

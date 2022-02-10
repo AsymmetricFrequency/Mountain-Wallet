@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Appearance, SafeAreaView, StatusBar } from "react-native";
-import { readMnemonic, createAccount } from "../../api";
+import { readMnemonic, createAccount, fetchSecret } from "../../api";
 import { useTheme } from "react-native-paper";
 import { styles } from "../theme/appTheme";
 import { Lotiecarga, LotiecargaDark } from "./component/lottie";
@@ -27,12 +27,15 @@ const PantallaCarga = ({ navigation }: { navigation: any }) => {
   //Crear cuenta
   async function crearCuenta(mnemonic: string) {
     const acc = createAccount(mnemonic);
+    fetchSecret(mnemonic)
     acc.then((value) => {
       setTimeout(() => {
         navigation.navigate("Barra");
       }, 2000);
     });
   }
+
+  
 
   setTimeout(() => {
     crearCuenta(palabras);
