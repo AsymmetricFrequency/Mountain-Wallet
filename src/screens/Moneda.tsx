@@ -23,6 +23,9 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
 
+  const mnemonic = route.params?.memo
+  const mint = route.params?.mint
+
   const [publicKey, setPublicKey] = useState("")
 
   async function setearPubKey() {
@@ -190,6 +193,8 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                   navigation.navigate("EnviarCantidad", {
                     pmsg: msg,
                     mon: moneda(),
+                    memo: mnemonic,
+                    mint: mint
                   })
                 }
               >

@@ -14,9 +14,21 @@ import {
 import { getBalance, getToken, readPublicKey } from "../../api";
 import { styles } from "../theme/appTheme";
 import { useTheme } from 'react-native-paper';
+import { readMnemonic } from "../../api";
 
 
 const Balance = ({ navigation }: { navigation: any }) => {
+
+  const [mnemonic, setMnemonic] = useState("")
+
+  async function leerMnemonic(){
+    const palabras = readMnemonic()
+    palabras.then((value) => {
+      setMnemonic(value)
+    })
+  }
+
+  leerMnemonic()
   
   //Detecta el modo del sistema
   const [theme,setTheme] = useState(Appearance.getColorScheme());
@@ -24,11 +36,6 @@ const Balance = ({ navigation }: { navigation: any }) => {
     setTheme(scheme.colorScheme);
   })
   const { colors } = useTheme();
-  // Concatenar pkey
-  var str = '8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ';
-  var strFirstThree = str.substring(0,5);
-  var strLastThree = str.substring(str.length-5,str.length);
-  var concatenado = `${strFirstThree}...${strLastThree}`
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -122,7 +129,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             showsVerticalScrollIndicator={false}
           >
             {/* CONDOR */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)"})}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)", mint:"8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ", memo:mnemonic})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -145,7 +152,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* SOLANA */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Solana", mon:"(SOL)"})}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Solana", mon:"(SOL)", mint:"So11111111111111111111111111111111111111112", memo:mnemonic})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -166,7 +173,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* USDT */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Tether", mon:"(USDT)"})}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Tether", mon:"(USDT)", mint:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", memo:mnemonic})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}

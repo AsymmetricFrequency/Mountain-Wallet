@@ -10,10 +10,11 @@ import {
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { AutoSizeText, ResizeTextMode } from "react-native-auto-size-text";
 import { styles } from "../theme/appTheme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+
+import { sendSoles } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -25,11 +26,21 @@ const EnviarDireccion = ({
   route: any;
 }) => {
   const [copiedText, setCopiedText] = useState("");
+  const [toPublic, setToPublic] = useState("");
 
   const { pinN } = route.params;
   const { abrev } = route.params;
   const { msg, mon } = route.params;
   const { titleMoneda } = route.params;
+  const mnemonic = route.params?.memo
+  const mint = route.params?.mint
+
+  async function enviarSoles() {
+    const transaccion = sendSoles(mnemonic, toPublic, Number(pinN))
+    transaccion.then((value) => {
+      console.log(value)
+    })
+  }
 
   const imag = () => {
     if (titleMoneda == "Condorcoin") {
@@ -104,7 +115,7 @@ const EnviarDireccion = ({
         </View>
         <View style={styles.pegarDireccion}>
           <View style={{ width: "55%" }}>
-            <TextInput style={styles.pegaDir} placeholder="Pegar dirección">
+            <TextInput style={styles.pegaDir} onChangeText={val => setToPublic(val)} placeholder="Pegar dirección">
               {copiedText}
             </TextInput>
           </View>
@@ -125,7 +136,10 @@ const EnviarDireccion = ({
         </View>
 
         <View style={styles.btnEnviar}>
-          <TouchableOpacity style={styles.btnCont}>
+          <TouchableOpacity 
+            style={styles.btnCont}
+            onPress={() => enviarSoles()}
+          >
             <Text style={styles.txtEnviar}>Enviar</Text>
           </TouchableOpacity>
         </View>
