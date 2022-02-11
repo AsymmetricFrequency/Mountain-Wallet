@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 
-import { Image, useColorScheme, Appearance, Platform,Text } from "react-native";
+import {
+  Image,
+  useColorScheme,
+  Appearance,
+  Platform,
+  Text,
+} from "react-native";
 
 import "react-native-url-polyfill/auto";
 
 import { readPassword } from "./api";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/stack";
 
 //screens
 import Balance from "./src/screens/Balance";
@@ -136,10 +145,10 @@ function Barra() {
       <Tab.Screen name="Ajustes" component={Ajustes} />
     </Tab.Navigator>
   );
-};
+}
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
+  const Stack = createStackNavigator();
   const [llave, setLlave] = useState("");
   const scheme = useColorScheme();
 
@@ -147,12 +156,15 @@ export default function App() {
     setLlave(value);
   });
 
-  
   if (llave != null && llave != "" && llave != undefined) {
     return (
-        <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
+      <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+            }}
+          >
             <Stack.Screen
               name="Splash"
               component={Splashc}
@@ -210,13 +222,17 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-        </PaperProvider>
+      </PaperProvider>
     );
   } else {
     return (
       <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+            }}
+          >
             <Stack.Screen
               name="Splash"
               component={Splashc}
