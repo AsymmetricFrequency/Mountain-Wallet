@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AutoSizeText, ResizeTextMode } from "react-native-auto-size-text";
 import { styles } from "../theme/appTheme";
+
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -20,6 +20,9 @@ const EnviarCantidad = ({
   const { abrev } = route.params;
   const { msg, mon } = route.params;
   const { pmsg } = route.params;
+  const mnemonic = route.params?.memo
+  const mint = route.params?.mint
+  
 
   const [pinNumerico, setPinnumerico] = useState("");
   const numbers = pinNumerico;
@@ -186,6 +189,8 @@ const EnviarCantidad = ({
                   pinN: pinNumerico,
                   titleMoneda: pmsg,
                   abrev: mon,
+                  memo: mnemonic,
+                  mint: mint
                 })
               }
             >

@@ -106,8 +106,8 @@ async function generateMnemonic() {
       //guardando mnemonic en asyncStorage
       saveMmemonic(data) 
       return data
-        }   
-    )
+    }   
+  )
 }
 
 //Crear cuenta (public key)
@@ -118,10 +118,11 @@ async function createAccount(mnemonic: string) {
     data =>{
       savePublicKey(data)
       return data
-      }   
-    )
+    }   
+  )
 }
 
+//Crear cuenta (secret key)
 async function fetchSecret(mnemonic: string) {
   fetch(`https://apiwalletnode.herokuapp.com/keypair_secret_key/${mnemonic}`).then(
       res => res.text()
@@ -129,8 +130,18 @@ async function fetchSecret(mnemonic: string) {
     data =>{
       saveKey(data)
       return data
-      }   
-    )
+    }   
+  )
+}
+
+async function sendSoles(mnemonic: string, toPublicKey: string, amount: number){
+  fetch(`https://apiwalletnode.herokuapp.com/send_transaction/${mnemonic}/${toPublicKey}/${amount}`).then(
+      res => res.text()
+  ).then(
+    data =>{
+      return data
+    }   
+  )
 }
 
 //crear conexion
@@ -255,5 +266,6 @@ export {
   savePassword, 
   readPassword,
   enviarTrans,
-  fetchSecret 
+  fetchSecret,
+  sendSoles
 }
