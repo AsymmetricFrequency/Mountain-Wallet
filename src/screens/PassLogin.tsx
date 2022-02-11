@@ -57,7 +57,7 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
     const password = pin1 + pin2 + pin3 + pin4;
 
     if (password == storedPass) {
-      navigation.navigate("Balance");
+      navigation.navigate("Barra");
     } else {
       setVacioModal(true);
       setanmt("fadeInDownBig");
