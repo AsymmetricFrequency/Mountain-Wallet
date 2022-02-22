@@ -15,6 +15,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 
 import { sendSoles } from "../../api";
+import { sendSPL } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -30,13 +31,19 @@ const EnviarDireccion = ({
 
   const { pinN } = route.params;
   const { abrev } = route.params;
-  const { msg, mon } = route.params;
   const { titleMoneda } = route.params;
   const mnemonic = route.params?.memo
   const mint = route.params?.mint
 
   async function enviarSoles() {
     const transaccion = sendSoles(mnemonic, toPublic, Number(pinN))
+    transaccion.then((value) => {
+      console.log(value)
+    })
+  }
+
+  async function enviarSPL() {
+    const transaccion = sendSPL(mnemonic, toPublic, Number(pinN),mint)
     transaccion.then((value) => {
       console.log(value)
     })
@@ -134,15 +141,26 @@ const EnviarDireccion = ({
             </TouchableOpacity>
           </View>
         </View>
-
+        {titleMoneda == "Solana" && (
         <View style={styles.btnEnviar}>
           <TouchableOpacity 
             style={styles.btnCont}
-            onPress={() => enviarSoles()}
+            onPress={() => [enviarSoles(), navigation.navigate('Balance')]}
           >
             <Text style={styles.txtEnviar}>Enviar</Text>
           </TouchableOpacity>
         </View>
+        )}
+        {titleMoneda != "Solana" &&(
+          <View style={styles.btnEnviar}>
+          <TouchableOpacity 
+            style={styles.btnCont}
+            onPress={() => [enviarSPL(), navigation.navigate('Balance')]}
+          >
+            <Text style={styles.txtEnviar}>Enviar</Text>
+          </TouchableOpacity>
+        </View>
+        )}
       </View>
     </KeyboardAwareScrollView>
   );
