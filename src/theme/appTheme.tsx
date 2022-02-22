@@ -15,7 +15,7 @@ const screenHeight = Dimensions.get("window").height;
 const spaceH = windowHeight - screenHeight;
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const radios = Platform.OS === "ios" ? 10 : 15;
-const saldoios = Platform.OS === "ios" ? 0.87 : 0.85;
+const borrarios = Platform.OS === "ios" ? 31 : 27;
 const bottomios = Platform.OS === "ios" ? 60 : StatusBar.currentHeight;
 const cirios = Platform.OS === "ios" ? 0 : 25;
 const cantidadios = Platform.OS === "ios" ? -25 : -40;
@@ -1043,4 +1043,82 @@ export const styles = StyleSheet.create({
     marginLeft: 63,
   },
   //Fin ExFrase
+
+  //Pass Login
+  contenedorIcon: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  icon: {
+    height: RFValue(208.8),
+    width: RFValue(208.8),
+    resizeMode: "contain",
+  },
+  headerCirculos: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: RFValue(32),
+    width: RFValue(171.3),
+  },
+  //Estilo circulos contraseña
+  circUno: {
+    borderRadius: 100,
+    borderWidth: 1,
+    height: RFValue(28),
+    justifyContent: "center",
+    marginHorizontal: RFValue(9.7),
+    textAlign: "center",
+    width: RFValue(28.1),
+  },
+  //pad numerico
+  padUno: {
+    flexDirection: "row",
+    marginTop: RFValue(15.08),
+    width: RFValue(210),
+    justifyContent: "space-around",
+  },
+  padDos: {
+    flexDirection: "row",
+    marginTop: RFValue(29),
+    width: RFValue(210),
+    justifyContent: "space-around",
+  },
+  padTres: {
+    flexDirection: "row",
+    marginTop: RFValue(29),
+    width: RFValue(210),
+    justifyContent: "space-around",
+  },
+  padCero: {
+    marginTop: RFValue(29),
+    width: RFValue(210),
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  numberP: {
+    color: "#440577",
+    fontWeight: "bold",
+    flexDirection: "row",
+    fontSize: RFValue(23),
+    marginHorizontal: RFValue(20),
+  },
+  borrar: {
+    width: RFValue(35.9),
+    height: RFValue(28),
+    bottom: RFValue(borrarios),
+    left: RFValue(70),
+  },
+  tcBorrar: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btnBorrarP: {
+    color: "#440577",
+  },
+  contBtn: {
+    marginTop: RFValue(5),
+  },
+
+  //Fin Pass Login
 });
