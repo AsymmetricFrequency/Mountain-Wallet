@@ -113,7 +113,11 @@ const Balance = ({ navigation }: { navigation: any }) => {
       <View style={[styles.completo,{backgroundColor:colors.background}]}>
         <Image
           style={styles.logocolorB}
-          source={require("./img/logocolor.png")}
+          source={
+            theme === "light"
+              ? require("./img/logocolor.png")
+              : require("./img/logocolorDark.png")
+          }
         />
         <SafeAreaView style={styles.balancecry}>
           <ScrollView
