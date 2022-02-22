@@ -99,7 +99,7 @@ async function readPassword(){
 
 //generar mnemonic
 async function generateMnemonic() {
-  fetch("#Api#/mnemonic").then(
+  fetch("https://apiwalletnode.herokuapp.com/mnemonic").then(
       res => res.text()
   ).then(
     data =>{
@@ -112,7 +112,7 @@ async function generateMnemonic() {
 
 //Crear cuenta (public key)
 async function createAccount(mnemonic: string) {
-  fetch(`#Api#/keypair_public_key/${mnemonic}`).then(
+  fetch(`https://apiwalletnode.herokuapp.com/keypair_public_key/${mnemonic}`).then(
       res => res.text()
   ).then(
     data =>{
@@ -124,7 +124,7 @@ async function createAccount(mnemonic: string) {
 
 //Crear cuenta (secret key)
 async function fetchSecret(mnemonic: string) {
-  fetch(`#Api#/keypair_secret_key/${mnemonic}`).then(
+  fetch(`https://apiwalletnode.herokuapp.com/keypair_secret_key/${mnemonic}`).then(
       res => res.text()
   ).then(
     data =>{
@@ -135,13 +135,15 @@ async function fetchSecret(mnemonic: string) {
 }
 
 async function sendSoles(mnemonic: string, toPublicKey: string, amount: number){
-  fetch(`#Api#/send_transaction/${mnemonic}/${toPublicKey}/${amount}`).then(
-      res => res.text()
-  ).then(
-    data =>{
-      return data
-    }   
-  )
+  const response = await fetch(`https://apiwalletnode.herokuapp.com/send_transaction/${mnemonic}/${toPublicKey}/${amount}`)
+  const text = await response.text()
+  return text
+}
+
+async function sendSPL(mnemonic: string, toPublicKey: string, amount: number, mint: string){
+  const response = await fetch(`https://apiwalletnode.herokuapp.com/send_transaction_spl/${mnemonic}/${toPublicKey}/${amount}/${mint}`)
+  const text = await response.text()
+  return text
 }
 
 //crear conexion
@@ -191,50 +193,6 @@ async function getToken(publicKey: string, splToken: string){
 
 }
 
-async function enviarTrans(fromWallet,toPublic,amount){
-  const connection = createConnection("devnet")
-  const myMint = new solanaWeb3.PublicKey("7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ")
-
-  try {
-    var myToken = new Token(
-      connection,
-      myMint,
-      TOKEN_PROGRAM_ID,
-      fromWallet
-    )
-            
-    var fromTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-      fromWallet.publicKey
-    )
-    var toTokenAccount = await myToken.getOrCreateAssociatedAccountInfo(
-      new solanaWeb3.PublicKey(toPublic)
-    )
-  
-    var transaction = new solanaWeb3.Transaction()
-    .add(
-      Token.createTransferInstruction(
-        TOKEN_PROGRAM_ID,
-        fromTokenAccount.address,
-        toTokenAccount.address,
-        fromWallet.publicKey,
-        [],
-        amount * LAMPORTS_PER_SOL
-      )
-    )
-
-    var signature = await solanaWeb3.sendAndConfirmTransaction(
-      connection,
-      transaction,
-      [fromWallet]
-    ).catch((err) => {
-      console.log(err)
-    })
-    return "signature"
-    } catch (error) {
-      return error
-  }
-}
-
 // funcion para obtener el historial de transacciones
 async function getHistory(pubKey:string,options = { limit: 20 }){
 
@@ -265,7 +223,7 @@ export {
   readMnemonic,
   savePassword, 
   readPassword,
-  enviarTrans,
   fetchSecret,
-  sendSoles
+  sendSoles,
+  sendSPL
 }

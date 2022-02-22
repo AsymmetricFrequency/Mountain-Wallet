@@ -86,7 +86,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
     //obtener token de USDT(ESTO SOLO SE USA EN LA MAINNET)
     obtenerTokenBUSDT(pKey, "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
     //obtener balance del token
-    obtenerTokenB(pKey, "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ");
+    obtenerTokenB(pKey, "FmqkfdN9QXanfMpJoZmAuNC8jkhnb9aC3NrYn5JM62MU");
     //obtener balance solanas
     obtenerBalance(pKey);
   });
@@ -129,7 +129,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             showsVerticalScrollIndicator={false}
           >
             {/* CONDOR */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)", mint:"8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ", memo:mnemonic})}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)", mint:"FmqkfdN9QXanfMpJoZmAuNC8jkhnb9aC3NrYn5JM62MU", memo:mnemonic})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
