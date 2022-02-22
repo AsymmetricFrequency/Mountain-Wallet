@@ -402,10 +402,27 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(23),
   },
   price: {
-    marginTop: RFValue(4),
-    alignItems: "center",
-    justifyContent: "center",
-    height: RFValue(18),
+    borderBottomColor: "#E2DBEE",
+    borderBottomWidth: 1,
+    justifyContent:"center",
+    alignItems: "flex-start",
+    marginHorizontal: 29,
+    height: 50,
+    marginTop:3
+  },
+  txtCurrentPrice:{
+    fontSize:15,
+    fontWeight:"bold"
+  },
+  txtBalanceCripto:{
+    fontSize:35,
+    fontWeight:"bold" 
+  },
+  txtPorcentajeNegativo: {
+    color: "#CF0808"
+  },
+  txtPorcentajePositivo: {
+    color: "green"
   },
   dcER: {
     flexDirection: "row",
@@ -437,7 +454,8 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   cajasf: {
-    marginTop: RFValue(10),
+    fontWeight:"bold",
+    marginTop: RFValue(5),
     marginHorizontal: RFValue(25.5),
     alignItems: "center",
     justifyContent: "center",
