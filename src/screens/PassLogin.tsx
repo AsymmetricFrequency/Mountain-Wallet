@@ -1,47 +1,61 @@
 import React, { useRef, useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Platform,
-  Image,
-  Modal,
-  Dimensions,
-} from "react-native";
+import { Text, View, Image, Modal, StatusBar, Appearance } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
-import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import LottieView from "lottie-react-native";
 import { readPassword, savePassword } from "../../api";
-// import { useCalculadora } from '../hooks/useCalculadora';
-
-const windowWidth = Dimensions.get("screen").width;
-const windowHeight = Dimensions.get("screen").height;
-
-const colours = ["white", "#440577"];
-const getColour = () => colours[Math.floor(Math.random() * colours.length)];
+import { styles } from "../theme/appTheme";
+import { useTheme } from "react-native-paper";
 
 export const PassLogin = ({ navigation }: { navigation: any }) => {
-  //estado background
+  //Detecta el modo del sistema
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
 
-  const [colour, setColourUno] = useState("white");
-  const [colourDos, setColourDos] = useState("white");
-  const [colourTres, setColourTres] = useState("white");
-  const [colourCuatro, setColourCuatro] = useState("white");
-  const handleClickUno = () => {
-    setColourUno(getColour());
-  };
-  const handleClickDos = () => {
-    setColourDos(getColour());
-  };
-  const handleClickTres = () => {
-    setColourTres(getColour());
-  };
-  const handleClickCuatro = () => {
-    setColourCuatro(getColour());
-  };
+  Appearance.addChangeListener((scheme) => {
+    setTheme(scheme.colorScheme);
+    //Borar estado color
+    if (
+      theme === "light" &&
+      pin1 === "" &&
+      pin2 === "" &&
+      pin3 === "" &&
+      pin4 === ""
+    ) {
+      setPin1("");
+      setPin2("");
+      setPin3("");
+      setPin4("");
+      setColourUno(colors.background);
+      setColourDos(colors.background);
+      setColourTres(colors.background);
+      setColourCuatro(colors.background);
+    } else if (
+      theme === "dark" &&
+      pin1 === "" &&
+      pin2 === "" &&
+      pin3 === "" &&
+      pin4 === ""
+    ) {
+      setPin1("");
+      setPin2("");
+      setPin3("");
+      setPin4("");
+      setColourUno(colors.background);
+      setColourDos(colors.background);
+      setColourTres(colors.background);
+      setColourCuatro(colors.background);
+    }
+  });
+
+  const { colors } = useTheme();
+
+  //estado background
+  const [colour, setColourUno] = useState(colors.background);
+  const [colourDos, setColourDos] = useState(colors.background);
+  const [colourTres, setColourTres] = useState(colors.background);
+  const [colourCuatro, setColourCuatro] = useState(colors.background);
 
   //Modales
   const [anmt, setanmt] = useState("");
@@ -72,10 +86,10 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
       setPin2("");
       setPin3("");
       setPin4("");
-      setColourUno("white");
-      setColourDos("white");
-      setColourTres("white");
-      setColourCuatro("white");
+      setColourUno(colors.background);
+      setColourDos(colors.background);
+      setColourTres(colors.background);
+      setColourCuatro(colors.background);
     }
   }
 
@@ -93,32 +107,32 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
   function funcion(numero: string) {
     if (pin1 == "") {
       setPin1(numero);
-      setColourUno("#440577");
+      setColourUno(colors.text);
     } else if (pin1 != "" && pin2 == "") {
       setPin2(numero);
-      setColourDos("#440577");
+      setColourDos(colors.text);
     } else if (pin1 != "" && pin2 != "" && pin3 == "") {
       setPin3(numero);
-      setColourTres("#440577");
+      setColourTres(colors.text);
     } else if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 == "") {
       setPin4(numero);
-      setColourCuatro("#440577");
+      setColourCuatro(colors.text);
     }
   }
 
   function borrar() {
     if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 != "") {
       setPin4("");
-      setColourCuatro("white");
+      setColourCuatro(colors.background);
     } else if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 == "") {
       setPin3("");
-      setColourTres("white");
+      setColourTres(colors.background);
     } else if (pin1 != "" && pin2 != "" && pin3 == "" && pin4 == "") {
       setPin2("");
-      setColourDos("white");
+      setColourDos(colors.background);
     } else if (pin1 != "" && pin2 == "" && pin3 == "" && pin4 == "") {
       setPin1("");
-      setColourUno("white");
+      setColourUno(colors.background);
     } else if (pin1 == "" && pin2 == "" && pin3 == "" && pin4 == "") {
       console.log("====================================");
       console.log("No hay nada que borrar");
@@ -127,45 +141,46 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
-        <Modal
-          visible={vacioModal}
-          transparent
-          onRequestClose={() => setVacioModal(false)}
-          hardwareAccelerated
-        >
-          <Animatable.View animation={anmt} duration={600}>
-            <View style={styles.bodymodal}>
-              <View style={styles.ventanamodal}>
-                <View style={styles.icontext}>
-                  <View style={styles.contenedorlottie}>
-                    <LottieView
-                      style={styles.lottie}
-                      source={require("./Lottie/error.json")}
-                      autoPlay
-                    />
-                  </View>
+    <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={theme === "dark" ? "light-content" : "dark-content"}
+      />
+      <Modal
+        visible={vacioModal}
+        transparent
+        onRequestClose={() => setVacioModal(false)}
+        hardwareAccelerated
+      >
+        <Animatable.View animation={anmt} duration={600}>
+          <View style={styles.bodymodal}>
+            <View style={styles.ventanamodal}>
+              <View style={styles.icontext}>
+                <View style={styles.contenedorlottie}>
+                  <LottieView
+                    style={styles.lottie}
+                    source={require("./Lottie/error.json")}
+                    autoPlay
+                  />
                 </View>
-                <View style={styles.textnoti}>
-                  <View style={styles.contenedortext}>
-                    <Text style={styles.texticon}>Error</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.notificacion}>
-                      Contraseña incorrecta
-                    </Text>
-                  </View>
+              </View>
+              <View style={styles.textnoti}>
+                <View style={styles.contenedortext}>
+                  <Text style={styles.texticon}>Error</Text>
+                </View>
+                <View>
+                  <Text style={styles.notificacion}>Contraseña incorrecta</Text>
                 </View>
               </View>
             </View>
-          </Animatable.View>
-        </Modal>
-        <View style={styles.headerConfi}></View>
-        <View style={styles.headerDos}>
-          <View>
-            <Text style={styles.headerTitle}>Ingrese contraseña</Text>
           </View>
+        </Animatable.View>
+      </Modal>
+      <View style={[styles.completo, { backgroundColor: colors.background }]}>
+        <View style={styles.titlecc}>
+          <Text style={[styles.titletx, { color: colors.text }]}>
+            Ingrese contraseña
+          </Text>
         </View>
         <View style={styles.contenedorIcon}>
           <Image style={styles.icon} source={require("./img/password.png")} />
@@ -174,266 +189,104 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
         <View style={styles.headerCirculos}>
           {/* PRUEBA BOTON BACKGROUND */}
           <TouchableOpacity
-            style={[styles.circUno, { backgroundColor: colour }]}
-            onPress={handleClickUno}
+            style={[
+              styles.circUno,
+              { backgroundColor: colour, borderColor: colors.text },
+            ]}
+            // onPress={handleClickUno}
             disabled={true}
           />
 
           <TouchableOpacity
-            style={[styles.circUno, { backgroundColor: colourDos }]}
-            onPress={handleClickDos}
+            style={[
+              styles.circUno,
+              { backgroundColor: colourDos, borderColor: colors.text },
+            ]}
+            // onPress={handleClickDos}
             disabled={true}
           />
 
           <TouchableOpacity
-            style={[styles.circUno, { backgroundColor: colourTres }]}
-            onPress={handleClickTres}
+            style={[
+              styles.circUno,
+              { backgroundColor: colourTres, borderColor: colors.text },
+            ]}
+            // onPress={handleClickTres}
             disabled={true}
           />
 
           <TouchableOpacity
-            style={[styles.circUno, { backgroundColor: colourCuatro }]}
-            onPress={handleClickCuatro}
+            style={[
+              styles.circUno,
+              { backgroundColor: colourCuatro, borderColor: colors.text },
+            ]}
+            // onPress={handleClickCuatro}
             disabled={true}
           />
         </View>
         {/* fila uno */}
-        <View style={styles.numpadUno}>
+        <View style={styles.padUno}>
           <TouchableOpacity onPress={() => funcion("1")}>
-            <Text style={styles.number}>1</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>1</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("2")}>
-            <Text style={styles.number}>2</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>2</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("3")}>
-            <Text style={styles.number}>3</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>3</Text>
           </TouchableOpacity>
         </View>
         {/* fila dos */}
-        <View style={styles.numpadDos}>
+        <View style={styles.padDos}>
           <TouchableOpacity onPress={() => funcion("4")}>
-            <Text style={styles.number}>4</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>4</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("5")}>
-            <Text style={styles.number}>5</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>5</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("6")}>
-            <Text style={styles.number}>6</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>6</Text>
           </TouchableOpacity>
         </View>
         {/* fila tres */}
-        <View style={styles.numpadTres}>
+        <View style={styles.padTres}>
           <TouchableOpacity onPress={() => funcion("7")}>
-            <Text style={styles.number}>7</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>7</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("8")}>
-            <Text style={styles.number}>8</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>8</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("9")}>
-            <Text style={styles.number}>9</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>9</Text>
           </TouchableOpacity>
         </View>
         {/* fila cero */}
-        <View style={styles.numpadTres}>
+        <View style={styles.padCero}>
           <TouchableOpacity onPress={() => funcion("0")}>
-            <Text style={styles.numberCero}>0</Text>
+            <Text style={[styles.numberP, { color: colors.text }]}>0</Text>
           </TouchableOpacity>
         </View>
         {/* fila boton borrar */}
         <View style={styles.borrar}>
-          <TouchableOpacity onPress={() => borrar()}>
-            <Icon name="backspace-outline" style={styles.btnBorrar} />
+          <TouchableOpacity onPress={() => borrar()} style={styles.tcBorrar}>
+            <Icon
+              name="backspace-outline"
+              size={32}
+              style={{ color: colors.text }}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.contBtn}>
           <TouchableOpacity
-            style={styles.btnR}
+            style={[styles.btnDone, { backgroundColor: colors.text }]}
             onPress={() => validarPassword()}
           >
-            <Text style={styles.textbtnR}>CONFIRMAR</Text>
+            <Text style={[styles.txtDone, { color: colors.background }]}>
+              CONFIRMAR
+            </Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
-
-const alturaios = Platform.OS === "ios" ? "11%" : "2%";
-const cuadroios = Platform.OS === "ios" ? 55 : 45;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  headerConfi: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: 55,
-    paddingLeft: 10,
-  },
-  headerDos: {
-    flexDirection: "row",
-    justifyContent: "center",
-    padding: 20,
-    bottom: 20,
-  },
-  headerTitle: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#440577",
-  },
-  contenedorIcon: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  icon: {
-    bottom: RFValue(15),
-    height: 150,
-    width: 150,
-  },
-  headerCirculos: {
-    flexDirection: "row",
-    justifyContent: "center",
-    margin: 10,
-    height: RFValue(-40),
-  },
-  numpadUno: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 20,
-    marginHorizontal: 80,
-  },
-  numpadDos: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 20,
-    marginHorizontal: 80,
-  },
-  numpadTres: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 20,
-    marginHorizontal: 80,
-  },
-  numberPad: {
-    alignSelf: "center",
-  },
-  number: {
-    color: "#4D4D4D",
-    fontWeight: "bold",
-    flexDirection: "row",
-    fontSize: 24,
-    marginHorizontal: 45,
-  },
-  numberCero: {
-    alignItems: "center",
-    color: "#4D4D4D",
-    fontWeight: "bold",
-    flexDirection: "row",
-    fontSize: 24,
-  },
-  iconConfig: {
-    flexDirection: "row",
-  },
-  borrar: {
-    alignItems: "center",
-    fontWeight: "bold",
-    flexDirection: "row",
-    width: 65,
-    height: 60,
-    marginHorizontal: 285,
-    marginVertical: -68,
-    marginBottom: RFValue(-15),
-  },
-  btnBorrar: {
-    fontSize: 30,
-  },
-  contBtn: {
-    flexDirection: "row",
-    justifyContent: "center",
-    height: RFValue(50),
-    marginHorizontal: RFValue(57),
-    top: RFValue(15),
-    margin: RFValue(20),
-    width: RFValue(240),
-  },
-  btnR: {
-    alignItems: "center",
-    backgroundColor: "#440577",
-    borderRadius: 20,
-    height: RFValue(50),
-    justifyContent: "center",
-    width: RFValue(240),
-  },
-  textbtnR: {
-    color: "white",
-    fontSize: RFValue(20),
-    fontWeight: "bold",
-  },
-  labeldos: {
-    fontSize: RFValue(15),
-    fontWeight: "bold",
-    margin: 8,
-    justifyContent: "center",
-  },
-
-  //Estilo circulos contraseña
-  circUno: {
-    borderColor: "#440577",
-    borderRadius: 100,
-    borderWidth: 1,
-    fontSize: RFValue(15),
-    height: RFValue(cuadroios),
-    justifyContent: "center",
-    marginHorizontal: 10,
-    //margin: RFValue(5),
-    marginTop: RFValue(12),
-    textAlign: "center",
-    width: RFValue(cuadroios),
-  },
-  //Modal
-  bodymodal: {
-    flex: 1,
-    alignItems: "center",
-  },
-  ventanamodal: {
-    alignItems: "center",
-    backgroundColor: "#5B298A",
-    borderWidth: 0.5,
-    borderColor: "black",
-    borderRadius: 20,
-    flexDirection: "row",
-    height: windowHeight * 0.1,
-    paddingLeft: RFValue(12),
-    paddingRight: RFValue(12),
-    top: alturaios,
-    width: windowWidth * 0.95,
-  },
-  icontext: {
-    alignItems: "center",
-  },
-  textnoti: {
-    //--- No borrar ---//
-  },
-  contenedorlottie: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  lottie: {
-    height: 60,
-    width: 60,
-  },
-  contenedortext: {
-    justifyContent: "center",
-  },
-  texticon: {
-    color: "white",
-    fontSize: RFValue(18),
-    fontWeight: "bold",
-  },
-  notificacion: {
-    color: "white",
-    fontSize: RFValue(12),
-  },
-});
