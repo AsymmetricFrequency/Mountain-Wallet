@@ -10,6 +10,7 @@ import {
   RefreshControl,
   FlatList,
   Appearance,
+  LogBox
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { styles } from "../theme/appTheme";
@@ -45,6 +46,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
   const { colors } = useTheme();
 
   const { msg, mon } = route.params;
+  const symbol = route.params?.moneda
 
   const ima = () => {
     if (msg == "Condorcoin") {
@@ -83,28 +85,32 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
 
   const [coins, setCoins] = useState();
 
-  const loadData = async () => {
+  const precioMoneda = async (symbol: string) => {
     const res = await fetch(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=solana&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h"
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${symbol}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h`
     );
     const data = await res.json();
     setCoins(data);
   };
 
   useEffect(() => {
-    loadData();
+    precioMoneda(symbol);
   }, []);
 
   // // refresco
   const [refresh, setRefresh] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const onRefre = () => {
     setRefresh(true);
-
-    setTimeout(() => {
-      setRefresh(false);
-    }, 1000);
+    precioMoneda(symbol)
+    setRefresh(false);
+    
   };
+  // Elimina advertencia de virtualizacion 
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
+  }, [])
 
   return (
     <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
@@ -156,7 +162,13 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
           <View style={styles.price}>
             <FlatList
               data={coins}
-              refreshing={refresh}
+              scrollEnabled={false}
+              refreshing={refreshing}
+              onRefresh={async () => {
+              setRefreshing(true);
+              await precioMoneda(symbol);
+              setRefreshing(false);
+               }}
               renderItem={({ item }) => {
                 return (
                   <Text style={{ color: colors.text }}>

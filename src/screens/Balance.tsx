@@ -133,7 +133,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             showsVerticalScrollIndicator={false}
           >
             {/* CONDOR */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)", mint:"FmqkfdN9QXanfMpJoZmAuNC8jkhnb9aC3NrYn5JM62MU", memo:mnemonic})}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)", mint:"FmqkfdN9QXanfMpJoZmAuNC8jkhnb9aC3NrYn5JM62MU", memo:mnemonic , moneda:"condorcoin"})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -156,7 +156,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* SOLANA */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Solana", mon:"(SOL)", mint:"So11111111111111111111111111111111111111112", memo:mnemonic})}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Solana", mon:"(SOL)", mint:"So11111111111111111111111111111111111111112", memo:mnemonic , moneda:"solana"})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -177,7 +177,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* USDT */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Tether", mon:"(USDT)", mint:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", memo:mnemonic})}>
+            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Tether", mon:"(USDT)", mint:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", memo:mnemonic , moneda:"tether"})}>
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
