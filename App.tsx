@@ -26,7 +26,6 @@ import Recibir from "./src/screens/Recibir";
 import Splashc from "./src/screens/Splashc";
 import QrReader from "./src/screens/QrReader";
 import PantallaCarga from "./src/screens/PantallaCarga";
-import Swap from "./src/screens/Swap";
 import Ajustes from "./src/screens/Ajustes";
 import Slider from "./src/screens/Slider";
 import Moneda from "./src/screens/Moneda";
@@ -114,12 +113,6 @@ function Barra() {
                 ? require("./src/screens/img/walletcolorDark.png")
                 : require("./src/screens/img/walletcolor.png")
               : require("./src/screens/img/walletblanco.png");
-          } else if (route.name === "Swap") {
-            imagenes = focused
-              ? theme == "dark"
-                ? require("./src/screens/img/swapcolorDark.png")
-                : require("./src/screens/img/swapcolor.png")
-              : require("./src/screens/img/swapblanco.png");
           } else if (route.name === "Ajustes") {
             imagenes = focused
               ? theme == "dark"
@@ -141,7 +134,6 @@ function Barra() {
       })}
     >
       <Tab.Screen name="Balance" component={Balance} />
-      <Tab.Screen name="Swap" component={Swap} />
       <Tab.Screen name="Ajustes" component={Ajustes} />
     </Tab.Navigator>
   );

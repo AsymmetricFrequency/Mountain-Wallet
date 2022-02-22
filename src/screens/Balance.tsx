@@ -194,18 +194,6 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>           
           </ScrollView>
         </SafeAreaView>
-          {/* Agregar token */}
-          <TouchableOpacity style={[styles.tablacry,styles.sombras]} activeOpacity={0.5}>
-              <View style={styles.logocry}>
-                <Image
-                  style={styles.imgcry}
-                  source={require("./img/billeteras/agregar.png")}
-                />
-              </View>
-              <View style={styles.nombrecry}>
-                <Text style={styles.ntxtcry}>Agregar Token</Text>
-              </View>
-            </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
