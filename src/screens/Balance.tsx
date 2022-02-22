@@ -45,7 +45,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
     return () => backHandler.remove();
   }, []);
 
-  //Funcion obtener balance
+  //Funcion obtener balance solana 
   const [balance, setBalance] = useState(0);
 
   async function obtenerBalance(publicKey: string) {
@@ -58,7 +58,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
       });
   }
 
-  //Funcion de obtener splToken
+  //Funcion de obtener balance splToken
   const [tokenBalance, setTokenBalance] = useState(0);
 
   async function obtenerTokenB(publicKey: string, mint: string) {
@@ -67,7 +67,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
     });
   }
 
-  //Funcion de obtener splToken USDT
+  //Funcion de obtener balance splToken USDT
   const [tokenBalanceUSDT, setTokenBalanceUSDT] = useState(0);
 
   async function obtenerTokenBUSDT(publicKey: string, mint: string) {
