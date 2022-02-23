@@ -26,6 +26,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
 
   const mnemonic = route.params?.memo
   const mint = route.params?.mint
+  const coin = route.params?.msg
 
   const [publicKey, setPublicKey] = useState("")
 
@@ -73,51 +74,31 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
     }
   };
 
-    //Funcion obtener balance solana 
-    const [balance, setBalance] = useState(0);
-    async function obtenerBalance(publicKey: string) {
+  //Funcion obtener balance solana 
+  const [balance, setBalance] = useState(0);
+  
+  async function obtenerBalance(publicKey: string, mint:string) {
+
+    if (coin == "Solana") {
       getBalance(publicKey)
-        .then((value) => {
-          setBalance(value);
-        })
-        .catch((error) => {
-          return "error";
-        });
+      .then((value) => {
+        setBalance(value);
+      })
+      .catch((error) => {
+        return error;
+      });
+
+    }else {
+      getToken(publicKey, mint).then((value) => {
+        setBalance(value);
+      })
+      .catch((error) => {
+        return error;
+      });
     }
+  }
 
- //Funcion de obtener balance splToken
- const [tokenBalance, setTokenBalance] = useState(0);
-
- async function obtenerTokenB(publicKey: string, mint: string) {
-   const bala = getToken(publicKey, mint).then((value) => {
-     setTokenBalance(value);
-   });
- }
-
- //Funcion de obtener balance splToken USDT
- const [tokenBalanceUSDT, setTokenBalanceUSDT] = useState(0);
-
- async function obtenerTokenBUSDT(publicKey: string, mint: string) {
-   const bala = getToken(publicKey, mint).then((value) => {
-     setTokenBalanceUSDT(value);
-   });
- }
-
- //funcion obtener llave publica
- const [pKey, setPKey] = useState("");
- readPublicKey().then((val) => {
-   setPKey(val);
- });
-
- useEffect(() => {
-   //obtener token de USDT(ESTO SOLO SE USA EN LA MAINNET)
-   obtenerTokenBUSDT(pKey, "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB");
-   //obtener balance del token
-   obtenerTokenB(pKey, "FmqkfdN9QXanfMpJoZmAuNC8jkhnb9aC3NrYn5JM62MU");
-   //obtener balance solanas
-   obtenerBalance(pKey);
- });
-
+  obtenerBalance(publicKey,mint);
 
   const moneda = () => {
     if (msg == "Condorcoin") {
@@ -214,18 +195,10 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
               <Text
                 numberOfLines={1}
                 style={[styles.saldofull, { color: colors.text }]}
-              > { msg == "Solana" && (
-                  <View >
-                    <Text style={[styles.txtBalanceCripto,{ color: colors.text }]}>{balance}</Text>
-                  </View>
-                ) 
-              }
-              { msg != "Solana" &&(
-                  <View>
-                    <Text style={[styles.txtBalanceCripto,{ color: colors.text }]}>{tokenBalance}</Text>
-                  </View>
-              )}
-              
+              >
+              <View >
+                <Text style={[styles.txtBalanceCripto,{ color: colors.text }]}>{balance}</Text>
+              </View>
               </Text>
             </ScrollView>
           </View>

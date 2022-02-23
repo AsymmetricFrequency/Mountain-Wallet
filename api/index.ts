@@ -146,6 +146,12 @@ async function sendSPL(mnemonic: string, toPublicKey: string, amount: number, mi
   return text
 }
 
+async function sendSPLStable(mnemonic: string, toPublicKey: string, amount: number, mint: string){
+  const response = await fetch(`https://apiwalletnode.herokuapp.com/send_transaction_spl_stable/${mnemonic}/${toPublicKey}/${amount}/${mint}`)
+  const text = await response.text()
+  return text
+}
+
 //crear conexion
 function createConnection(cluster:string) {
   return new solanaWeb3.Connection(solanaWeb3.clusterApiUrl(cluster))
@@ -153,7 +159,8 @@ function createConnection(cluster:string) {
 
 //obtener balance de Solanas
 async function getBalance(publicKey: string) {
-  const connection = createConnection("devnet")
+  const connection = createConnection("mainnet-beta")
+  
   const lamports = await connection.getBalance(new solanaWeb3.PublicKey(publicKey)).catch((err) => {
     console.log(err);
   })
@@ -181,7 +188,7 @@ async function findAssociatedTokenAddress(
 
 //obtener balance del token
 async function getToken(publicKey: string, splToken: string){
-    const connection = createConnection("devnet")
+    const connection = createConnection("mainnet-beta")
     const account = await findAssociatedTokenAddress(new PublicKey(publicKey), new PublicKey(splToken))
 
   try {
@@ -225,5 +232,6 @@ export {
   readPassword,
   fetchSecret,
   sendSoles,
-  sendSPL
+  sendSPL,
+  sendSPLStable
 }

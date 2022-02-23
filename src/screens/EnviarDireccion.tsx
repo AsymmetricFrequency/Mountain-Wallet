@@ -16,6 +16,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { sendSoles } from "../../api";
 import { sendSPL } from "../../api";
+import { sendSPLStable } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -44,6 +45,13 @@ const EnviarDireccion = ({
 
   async function enviarSPL() {
     const transaccion = sendSPL(mnemonic, toPublic, Number(pinN),mint)
+    transaccion.then((value) => {
+      console.log(value)
+    })
+  }
+
+  async function enviarSPLStable() {
+    const transaccion = sendSPLStable(mnemonic, toPublic, Number(pinN),mint)
     transaccion.then((value) => {
       console.log(value)
     })
@@ -151,11 +159,21 @@ const EnviarDireccion = ({
           </TouchableOpacity>
         </View>
         )}
-        {titleMoneda != "Solana" &&(
+        {titleMoneda == "Condorcoin" &&(
           <View style={styles.btnEnviar}>
           <TouchableOpacity 
             style={styles.btnCont}
             onPress={() => [enviarSPL(), navigation.navigate('Balance')]}
+          >
+            <Text style={styles.txtEnviar}>Enviar</Text>
+          </TouchableOpacity>
+        </View>
+        )}
+        {titleMoneda == "Tether" &&(
+          <View style={styles.btnEnviar}>
+          <TouchableOpacity 
+            style={styles.btnCont}
+            onPress={() => [enviarSPLStable(), navigation.navigate('Balance')]}
           >
             <Text style={styles.txtEnviar}>Enviar</Text>
           </TouchableOpacity>
