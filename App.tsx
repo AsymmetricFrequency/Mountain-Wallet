@@ -45,6 +45,8 @@ import { useTheme } from "react-native-paper";
 import { RFValue } from "react-native-responsive-fontsize";
 import Restaurar from "./src/screens/Restaurar";
 import ExFrase from "./src/screens/ExFrase";
+import TranFallida from "./src/screens/TranFallida";
+import TranExitosa from "./src/screens/TranExitosa";
 
 const Tab = createBottomTabNavigator();
 //Detecta el sistema en navigator
@@ -56,7 +58,7 @@ const darkTheme = {
     //slider
     primary: "#8B39CD",
     //contrario
-    text: "#E2DBEE",
+    text: "#FBF7FF",
     //igual
     background: "#440577",
     //negro
@@ -65,6 +67,8 @@ const darkTheme = {
     surface: "#00FFFF",
     //Morado negro
     disabled: "#FBF7FF",
+    //Morado gris
+    placeholder:"#E2DBEE"
   },
 };
 
@@ -80,6 +84,7 @@ const lightTheme = {
     accent: "#4D4D4D",
     surface: "#E2DBEE",
     disabled: "#4D4D4D",
+    placeholder:"#440577"
   },
 };
 
@@ -191,6 +196,16 @@ export default function App() {
               name="EnviarDireccion"
               component={EnviarDireccion}
               options={{ headerShown: false }}
+            />*/}
+            <Stack.Screen
+              name="TranFallida"
+              component={TranFallida}
+              options={{ headerShown: false }}
+            /> 
+            <Stack.Screen
+              name="TranExitosa"
+              component={TranExitosa}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="QrReader"
@@ -296,6 +311,16 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="TranFallida"
+              component={TranFallida}
+              options={{ headerShown: false }}
+            /> 
+            <Stack.Screen
+              name="TranExitosa"
+              component={TranExitosa}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
               name="QrReader"
               component={QrReader}
               options={{ headerShown: false }}

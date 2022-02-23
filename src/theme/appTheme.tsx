@@ -310,6 +310,14 @@ export const styles = StyleSheet.create({
     width: 220,
     height: 220,
   },
+  lottiefallido:{
+    width: RFValue(213.8),
+    height: RFValue(213.8),
+  },
+  lottiesucces: {
+    width: RFValue(136.9),
+    height: RFValue(136.9),
+  },
   //Fin lottie
   //Balance
   logocolorB: {
@@ -402,10 +410,27 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(23),
   },
   price: {
-    marginTop: RFValue(4),
-    alignItems: "center",
-    justifyContent: "center",
-    height: RFValue(18),
+    borderBottomColor: "#E2DBEE",
+    borderBottomWidth: 1,
+    justifyContent:"center",
+    alignItems: "flex-start",
+    marginHorizontal: 29,
+    height: 50,
+    marginTop:3
+  },
+  txtCurrentPrice:{
+    fontSize:15,
+    fontWeight:"bold"
+  },
+  txtBalanceCripto:{
+    fontSize:35,
+    fontWeight:"bold" 
+  },
+  txtPorcentajeNegativo: {
+    color: "#CF0808"
+  },
+  txtPorcentajePositivo: {
+    color: "green"
   },
   dcER: {
     flexDirection: "row",
@@ -437,7 +462,8 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   cajasf: {
-    marginTop: RFValue(10),
+    fontWeight:"bold",
+    marginTop: RFValue(5),
     marginHorizontal: RFValue(25.5),
     alignItems: "center",
     justifyContent: "center",
@@ -914,7 +940,6 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(42),
   },
   txtDonex: {
-    color: "#fff",
     fontSize: RFValue(15),
     textAlign: "center",
     justifyContent: "center",
@@ -1121,4 +1146,147 @@ export const styles = StyleSheet.create({
   },
 
   //Fin Pass Login
+  //TranFallido
+  lotti:{
+    marginTop: RFValue(70),
+  },
+  titlemensaje:{
+    marginTop:RFValue(38.5), 
+  },
+  titletxt:{
+    color:"#9C9B9C",
+    fontSize:RFValue(13.8)
+  },
+  errormensaje:{
+    marginTop:RFValue(9),
+    width:RFValue(210.3),
+  },
+  errortxt:{
+    color:"#AEA3C6",
+    fontSize:RFValue(21.25),
+    textAlign: "center",
+    fontWeight: "500"
+  },
+  cajaterminar: {
+    alignItems: "center",
+    elevation: 3,
+    bottom: RFValue(45),
+    position: "absolute",
+  },
+  btnterminar: {
+    borderRadius: 5,
+    width: RFValue(108.5),
+    height: RFValue(33.4),
+    justifyContent: "center",
+    elevation: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+  },
+  txtterminar: {
+    fontSize: RFValue(21.2),
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  //Fin Tranfallido
+  //Tran Exitosa
+  cajalotie: {
+    marginTop: RFValue(32),
+  },
+  textInputE: {
+    alignItems: "center",
+    borderWidth: 3,
+    borderColor: "#E2DBEE",
+    borderRadius: 10,
+    height: RFValue(121.1),
+    marginTop: RFValue(30),
+    width: RFValue(116.8),
+    justifyContent: "center"
+  },
+  icntt: {
+    fontSize: RFValue(12.5),
+    color: "#B3B3B3",
+    fontWeight: '500',
+  },
+  txtingresa: {
+    marginTop: RFValue(2.6),
+  },
+  transa: {
+    fontSize: RFValue(50),
+    fontWeight: '400'
+  },
+  contcnd: {
+    marginTop: RFValue(7.8)
+  },
+  cndrRx: {
+    fontSize: RFValue(8.1),
+    fontWeight: '400'
+  },
+  contid: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: RFValue(16.7),
+    marginTop: RFValue(21),
+    width: RFValue(180),
+  },
+  txtid: {
+    color: "#9C9B9C",
+    fontWeight: "500",
+    fontSize: RFValue(12.5),
+  },
+  idtransaccion: {
+    backgroundColor: "#E2DBEE",
+    borderRadius: 8,
+    marginTop: RFValue(12.5),
+    height: RFValue(81),
+    width: RFValue(227.9),
+    justifyContent: "center",
+  },
+  tablaid: {
+    flexDirection: "row",
+    width: RFValue(238),
+    height: RFValue(64),
+  },
+  cbtncid: {
+    width: "25%",
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+ cuadroid: {
+    justifyContent: "center",
+    width: "72%",
+    paddingRight: RFValue(24)
+  },
+  txtqid: {
+    color: "#440577",
+    fontSize: RFValue(13),
+    fontWeight: "500",
+  },
+  cajatermi: {
+    alignItems: "center",
+    elevation: 3,
+    marginTop:23
+  },
+  cnttransa: {
+    marginTop: 25,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  btntransa: {
+    height: RFValue(30),
+    width: RFValue(147.7),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  txttransa: {
+    color: "#BFABE1",
+    fontSize: RFValue(17),
+  },
+  scroll:{
+    alignItems: "center",
+    paddingBottom: 25
+  
+  }
+  //Fin Tran Exitosa
 });
