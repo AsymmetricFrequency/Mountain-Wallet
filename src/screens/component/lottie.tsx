@@ -82,7 +82,41 @@ const LotiecargaDark = () => {
   )
 }
 
+const Lotiefallido = () => {
+  return (
+    <LottieView
+      style={styles.lottiefallido}
+      source={require("../Lottie/tranfallida.json")}
+      autoPlay
+      loop={false}
+      speed={0.6}
+    />
+  )
+}
+
+const Lotiesucces = () => {
+  return (
+    <LottieView
+      style={styles.lottiesucces}
+      source={require("../Lottie/tranexitosa.json")}
+      autoPlay={true}
+      loop={false}
+    />
+  );
+};
+
+const LotiesuccesDark = () => {
+  return (
+    <LottieView
+      style={styles.lottiesucces}
+      source={require("../Lottie/sucess.json")}
+      autoPlay={true}
+      loop={false}
+    />
+  );
+};
 
 
 
-export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy,Lotiecarga,LotiecargaDark};
+
+export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy,Lotiecarga,LotiecargaDark,Lotiefallido, Lotiesucces, LotiesuccesDark};
