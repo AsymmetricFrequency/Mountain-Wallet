@@ -1168,15 +1168,15 @@ export const styles = StyleSheet.create({
     fontWeight: "500"
   },
   cajaterminar: {
-    alignItems: "center",
     elevation: 3,
     bottom: RFValue(45),
     position: "absolute",
   },
   btnterminar: {
+    alignItems: "center",
     borderRadius: 5,
     width: RFValue(108.5),
-    height: RFValue(33.4),
+    height: RFValue(33.5),
     justifyContent: "center",
     elevation: 24,
     shadowColor: "#000",
@@ -1185,9 +1185,9 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   txtterminar: {
-    fontSize: RFValue(21.2),
+    fontSize: RFValue(21),
     textAlign: "center",
-    justifyContent: "center",
+    marginTop:-1
   },
   //Fin Tranfallido
   //Tran Exitosa
