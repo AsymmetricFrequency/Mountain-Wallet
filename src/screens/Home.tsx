@@ -77,9 +77,6 @@ const Home = ({ navigation }: { navigation: any }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.cajadevep}>
-          <Text style={styles.txtdevep}>DEVELOPED BY CONDOR LAB</Text>
-        </View>
       </View>
     </SafeAreaView>
   );
