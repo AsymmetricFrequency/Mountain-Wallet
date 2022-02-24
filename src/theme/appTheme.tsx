@@ -310,7 +310,7 @@ export const styles = StyleSheet.create({
     width: 220,
     height: 220,
   },
-  lottiefallido:{
+  lottiefallido: {
     width: RFValue(213.8),
     height: RFValue(213.8),
   },
@@ -412,25 +412,25 @@ export const styles = StyleSheet.create({
   price: {
     borderBottomColor: "#E2DBEE",
     borderBottomWidth: 1,
-    justifyContent:"center",
+    justifyContent: "center",
     alignItems: "flex-start",
     marginHorizontal: 29,
     height: 50,
-    marginTop:3
+    marginTop: 3,
   },
-  txtCurrentPrice:{
-    fontSize:15,
-    fontWeight:"bold"
+  txtCurrentPrice: {
+    fontSize: 15,
+    fontWeight: "bold",
   },
-  txtBalanceCripto:{
-    fontSize:35,
-    fontWeight:"bold" 
+  txtBalanceCripto: {
+    fontSize: 35,
+    fontWeight: "bold",
   },
   txtPorcentajeNegativo: {
-    color: "#CF0808"
+    color: "#CF0808",
   },
   txtPorcentajePositivo: {
-    color: "green"
+    color: "#11DD3E",
   },
   dcER: {
     flexDirection: "row",
@@ -462,7 +462,7 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   cajasf: {
-    fontWeight:"bold",
+    fontWeight: "bold",
     marginTop: RFValue(5),
     marginHorizontal: RFValue(25.5),
     alignItems: "center",
@@ -1147,25 +1147,25 @@ export const styles = StyleSheet.create({
 
   //Fin Pass Login
   //TranFallido
-  lotti:{
+  lotti: {
     marginTop: RFValue(70),
   },
-  titlemensaje:{
-    marginTop:RFValue(38.5), 
+  titlemensaje: {
+    marginTop: RFValue(38.5),
   },
-  titletxt:{
-    color:"#9C9B9C",
-    fontSize:RFValue(13.8)
+  titletxt: {
+    color: "#9C9B9C",
+    fontSize: RFValue(13.8),
   },
-  errormensaje:{
-    marginTop:RFValue(9),
-    width:RFValue(210.3),
+  errormensaje: {
+    marginTop: RFValue(9),
+    width: RFValue(210.3),
   },
-  errortxt:{
-    color:"#AEA3C6",
-    fontSize:RFValue(21.25),
+  errortxt: {
+    color: "#AEA3C6",
+    fontSize: RFValue(21.25),
     textAlign: "center",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   cajaterminar: {
     elevation: 3,
@@ -1187,7 +1187,7 @@ export const styles = StyleSheet.create({
   txtterminar: {
     fontSize: RFValue(21),
     textAlign: "center",
-    marginTop:-1
+    marginTop: -1,
   },
   //Fin Tranfallido
   //Tran Exitosa
@@ -1202,26 +1202,26 @@ export const styles = StyleSheet.create({
     height: RFValue(121.1),
     marginTop: RFValue(30),
     width: RFValue(116.8),
-    justifyContent: "center"
+    justifyContent: "center",
   },
   icntt: {
     fontSize: RFValue(12.5),
     color: "#B3B3B3",
-    fontWeight: '500',
+    fontWeight: "500",
   },
   txtingresa: {
     marginTop: RFValue(2.6),
   },
   transa: {
     fontSize: RFValue(50),
-    fontWeight: '400'
+    fontWeight: "400",
   },
   contcnd: {
-    marginTop: RFValue(7.8)
+    marginTop: RFValue(7.8),
   },
   cndrRx: {
     fontSize: RFValue(8.1),
-    fontWeight: '400'
+    fontWeight: "400",
   },
   contid: {
     alignItems: "center",
@@ -1253,10 +1253,10 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "center",
   },
- cuadroid: {
+  cuadroid: {
     justifyContent: "center",
     width: "72%",
-    paddingRight: RFValue(24)
+    paddingRight: RFValue(24),
   },
   txtqid: {
     color: "#440577",
@@ -1266,7 +1266,7 @@ export const styles = StyleSheet.create({
   cajatermi: {
     alignItems: "center",
     elevation: 3,
-    marginTop:23
+    marginTop: 23,
   },
   cnttransa: {
     marginTop: 25,
@@ -1283,10 +1283,9 @@ export const styles = StyleSheet.create({
     color: "#BFABE1",
     fontSize: RFValue(17),
   },
-  scroll:{
+  scroll: {
     alignItems: "center",
-    paddingBottom: 25
-  
-  }
+    paddingBottom: 25,
+  },
   //Fin Tran Exitosa
 });

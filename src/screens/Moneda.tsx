@@ -10,7 +10,7 @@ import {
   RefreshControl,
   FlatList,
   Appearance,
-  LogBox
+  LogBox,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { styles } from "../theme/appTheme";
@@ -23,21 +23,20 @@ import { readMnemonic } from "../../api";
 const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
+  const mnemonic = route.params?.memo;
+  const mint = route.params?.mint;
+  const coin = route.params?.msg;
 
-  const mnemonic = route.params?.memo
-  const mint = route.params?.mint
-  const coin = route.params?.msg
-
-  const [publicKey, setPublicKey] = useState("")
+  const [publicKey, setPublicKey] = useState("");
 
   async function setearPubKey() {
-    const llavePublica = readPublicKey()
+    const llavePublica = readPublicKey();
     llavePublica.then((value) => {
-      setPublicKey(value)
-    })
+      setPublicKey(value);
+    });
   }
 
-  setearPubKey()
+  setearPubKey();
 
   //Detecta el modo del sistema
   const [theme, setTheme] = useState(Appearance.getColorScheme());
@@ -47,7 +46,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
   const { colors } = useTheme();
 
   const { msg, mon } = route.params;
-  const symbol = route.params?.moneda
+  const symbol = route.params?.moneda;
 
   const ima = () => {
     if (msg == "Condorcoin") {
@@ -74,31 +73,30 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
     }
   };
 
-  //Funcion obtener balance solana 
+  //Funcion obtener balance solana
   const [balance, setBalance] = useState(0);
-  
-  async function obtenerBalance(publicKey: string, mint:string) {
 
+  async function obtenerBalance(publicKey: string, mint: string) {
     if (coin == "Solana") {
       getBalance(publicKey)
-      .then((value) => {
-        setBalance(value);
-      })
-      .catch((error) => {
-        return error;
-      });
-
-    }else {
-      getToken(publicKey, mint).then((value) => {
-        setBalance(value);
-      })
-      .catch((error) => {
-        return error;
-      });
+        .then((value) => {
+          setBalance(value);
+        })
+        .catch((error) => {
+          return error;
+        });
+    } else {
+      getToken(publicKey, mint)
+        .then((value) => {
+          setBalance(value);
+        })
+        .catch((error) => {
+          return error;
+        });
     }
   }
 
-  obtenerBalance(publicKey,mint);
+  obtenerBalance(publicKey, mint);
 
   const moneda = () => {
     if (msg == "Condorcoin") {
@@ -130,14 +128,13 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
 
   const onRefre = () => {
     setRefresh(true);
-    precioMoneda(symbol)
+    precioMoneda(symbol);
     setRefresh(false);
-    
   };
-  // Elimina advertencia de virtualizacion 
+  // Elimina advertencia de virtualizacion
   useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
-  }, [])
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
 
   return (
     <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
@@ -186,7 +183,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
               </Text>
             </View>
           </View>
-          
+
           <View style={styles.cajasf}>
             <ScrollView
               horizontal={true}
@@ -196,13 +193,19 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                 numberOfLines={1}
                 style={[styles.saldofull, { color: colors.text }]}
               >
-              <View >
-                <Text style={[styles.txtBalanceCripto,{ color: colors.text }]}>{balance}</Text>
-              </View>
+                <View>
+                  <Text
+                    style={[styles.txtBalanceCripto, { color: colors.text }]}
+                  >
+                    {balance}
+                  </Text>
+                </View>
               </Text>
             </ScrollView>
           </View>
-          <View style={styles.dcER}>
+          <View
+            style={[styles.dcER, { borderTopWidth: theme === "light" ? 1 : 0 }]}
+          >
             <View style={styles.dcE}>
               <TouchableOpacity
                 style={[
@@ -216,7 +219,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                     pmsg: msg,
                     mon: moneda(),
                     memo: mnemonic,
-                    mint: mint
+                    mint: mint,
                   })
                 }
               >
@@ -233,7 +236,12 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                   { backgroundColor: colors.text },
                 ]}
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate("Recibir", { pmsg: msg, publicKey: publicKey })}
+                onPress={() =>
+                  navigation.navigate("Recibir", {
+                    pmsg: msg,
+                    publicKey: publicKey,
+                  })
+                }
               >
                 <Text style={[styles.textbtnR, { color: colors.background }]}>
                   Recibir
@@ -247,25 +255,27 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
               scrollEnabled={false}
               refreshing={refreshing}
               onRefresh={async () => {
-              setRefreshing(true);
-              await precioMoneda(symbol);
-              setRefreshing(false);
-               }}
+                setRefreshing(true);
+                await precioMoneda(symbol);
+                setRefreshing(false);
+              }}
               renderItem={({ item }) => {
                 return (
                   <View>
-                  <Text style={[styles.txtCurrentPrice,{ color: colors.text }]}>
-                    ${item.current_price}
-                  </Text>
-                  <Text 
-                    style={[
-                      item.price_change_percentage_24h > 0
-                      ? styles.txtPorcentajePositivo
-                      : styles.txtPorcentajeNegativo,
+                    <Text
+                      style={[styles.txtCurrentPrice, { color: colors.text }]}
+                    >
+                      ${item.current_price}
+                    </Text>
+                    <Text
+                      style={[
+                        item.price_change_percentage_24h > 0
+                          ? styles.txtPorcentajePositivo
+                          : styles.txtPorcentajeNegativo,
                       ]}
-                  >
-                    {item.price_change_percentage_24h.toFixed(2)}%
-                  </Text>
+                    >
+                      {item.price_change_percentage_24h.toFixed(2)}%
+                    </Text>
                   </View>
                 );
               }}
