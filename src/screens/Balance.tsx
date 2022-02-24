@@ -13,28 +13,26 @@ import {
 } from "react-native";
 import { getBalance, getToken, readPublicKey } from "../../api";
 import { styles } from "../theme/appTheme";
-import { useTheme } from 'react-native-paper';
+import { useTheme } from "react-native-paper";
 import { readMnemonic } from "../../api";
 
-
 const Balance = ({ navigation }: { navigation: any }) => {
+  const [mnemonic, setMnemonic] = useState("");
 
-  const [mnemonic, setMnemonic] = useState("")
-
-  async function leerMnemonic(){
-    const palabras = readMnemonic()
+  async function leerMnemonic() {
+    const palabras = readMnemonic();
     palabras.then((value) => {
-      setMnemonic(value)
-    })
+      setMnemonic(value);
+    });
   }
 
-  leerMnemonic()
-  
+  leerMnemonic();
+
   //Detecta el modo del sistema
-  const [theme,setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme)=>{
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
-  })
+  });
   const { colors } = useTheme();
 
   useEffect(() => {
@@ -45,7 +43,7 @@ const Balance = ({ navigation }: { navigation: any }) => {
     return () => backHandler.remove();
   }, []);
 
-  //Funcion obtener balance solana 
+  //Funcion obtener balance solana
   const [balance, setBalance] = useState(0);
 
   async function obtenerBalance(publicKey: string) {
@@ -102,22 +100,16 @@ const Balance = ({ navigation }: { navigation: any }) => {
     }, 1000);
   };
 
-
-  
   return (
-    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
-      <StatusBar 
+    <SafeAreaView style={styles.body}>
+      {/* <StatusBar 
         backgroundColor= {colors.background}
         barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
-      />
-      <View style={[styles.completo,{backgroundColor:colors.background}]}>
+      /> */}
+      <View style={styles.completo}>
         <Image
           style={styles.logocolorB}
-          source={
-            theme === "light"
-              ? require("./img/logocolor.png")
-              : require("./img/logocolorDark.png")
-          }
+          source={require("./img/logocolor.png")}
         />
         <SafeAreaView style={styles.balancecry}>
           <ScrollView
@@ -133,7 +125,19 @@ const Balance = ({ navigation }: { navigation: any }) => {
             showsVerticalScrollIndicator={false}
           >
             {/* CONDOR */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Condorcoin", mon:"(CNDR)", mint:"8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ", memo:mnemonic , moneda:"condorcoin"})}>
+            <TouchableOpacity
+              style={styles.tablacry}
+              activeOpacity={0.5}
+              onPress={() =>
+                navigation.navigate("Moneda", {
+                  msg: "Condorcoin",
+                  mon: "(CNDR)",
+                  mint: "8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZ",
+                  memo: mnemonic,
+                  moneda: "condorcoin",
+                })
+              }
+            >
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -156,7 +160,19 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* SOLANA */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Solana", mon:"(SOL)", mint:"So11111111111111111111111111111111111111112", memo:mnemonic , moneda:"solana"})}>
+            <TouchableOpacity
+              style={styles.tablacry}
+              activeOpacity={0.5}
+              onPress={() =>
+                navigation.navigate("Moneda", {
+                  msg: "Solana",
+                  mon: "(SOL)",
+                  mint: "So11111111111111111111111111111111111111112",
+                  memo: mnemonic,
+                  moneda: "solana",
+                })
+              }
+            >
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -168,7 +184,9 @@ const Balance = ({ navigation }: { navigation: any }) => {
               </View>
               <View style={styles.smcry}>
                 <View style={styles.saldocry}>
-                  <Text numberOfLines={1} style={styles.stxtcry}>{balance}</Text>
+                  <Text numberOfLines={1} style={styles.stxtcry}>
+                    {balance}
+                  </Text>
                 </View>
                 <View style={styles.monedacry}>
                   <Text style={styles.mtxtcry}>SOL</Text>
@@ -177,7 +195,19 @@ const Balance = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
 
             {/* USDT */}
-            <TouchableOpacity style={styles.tablacry} activeOpacity={0.5} onPress={() => navigation.navigate("Moneda",{msg:"Tether", mon:"(USDT)", mint:"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", memo:mnemonic , moneda:"tether"})}>
+            <TouchableOpacity
+              style={styles.tablacry}
+              activeOpacity={0.5}
+              onPress={() =>
+                navigation.navigate("Moneda", {
+                  msg: "Tether",
+                  mon: "(USDT)",
+                  mint: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+                  memo: mnemonic,
+                  moneda: "tether",
+                })
+              }
+            >
               <View style={styles.logocry}>
                 <Image
                   style={styles.imgcry}
@@ -189,13 +219,15 @@ const Balance = ({ navigation }: { navigation: any }) => {
               </View>
               <View style={styles.smcry}>
                 <View style={styles.saldocry}>
-                  <Text numberOfLines={1} style={styles.stxtcry}>{tokenBalanceUSDT}</Text>
+                  <Text numberOfLines={1} style={styles.stxtcry}>
+                    {tokenBalanceUSDT}
+                  </Text>
                 </View>
                 <View style={styles.monedacry}>
                   <Text style={styles.mtxtcry}>USDT</Text>
                 </View>
               </View>
-            </TouchableOpacity>           
+            </TouchableOpacity>
           </ScrollView>
         </SafeAreaView>
       </View>

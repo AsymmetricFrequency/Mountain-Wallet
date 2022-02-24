@@ -15,7 +15,6 @@ import { generateMnemonic } from "../../api";
 import { styles } from "../theme/appTheme";
 
 const Home = ({ navigation }: { navigation: any }) => {
-
   function crearMnemonic() {
     const memo = generateMnemonic();
     memo.then((value) => {
@@ -40,41 +39,34 @@ const Home = ({ navigation }: { navigation: any }) => {
     return () => backHandler.remove();
   }, []);
 
-
   return (
-    <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
-      <StatusBar
+    // <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
+    <SafeAreaView style={styles.body}>
+      {/* <StatusBar
         backgroundColor={colors.background}
         barStyle={theme === "dark" ? "light-content" : "dark-content"}
-      />
-      <View style={[styles.completo, { backgroundColor: colors.background }]}>
+      /> */}
+      {/* <View style={[styles.completo, { backgroundColor: colors.background }]}> */}
+      <View style={styles.completo}>
         <Image
           style={styles.logocolor}
-          source={
-            theme === "light"
-              ? require("./img/logocolor.png")
-              : require("./img/logocolorDark.png")
-          }
+          source={require("./img/logocolor.png")}
         />
         <View style={styles.btncr}>
           <TouchableOpacity
-            style={[styles.btnc, { backgroundColor: colors.text }]}
+            style={styles.btnc}
             activeOpacity={0.5}
             onPress={() => crearMnemonic()}
           >
-            <Text style={[styles.txtc, { color: colors.background }]}>
-              CREAR NUEVA CARTERA
-            </Text>
+            <Text style={styles.txtc}>CREAR NUEVA CARTERA</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.btnr, { backgroundColor: colors.text }]}
+            style={styles.btnr}
             activeOpacity={0.5}
             onPress={() => navigation.navigate("Restaurar")}
           >
-            <Text style={[styles.txtr, { color: colors.background }]}>
-              RESTAURAR CARTERA
-            </Text>
+            <Text style={styles.txtr}>RESTAURAR CARTERA</Text>
           </TouchableOpacity>
         </View>
       </View>
