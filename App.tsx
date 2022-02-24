@@ -68,7 +68,7 @@ const darkTheme = {
     //Morado negro
     disabled: "#FBF7FF",
     //Morado gris
-    placeholder:"#E2DBEE"
+    placeholder: "#E2DBEE",
   },
 };
 
@@ -84,7 +84,7 @@ const lightTheme = {
     accent: "#4D4D4D",
     surface: "#E2DBEE",
     disabled: "#4D4D4D",
-    placeholder:"#440577"
+    placeholder: "#440577",
   },
 };
 
@@ -196,12 +196,12 @@ export default function App() {
               name="EnviarDireccion"
               component={EnviarDireccion}
               options={{ headerShown: false }}
-            />*/}
+            />
             <Stack.Screen
               name="TranFallida"
               component={TranFallida}
               options={{ headerShown: false }}
-            /> 
+            />
             <Stack.Screen
               name="TranExitosa"
               component={TranExitosa}
@@ -314,13 +314,13 @@ export default function App() {
               name="TranFallida"
               component={TranFallida}
               options={{ headerShown: false }}
-            /> 
+            />
             <Stack.Screen
               name="TranExitosa"
               component={TranExitosa}
               options={{ headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
               name="QrReader"
               component={QrReader}
               options={{ headerShown: false }}
