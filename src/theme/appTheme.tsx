@@ -15,7 +15,7 @@ const screenHeight = Dimensions.get("window").height;
 const spaceH = windowHeight - screenHeight;
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const radios = Platform.OS === "ios" ? 10 : 15;
-const borrarios = Platform.OS === "ios" ? 31 : 27;
+const borrarios = Platform.OS === "ios" ? 31 : 20;
 const bottomios = Platform.OS === "ios" ? 60 : StatusBar.currentHeight;
 const cirios = Platform.OS === "ios" ? 0 : 25;
 const cantidadios = Platform.OS === "ios" ? -25 : -40;
@@ -244,6 +244,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   txttx: {
+    color: "#4D4D4D",
     fontSize: RFValue(23),
     fontWeight: "bold",
     textAlign: "center",
@@ -260,6 +261,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   itemLabel: {
+    color: "#4D4D4D",
     fontSize: RFValue(25),
     fontWeight: "bold",
   },
@@ -271,6 +273,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   counter: {
+    color: "#440577",
     fontSize: RFValue(17),
     textAlign: "center",
   },

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Text, View, Image, Modal, StatusBar, Appearance } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import * as Animatable from "react-native-animatable";
 import LottieView from "lottie-react-native";
 import { readPassword, savePassword } from "../../api";
@@ -235,11 +235,7 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
         {/* fila boton borrar */}
         <View style={styles.borrar}>
           <TouchableOpacity onPress={() => borrar()} style={styles.tcBorrar}>
-            <Icon
-              name="backspace-outline"
-              size={32}
-              style={{ color: "#440577" }}
-            />
+            <Icon name="backspace" size={25} style={{ color: "#440577" }} />
           </TouchableOpacity>
         </View>
         <View style={styles.contBtn}>
