@@ -16,46 +16,25 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
   Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
     //Borar estado color
-    if (
-      theme === "light" &&
-      pin1 === "" &&
-      pin2 === "" &&
-      pin3 === "" &&
-      pin4 === ""
-    ) {
+    if (pin1 === "" && pin2 === "" && pin3 === "" && pin4 === "") {
       setPin1("");
       setPin2("");
       setPin3("");
       setPin4("");
-      setColourUno(colors.background);
-      setColourDos(colors.background);
-      setColourTres(colors.background);
-      setColourCuatro(colors.background);
-    } else if (
-      theme === "dark" &&
-      pin1 === "" &&
-      pin2 === "" &&
-      pin3 === "" &&
-      pin4 === ""
-    ) {
-      setPin1("");
-      setPin2("");
-      setPin3("");
-      setPin4("");
-      setColourUno(colors.background);
-      setColourDos(colors.background);
-      setColourTres(colors.background);
-      setColourCuatro(colors.background);
+      setColourUno("#FBF7FF");
+      setColourDos("#FBF7FF");
+      setColourTres("#FBF7FF");
+      setColourCuatro("#FBF7FF");
     }
   });
 
   const { colors } = useTheme();
 
   //estado background
-  const [colour, setColourUno] = useState(colors.background);
-  const [colourDos, setColourDos] = useState(colors.background);
-  const [colourTres, setColourTres] = useState(colors.background);
-  const [colourCuatro, setColourCuatro] = useState(colors.background);
+  const [colour, setColourUno] = useState("#FBF7FF");
+  const [colourDos, setColourDos] = useState("#FBF7FF");
+  const [colourTres, setColourTres] = useState("#FBF7FF");
+  const [colourCuatro, setColourCuatro] = useState("#FBF7FF");
 
   //Modales
   const [anmt, setanmt] = useState("");
@@ -86,10 +65,10 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
       setPin2("");
       setPin3("");
       setPin4("");
-      setColourUno(colors.background);
-      setColourDos(colors.background);
-      setColourTres(colors.background);
-      setColourCuatro(colors.background);
+      setColourUno("#FBF7FF");
+      setColourDos("#FBF7FF");
+      setColourTres("#FBF7FF");
+      setColourCuatro("#FBF7FF");
     }
   }
 
@@ -107,32 +86,32 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
   function funcion(numero: string) {
     if (pin1 == "") {
       setPin1(numero);
-      setColourUno(colors.text);
+      setColourUno("#440577");
     } else if (pin1 != "" && pin2 == "") {
       setPin2(numero);
-      setColourDos(colors.text);
+      setColourDos("#440577");
     } else if (pin1 != "" && pin2 != "" && pin3 == "") {
       setPin3(numero);
-      setColourTres(colors.text);
+      setColourTres("#440577");
     } else if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 == "") {
       setPin4(numero);
-      setColourCuatro(colors.text);
+      setColourCuatro("#440577");
     }
   }
 
   function borrar() {
     if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 != "") {
       setPin4("");
-      setColourCuatro(colors.background);
+      setColourCuatro("#FBF7FF");
     } else if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 == "") {
       setPin3("");
-      setColourTres(colors.background);
+      setColourTres("#FBF7FF");
     } else if (pin1 != "" && pin2 != "" && pin3 == "" && pin4 == "") {
       setPin2("");
-      setColourDos(colors.background);
+      setColourDos("#FBF7FF");
     } else if (pin1 != "" && pin2 == "" && pin3 == "" && pin4 == "") {
       setPin1("");
-      setColourUno(colors.background);
+      setColourUno("#FBF7FF");
     } else if (pin1 == "" && pin2 == "" && pin3 == "" && pin4 == "") {
       console.log("====================================");
       console.log("No hay nada que borrar");
@@ -141,11 +120,11 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
-      <StatusBar
+    <SafeAreaView style={styles.body}>
+      {/* <StatusBar
         backgroundColor={colors.background}
         barStyle={theme === "dark" ? "light-content" : "dark-content"}
-      />
+      /> */}
       <Modal
         visible={vacioModal}
         transparent
@@ -176,11 +155,10 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
           </View>
         </Animatable.View>
       </Modal>
-      <View style={[styles.completo, { backgroundColor: colors.background }]}>
+      {/* <View style={[styles.completo, { backgroundColor: colors.background }]}> */}
+      <View style={styles.completo}>
         <View style={styles.titlecc}>
-          <Text style={[styles.titletx, { color: colors.text }]}>
-            Ingrese contraseña
-          </Text>
+          <Text style={styles.titletx}>Ingrese contraseña</Text>
         </View>
         <View style={styles.contenedorIcon}>
           <Image style={styles.icon} source={require("./img/password.png")} />
@@ -189,37 +167,25 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
         <View style={styles.headerCirculos}>
           {/* PRUEBA BOTON BACKGROUND */}
           <TouchableOpacity
-            style={[
-              styles.circUno,
-              { backgroundColor: colour, borderColor: colors.text },
-            ]}
+            style={[styles.circUno, { backgroundColor: colour }]}
             // onPress={handleClickUno}
             disabled={true}
           />
 
           <TouchableOpacity
-            style={[
-              styles.circUno,
-              { backgroundColor: colourDos, borderColor: colors.text },
-            ]}
+            style={[styles.circUno, { backgroundColor: colourDos }]}
             // onPress={handleClickDos}
             disabled={true}
           />
 
           <TouchableOpacity
-            style={[
-              styles.circUno,
-              { backgroundColor: colourTres, borderColor: colors.text },
-            ]}
+            style={[styles.circUno, { backgroundColor: colourTres }]}
             // onPress={handleClickTres}
             disabled={true}
           />
 
           <TouchableOpacity
-            style={[
-              styles.circUno,
-              { backgroundColor: colourCuatro, borderColor: colors.text },
-            ]}
+            style={[styles.circUno, { backgroundColor: colourCuatro }]}
             // onPress={handleClickCuatro}
             disabled={true}
           />
@@ -227,43 +193,43 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
         {/* fila uno */}
         <View style={styles.padUno}>
           <TouchableOpacity onPress={() => funcion("1")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>1</Text>
+            <Text style={styles.numberP}>1</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("2")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>2</Text>
+            <Text style={styles.numberP}>2</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("3")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>3</Text>
+            <Text style={styles.numberP}>3</Text>
           </TouchableOpacity>
         </View>
         {/* fila dos */}
         <View style={styles.padDos}>
           <TouchableOpacity onPress={() => funcion("4")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>4</Text>
+            <Text style={styles.numberP}>4</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("5")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>5</Text>
+            <Text style={styles.numberP}>5</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("6")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>6</Text>
+            <Text style={styles.numberP}>6</Text>
           </TouchableOpacity>
         </View>
         {/* fila tres */}
         <View style={styles.padTres}>
           <TouchableOpacity onPress={() => funcion("7")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>7</Text>
+            <Text style={styles.numberP}>7</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("8")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>8</Text>
+            <Text style={styles.numberP}>8</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => funcion("9")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>9</Text>
+            <Text style={styles.numberP}>9</Text>
           </TouchableOpacity>
         </View>
         {/* fila cero */}
         <View style={styles.padCero}>
           <TouchableOpacity onPress={() => funcion("0")}>
-            <Text style={[styles.numberP, { color: colors.text }]}>0</Text>
+            <Text style={styles.numberP}>0</Text>
           </TouchableOpacity>
         </View>
         {/* fila boton borrar */}
@@ -272,18 +238,16 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
             <Icon
               name="backspace-outline"
               size={32}
-              style={{ color: colors.text }}
+              style={{ color: "#440577" }}
             />
           </TouchableOpacity>
         </View>
         <View style={styles.contBtn}>
           <TouchableOpacity
-            style={[styles.btnDone, { backgroundColor: colors.text }]}
+            style={styles.btnDone}
             onPress={() => validarPassword()}
           >
-            <Text style={[styles.txtDone, { color: colors.background }]}>
-              CONFIRMAR
-            </Text>
+            <Text style={styles.txtDone}>CONFIRMAR</Text>
           </TouchableOpacity>
         </View>
       </View>

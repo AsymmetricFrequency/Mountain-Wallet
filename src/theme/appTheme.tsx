@@ -41,10 +41,12 @@ export const styles = StyleSheet.create({
     height: windowHeight,
     width: windowWidth,
     flex: 1,
+    backgroundColor: "#FBF7FF",
   },
   completo: {
     alignItems: "center",
     flex: 1,
+    //backgroundColor: "red",
   },
   logocolor: {
     marginTop: RFValue(70),
@@ -58,12 +60,14 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(17),
   },
   btnc: {
+    backgroundColor: "#440577",
     borderRadius: radios,
     width: RFValue(245),
     height: RFValue(48.44),
     justifyContent: "center",
   },
   txtc: {
+    color: "#FBF7FF",
     fontSize: RFValue(17),
     fontWeight: "400",
     textAlign: "center",
@@ -113,7 +117,7 @@ export const styles = StyleSheet.create({
   introTitleStyle: {
     fontSize: RFValue(23),
     fontWeight: "bold",
-    // color: "#4D4D4D",
+    color: "#4D4D4D",
     textAlign: "center",
   },
   cajatxt: {
@@ -132,6 +136,13 @@ export const styles = StyleSheet.create({
   cajadone: {
     position: "absolute",
     right: RFValue(20),
+    zIndex: 3,
+    elevation: 3,
+    marginTop: RFValue(53),
+  },
+  cajadoneLeft: {
+    position: "absolute",
+    left: RFValue(30),
     zIndex: 3,
     elevation: 3,
     marginTop: RFValue(53),
@@ -224,6 +235,7 @@ export const styles = StyleSheet.create({
   titletx: {
     fontSize: RFValue(23),
     fontWeight: "bold",
+    color: "#440577",
   },
   txtcc: {
     marginTop: RFValue(84),
@@ -269,6 +281,7 @@ export const styles = StyleSheet.create({
     bottom: RFValue(-70),
   },
   btnDone: {
+    backgroundColor: "#440577",
     borderRadius: 15,
     width: RFValue(201),
     height: RFValue(41.7),
@@ -280,6 +293,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   txtDone: {
+    color: "#FBF7FF",
     fontSize: RFValue(21),
     textAlign: "center",
     justifyContent: "center",
@@ -1090,6 +1104,7 @@ export const styles = StyleSheet.create({
   circUno: {
     borderRadius: 100,
     borderWidth: 1,
+    borderColor: "#440577",
     height: RFValue(28),
     justifyContent: "center",
     marginHorizontal: RFValue(9.7),

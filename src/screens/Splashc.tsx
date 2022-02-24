@@ -4,15 +4,14 @@ import { readPassword } from "../../api";
 import { useNavigation } from "@react-navigation/native";
 import { Lotiesplash } from "./component/lottie";
 import { styles } from "../theme/appTheme";
-import { useTheme } from 'react-native-paper';
+import { useTheme } from "react-native-paper";
 
 const Splashc = () => {
-
   //Detecta el modo del sistema
-  const [theme,setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme)=>{
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
-  })
+  });
   const { colors } = useTheme();
 
   const navigation = useNavigation();
@@ -25,22 +24,22 @@ const Splashc = () => {
     if (llave != null && llave != "" && llave != undefined) {
       navigation.navigate("Pass" as any);
     }
-      navigation.navigate("Home" as any);
-    
+    navigation.navigate("Home" as any);
   }, 3500);
 
-
-
   return (
-    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
-      <StatusBar 
-        backgroundColor= {colors.background}
-        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
-      />
+    <SafeAreaView style={styles.body}>
+      {/* <StatusBar
+        backgroundColor={colors.background}
+        barStyle={theme === "dark" ? "light-content" : "dark-content"}
+      /> */}
       <View
         style={[
           styles.completo,
-          {backgroundColor:colors.background,alignItems: "center", justifyContent: "center"}
+          {
+            alignItems: "center",
+            justifyContent: "center",
+          },
         ]}
       >
         <Lotiesplash />

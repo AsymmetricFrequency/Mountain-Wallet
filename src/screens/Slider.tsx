@@ -1,63 +1,82 @@
 import React, { useState } from "react";
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { View, Text, Image, TouchableOpacity, Platform,SafeAreaView,StatusBar, Appearance  } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  Appearance,
+} from "react-native";
 
 //import AppIntroSlider to use it
 import AppIntroSlider from "react-native-app-intro-slider";
-import { useTheme } from 'react-native-paper';
+import { useTheme } from "react-native-paper";
 import { readMnemonic } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Slider = ({ navigation, route }: { navigation: any; route: any }) => {
   //Detecta el modo del sistema
-  const [theme,setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme)=>{
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
-  })
+  });
   const { colors } = useTheme();
 
-  const [mnemonic, setMnemonic] = useState("")
+  const [mnemonic, setMnemonic] = useState("");
 
+  async function leerMnemonic() {
+    const frase = readMnemonic();
+    frase.then((value) => {
+      setMnemonic(value);
+    });
+  }
 
-async function leerMnemonic() {
-  const frase = readMnemonic();
-  frase.then((value) =>{
-    setMnemonic(value)
-  })
-}
-
-leerMnemonic()
+  leerMnemonic();
 
   const RenderItem = ({ item }) => {
     return (
-      <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
-        <StatusBar 
+      <SafeAreaView style={styles.body}>
+        {/* <StatusBar 
           backgroundColor= {colors.background}
           barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
-        />
-        <View style={[styles.completo,{backgroundColor:colors.background}]}>
+        /> */}
+        <View style={styles.completo}>
           <Image style={styles.introImageStyle} source={item.image} />
           <View style={styles.cajatitle}>
-            <Text style={[styles.introTitleStyle,{color:colors.accent}]}>{item.title}</Text>
+            <Text style={styles.introTitleStyle}>{item.title}</Text>
           </View>
           <View style={styles.cajatxt}>
-            <Text style={[styles.introTextStyle,{color:colors.accent}]}>{item.text}</Text>
+            <Text style={styles.introTextStyle}>{item.text}</Text>
           </View>
+          {item.key == "s1" && (
+            <View style={styles.cajadoneLeft}>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={styles.btndo}
+                onPress={() => navigation.navigate("Home")}
+              >
+                <Icon name="arrow-left" size={altura} color="#440577" />
+              </TouchableOpacity>
+            </View>
+          )}
           {item.key == "s3" && (
             <View style={styles.cajadone}>
               <TouchableOpacity
                 activeOpacity={0.5}
                 style={styles.btndo}
-                onPress={() => navigation.navigate("Crear",{msg:mnemonic})}
+                onPress={() => navigation.navigate("Crear", { msg: mnemonic })}
               >
                 <Icon name="arrow-right" size={altura} color="#440577" />
               </TouchableOpacity>
             </View>
           )}
         </View>
-      </SafeAreaView >
+      </SafeAreaView>
     );
   };
 
@@ -74,7 +93,7 @@ leerMnemonic()
         showDoneButton={false}
         renderDoneButton={renderdone}
         dotStyle={styles.dotst}
-        activeDotStyle={[styles.actist,{backgroundColor:colors.primary}]}
+        activeDotStyle={[styles.actist, { backgroundColor: colors.primary }]}
       />
     </>
   );
