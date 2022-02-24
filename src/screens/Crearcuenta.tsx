@@ -8,7 +8,7 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
-  Appearance
+  Appearance,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
@@ -18,44 +18,49 @@ import {
   animatedStyles,
 } from "../screens/utils/animations";
 import Carousel from "react-native-snap-carousel";
-import { useTheme } from 'react-native-paper';
+import { useTheme } from "react-native-paper";
 
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
 const altura = Platform.OS === "ios" ? 22 : 25;
 
-const Crearcuenta = ({ navigation, route }: { navigation: any; route: any }) => {
-  
-  const frase = route.params?.msg.split(" ")
+const Crearcuenta = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
+  const frase = route.params?.msg.split(" ");
   //const palabras = frase.split(" ")
-  
+
   //Detecta el modo del sistema
-  const [theme,setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme)=>{
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
-  })
+  });
   const { colors } = useTheme();
 
   const [numero, setNumero] = useState(1);
-    
-  const RenderItem =  ({ item }) => {
-      return (
-        <View style={styles.itemContainer}>
-          <Text style={[styles.itemLabel,{color:colors.text}]}>{`${item}`}</Text>
-        </View>
-      );
+
+  const RenderItem = ({ item }) => {
+    return (
+      <View style={styles.itemContainer}>
+        <Text style={styles.itemLabel}>{`${item}`}</Text>
+      </View>
+    );
   };
 
   return (
-    <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
-      <StatusBar 
+    <SafeAreaView style={styles.body}>
+      {/* <StatusBar 
         backgroundColor= {colors.background}
         barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
-      />
+      /> */}
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
-          <Text style={[styles.titletx,{color:colors.text}]}>Crear nueva cartera</Text>
+          <Text style={styles.titletx}>Crear nueva cartera</Text>
         </View>
         <View style={styles.cajaatras}>
           <TouchableOpacity
@@ -67,7 +72,7 @@ const Crearcuenta = ({ navigation, route }: { navigation: any; route: any }) => 
           </TouchableOpacity>
         </View>
         <View style={styles.txtcc}>
-          <Text style={[styles.txttx,{color:colors.accent}]}>
+          <Text style={styles.txttx}>
             Escribe tu frase de respaldo en un lugar seguro
           </Text>
         </View>
@@ -87,20 +92,19 @@ const Crearcuenta = ({ navigation, route }: { navigation: any; route: any }) => 
           enableMomentum={true}
         />
         <View style={styles.txtpag}>
-          <Text style={[styles.counter,{color:colors.text}]}>{numero} de 12</Text>
+          <Text style={styles.counter}>{numero} de 12</Text>
         </View>
         {numero == 12 && (
           <View style={styles.cajabtn}>
             <TouchableOpacity
-              style={[styles.btnDone,{ backgroundColor:colors.text}]}
+              style={styles.btnDone}
               activeOpacity={0.5}
               onPress={() => navigation.navigate("DocePalabras")}
             >
-              <Text style={[styles.txtDone,{color:colors.background}]}>Continuar</Text>
+              <Text style={styles.txtDone}>Continuar</Text>
             </TouchableOpacity>
           </View>
         )}
-      
       </View>
     </SafeAreaView>
   );

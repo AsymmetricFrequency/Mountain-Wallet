@@ -7,15 +7,20 @@ import {
   Image,
   Modal,
   Dimensions,
+  Alert,
+  ToastAndroid,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import LottieView from "lottie-react-native";
+import { styles } from "../theme/appTheme";
 import { readPassword } from "../../api";
 import { ConfirContra } from "./ConfirContra";
+
+const altura = Platform.OS === "ios" ? 22 : 25;
 
 // import { useCalculadora } from '../hooks/useCalculadora';
 
@@ -23,7 +28,7 @@ const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
 
 //backgroud contraseña
-const colours = ["white", "#440577"];
+const colours = ["#FBF7FF", "#440577"];
 const getColour = () => colours[Math.floor(Math.random() * colours.length)];
 
 export const Contraseña = ({ navigation }: { navigation: any }) => {
@@ -31,10 +36,10 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
 
   //Estado background
 
-  const [colour, setColourUno] = useState("white");
-  const [colourDos, setColourDos] = useState("white");
-  const [colourTres, setColourTres] = useState("white");
-  const [colourCuatro, setColourCuatro] = useState("white");
+  const [colour, setColourUno] = useState("#FBF7FF");
+  const [colourDos, setColourDos] = useState("#FBF7FF");
+  const [colourTres, setColourTres] = useState("#FBF7FF");
+  const [colourCuatro, setColourCuatro] = useState("#FBF7FF");
   const handleClickUno = () => {
     setColourUno(getColour());
   };
@@ -53,14 +58,14 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
   const [vacioModal, setVacioModal] = useState(false);
 
   function validadorPassword() {
-    setColourCuatro("white");
-    setColourTres("white");
-    setColourDos("white");
-    setColourUno("white");
-    setPin1("")
-    setPin2("")
-    setPin3("")
-    setPin4("")
+    setColourCuatro("#FBF7FF");
+    setColourTres("#FBF7FF");
+    setColourDos("#FBF7FF");
+    setColourUno("#FBF7FF");
+    setPin1("");
+    setPin2("");
+    setPin3("");
+    setPin4("");
   }
 
   function genPassword() {
@@ -69,12 +74,11 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
     console.log(antipass);
     if (antipass.length === 4) {
       navigation.navigate("ConfirContra", { prePassword: antipass });
+    } else {
+      validadorPassword();
+      ToastAndroid.show("Por favor digite 4 numeros", ToastAndroid.SHORT);
     }
-    else{
-      validadorPassword()
-      alert("Porfavor digite 4 numeros") 
-        }
-  }   
+  }
 
   const [pin1, setPin1] = useState("");
   const [pin2, setPin2] = useState("");
@@ -100,16 +104,16 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
   function borrar() {
     if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 != "") {
       setPin4("");
-      setColourCuatro("white");
+      setColourCuatro("#FBF7FF");
     } else if (pin1 != "" && pin2 != "" && pin3 != "" && pin4 == "") {
       setPin3("");
-      setColourTres("white");
+      setColourTres("#FBF7FF");
     } else if (pin1 != "" && pin2 != "" && pin3 == "" && pin4 == "") {
       setPin2("");
-      setColourDos("white");
+      setColourDos("#FBF7FF");
     } else if (pin1 != "" && pin2 == "" && pin3 == "" && pin4 == "") {
       setPin1("");
-      setColourUno("white");
+      setColourUno("#FBF7FF");
     } else if (pin1 == "" && pin2 == "" && pin3 == "" && pin4 == "") {
       console.log("====================================");
       console.log("No hay nada que borrar");
@@ -118,49 +122,51 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
-        <Modal
-          visible={vacioModal}
-          transparent
-          onRequestClose={() => setVacioModal(false)}
-          hardwareAccelerated
-        >
-          <Animatable.View animation={anmt} duration={600}>
-            <View style={styles.bodymodal}>
-              <View style={styles.ventanamodal}>
-                <View style={styles.icontext}>
-                  <View style={styles.contenedorlottie}>
-                    <LottieView
-                      style={styles.lottie}
-                      source={require("./Lottie/error.json")}
-                      autoPlay
-                    />
-                  </View>
+    // <View style={styles.container}>
+    <SafeAreaView style={styles.body}>
+      <Modal
+        visible={vacioModal}
+        transparent
+        onRequestClose={() => setVacioModal(false)}
+        hardwareAccelerated
+      >
+        <Animatable.View animation={anmt} duration={600}>
+          <View style={styles.bodymodal}>
+            <View style={styles.ventanamodal}>
+              <View style={styles.icontext}>
+                <View style={styles.contenedorlottie}>
+                  <LottieView
+                    style={styles.lottie}
+                    source={require("./Lottie/error.json")}
+                    autoPlay
+                  />
                 </View>
-                <View style={styles.textnoti}>
-                  <View style={styles.contenedortext}>
-                    <Text style={styles.texticon}>Error</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.notificacion}>
-                      Contraseña incorrecta
-                    </Text>
-                  </View>
+              </View>
+              <View style={styles.textnoti}>
+                <View style={styles.contenedortext}>
+                  <Text style={styles.texticon}>Error</Text>
+                </View>
+                <View>
+                  <Text style={styles.notificacion}>Contraseña incorrecta</Text>
                 </View>
               </View>
             </View>
-          </Animatable.View>
-        </Modal>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="arrow-back-outline" size={40} color={"#440577"} />
+          </View>
+        </Animatable.View>
+      </Modal>
+      <View style={styles.completo}>
+        <View style={styles.cajaatras}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.btndo}
+            onPress={() => navigation.goBack()}
+          >
+            <Icon name="arrow-left" size={altura} color="#440577" />
           </TouchableOpacity>
         </View>
-        <View style={styles.headerDos}>
-          <View>
-            <Text style={styles.headerTitle}>Ingrese una contraseña</Text>
-          </View>
+
+        <View style={styles.titlecc}>
+          <Text style={styles.titletx}>Ingrese contraseña</Text>
         </View>
         <View style={styles.contenedorIcon}>
           <Image style={styles.icon} source={require("./img/password.png")} />
@@ -170,30 +176,30 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
           {/* PRUEBA BOTON BACKGROUND */}
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colour }]}
-            onPress={handleClickUno}
+            //onPress={handleClickUno}
             disabled={true}
           />
 
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colourDos }]}
-            onPress={handleClickDos}
+            //onPress={handleClickDos}
             disabled={true}
           />
 
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colourTres }]}
-            onPress={handleClickTres}
+            //onPress={handleClickTres}
             disabled={true}
           />
 
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colourCuatro }]}
-            onPress={handleClickCuatro}
+            //onPress={handleClickCuatro}
             disabled={true}
           />
         </View>
         {/* fila uno */}
-        <View style={styles.numpadUno}>
+        <View style={styles.padUno}>
           <TouchableOpacity onPress={() => funcion("1")}>
             <Text style={styles.number}>1</Text>
           </TouchableOpacity>
@@ -205,7 +211,7 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
         </View>
         {/* fila dos */}
-        <View style={styles.numpadDos}>
+        <View style={styles.padDos}>
           <TouchableOpacity onPress={() => funcion("4")}>
             <Text style={styles.number}>4</Text>
           </TouchableOpacity>
@@ -217,7 +223,7 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
         </View>
         {/* fila tres */}
-        <View style={styles.numpadTres}>
+        <View style={styles.padTres}>
           <TouchableOpacity onPress={() => funcion("7")}>
             <Text style={styles.number}>7</Text>
           </TouchableOpacity>
@@ -229,208 +235,30 @@ export const Contraseña = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
         </View>
         {/* fila cero */}
-        <View style={styles.numpadTres}>
+        <View style={styles.padCero}>
           <TouchableOpacity onPress={() => funcion("0")}>
             <Text style={styles.numberCero}>0</Text>
           </TouchableOpacity>
         </View>
         {/* fila boton borrar */}
         <View style={styles.borrar}>
-          <TouchableOpacity onPress={() => borrar()}>
-            <Icon name="backspace-outline" style={styles.btnBorrar} />
+          <TouchableOpacity onPress={() => borrar()} style={styles.tcBorrar}>
+            <Icon name="backspace" size={25} style={{ color: "#440577" }} />
           </TouchableOpacity>
         </View>
         <View style={styles.contBtn}>
           <TouchableOpacity
-            style={styles.btnCont}
+            style={styles.btnDone}
             onPress={() => genPassword()}
           >
-            <Text style={styles.textbtnR}>CONTINUAR</Text>
+            <Text style={styles.txtDone}>CONTINUAR</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    </View>
+      </View>
+    </SafeAreaView>
+    // </View>
   );
 };
 
 const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 const cuadroios = Platform.OS === "ios" ? 55 : 45;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: 10,
-    paddingLeft: 10,
-  },
-  headerDos: {
-    flexDirection: "row",
-    justifyContent: "center",
-    padding: 20,
-    bottom: 20,
-  },
-  headerTitle: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#440577",
-  },
-  contenedorIcon: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  icon: {
-    bottom: RFValue(15),
-    height: 150,
-    width: 150,
-  },
-  headerCirculos: {
-    flexDirection: "row",
-    justifyContent: "center",
-    margin: 10,
-    height: RFValue(-40),
-  },
-
-  numpadUno: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 20,
-    marginHorizontal: 80,
-  },
-  numpadDos: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 20,
-    marginHorizontal: 80,
-  },
-  numpadTres: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginVertical: 20,
-    marginHorizontal: 80,
-  },
-  numberPad: {
-    alignSelf: "center",
-  },
-  number: {
-    color: "#4D4D4D",
-    fontWeight: "bold",
-    flexDirection: "row",
-    fontSize: 24,
-    marginHorizontal: 45,
-  },
-  numberCero: {
-    alignItems: "center",
-    color: "#4D4D4D",
-    fontWeight: "bold",
-    flexDirection: "row",
-    fontSize: 24,
-  },
-  iconConfig: {
-    flexDirection: "row",
-  },
-  borrar: {
-    alignItems: "center",
-    fontWeight: "bold",
-    flexDirection: "row",
-    width: 65,
-    height: 60,
-    marginHorizontal: 285,
-    marginVertical: -68,
-    marginBottom: RFValue(-15),
-  },
-  btnBorrar: {
-    fontSize: 30,
-  },
-  contBtn: {
-    flexDirection: "row",
-    justifyContent: "center",
-    height: RFValue(50),
-    marginHorizontal: RFValue(57),
-    top: RFValue(15),
-    margin: RFValue(20),
-    width: RFValue(240),
-  },
-  btnCont: {
-    alignItems: "center",
-    backgroundColor: "#440577",
-    borderRadius: 20,
-    height: RFValue(50),
-    justifyContent: "center",
-    width: RFValue(240),
-  },
-  textbtnR: {
-    color: "white",
-    fontSize: RFValue(20),
-    fontWeight: "bold",
-  },
-  labeldos: {
-    fontSize: RFValue(15),
-    fontWeight: "bold",
-    margin: 8,
-    justifyContent: "center",
-  },
-
-  //Estilo circulos contraseña
-  circUno: {
-    borderColor: "#440577",
-    borderRadius: 100,
-    borderWidth: 1,
-    fontSize: RFValue(15),
-    height: RFValue(cuadroios),
-    justifyContent: "center",
-    marginHorizontal: 10,
-    //margin: RFValue(5),
-    marginTop: RFValue(12),
-    textAlign: "center",
-    width: RFValue(cuadroios),
-  },
-
-  //Modal
-  bodymodal: {
-    flex: 1,
-    alignItems: "center",
-  },
-  ventanamodal: {
-    alignItems: "center",
-    backgroundColor: "#5B298A",
-    borderWidth: 0.5,
-    borderColor: "black",
-    borderRadius: 20,
-    flexDirection: "row",
-    height: windowHeight * 0.1,
-    paddingLeft: RFValue(12),
-    paddingRight: RFValue(12),
-    top: alturaios,
-    width: windowWidth * 0.95,
-  },
-  icontext: {
-    alignItems: "center",
-  },
-  textnoti: {
-    //--- No borrar ---//
-  },
-  contenedorlottie: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  lottie: {
-    height: 60,
-    width: 60,
-  },
-  contenedortext: {
-    justifyContent: "center",
-  },
-  texticon: {
-    color: "white",
-    fontSize: RFValue(18),
-    fontWeight: "bold",
-  },
-  notificacion: {
-    color: "white",
-    fontSize: RFValue(12),
-  },
-});
