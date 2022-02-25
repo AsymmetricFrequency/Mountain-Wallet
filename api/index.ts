@@ -90,6 +90,25 @@ async function readPassword(){
        // saving error  
   }
 }
+//Funcion guardar nombre de usuario
+async function saveUser(data){
+  try {
+  console.log(await AsyncStorage.setItem('@storage_User', data)) 
+  } catch (e) { 
+  // saving error 
+  }
+  }
+  
+  //Funcion leer nombre de usuario
+  async function readUser(){
+  try {
+  const user = await AsyncStorage.getItem('@storage_User')
+  return user 
+  } catch (e) { 
+  // saving error 
+  }
+  }
+
 
 ////////////////////////////////////////////////////////////
 //  Funciones de Solana-web3 para la creacion de cuentas  //
@@ -233,5 +252,7 @@ export {
   fetchSecret,
   sendSoles,
   sendSPL,
-  sendSPLStable
+  sendSPLStable,
+  saveUser,
+  readUser
 }
