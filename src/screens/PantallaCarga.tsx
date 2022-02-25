@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { View, Appearance, SafeAreaView, StatusBar } from "react-native";
-import { readMnemonic, createAccount, fetchSecret } from "../../api";
+import { readMnemonic, createAccount, fetchSecret, saveUser } from "../../api";
 import { useTheme } from "react-native-paper";
 import { styles } from "../theme/appTheme";
 import { Lotiecarga, LotiecargaDark } from "./component/lottie";
 
-const PantallaCarga = ({ navigation }: { navigation: any }) => {
+const PantallaCarga = ({ navigation, route }: { navigation: any; route: any })  => {
+
   //Detecta el modo del sistema
   const [theme, setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme) => {
@@ -35,12 +36,11 @@ const PantallaCarga = ({ navigation }: { navigation: any }) => {
     });
   }
 
-  
-
   setTimeout(() => {
     crearCuenta(palabras);
   }, 2000);
 
+  
   return (
     <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
       <StatusBar

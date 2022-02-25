@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTheme } from 'react-native-paper';
 
-import { readPublicKey, readKey } from '../../api';
+import { readPublicKey, readKey,readUser } from '../../api';
 
 
 
@@ -15,7 +15,19 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
 
   const [publicKey, setPublicKey] = useState("")
   const [secretKey, setSecretKey] = useState("")
+ 
+  //Variable obtenida de pantalla Edituser 
+  var userNew = route.params?.nuevoUsuario
+  console.log(userNew);
 
+  //funcion leer nombre de usuario
+  const [usuario, setUsuario] = useState("");
+      readUser().then((val) => {
+      setUsuario(val);
+   });
+
+
+  
   async function setearLlaves() {
     const llavePublica = readPublicKey()
     const llavePrivada = readKey()
@@ -65,7 +77,7 @@ const Ajustes = ({ navigation, route }: { navigation: any, route: any }) => {
               </View>
             </View>
             <View style={styles.txtuaj}>
-              <Text style={[styles.contaj,{color:colors.text}]}>Usuario condor</Text>
+              <Text style={[styles.contaj,{color:colors.text}]}>{userNew !== "" &&(usuario)}{userNew =="" && (userNew)}</Text>
               <Text style={[styles.contuaj,{color:colors.text}]}>{concatenado}</Text>
             </View>
             <TouchableOpacity style={styles.editaj} activeOpacity={0.5} onPress={() => navigation.navigate("Editar")}>

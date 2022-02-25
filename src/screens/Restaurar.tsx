@@ -13,13 +13,13 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { styles } from "../theme/appTheme";
 import { TextInput } from "react-native-gesture-handler";
-import { saveMmemonic } from "../../api";
+import { saveMmemonic,saveUser } from "../../api";
 import { useTheme } from "react-native-paper";
 
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 //
-const Restaurar = ({ navigation }: { navigation: any }) => {
+const Restaurar = ({ navigation, route }: { navigation: any; route: any })  => {
   //Detecta el modo del sistema
   const [theme, setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme) => {
@@ -40,16 +40,18 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
       };
     });
   }
-
-
+  const [userRestaurar,setUserRestaurar] = useState ("") 
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
 
   function continuar() {
+
     if (values.mnemonic != "") {
       saveMmemonic(values.mnemonic);
-      navigation.navigate("Contraseña");
-    } else {
+      navigation.navigate("Contraseña",{pipo:userRestaurar});
+    }
+ 
+    else {
       setVacioModal(true);
       setanmt("fadeInDownBig");
       setTimeout(() => {
@@ -120,6 +122,7 @@ const Restaurar = ({ navigation }: { navigation: any }) => {
             style={styles.txtNombreBll}
             placeholder={"Nombre de la billetera"}
             placeholderTextColor="#AEA3C6"
+            onChangeText={text => setUserRestaurar(text)}
           ></TextInput>
         </View>
         <View style={styles.escudo}>
