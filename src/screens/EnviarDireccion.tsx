@@ -37,24 +37,21 @@ const EnviarDireccion = ({
   const mint = route.params?.mint
 
   async function enviarSoles() {
-    const transaccion = sendSoles(mnemonic, toPublic, Number(pinN))
-    transaccion.then((value) => {
-      console.log(value)
-    })
+    const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN))
+    const respuesta = await transaccion 
+    navigation.navigate('TranExitosa', {resp: respuesta}) 
   }
 
   async function enviarSPL() {
-    const transaccion = sendSPL(mnemonic, toPublic, Number(pinN),mint)
-    transaccion.then((value) => {
-      console.log(value)
-    })
+    const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN),mint)
+    const respuesta = await transaccion 
+    navigation.navigate('TranExitosa', {resp: respuesta}) 
   }
 
   async function enviarSPLStable() {
-    const transaccion = sendSPLStable(mnemonic, toPublic, Number(pinN),mint)
-    transaccion.then((value) => {
-      console.log(value)
-    })
+    const transaccion = await sendSPLStable(mnemonic, toPublic, Number(pinN),mint)
+   const respuesta = await transaccion 
+   navigation.navigate('TranExitosa', {resp: respuesta}) 
   }
 
   const imag = () => {
@@ -153,7 +150,7 @@ const EnviarDireccion = ({
         <View style={styles.btnEnviar}>
           <TouchableOpacity 
             style={styles.btnCont}
-            onPress={() => [enviarSoles(), navigation.navigate('Balance')]}
+            onPress={() => [enviarSoles()]}
           >
             <Text style={styles.txtEnviar}>Enviar</Text>
           </TouchableOpacity>
@@ -163,7 +160,7 @@ const EnviarDireccion = ({
           <View style={styles.btnEnviar}>
           <TouchableOpacity 
             style={styles.btnCont}
-            onPress={() => [enviarSPL(), navigation.navigate('Balance')]}
+            onPress={() => [enviarSPL()]}
           >
             <Text style={styles.txtEnviar}>Enviar</Text>
           </TouchableOpacity>
@@ -173,7 +170,7 @@ const EnviarDireccion = ({
           <View style={styles.btnEnviar}>
           <TouchableOpacity 
             style={styles.btnCont}
-            onPress={() => [enviarSPLStable(), navigation.navigate('Balance')]}
+            onPress={() => [enviarSPLStable()]}
           >
             <Text style={styles.txtEnviar}>Enviar</Text>
           </TouchableOpacity>
