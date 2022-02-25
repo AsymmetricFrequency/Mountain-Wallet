@@ -35,6 +35,9 @@ import {
     Appearance.addChangeListener((scheme) => {
       setTheme(scheme.colorScheme);
     });
+
+    const respuesta = route.params?.resp
+
     const { colors } = useTheme();
     const [copiedText, setCopiedText] = useState("");
     const [animacion, setAnimacion] = useState(false);
@@ -141,7 +144,7 @@ import {
                               </View>
                               <View style={styles.cuadroid}>
                                   <Text numberOfLines={4} style={styles.txtqid}>
-                                      8XkS7ZDPR9zXcNcYR884tBScnQRyFcWRb7WcLtCR6zEZnQRyFc
+                                     {respuesta}
                                   </Text>
                               </View>
                           </View>
