@@ -26,42 +26,41 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any })  => {
     setTheme(scheme.colorScheme);
   });
   const { colors } = useTheme();
-
-  const [values, setValues] = useState({
-    mnemonic: "",
-  });
-
-  //Esta funcion actualiza y toma lo que esta en la caja de texto
-  function handleChange(text, eventName) {
-    setValues((prev) => {
-      return {
-        ...prev,
-        [eventName]: text,
-      };
-    });
+  
+  const [values, setValues] = useState("");
+  const elements: string[] = [];
+  const words = values.split(" ")
+  for (let index = 0; index < 12; index++) {
+    elements.push(words[index]);
   }
+   
+
   const [userRestaurar,setUserRestaurar] = useState ("") 
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
 
   function continuar() {
 
-    if (values.mnemonic != "") {
-      saveMmemonic(values.mnemonic);
-      navigation.navigate("Contraseña",{pipo:userRestaurar});
+    if (values == "") {
+      alert("Porfavor escriba su frase secreta")
+    } 
+      else if (words.length != 12){
+         alert("Solo se permite 12 palabras")
+      } 
+      else if (userRestaurar == "") {
+        alert("Porfavor escriba nombre de billetera")
+        
+      }else if (userRestaurar.length > 10 ) {
+        alert("Permitido solo 10 caracteres")
+        
+      } else {
+        saveMmemonic(values);
+        navigation.navigate("Contraseña",{pipo:userRestaurar})
+      }
+      
+       
     }
- 
-    else {
-      setVacioModal(true);
-      setanmt("fadeInDownBig");
-      setTimeout(() => {
-        setanmt("fadeOutUp");
-        setTimeout(() => {
-          setVacioModal(false);
-        }, 100);
-      }, 2000);
-    }
-  }
+    console.log(words);
   const [copiedText, setCopiedText] = useState("");
 
   const fetchCopiedText = async () => {
@@ -100,7 +99,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any })  => {
               autoCapitalize="none"
               placeholder={"Por favor ingresa tu frase de respaldo."}
               placeholderTextColor="#AEA3C6"
-              onChangeText={(text) => handleChange(text, "mnemonic")}
+              onChangeText={(text) => setValues(text)}
             >
               {copiedText}
             </TextInput>
