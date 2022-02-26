@@ -287,8 +287,8 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
               source={{
                 uri:
                   theme === "light"
-                    ? `https://condorcoinco.github.io/charts/${msg}.html`
-                    : `https://condorcoinco.github.io/charts/${msg}Dark.html`,
+                    ? `https://vortexlab-cali.github.io/charts/${msg}.html`
+                    : `https://vortexlab-cali.github.io/charts/${msg}Dark.html`
               }}
               style={{ flex: 1 }}
             />
