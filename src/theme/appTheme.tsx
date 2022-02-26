@@ -658,6 +658,10 @@ export const styles = StyleSheet.create({
   },
   txtAjustable: {
     marginTop: cantidadios,
+    width: RFValue(141.9),
+    alignItems: "center",
+    height: RFValue(41.7),
+    justifyContent: "center",
   },
   cantidadRecibe: {
     color: "#440577",
@@ -790,6 +794,10 @@ export const styles = StyleSheet.create({
   },
   txtAjustables: {
     marginTop: cntdadios,
+    width: RFValue(141.9),
+    alignItems: "center",
+    height: RFValue(41.7),
+    justifyContent: "center",
   },
   txtAjust: {
     marginTop: -8,

@@ -1,10 +1,16 @@
-import { Image, Platform, StatusBar, Text, View } from "react-native";
+import {
+  Image,
+  Platform,
+  StatusBar,
+  Text,
+  View,
+  ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../theme/appTheme";
-
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -20,9 +26,8 @@ const EnviarCantidad = ({
   const { abrev } = route.params;
   const { msg, mon } = route.params;
   const { pmsg } = route.params;
-  const mnemonic = route.params?.memo
-  const mint = route.params?.mint
-  
+  const mnemonic = route.params?.memo;
+  const mint = route.params?.mint;
 
   const [pinNumerico, setPinnumerico] = useState("");
   const numbers = pinNumerico;
@@ -64,6 +69,16 @@ const EnviarCantidad = ({
   }
   console.log(pinNumerico);
 
+  const tt = numbers;
+  const variables = {
+    maximumFractionDigits: 10,
+    minimumFractionDigits: 0,
+    minimumIntegerDigits: 1,
+    maximumIntegerDigits: 10,
+  };
+
+  const nf = new Intl.NumberFormat("es", variables).format(tt);
+
   return (
     <SafeAreaView style={styles.body}>
       <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
@@ -88,22 +103,20 @@ const EnviarCantidad = ({
             <Text style={styles.cndr}>{mon}</Text>
             <Text style={styles.valor}>$ 0.00</Text>
           </View>
-          {/* <AutoSizeText
-            numberOfLines={1}
-            mode={ResizeTextMode.group}
-            style={styles.txtAjustable}
-          > */}
           <View style={styles.txtAjustable}>
-            <TextInput
-              style={styles.cantidadRecibe}
-              editable={false}
-              placeholder="0"
-            >
-              {pinNumerico}
-            </TextInput>
+            <ScrollView horizontal={true}>
+              <Text
+                style={styles.cantidadRecibe}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                minimumFontScale={0.5}
+                adjustsFontSizeToFit={true}
+                allowFontScaling
+              >
+                {nf}
+              </Text>
+            </ScrollView>
           </View>
-
-          {/* </AutoSizeText> */}
         </View>
         <View style={styles.tecladoIngresar}>
           <View style={{ width: "55%" }}>
@@ -165,7 +178,7 @@ const EnviarCantidad = ({
               <TouchableOpacity
                 onPress={() => setPinnumerico(`${pinNumerico}.`)}
               >
-                <Text style={styles.punto}>.</Text>
+                <Text style={styles.punto}>,</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setPinnumerico(`${pinNumerico}0`)}
@@ -186,11 +199,11 @@ const EnviarCantidad = ({
               style={styles.ingresar}
               onPress={() =>
                 navigation.navigate("EnviarDireccion", {
-                  pinN: pinNumerico,
+                  pinN: nf,
                   titleMoneda: pmsg,
                   abrev: mon,
                   memo: mnemonic,
-                  mint: mint
+                  mint: mint,
                 })
               }
             >
