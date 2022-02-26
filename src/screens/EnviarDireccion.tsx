@@ -6,13 +6,13 @@ import {
   TextInput,
   View,
   Clipboard,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { styles } from "../theme/appTheme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 
 import { sendSoles } from "../../api";
 import { sendSPL } from "../../api";
@@ -33,25 +33,30 @@ const EnviarDireccion = ({
   const { pinN } = route.params;
   const { abrev } = route.params;
   const { titleMoneda } = route.params;
-  const mnemonic = route.params?.memo
-  const mint = route.params?.mint
+  const mnemonic = route.params?.memo;
+  const mint = route.params?.mint;
 
   async function enviarSoles() {
-    const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN))
-    const respuesta = await transaccion 
-    navigation.navigate('TranExitosa', {resp: respuesta}) 
+    const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN));
+    const respuesta = await transaccion;
+    navigation.navigate("TranExitosa", { resp: respuesta });
   }
 
   async function enviarSPL() {
-    const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN),mint)
-    const respuesta = await transaccion 
-    navigation.navigate('TranExitosa', {resp: respuesta}) 
+    const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN), mint);
+    const respuesta = await transaccion;
+    navigation.navigate("TranExitosa", { resp: respuesta });
   }
 
   async function enviarSPLStable() {
-    const transaccion = await sendSPLStable(mnemonic, toPublic, Number(pinN),mint)
-   const respuesta = await transaccion 
-   navigation.navigate('TranExitosa', {resp: respuesta}) 
+    const transaccion = await sendSPLStable(
+      mnemonic,
+      toPublic,
+      Number(pinN),
+      mint
+    );
+    const respuesta = await transaccion;
+    navigation.navigate("TranExitosa", { resp: respuesta });
   }
 
   const imag = () => {
@@ -104,21 +109,19 @@ const EnviarDireccion = ({
 
         <View style={styles.textInput}>
           <Text style={styles.icnt}>Cantidad</Text>
-          {/* <AutoSizeText
-            numberOfLines={1}
-            mode={ResizeTextMode.group}
-            style={styles.txtAjust}
-          >
-            <Text style={styles.cntdRecibe}>{pinN}</Text>
-          </AutoSizeText> */}
           <View style={styles.txtAjustables}>
-            <TextInput
-              style={styles.cantidadRecibe}
-              editable={false}
-              placeholder="0"
-            >
-              {pinN}
-            </TextInput>
+            <ScrollView horizontal={true}>
+              <Text
+                style={styles.cantidadRecibe}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                minimumFontScale={0.5}
+                adjustsFontSizeToFit={true}
+                allowFontScaling
+              >
+                {pinN}
+              </Text>
+            </ScrollView>
           </View>
         </View>
         <View style={styles.contCndr}>
@@ -127,7 +130,11 @@ const EnviarDireccion = ({
         </View>
         <View style={styles.pegarDireccion}>
           <View style={{ width: "55%" }}>
-            <TextInput style={styles.pegaDir} onChangeText={val => setToPublic(val)} placeholder="Pegar dirección">
+            <TextInput
+              style={styles.pegaDir}
+              onChangeText={(val) => setToPublic(val)}
+              placeholder="Pegar dirección"
+            >
               {copiedText}
             </TextInput>
           </View>
@@ -147,34 +154,34 @@ const EnviarDireccion = ({
           </View>
         </View>
         {titleMoneda == "Solana" && (
-        <View style={styles.btnEnviar}>
-          <TouchableOpacity 
-            style={styles.btnCont}
-            onPress={() => [enviarSoles()]}
-          >
-            <Text style={styles.txtEnviar}>Enviar</Text>
-          </TouchableOpacity>
-        </View>
-        )}
-        {titleMoneda == "Condorcoin" &&(
           <View style={styles.btnEnviar}>
-          <TouchableOpacity 
-            style={styles.btnCont}
-            onPress={() => [enviarSPL()]}
-          >
-            <Text style={styles.txtEnviar}>Enviar</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.btnCont}
+              onPress={() => [enviarSoles()]}
+            >
+              <Text style={styles.txtEnviar}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
         )}
-        {titleMoneda == "Tether" &&(
+        {titleMoneda == "Condorcoin" && (
           <View style={styles.btnEnviar}>
-          <TouchableOpacity 
-            style={styles.btnCont}
-            onPress={() => [enviarSPLStable()]}
-          >
-            <Text style={styles.txtEnviar}>Enviar</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.btnCont}
+              onPress={() => [enviarSPL()]}
+            >
+              <Text style={styles.txtEnviar}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {titleMoneda == "Tether" && (
+          <View style={styles.btnEnviar}>
+            <TouchableOpacity
+              style={styles.btnCont}
+              onPress={() => [enviarSPLStable()]}
+            >
+              <Text style={styles.txtEnviar}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     </KeyboardAwareScrollView>
