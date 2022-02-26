@@ -11,6 +11,8 @@ import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../theme/appTheme";
+import "intl";
+import "intl/locale-data/jsonp/es-CO";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
