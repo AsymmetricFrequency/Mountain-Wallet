@@ -444,6 +444,7 @@ export const styles = StyleSheet.create({
   txtCurrentPrice: {
     fontSize: 15,
     fontWeight: "bold",
+    color:'#440577'
   },
   txtBalanceCripto: {
     fontSize: 35,
@@ -506,11 +507,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   graf: {
-    alignItems: "center",
-    justifyContent: "center",
-    //right: 10,
-    height: RFValue(208.7),
-    width: RFValue(208.7),
+    height: 430,
   },
   grafcondor: {
     alignItems: "center",
