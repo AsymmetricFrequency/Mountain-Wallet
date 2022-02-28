@@ -102,10 +102,6 @@ const Balance = ({ navigation }: { navigation: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
-      {/* <StatusBar 
-        backgroundColor= {colors.background}
-        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
-      /> */}
       <View style={styles.completo}>
         <Image
           style={styles.logocolorB}

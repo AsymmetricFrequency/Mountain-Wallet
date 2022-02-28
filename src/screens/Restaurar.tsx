@@ -13,54 +13,45 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { styles } from "../theme/appTheme";
 import { TextInput } from "react-native-gesture-handler";
-import { saveMmemonic,saveUser } from "../../api";
+import { saveMmemonic, saveUser } from "../../api";
 import { useTheme } from "react-native-paper";
-
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 //
-const Restaurar = ({ navigation, route }: { navigation: any; route: any })  => {
+const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
   //Detecta el modo del sistema
   const [theme, setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme) => {
     setTheme(scheme.colorScheme);
   });
   const { colors } = useTheme();
-  
+
   const [values, setValues] = useState("");
   const elements: string[] = [];
-  const words = values.split(" ")
+  const words = values.split(" ");
   for (let index = 0; index < 12; index++) {
     elements.push(words[index]);
   }
-   
 
-  const [userRestaurar,setUserRestaurar] = useState ("") 
+  const [userRestaurar, setUserRestaurar] = useState("");
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
 
   function continuar() {
-
     if (values == "") {
-      alert("Porfavor escriba su frase secreta")
-    } 
-      else if (words.length != 12){
-         alert("Solo se permite 12 palabras")
-      } 
-      else if (userRestaurar == "") {
-        alert("Porfavor escriba nombre de billetera")
-        
-      }else if (userRestaurar.length > 10 ) {
-        alert("Permitido solo 10 caracteres")
-        
-      } else {
-        saveMmemonic(values);
-        navigation.navigate("Contraseña",{pipo:userRestaurar})
-      }
-      
-       
+      alert("Porfavor escriba su frase secreta");
+    } else if (words.length != 12) {
+      alert("Solo se permite 12 palabras");
+    } else if (userRestaurar == "") {
+      alert("Porfavor escriba nombre de billetera");
+    } else if (userRestaurar.length > 10) {
+      alert("Permitido solo 10 caracteres");
+    } else {
+      saveMmemonic(values);
+      navigation.navigate("Contraseña", { pipo: userRestaurar });
     }
-    console.log(words);
+  }
+  console.log(words);
   const [copiedText, setCopiedText] = useState("");
 
   const fetchCopiedText = async () => {
@@ -71,16 +62,9 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any })  => {
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={[
-        styles.body,
-        { backgroundColor: colors.background },
-      ]}
+      contentContainerStyle={[styles.body]}
       scrollEnabled={false}
     >
-      <StatusBar
-        backgroundColor={colors.background}
-        barStyle={theme === "dark" ? "light-content" : "dark-content"}
-      />
       <View style={styles.completo}>
         <View style={styles.cajaatras}>
           <TouchableOpacity
@@ -121,7 +105,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any })  => {
             style={styles.txtNombreBll}
             placeholder={"Nombre de la billetera"}
             placeholderTextColor="#AEA3C6"
-            onChangeText={text => setUserRestaurar(text)}
+            onChangeText={(text) => setUserRestaurar(text)}
           ></TextInput>
         </View>
         <View style={styles.escudo}>
@@ -132,13 +116,11 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any })  => {
         </View>
         <View style={styles.cajabtnRest}>
           <TouchableOpacity
-            style={[styles.btnDone, { backgroundColor: colors.text }]}
+            style={styles.btnDone}
             activeOpacity={0.5}
             onPress={() => continuar()}
           >
-            <Text style={[styles.txtDone, { color: colors.background }]}>
-              Continuar
-            </Text>
+            <Text style={styles.txtDone}>Continuar</Text>
           </TouchableOpacity>
         </View>
       </View>

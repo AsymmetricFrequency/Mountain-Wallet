@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Platform,
   Modal,
-  RefreshControl
+  RefreshControl,
 } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import * as Animatable from "react-native-animatable";
@@ -45,17 +45,15 @@ function leerMnemonic() {
 }
 
 const DocePalabras = ({ navigation }: { navigation: any }) => {
-  
   const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
     setRefreshing(true);
-    
-    if (elements.length === 0){
+
+    if (elements.length === 0) {
       leerMnemonic();
-      
-    }else{
-      console.log('lleno');
+    } else {
+      console.log("lleno");
     }
     setTimeout(() => {
       setRefreshing(false);
@@ -202,7 +200,11 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
               );
             } else {
               return (
-                <TextInput key={index} style={styles.fondoFrases} editable={false}>
+                <TextInput
+                  key={index}
+                  style={styles.fondoFrases}
+                  editable={false}
+                >
                   <Text style={styles.txtDoceIncompleta}>
                     {doceIncompleta[index]}
                   </Text>
@@ -223,8 +225,5 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
     </KeyboardAwareScrollView>
   );
 };
-
-const cuadroios = Platform.OS === "ios" ? 55 : 45;
-const alturaios = Platform.OS === "ios" ? "11%" : "2%";
 
 export default DocePalabras;

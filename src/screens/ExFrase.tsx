@@ -49,25 +49,22 @@ function leerMnemonic() {
 }
 
 const ExFrase = ({ navigation }: { navigation: any }) => {
-
-
   const [refreshing, setRefreshing] = React.useState(false);
   const [animacion, setAnimacion] = useState(false);
 
   useEffect(() => {
     setRefreshing(true);
-    if (elements.length === 0){
+    if (elements.length === 0) {
       leerMnemonic();
-    }else{
-      console.log('lleno');
-      
+    } else {
+      console.log("lleno");
     }
     setTimeout(() => {
       setRefreshing(false);
     }, 5);
   }, []);
 
-  const frase = `${elements[0]} ${elements[1]} ${elements[2]} ${elements[3]} ${elements[4]} ${elements[5]} ${elements[6]} ${elements[7]} ${elements[8]} ${elements[9]} ${elements[10]} ${elements[11]}`
+  const frase = `${elements[0]} ${elements[1]} ${elements[2]} ${elements[3]} ${elements[4]} ${elements[5]} ${elements[6]} ${elements[7]} ${elements[8]} ${elements[9]} ${elements[10]} ${elements[11]}`;
 
   const CopyToClipboard = async () => {
     Clipboard.setString(frase);
@@ -105,10 +102,6 @@ const ExFrase = ({ navigation }: { navigation: any }) => {
 
   return (
     <KeyboardAwareScrollView style={styles.body}>
-      {/* <StatusBar
-          backgroundColor={colors.background}
-          barStyle={theme === "dark" ? "light-content" : "dark-content"}
-        /> */}
       <ScrollView
         style={{ backgroundColor: "red" }}
         refreshControl={

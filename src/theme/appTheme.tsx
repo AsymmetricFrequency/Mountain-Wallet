@@ -448,6 +448,7 @@ export const styles = StyleSheet.create({
   txtBalanceCripto: {
     fontSize: 35,
     fontWeight: "bold",
+    color: "#440577",
   },
   txtPorcentajeNegativo: {
     color: "#CF0808",
@@ -479,10 +480,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     justifyContent: "center",
+    backgroundColor: "#440577",
   },
   textbtnR: {
     fontSize: RFValue(21.25),
     fontWeight: "400",
+    color: "#FFFFFF",
   },
   cajasf: {
     fontWeight: "bold",
@@ -493,6 +496,7 @@ export const styles = StyleSheet.create({
   },
   saldofull: {
     fontSize: RFValue(20),
+    color: "#440577",
   },
   sombras: {
     elevation: 2,
@@ -896,6 +900,7 @@ export const styles = StyleSheet.create({
   titlex: {
     fontSize: RFValue(20),
     fontWeight: "bold",
+    color: "#440577",
   },
   //Ajustes
   logosintxt: {
@@ -987,6 +992,7 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(15),
     textAlign: "center",
     justifyContent: "center",
+    color: "#FBF7FF",
   },
   //FinExclave
   //Edituser
@@ -999,11 +1005,13 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderWidth: 1,
     borderRadius: 10,
+    borderColor: "#440577",
   },
   inputuser: {
     width: "100%",
     fontSize: RFValue(17),
     height: "100%",
+    color: "#440577",
   },
   cajabtneuser: {
     alignItems: "center",
@@ -1228,11 +1236,13 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 8,
+    backgroundColor: "#440577",
   },
   txtterminar: {
     fontSize: RFValue(21),
     textAlign: "center",
     marginTop: -1,
+    color: "#FBF7FF",
   },
   //Fin Tranfallido
   //Tran Exitosa
@@ -1260,6 +1270,7 @@ export const styles = StyleSheet.create({
   transa: {
     fontSize: RFValue(50),
     fontWeight: "400",
+    color: "#440577",
   },
   contcnd: {
     marginTop: RFValue(7.8),
@@ -1267,6 +1278,7 @@ export const styles = StyleSheet.create({
   cndrRx: {
     fontSize: RFValue(8.1),
     fontWeight: "400",
+    color: "#440577",
   },
   contid: {
     alignItems: "center",
@@ -1315,14 +1327,15 @@ export const styles = StyleSheet.create({
   },
   cnttransa: {
     marginTop: 25,
-    borderWidth: 1,
-    borderRadius: 5,
   },
   btntransa: {
     height: RFValue(30),
     width: RFValue(147.7),
     alignItems: "center",
     justifyContent: "center",
+    borderColor: "#440577",
+    borderWidth: 1,
+    borderRadius: 5,
   },
   txttransa: {
     color: "#BFABE1",

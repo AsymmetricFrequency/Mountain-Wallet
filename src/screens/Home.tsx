@@ -40,13 +40,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   }, []);
 
   return (
-    // <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
     <SafeAreaView style={styles.body}>
-      {/* <StatusBar
-        backgroundColor={colors.background}
-        barStyle={theme === "dark" ? "light-content" : "dark-content"}
-      /> */}
-      {/* <View style={[styles.completo, { backgroundColor: colors.background }]}> */}
       <View style={styles.completo}>
         <Image
           style={styles.logocolor}

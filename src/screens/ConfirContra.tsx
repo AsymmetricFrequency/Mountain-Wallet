@@ -260,6 +260,3 @@ export const ConfirContra = ({
     </SafeAreaView>
   );
 };
-
-const alturaios = Platform.OS === "ios" ? "11%" : "2%";
-const cuadroios = Platform.OS === "ios" ? 55 : 45;

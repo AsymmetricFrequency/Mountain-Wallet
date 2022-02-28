@@ -41,10 +41,6 @@ const Slider = ({ navigation, route }: { navigation: any; route: any }) => {
   const RenderItem = ({ item }) => {
     return (
       <SafeAreaView style={styles.body}>
-        {/* <StatusBar 
-          backgroundColor= {colors.background}
-          barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
-        /> */}
         <View style={styles.completo}>
           <Image style={styles.introImageStyle} source={item.image} />
           <View style={styles.cajatitle}>

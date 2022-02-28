@@ -5,8 +5,13 @@ import { useTheme } from "react-native-paper";
 import { styles } from "../theme/appTheme";
 import { Lotiecarga, LotiecargaDark } from "./component/lottie";
 
-const PantallaCarga = ({ navigation, route }: { navigation: any; route: any })  => {
-
+const PantallaCarga = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
   //Detecta el modo del sistema
   const [theme, setTheme] = useState(Appearance.getColorScheme());
   Appearance.addChangeListener((scheme) => {
@@ -28,7 +33,7 @@ const PantallaCarga = ({ navigation, route }: { navigation: any; route: any })  
   //Crear cuenta
   async function crearCuenta(mnemonic: string) {
     const acc = createAccount(mnemonic);
-    fetchSecret(mnemonic)
+    fetchSecret(mnemonic);
     acc.then((value) => {
       setTimeout(() => {
         navigation.navigate("Barra");
@@ -40,24 +45,18 @@ const PantallaCarga = ({ navigation, route }: { navigation: any; route: any })  
     crearCuenta(palabras);
   }, 2000);
 
-  
   return (
-    <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
-      <StatusBar
-        backgroundColor={colors.background}
-        barStyle={theme === "dark" ? "light-content" : "dark-content"}
-      />
+    <SafeAreaView style={styles.body}>
       <View
         style={[
           styles.completo,
           {
-            backgroundColor: colors.background,
             justifyContent: "center",
             alignItems: "center",
           },
         ]}
       >
-        {theme === "light" ? <Lotiecarga /> : <LotiecargaDark />}
+        <Lotiecarga />
       </View>
     </SafeAreaView>
   );

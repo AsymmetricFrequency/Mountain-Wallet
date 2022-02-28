@@ -69,21 +69,9 @@ const EnviarCantidad = ({
       console.log("====================================");
     }
   }
-  //console.log(pinNumerico);
-
-  // const tt = numbers;
-  // const variables = {
-  //   maximumFractionDigits: 10,
-  //   minimumFractionDigits: 1,
-  //   minimumIntegerDigits: 1,
-  //   maximumIntegerDigits: 10,
-  // };
-  console.log(pinNumerico);
-  //const nf = new Intl.("es-CO", variables).format(tt);
 
   return (
     <SafeAreaView style={styles.body}>
-      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Enviar {pmsg}</Text>
