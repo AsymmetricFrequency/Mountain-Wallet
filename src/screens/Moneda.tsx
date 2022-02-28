@@ -235,7 +235,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                   return (
                     <View>
                       <Text
-                        style={[styles.txtCurrentPrice, { color: colors.text }]}
+                        style={styles.txtCurrentPrice}
                       >
                         ${item.current_price}
                       </Text>
@@ -261,8 +261,9 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
           </View>
 
           {msg != "Condorcoin" && (
-            <View style={styles.graf}>
+            <View>
               <WebView
+              style={styles.graf}
                 source={{
                   uri: `https://vortexlab-cali.github.io/charts/${msg}.html`,
                 }}
