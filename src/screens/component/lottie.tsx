@@ -37,28 +37,27 @@ const Lotieqr = () => {
 };
 
 const Lotiesplash = () => {
-
-    return (
-        <LottieView
-            style={styles.lottiesplash}                                            
-            source={require("../Lottie/spashcndr.json")}
-            autoPlay
-            // loop={false}
-        />
-    ) 
-}
+  return (
+    <LottieView
+      style={styles.lottiesplash}
+      source={require("../Lottie/spashcndr.json")}
+      autoPlay
+      // loop={false}
+    />
+  );
+};
 
 const Lotiecopy = () => {
-    return (
-        <LottieView
-            style={styles.lottiecopy}                                            
-            source={require("../Lottie/copy.json")}
-            speed={2.5}
-            autoPlay
-            loop={true}
-        />
-    ) 
-}
+  return (
+    <LottieView
+      style={styles.lottiecopy}
+      source={require("../Lottie/copy.json")}
+      speed={2.5}
+      autoPlay
+      loop={true}
+    />
+  );
+};
 
 const Lotiecarga = () => {
   return (
@@ -68,8 +67,8 @@ const Lotiecarga = () => {
       autoPlay
       speed={1.1}
     />
-  )
-}
+  );
+};
 
 const LotiecargaDark = () => {
   return (
@@ -79,8 +78,8 @@ const LotiecargaDark = () => {
       autoPlay
       speed={1.1}
     />
-  )
-}
+  );
+};
 
 const Lotiefallido = () => {
   return (
@@ -91,8 +90,8 @@ const Lotiefallido = () => {
       loop={false}
       speed={0.6}
     />
-  )
-}
+  );
+};
 
 const Lotiesucces = () => {
   return (
@@ -116,7 +115,28 @@ const LotiesuccesDark = () => {
   );
 };
 
+const LotieGraficaCondor = () => {
+  return (
+    <LottieView
+      style={styles.lottiecondorchart}
+      source={require("../Lottie/construction.json")}
+      autoPlay={true}
+      loop={false}
+      speed={1}
+    />
+  );
+};
 
-
-
-export {Lotierror, Lotiexito, Lotieqr,Lotiesplash,Lotiecopy,Lotiecarga,LotiecargaDark,Lotiefallido, Lotiesucces, LotiesuccesDark};
+export {
+  Lotierror,
+  Lotiexito,
+  Lotieqr,
+  Lotiesplash,
+  Lotiecopy,
+  Lotiecarga,
+  LotiecargaDark,
+  Lotiefallido,
+  Lotiesucces,
+  LotiesuccesDark,
+  LotieGraficaCondor,
+};
