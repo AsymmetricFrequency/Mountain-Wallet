@@ -140,12 +140,8 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
   }, []);
 
   return (
-    <SafeAreaView style={[styles.body, { backgroundColor: colors.background }]}>
-      <StatusBar
-        backgroundColor={colors.background}
-        barStyle={theme === "dark" ? "light-content" : "dark-content"}
-      />
-      <View style={[styles.completo, { backgroundColor: colors.background }]}>
+    <SafeAreaView style={styles.body}>
+      <View style={styles.completo}>
         <View style={styles.cajaatras}>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -171,19 +167,12 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
           <View style={styles.logomoneda}>{ima()}</View>
           <View style={styles.cajamon}>
             <View>
-              <Text
-                style={[
-                  styles.montxt,
-                  { textTransform: "uppercase", color: colors.disabled },
-                ]}
-              >
+              <Text style={[styles.montxt, { textTransform: "uppercase" }]}>
                 {msg}
               </Text>
             </View>
             <View>
-              <Text style={[styles.montxt, { color: colors.disabled }]}>
-                {mon}
-              </Text>
+              <Text style={styles.montxt}>{mon}</Text>
             </View>
           </View>
 
@@ -192,30 +181,17 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <Text
-                numberOfLines={1}
-                style={[styles.saldofull, { color: colors.text }]}
-              >
+              <Text numberOfLines={1} style={styles.saldofull}>
                 <View>
-                  <Text
-                    style={[styles.txtBalanceCripto, { color: colors.text }]}
-                  >
-                    {balance}
-                  </Text>
+                  <Text style={styles.txtBalanceCripto}>{balance}</Text>
                 </View>
               </Text>
             </ScrollView>
           </View>
-          <View
-            style={[styles.dcER, { borderTopWidth: theme === "light" ? 1 : 0 }]}
-          >
+          <View style={[styles.dcER, { borderTopWidth: 1 }]}>
             <View style={styles.dcE}>
               <TouchableOpacity
-                style={[
-                  styles.btnR,
-                  styles.sombras,
-                  { backgroundColor: colors.text },
-                ]}
+                style={[styles.btnR, styles.sombras]}
                 activeOpacity={0.5}
                 onPress={() =>
                   navigation.navigate("EnviarCantidad", {
@@ -226,18 +202,12 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                   })
                 }
               >
-                <Text style={[styles.textbtnR, { color: colors.background }]}>
-                  Enviar
-                </Text>
+                <Text style={styles.textbtnR}>Enviar</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.dcR}>
               <TouchableOpacity
-                style={[
-                  styles.btnR,
-                  styles.sombras,
-                  { backgroundColor: colors.text },
-                ]}
+                style={[styles.btnR, styles.sombras]}
                 activeOpacity={0.5}
                 onPress={() =>
                   navigation.navigate("Recibir", {
@@ -246,9 +216,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
                   })
                 }
               >
-                <Text style={[styles.textbtnR, { color: colors.background }]}>
-                  Recibir
-                </Text>
+                <Text style={styles.textbtnR}>Recibir</Text>
               </TouchableOpacity>
             </View>
           </View>

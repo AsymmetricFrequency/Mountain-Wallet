@@ -54,10 +54,6 @@ const Crearcuenta = ({
 
   return (
     <SafeAreaView style={styles.body}>
-      {/* <StatusBar 
-        backgroundColor= {colors.background}
-        barStyle={theme === 'dark' ?  "light-content" : "dark-content"} 
-      /> */}
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Crear nueva cartera</Text>

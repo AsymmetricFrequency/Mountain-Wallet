@@ -105,8 +105,8 @@ function Barra() {
 
         tabBarStyle: {
           height: RFValue(barios),
-          backgroundColor: colors.background,
-          borderTopColor: colors.background,
+          backgroundColor: "#FBF7FF",
+          borderTopColor: "#FBF7FF",
           elevation: 0,
         },
 
@@ -115,7 +115,7 @@ function Barra() {
           if (route.name === "Balance") {
             imagenes = focused
               ? theme == "dark"
-                ? require("./src/screens/img/walletcolorDark.png")
+                ? require("./src/screens/img/walletcolor.png")
                 : require("./src/screens/img/walletcolor.png")
               : require("./src/screens/img/walletblanco.png");
           } else if (route.name === "Ajustes") {
@@ -155,7 +155,7 @@ export default function App() {
 
   if (llave != null && llave != "" && llave != undefined) {
     return (
-      <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
+      <PaperProvider>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -233,7 +233,7 @@ export default function App() {
     );
   } else {
     return (
-      <PaperProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
+      <PaperProvider>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{

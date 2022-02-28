@@ -19,16 +19,13 @@ import QRCode from "react-native-qrcode-svg";
 import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-
 const altura = Platform.OS === "ios" ? 22 : 25;
 const windowWidth = Dimensions.get("screen").width;
 
 const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
-
   const { pmsg, publicKey } = route.params;
 
   console.log(publicKey);
-  
 
   const ima = () => {
     if (pmsg == "Condorcoin") {
@@ -57,7 +54,7 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
 
   const [copiadoModal, setCopiadoModal] = useState(false);
   const [animacion, setAnimacion] = useState(false);
-  
+
   const CopyToClipboard = () => {
     Clipboard.setString(publicKey);
     setAnimacion(true);
@@ -69,26 +66,26 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
   };
   //Animacion copiado
   const animation = React.useRef(null);
-  const amj = (number=0) => {
+  const amj = (number = 0) => {
     if (Platform.OS === "android") {
-      number= 2000
+      number = 2000;
     } else if (Platform.OS === "ios") {
-      number = 3000
+      number = 3000;
     }
-    return number
-  }
+    return number;
+  };
 
   React.useEffect(() => {
     if (animacion === true) {
-      animation.current.play(0,50);
+      animation.current.play(0, 50);
       setTimeout(() => {
         setAnimacion(false);
-      },amj());
+      }, amj());
     } else if (animacion === false) {
       if (Platform.OS === "android") {
-        animation.current.play(18,18);
-      } else if (Platform.OS === "ios"){
-        animation.current.play(18,50);
+        animation.current.play(18, 18);
+      } else if (Platform.OS === "ios") {
+        animation.current.play(18, 50);
       }
     }
   }, [animacion]);
@@ -108,8 +105,6 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
-     
-      <StatusBar backgroundColor="#FBF7FF" barStyle={"dark-content"} />
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Recibir {pmsg}</Text>
@@ -149,8 +144,6 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
               <Text numberOfLines={3} style={styles.txtqr}>
                 {publicKey}
               </Text>
-
-              {/* <TextInput style={styles.inputqr} value={pKey} editable={false}/> */}
             </View>
           </View>
         </TouchableOpacity>

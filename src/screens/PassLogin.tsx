@@ -121,10 +121,6 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
-      {/* <StatusBar
-        backgroundColor={colors.background}
-        barStyle={theme === "dark" ? "light-content" : "dark-content"}
-      /> */}
       <Modal
         visible={vacioModal}
         transparent
@@ -155,7 +151,6 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
           </View>
         </Animatable.View>
       </Modal>
-      {/* <View style={[styles.completo, { backgroundColor: colors.background }]}> */}
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Ingrese contraseña</Text>
@@ -168,25 +163,21 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
           {/* PRUEBA BOTON BACKGROUND */}
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colour }]}
-            // onPress={handleClickUno}
             disabled={true}
           />
 
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colourDos }]}
-            // onPress={handleClickDos}
             disabled={true}
           />
 
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colourTres }]}
-            // onPress={handleClickTres}
             disabled={true}
           />
 
           <TouchableOpacity
             style={[styles.circUno, { backgroundColor: colourCuatro }]}
-            // onPress={handleClickCuatro}
             disabled={true}
           />
         </View>

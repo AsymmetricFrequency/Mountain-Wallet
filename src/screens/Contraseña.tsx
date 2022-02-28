@@ -17,7 +17,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
 import LottieView from "lottie-react-native";
 import { styles } from "../theme/appTheme";
-import { readPassword , saveUser } from "../../api";
+import { readPassword, saveUser } from "../../api";
 import { ConfirContra } from "./ConfirContra";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
@@ -31,34 +31,37 @@ const windowHeight = Dimensions.get("screen").height;
 const colours = ["#FBF7FF", "#440577"];
 const getColour = () => colours[Math.floor(Math.random() * colours.length)];
 
-export const Contraseña = ({ navigation, route }: { navigation: any; route: any })  => {
+export const Contraseña = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
   const [password1, setPassword1] = useState({ pass1: "" });
-  
-   let cosa = route.params?.pipo
-   console.log(cosa);
-   
-  //Funcion para generar usuario aleatorio 
-  function generateRandomUser(len) {
-    let randomUser = 'Usuario_';
-    let wordChars = '0123456789';
-    
-    for(let i = 0; i < len; i++) {
-      randomUser += wordChars.charAt(Math.floor(Math.random() * wordChars.length));
-    }
-    
-      if (cosa !== undefined) {
-        saveUser(cosa)
-      }
-      else {
-        saveUser(randomUser)
-        
-      }     
-    }
-  
-  generateRandomUser(6);
-  
-  
 
+  let cosa = route.params?.pipo;
+  console.log(cosa);
+
+  //Funcion para generar usuario aleatorio
+  function generateRandomUser(len) {
+    let randomUser = "Usuario_";
+    let wordChars = "0123456789";
+
+    for (let i = 0; i < len; i++) {
+      randomUser += wordChars.charAt(
+        Math.floor(Math.random() * wordChars.length)
+      );
+    }
+
+    if (cosa !== undefined) {
+      saveUser(cosa);
+    } else {
+      saveUser(randomUser);
+    }
+  }
+
+  generateRandomUser(6);
 
   //Estado background
 
@@ -148,7 +151,6 @@ export const Contraseña = ({ navigation, route }: { navigation: any; route: any
   }
 
   return (
-    // <View style={styles.container}>
     <SafeAreaView style={styles.body}>
       <Modal
         visible={vacioModal}
@@ -285,6 +287,3 @@ export const Contraseña = ({ navigation, route }: { navigation: any; route: any
     // </View>
   );
 };
-
-const alturaios = Platform.OS === "ios" ? "11%" : "2%";
-const cuadroios = Platform.OS === "ios" ? 55 : 45;
