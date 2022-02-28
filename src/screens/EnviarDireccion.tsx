@@ -39,13 +39,71 @@ const EnviarDireccion = ({
   async function enviarSoles() {
     const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN));
     const respuesta = await transaccion;
-    navigation.navigate("TranExitosa", { resp: respuesta });
+    var respuesta_es = "";
+    var spaceCount = (respuesta.split(" ").length - 1);
+    //Handleo de errores
+    if (respuesta == "Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1") {
+      
+      respuesta_es = "Balance insuficiente para esta Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "Invalid public key input") {
+
+      respuesta_es = "Llave publica de destino invalida";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "Error: failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit.") {
+      
+      respuesta_es = "Fondos insuficientes para la Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "Error: failed to send transaction = Transaction simulation failed: Insufficient funds for fee") {
+      
+      respuesta_es = "Fondos insuficientes para la Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if(spaceCount > 0){
+      respuesta_es = "Algo ha salido mal, intentalo de nuevo"; 
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+       
+    }else {
+      navigation.navigate("TranExitosa", { resp: respuesta, num: pinN  });
+    }
   }
 
   async function enviarSPL() {
     const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN), mint);
     const respuesta = await transaccion;
-    navigation.navigate("TranExitosa", { resp: respuesta });
+    var respuesta_es = "";
+    var spaceCount = (respuesta.split(" ").length - 1);
+    //Handleo de errores
+    if (respuesta == "Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1") {
+      
+      respuesta_es = "Balance insuficiente para esta Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "Invalid public key input") {
+
+      respuesta_es = "Llave publica de destino invalida";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "Error: failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit.") {
+      
+      respuesta_es = "Fondos insuficientes para la Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "Error: failed to send transaction = Transaction simulation failed: Insufficient funds for fee") {
+      
+      respuesta_es = "Fondos insuficientes para la Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if(spaceCount > 0){
+      respuesta_es = "Algo ha salido mal, intentalo de nuevo"; 
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+       
+    }else {
+      navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
+    }
   }
 
   async function enviarSPLStable() {
@@ -56,7 +114,36 @@ const EnviarDireccion = ({
       mint
     );
     const respuesta = await transaccion;
-    navigation.navigate("TranExitosa", { resp: respuesta });
+    var respuesta_es = "";
+    var spaceCount = (respuesta.split(" ").length - 1);
+    //Handleo de errores
+    if (respuesta == "failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1") {
+      
+      respuesta_es = "Balance insuficiente para esta Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "Invalid public key input") {
+
+      respuesta_es = "Llave publica de destino invalida";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit.") {
+      
+      respuesta_es = "Fondos insuficientes para la Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else if (respuesta == "failed to send transaction = Transaction simulation failed: Insufficient funds for fee") {
+      
+      respuesta_es = "Fondos insuficientes para la Transacción";
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+    
+    }else if(spaceCount > 0){
+      respuesta_es = "Algo ha salido mal, intentalo de nuevo"; 
+      navigation.navigate("TranFallida", { resp: respuesta_es });
+
+    }else {
+      navigation.navigate("TranExitosa", { resp: respuesta, num: pinN  });
+    }
   }
 
   const imag = () => {
