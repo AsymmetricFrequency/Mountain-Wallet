@@ -212,6 +212,45 @@ export const styles = StyleSheet.create({
     color: "white",
     fontSize: RFValue(12),
   },
+  //Modal Sesion
+
+
+
+  cajafull:{
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor:"rgba(191, 162, 255, 0.85)",
+    justifyContent: 'center',
+    },
+
+    ventanafull: {
+        width: windowWidth,
+        height: windowHeight,
+        flexDirection: "column",
+        alignItems: 'center',
+        justifyContent:"center"
+    },
+    icontextfull: {
+        alignItems: 'center',
+        
+    },
+    contenedorlottiefull:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
+
+
+
+
+
+
+
+
+
+
+
+  
   //Fin Modal
   //Crear Cuenta
   cajacc: {
@@ -340,6 +379,11 @@ export const styles = StyleSheet.create({
     width: 50,
     height: 50,
     flex: 1,
+  },
+  lottiecerrars: {
+    width: RFValue(230),
+    height: RFValue(230),
+  
   },
   //Fin lottie
   //Balance
@@ -551,12 +595,12 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     width: RFValue(238),
     height: RFValue(64),
-    marginTop: RFValue(29),
-    paddingHorizontal: RFValue(8),
+    marginTop: RFValue(20),
+    paddingHorizontal: RFValue(30),
   },
   cbtncop: {
-    width: "25%",
-    alignItems: "flex-end",
+    //width: "25%",
+    alignItems: "center",
     justifyContent: "center",
   },
   btncop: {
@@ -566,7 +610,8 @@ export const styles = StyleSheet.create({
   },
   cuadroqr: {
     justifyContent: "center",
-    width: "72%",
+    alignItems: "center",
+    //width: "72%",
   },
   txtqr: {
     color: "#440577",

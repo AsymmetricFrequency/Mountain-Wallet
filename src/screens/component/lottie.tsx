@@ -126,6 +126,17 @@ const LotieGraficaCondor = () => {
     />
   );
 };
+const LotieCerrarSesion = () => {
+  return (
+    <LottieView
+      style={styles.lottiecerrars}
+      source={require("../Lottie/cerrarsesion.json")}
+      autoPlay={true}
+      loop={true}
+      speed={1}
+    />
+  );
+};
 
 export {
   Lotierror,
@@ -139,4 +150,5 @@ export {
   Lotiesucces,
   LotiesuccesDark,
   LotieGraficaCondor,
+  LotieCerrarSesion
 };
