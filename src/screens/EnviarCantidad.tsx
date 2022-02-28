@@ -69,17 +69,17 @@ const EnviarCantidad = ({
       console.log("====================================");
     }
   }
+  //console.log(pinNumerico);
+
+  // const tt = numbers;
+  // const variables = {
+  //   maximumFractionDigits: 10,
+  //   minimumFractionDigits: 1,
+  //   minimumIntegerDigits: 1,
+  //   maximumIntegerDigits: 10,
+  // };
   console.log(pinNumerico);
-
-  const tt = numbers;
-  const variables = {
-    maximumFractionDigits: 10,
-    minimumFractionDigits: 0,
-    minimumIntegerDigits: 1,
-    maximumIntegerDigits: 10,
-  };
-
-  const nf = new Intl.NumberFormat("es", variables).format(tt);
+  //const nf = new Intl.("es-CO", variables).format(tt);
 
   return (
     <SafeAreaView style={styles.body}>
@@ -106,18 +106,18 @@ const EnviarCantidad = ({
             <Text style={styles.valor}>$ 0.00</Text>
           </View>
           <View style={styles.txtAjustable}>
-            <ScrollView horizontal={true}>
-              <Text
-                style={styles.cantidadRecibe}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                minimumFontScale={0.5}
-                adjustsFontSizeToFit={true}
-                allowFontScaling
-              >
-                {nf}
-              </Text>
-            </ScrollView>
+            {/* <ScrollView horizontal={true}> */}
+            <Text
+              style={styles.cantidadRecibe}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              minimumFontScale={0.5}
+              adjustsFontSizeToFit={true}
+              allowFontScaling
+            >
+              {pinNumerico}
+            </Text>
+            {/* </ScrollView> */}
           </View>
         </View>
         <View style={styles.tecladoIngresar}>
@@ -180,7 +180,7 @@ const EnviarCantidad = ({
               <TouchableOpacity
                 onPress={() => setPinnumerico(`${pinNumerico}.`)}
               >
-                <Text style={styles.punto}>,</Text>
+                <Text style={styles.punto}>.</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setPinnumerico(`${pinNumerico}0`)}
@@ -201,7 +201,7 @@ const EnviarCantidad = ({
               style={styles.ingresar}
               onPress={() =>
                 navigation.navigate("EnviarDireccion", {
-                  pinN: nf,
+                  pinN: pinNumerico,
                   titleMoneda: pmsg,
                   abrev: mon,
                   memo: mnemonic,

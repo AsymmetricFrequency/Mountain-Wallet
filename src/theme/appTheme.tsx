@@ -18,7 +18,7 @@ const radios = Platform.OS === "ios" ? 10 : 15;
 const borrarios = Platform.OS === "ios" ? 31 : 20;
 const bottomios = Platform.OS === "ios" ? 60 : StatusBar.currentHeight;
 const cirios = Platform.OS === "ios" ? 0 : 25;
-const cantidadios = Platform.OS === "ios" ? -25 : -40;
+const cantidadios = Platform.OS === "ios" ? -25 : -35;
 const cntdadios = Platform.OS === "ios" ? 10 : -2;
 const alturaBtnEnviar = Platform.OS === "ios" ? 130 : 120;
 const topDocePios = Platform.OS === "ios" ? 50 : 55;
@@ -335,6 +335,12 @@ export const styles = StyleSheet.create({
     width: RFValue(136.9),
     height: RFValue(136.9),
   },
+  lottiecondorchart: {
+    //backgroundColor: "red",
+    width: 50,
+    height: 50,
+    flex: 1,
+  },
   //Fin lottie
   //Balance
   logocolorB: {
@@ -496,7 +502,20 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   graf: {
-    height: 430,
+    alignItems: "center",
+    justifyContent: "center",
+    //right: 10,
+    height: RFValue(208.7),
+    width: RFValue(208.7),
+  },
+  grafcondor: {
+    alignItems: "center",
+    justifyContent: "center",
+    //left: 40,
+    marginHorizontal: 25,
+    height: RFValue(260),
+    width: RFValue(280.4),
+    //flex: 1,
   },
   //FinMoneda
   //Recibir
@@ -665,7 +684,7 @@ export const styles = StyleSheet.create({
   },
   cantidadRecibe: {
     color: "#440577",
-    fontSize: RFValue(38.33),
+    fontSize: RFValue(34),
     fontWeight: "400",
   },
   contenedorCndr: {

@@ -19,6 +19,9 @@ import { WebView } from "react-native-webview";
 import { useTheme } from "react-native-paper";
 import { getBalance, getToken, readPublicKey } from "../../api";
 import { readMnemonic } from "../../api";
+import LottieView from "lottie-react-native";
+import { LotieGraficaCondor } from "./component/lottie";
+import Restaurar from "./Restaurar";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -250,49 +253,59 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
             </View>
           </View>
           <View style={styles.price}>
-            <FlatList
-              data={coins}
-              scrollEnabled={false}
-              refreshing={refreshing}
-              onRefresh={async () => {
-                setRefreshing(true);
-                await precioMoneda(symbol);
-                setRefreshing(false);
-              }}
-              renderItem={({ item }) => {
-                return (
-                  <View>
-                    <Text
-                      style={[styles.txtCurrentPrice, { color: colors.text }]}
-                    >
-                      ${item.current_price}
-                    </Text>
-                    <Text
-                      style={[
-                        item.price_change_percentage_24h > 0
-                          ? styles.txtPorcentajePositivo
-                          : styles.txtPorcentajeNegativo,
-                      ]}
-                    >
-                      {item.price_change_percentage_24h.toFixed(2)}%
-                    </Text>
-                  </View>
-                );
-              }}
-            ></FlatList>
+            {msg != "Condorcoin" && (
+              <FlatList
+                data={coins}
+                scrollEnabled={false}
+                refreshing={refreshing}
+                onRefresh={async () => {
+                  setRefreshing(true);
+                  await precioMoneda(symbol);
+                  setRefreshing(false);
+                }}
+                renderItem={({ item }) => {
+                  return (
+                    <View>
+                      <Text
+                        style={[styles.txtCurrentPrice, { color: colors.text }]}
+                      >
+                        ${item.current_price}
+                      </Text>
+                      <Text
+                        style={[
+                          item.price_change_percentage_24h > 0
+                            ? styles.txtPorcentajePositivo
+                            : styles.txtPorcentajeNegativo,
+                        ]}
+                      >
+                        {item.price_change_percentage_24h.toFixed(2)}%
+                      </Text>
+                    </View>
+                  );
+                }}
+              ></FlatList>
+            )}
+            {msg == "Condorcoin" && (
+              <Text style={{ color: "#440577", fontSize: 15 }}>
+                En Construcción...
+              </Text>
+            )}
           </View>
 
-          <View style={styles.graf}>
-            <WebView
-              source={{
-                uri:
-                  theme === "light"
-                    ? `https://vortexlab-cali.github.io/charts/${msg}.html`
-                    : `https://vortexlab-cali.github.io/charts/${msg}Dark.html`
-              }}
-              style={{ flex: 1 }}
-            />
-          </View>
+          {msg != "Condorcoin" && (
+            <View style={styles.graf}>
+              <WebView
+                source={{
+                  uri: `https://vortexlab-cali.github.io/charts/${msg}.html`,
+                }}
+              />
+            </View>
+          )}
+          {msg == "Condorcoin" && (
+            <View style={styles.grafcondor}>
+              <LotieGraficaCondor />
+            </View>
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>
