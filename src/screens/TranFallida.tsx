@@ -14,6 +14,9 @@ const TranFallida = ({ navigation, route }: { navigation: any, route: any }) => 
   Appearance.addChangeListener((scheme)=>{
     setTheme(scheme.colorScheme);
   })
+
+  const respuesta = route.params?.resp
+
   const { colors } = useTheme();
   return (
     <SafeAreaView style={[styles.body,{backgroundColor:colors.background}]}>
@@ -29,6 +32,7 @@ const TranFallida = ({ navigation, route }: { navigation: any, route: any }) => 
               <TouchableOpacity
                   activeOpacity={0.5}
                   style={styles.btndo}
+                  onPress={() => navigation.navigate('Balance')}
               >
                   <Icon name="close-thick" size={altura} color="#440577" />
               </TouchableOpacity>
@@ -40,12 +44,13 @@ const TranFallida = ({ navigation, route }: { navigation: any, route: any }) => 
                 <Text style={styles.titletxt} numberOfLines={3}>Mensaje</Text>
             </View>
             <View style={styles.errormensaje}>
-                <Text style={styles.errortxt}>Balance de tokens Insuficiente</Text>
+                <Text style={styles.errortxt}>{respuesta}</Text>
             </View>
             <View style={styles.cajaterminar}>
               <TouchableOpacity
                 style={[styles.btnterminar,{ backgroundColor:colors.text}]}
                 activeOpacity={0.5}     
+                onPress={() => navigation.navigate('Balance')}
               >
                 <Text style={[styles.txtterminar,{color:colors.background}]}>Terminar</Text>
               </TouchableOpacity>

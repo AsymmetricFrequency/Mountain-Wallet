@@ -118,7 +118,7 @@ async function saveUser(data){
 
 //generar mnemonic
 async function generateMnemonic() {
-  fetch("https://apiwalletnode.herokuapp.com/mnemonic").then(
+  fetch("https://wallet-condor-8246.uc.r.appspot.com/mnemonic").then(
       res => res.text()
   ).then(
     data =>{
@@ -131,7 +131,7 @@ async function generateMnemonic() {
 
 //Crear cuenta (public key)
 async function createAccount(mnemonic: string) {
-  fetch(`https://apiwalletnode.herokuapp.com/keypair_public_key/${mnemonic}`).then(
+  fetch(`https://wallet-condor-8246.uc.r.appspot.com/keypair_public_key/${mnemonic}`).then(
       res => res.text()
   ).then(
     data =>{
@@ -143,7 +143,7 @@ async function createAccount(mnemonic: string) {
 
 //Crear cuenta (secret key)
 async function fetchSecret(mnemonic: string) {
-  fetch(`https://apiwalletnode.herokuapp.com/keypair_secret_key/${mnemonic}`).then(
+  fetch(`https://wallet-condor-8246.uc.r.appspot.com/keypair_secret_key/${mnemonic}`).then(
       res => res.text()
   ).then(
     data =>{
@@ -154,19 +154,19 @@ async function fetchSecret(mnemonic: string) {
 }
 
 async function sendSoles(mnemonic: string, toPublicKey: string, amount: number){
-  const response = await fetch(`https://apiwalletnode.herokuapp.com/send_transaction/${mnemonic}/${toPublicKey}/${amount}`)
+  const response = await fetch(`https://wallet-condor-8246.uc.r.appspot.com/send_transaction/${mnemonic}/${toPublicKey}/${amount}`)
   const text = await response.text()
   return text
 }
 
 async function sendSPL(mnemonic: string, toPublicKey: string, amount: number, mint: string){
-  const response = await fetch(`https://apiwalletnode.herokuapp.com/send_transaction_spl/${mnemonic}/${toPublicKey}/${amount}/${mint}`)
+  const response = await fetch(`https://wallet-condor-8246.uc.r.appspot.com/send_transaction_spl/${mnemonic}/${toPublicKey}/${amount}/${mint}`)
   const text = await response.text()
   return text
 }
 
 async function sendSPLStable(mnemonic: string, toPublicKey: string, amount: number, mint: string){
-  const response = await fetch(`https://apiwalletnode.herokuapp.com/send_transaction_spl_stable/${mnemonic}/${toPublicKey}/${amount}/${mint}`)
+  const response = await fetch(`https://wallet-condor-8246.uc.r.appspot.com/send_transaction_spl_stable/${mnemonic}/${toPublicKey}/${amount}/${mint}`)
   const text = await response.text()
   return text
 }

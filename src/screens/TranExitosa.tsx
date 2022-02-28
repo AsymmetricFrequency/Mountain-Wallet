@@ -10,6 +10,7 @@ import {
     Alert,
     Appearance,
     ScrollView,
+    Linking
   } from "react-native";
   import React, { useState } from "react";
   import { TouchableOpacity } from "react-native-gesture-handler";
@@ -37,12 +38,13 @@ import {
     });
 
     const respuesta = route.params?.resp
+    const num = route.params?.num;
 
     const { colors } = useTheme();
     const [copiedText, setCopiedText] = useState("");
     const [animacion, setAnimacion] = useState(false);
     const CopyToClipboard = () => {
-      Clipboard.setString("hola mundo");
+      Clipboard.setString(respuesta);
       setAnimacion(true);
       if (Platform.OS === "android") {
         ToastAndroid.show("Identificador copiado", ToastAndroid.SHORT);
@@ -93,7 +95,7 @@ import {
                     <TouchableOpacity
                     activeOpacity={0.5}
                     style={styles.btndo}
-                    onPress={() => navigation.goBack()}
+                    onPress={() => navigation.navigate('Balance')}
                     >
                     <Icon name="close-thick" size={altura} color="#440577" />
                     </TouchableOpacity>
@@ -117,7 +119,7 @@ import {
                         <Text style={styles.icntt}>Cantidad</Text>
                       </View>                    
                       <View style={styles.txtingresa }>
-                          <Text style={[styles.transa, { color: colors.placeholder }]}>0</Text>
+                          <Text style={[styles.transa, { color: colors.placeholder }]}>{num}</Text>
                       </View>
                       <View style={styles.contcnd}>
                         <Text style={[styles.cndrRx, { color: colors.placeholder }]}>CNDR</Text>
@@ -153,13 +155,14 @@ import {
                   <View style={styles.cajatermi}>
                     <TouchableOpacity
                       style={[styles.btnterminar,{ backgroundColor:colors.text}]}
-                      activeOpacity={0.5}     
+                      activeOpacity={0.5}
+                      onPress={() => navigation.navigate('Balance')}     
                     >
                       <Text style={[styles.txtterminar,{color:colors.background}]}>Terminar</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={[styles.cnttransa,{ borderColor: colors.placeholder}]}>
-                      <TouchableOpacity style={styles.btntransa}>
+                      <TouchableOpacity onPress={() => Linking.openURL(`https://solscan.io/tx/${respuesta}`)} style={styles.btntransa}>
                       <Text style={styles.txttransa}>Ir a la transacción</Text>
                       </TouchableOpacity>
                   </View>
