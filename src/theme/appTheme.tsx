@@ -221,24 +221,39 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor:"rgba(191, 162, 255, 0.85)",
     justifyContent: 'center',
-    },
-
-    ventanafull: {
-        width: windowWidth,
-        height: windowHeight,
-        flexDirection: "column",
-        alignItems: 'center',
-        justifyContent:"center"
-    },
-    icontextfull: {
-        alignItems: 'center',
-        
-    },
-    contenedorlottiefull:{
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+  },
+  cajafulldos:{
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor:"rgba(79, 19, 208, 0.75)",
+    justifyContent: 'center',
+  },
+  ventanafull: {
+    width: windowWidth,
+    height: windowHeight,
+    flexDirection: "column",
+    alignItems: 'center',
+    justifyContent:"center"
+  },
+  icontextfull: {
+    alignItems: 'center',   
+  },
+  contenedorlottiefull:{
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contenedortextfull: {
+    justifyContent: 'center',
+    width:209,
+    height:69
     
+  },
+  texticonfull: {
+    fontSize:RFValue(23),
+    fontWeight: "700",
+    color:'white',
+    textAlign:"center"
+  },
 
 
 
@@ -1016,13 +1031,14 @@ export const styles = StyleSheet.create({
   },
   cajaex: {
     width: RFValue(245.4),
-    height: RFValue(235),
+    height: RFValue(200),
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "#440577",
     borderRadius: 6,
     marginTop: RFValue(12.5),
+    padding:RFValue(10)
   },
   cajabtnex: {
     alignItems: "center",
