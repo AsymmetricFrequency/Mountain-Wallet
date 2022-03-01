@@ -5,6 +5,7 @@ import {
   Text,
   View,
   ScrollView,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
@@ -69,6 +70,21 @@ const EnviarCantidad = ({
       console.log("====================================");
     }
   }
+
+  function enviar_data(){
+    if (pinNumerico != "" && pinNumerico != "0"){
+      navigation.navigate("EnviarDireccion", {
+        pinN: pinNumerico,
+        titleMoneda: pmsg,
+        abrev: mon,
+        memo: mnemonic,
+        mint: mint,
+      })
+    }else{
+      alert("OJO ingrese cantidad")
+    }
+  }
+
   console.log(pinNumerico);
 
   return (
@@ -188,13 +204,7 @@ const EnviarCantidad = ({
             <TouchableOpacity
               style={styles.ingresar}
               onPress={() =>
-                navigation.navigate("EnviarDireccion", {
-                  pinN: pinNumerico,
-                  titleMoneda: pmsg,
-                  abrev: mon,
-                  memo: mnemonic,
-                  mint: mint,
-                })
+                enviar_data()
               }
             >
               <Text style={styles.txtingresar}>Ingresar</Text>

@@ -9,7 +9,7 @@ import {
   ScrollView,
   Modal,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TapGestureHandler,
   TouchableOpacity,
@@ -45,16 +45,12 @@ const EnviarDireccion = ({
   const { titleMoneda } = route.params;
   const mnemonic = route.params?.memo;
   const mint = route.params?.mint;
-
+  const text2 = route.params?.text;
+  
   async function enviarSoles() {
     setVacioModal(true);
     setanmt("zoomIn");
-    setTimeout(() => {
-      setanmt("zoomOut");
-      setTimeout(() => {
-        setVacioModal(false);
-      }, 100);
-    }, 61000);
+      
     const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN));
     const respuesta = await transaccion;
     var respuesta_es = "";
@@ -65,26 +61,38 @@ const EnviarDireccion = ({
       "Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1"
     ) {
       respuesta_es = "Balance insuficiente para esta Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);        
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (respuesta == "Invalid public key input") {
       respuesta_es = "Llave publica de destino invalida";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (
       respuesta ==
       "Error: failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit."
     ) {
       respuesta_es = "Fondos insuficientes para la Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false)
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (
       respuesta ==
       "Error: failed to send transaction = Transaction simulation failed: Insufficient funds for fee"
     ) {
       respuesta_es = "Fondos insuficientes para la Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (spaceCount > 0) {
       respuesta_es = "Algo ha salido mal, intentalo de nuevo";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else {
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
     }
   }
@@ -92,12 +100,6 @@ const EnviarDireccion = ({
   async function enviarSPL() {
     setVacioModal(true);
     setanmt("zoomIn");
-    setTimeout(() => {
-      setanmt("zoomOut");
-      setTimeout(() => {
-        setVacioModal(false);
-      }, 100);
-    }, 61000);
     const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN), mint);
     const respuesta = await transaccion;
     var respuesta_es = "";
@@ -106,41 +108,49 @@ const EnviarDireccion = ({
     if (
       respuesta ==
       "Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1"
+
     ) {
       respuesta_es = "Balance insuficiente para esta Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (respuesta == "Invalid public key input") {
       respuesta_es = "Llave publica de destino invalida";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (
       respuesta ==
       "Error: failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit."
     ) {
       respuesta_es = "Fondos insuficientes para la Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (
       respuesta ==
       "Error: failed to send transaction = Transaction simulation failed: Insufficient funds for fee"
     ) {
       respuesta_es = "Fondos insuficientes para la Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (spaceCount > 0) {
       respuesta_es = "Algo ha salido mal, intentalo de nuevo";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else {
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
     }
+    
   }
 
   async function enviarSPLStable() {
     setVacioModal(true);
     setanmt("zoomIn");
-    setTimeout(() => {
-      setanmt("zoomOut");
-      setTimeout(() => {
-        setVacioModal(false);
-      }, 100);
-    }, 61000);
     const transaccion = await sendSPLStable(
       mnemonic,
       toPublic,
@@ -156,29 +166,43 @@ const EnviarDireccion = ({
       "failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1"
     ) {
       respuesta_es = "Balance insuficiente para esta Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (respuesta == "Invalid public key input") {
       respuesta_es = "Llave publica de destino invalida";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (
       respuesta ==
       "failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit."
     ) {
       respuesta_es = "Fondos insuficientes para la Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (
       respuesta ==
       "failed to send transaction = Transaction simulation failed: Insufficient funds for fee"
     ) {
       respuesta_es = "Fondos insuficientes para la Transacción";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (spaceCount > 0) {
       respuesta_es = "Algo ha salido mal, intentalo de nuevo";
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else {
+      setanmt("zoomOut");
+      setVacioModal(false);
       navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
+      
     }
   }
+
 
   const imag = () => {
     if (titleMoneda == "Condorcoin") {
@@ -208,6 +232,7 @@ const EnviarDireccion = ({
   const fetchCopiedText = async () => {
     const text = await Clipboard.getString();
     setCopiedText(text);
+    setToPublic(text);
   };
 
   return (
@@ -287,7 +312,14 @@ const EnviarDireccion = ({
                 source={require("./img/Paste-clipboard.png")}
               ></Image>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("QrReader")}>
+            <TouchableOpacity onPress={() => navigation.navigate("QrReader",{
+                pinN: pinN,
+                titleMoneda: titleMoneda,
+                abrev: abrev,
+                memo: mnemonic,
+                mint: mint,
+              })
+            }>
               <Image
                 style={styles.qr}
                 source={require("./img/qr-enviar.png")}
