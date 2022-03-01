@@ -18,8 +18,8 @@ const radios = Platform.OS === "ios" ? 10 : 15;
 const borrarios = Platform.OS === "ios" ? 31 : 20;
 const bottomios = Platform.OS === "ios" ? 60 : StatusBar.currentHeight;
 const cirios = Platform.OS === "ios" ? 0 : 25;
-const cantidadios = Platform.OS === "ios" ? -25 : -35;
-const cntdadios = Platform.OS === "ios" ? 10 : -2;
+const cantidadios = Platform.OS === "ios" ? -25 : -25;
+const cntdadios = Platform.OS === "ios" ? 10 : 5;
 const alturaBtnEnviar = Platform.OS === "ios" ? 130 : 120;
 const topDocePios = Platform.OS === "ios" ? 50 : 55;
 const panelDoceios = Platform.OS === "ios" ? 60 : 94;
@@ -214,58 +214,44 @@ export const styles = StyleSheet.create({
   },
   //Modal Sesion
 
-
-
-  cajafull:{
+  cajafull: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor:"rgba(191, 162, 255, 0.85)",
-    justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "rgba(191, 162, 255, 0.85)",
+    justifyContent: "center",
   },
-  cajafulldos:{
+  cajafulldos: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor:"rgba(79, 19, 208, 0.75)",
-    justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "rgba(79, 19, 208, 0.75)",
+    justifyContent: "center",
   },
   ventanafull: {
     width: windowWidth,
     height: windowHeight,
     flexDirection: "column",
-    alignItems: 'center',
-    justifyContent:"center"
+    alignItems: "center",
+    justifyContent: "center",
   },
   icontextfull: {
-    alignItems: 'center',   
+    alignItems: "center",
   },
-  contenedorlottiefull:{
-    justifyContent: 'center',
-    alignItems: 'center',
+  contenedorlottiefull: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   contenedortextfull: {
-    justifyContent: 'center',
-    width:209,
-    height:69
-    
+    justifyContent: "center",
+    width: 209,
+    height: 69,
   },
   texticonfull: {
-    fontSize:RFValue(23),
+    fontSize: RFValue(23),
     fontWeight: "700",
-    color:'white',
-    textAlign:"center"
+    color: "white",
+    textAlign: "center",
   },
 
-
-
-
-
-
-
-
-
-
-
-  
   //Fin Modal
   //Crear Cuenta
   cajacc: {
@@ -398,7 +384,6 @@ export const styles = StyleSheet.create({
   lottiecerrars: {
     width: RFValue(230),
     height: RFValue(230),
-  
   },
   //Fin lottie
   //Balance
@@ -503,7 +488,7 @@ export const styles = StyleSheet.create({
   txtCurrentPrice: {
     fontSize: 15,
     fontWeight: "bold",
-    color:'#440577'
+    color: "#440577",
   },
   txtBalanceCripto: {
     fontSize: 35,
@@ -749,8 +734,9 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   contenedorCndr: {
+    backgroundColor: "red",
     alignItems: "center",
-    bottom: 45,
+    bottom: 35,
   },
   cndr: {
     //backgroundColor: "green",
@@ -865,7 +851,7 @@ export const styles = StyleSheet.create({
   //EnviarDireccion
   contCndr: {
     alignItems: "center",
-    bottom: 90,
+    bottom: 80,
   },
   cntdRecibe: {
     color: "#440577",
@@ -907,7 +893,7 @@ export const styles = StyleSheet.create({
   cndrR: {
     justifyContent: "center",
     color: "#440577",
-    fontSize: RFValue(8.5),
+    fontSize: RFValue(15),
     fontWeight: "400",
     top: 37,
   },
@@ -1038,7 +1024,7 @@ export const styles = StyleSheet.create({
     borderColor: "#440577",
     borderRadius: 6,
     marginTop: RFValue(12.5),
-    padding:RFValue(10)
+    padding: RFValue(10),
   },
   cajabtnex: {
     alignItems: "center",
@@ -1334,7 +1320,7 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(7.8),
   },
   cndrRx: {
-    fontSize: RFValue(8.1),
+    fontSize: RFValue(10),
     fontWeight: "400",
     color: "#440577",
   },

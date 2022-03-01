@@ -69,6 +69,7 @@ const EnviarCantidad = ({
       console.log("====================================");
     }
   }
+  console.log(pinNumerico);
 
   return (
     <SafeAreaView style={styles.body}>
@@ -89,11 +90,7 @@ const EnviarCantidad = ({
 
         <View style={styles.textInput}>
           <Text style={styles.icnt}>Ingresar cantidad</Text>
-          <View style={styles.contenedorCndr}>
-            <Text style={styles.cndr}>{mon}</Text>
-            <Text style={styles.valor}>$ 0.00</Text>
-          </View>
-          <View style={styles.txtAjustable}>
+          <View style={styles.txtAjustables}>
             {/* <ScrollView horizontal={true}> */}
             <Text
               style={styles.cantidadRecibe}
@@ -107,6 +104,9 @@ const EnviarCantidad = ({
             </Text>
             {/* </ScrollView> */}
           </View>
+        </View>
+        <View style={styles.contCndr}>
+          <Text style={styles.cndrR}>{mon}</Text>
         </View>
         <View style={styles.tecladoIngresar}>
           <View style={{ width: "55%" }}>

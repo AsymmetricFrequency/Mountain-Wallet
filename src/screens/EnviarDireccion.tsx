@@ -10,7 +10,10 @@ import {
   Modal,
 } from "react-native";
 import React, { useState } from "react";
-import { TapGestureHandler, TouchableOpacity } from "react-native-gesture-handler";
+import {
+  TapGestureHandler,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { styles } from "../theme/appTheme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -19,7 +22,7 @@ import { sendSoles } from "../../api";
 import { sendSPL } from "../../api";
 import { sendSPLStable } from "../../api";
 import * as Animatable from "react-native-animatable";
-import { LotieEnviado} from "./component/lottie";
+import { LotieEnviado } from "./component/lottie";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -30,7 +33,6 @@ const EnviarDireccion = ({
   navigation: any;
   route: any;
 }) => {
-
   //Modales
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
@@ -46,13 +48,13 @@ const EnviarDireccion = ({
 
   async function enviarSoles() {
     setVacioModal(true);
-      setanmt("zoomIn");
+    setanmt("zoomIn");
+    setTimeout(() => {
+      setanmt("zoomOut");
       setTimeout(() => {
-        setanmt("zoomOut");
-        setTimeout(() => {
-          setVacioModal(false);
-        }, 100);
-      }, 61000);
+        setVacioModal(false);
+      }, 100);
+    }, 61000);
     const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN));
     const respuesta = await transaccion;
     var respuesta_es = "";
@@ -89,13 +91,13 @@ const EnviarDireccion = ({
 
   async function enviarSPL() {
     setVacioModal(true);
-      setanmt("zoomIn");
+    setanmt("zoomIn");
+    setTimeout(() => {
+      setanmt("zoomOut");
       setTimeout(() => {
-        setanmt("zoomOut");
-        setTimeout(() => {
-          setVacioModal(false);
-        }, 100);
-      }, 61000);
+        setVacioModal(false);
+      }, 100);
+    }, 61000);
     const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN), mint);
     const respuesta = await transaccion;
     var respuesta_es = "";
@@ -132,13 +134,13 @@ const EnviarDireccion = ({
 
   async function enviarSPLStable() {
     setVacioModal(true);
-      setanmt("zoomIn");
+    setanmt("zoomIn");
+    setTimeout(() => {
+      setanmt("zoomOut");
       setTimeout(() => {
-        setanmt("zoomOut");
-        setTimeout(() => {
-          setVacioModal(false);
-        }, 100);
-      }, 61000);
+        setVacioModal(false);
+      }, 100);
+    }, 61000);
     const transaccion = await sendSPLStable(
       mnemonic,
       toPublic,
@@ -175,7 +177,6 @@ const EnviarDireccion = ({
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else {
       navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
-      
     }
   }
 
@@ -218,16 +219,17 @@ const EnviarDireccion = ({
         hardwareAccelerated
       >
         <View style={styles.cajafulldos}>
-          <Animatable.View animation={anmt} duration= {600}>
+          <Animatable.View animation={anmt} duration={600}>
             <View style={styles.ventanafull}>
               <View style={styles.icontextfull}>
                 <View style={styles.contenedorlottiefull}>
-                  <LotieEnviado/>
-                                           
+                  <LotieEnviado />
                 </View>
               </View>
               <View style={styles.contenedortextfull}>
-                <Text style={styles.texticonfull}>Transacción en proceso...</Text>
+                <Text style={styles.texticonfull}>
+                  Transacción en proceso...
+                </Text>
               </View>
             </View>
           </Animatable.View>
@@ -251,23 +253,22 @@ const EnviarDireccion = ({
         <View style={styles.textInput}>
           <Text style={styles.icnt}>Cantidad</Text>
           <View style={styles.txtAjustables}>
-            <ScrollView horizontal={true}>
-              <Text
-                style={styles.cantidadRecibe}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                minimumFontScale={0.5}
-                adjustsFontSizeToFit={true}
-                allowFontScaling
-              >
-                {pinN}
-              </Text>
-            </ScrollView>
+            {/* <ScrollView horizontal={true}> */}
+            <Text
+              style={styles.cantidadRecibe}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              minimumFontScale={0.5}
+              adjustsFontSizeToFit={true}
+              allowFontScaling
+            >
+              {pinN}
+            </Text>
+            {/* </ScrollView> */}
           </View>
         </View>
         <View style={styles.contCndr}>
           <Text style={styles.cndrR}>{abrev}</Text>
-          <Text style={styles.valorR}>$ 0.00</Text>
         </View>
         <View style={styles.pegarDireccion}>
           <View style={{ width: "55%" }}>
