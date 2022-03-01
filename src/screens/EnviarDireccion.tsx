@@ -48,57 +48,69 @@ const EnviarDireccion = ({
   const text2 = route.params?.text;
   
   async function enviarSoles() {
-    setVacioModal(true);
-    setanmt("zoomIn");
-      
-    const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN));
-    const respuesta = await transaccion;
-    var respuesta_es = "";
-    var spaceCount = respuesta.split(" ").length - 1;
-    //Handleo de errores
-    if (
-      respuesta ==
-      "Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1"
-    ) {
-      respuesta_es = "Balance insuficiente para esta Transacción";
-      setanmt("zoomOut");
-      setVacioModal(false);        
-      navigation.navigate("TranFallida", { resp: respuesta_es });
-    } else if (respuesta == "Invalid public key input") {
-      respuesta_es = "Llave publica de destino invalida";
-      setanmt("zoomOut");
-      setVacioModal(false);
-      navigation.navigate("TranFallida", { resp: respuesta_es });
-    } else if (
-      respuesta ==
-      "Error: failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit."
-    ) {
-      respuesta_es = "Fondos insuficientes para la Transacción";
-      setanmt("zoomOut");
-      setVacioModal(false)
-      navigation.navigate("TranFallida", { resp: respuesta_es });
-    } else if (
-      respuesta ==
-      "Error: failed to send transaction = Transaction simulation failed: Insufficient funds for fee"
-    ) {
-      respuesta_es = "Fondos insuficientes para la Transacción";
-      setanmt("zoomOut");
-      setVacioModal(false);
-      navigation.navigate("TranFallida", { resp: respuesta_es });
-    } else if (spaceCount > 0) {
-      respuesta_es = "Algo ha salido mal, intentalo de nuevo";
-      setanmt("zoomOut");
-      setVacioModal(false);
-      navigation.navigate("TranFallida", { resp: respuesta_es });
-    } else {
-      setanmt("zoomOut");
-      setVacioModal(false);
-      navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
+
+    if (toPublic == "") {
+      alert("Porfavor ingrese una direccion valida") 
     }
+    else{
+      setVacioModal(true);
+      setanmt("zoomIn");
+        
+      const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN));
+      const respuesta = await transaccion;
+      var respuesta_es = "";
+      var spaceCount = respuesta.split(" ").length - 1;
+      //Handleo de errores
+      if (
+        respuesta ==
+        "Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1"
+      ) {
+        respuesta_es = "Balance insuficiente para esta Transacción";
+        setanmt("zoomOut");
+        setVacioModal(false);        
+        navigation.navigate("TranFallida", { resp: respuesta_es });
+      } else if (respuesta == "Invalid public key input") {
+        respuesta_es = "Llave publica de destino invalida";
+        setanmt("zoomOut");
+        setVacioModal(false);
+        navigation.navigate("TranFallida", { resp: respuesta_es });
+      } else if (
+        respuesta ==
+        "Error: failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit."
+      ) {
+        respuesta_es = "Fondos insuficientes para la Transacción";
+        setanmt("zoomOut");
+        setVacioModal(false)
+        navigation.navigate("TranFallida", { resp: respuesta_es });
+      } else if (
+        respuesta ==
+        "Error: failed to send transaction = Transaction simulation failed: Insufficient funds for fee"
+      ) {
+        respuesta_es = "Fondos insuficientes para la Transacción";
+        setanmt("zoomOut");
+        setVacioModal(false);
+        navigation.navigate("TranFallida", { resp: respuesta_es });
+      } else if (spaceCount > 0) {
+        respuesta_es = "Algo ha salido mal, intentalo de nuevo";
+        setanmt("zoomOut");
+        setVacioModal(false);
+        navigation.navigate("TranFallida", { resp: respuesta_es });
+      } else {
+        setanmt("zoomOut");
+        setVacioModal(false);
+        navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
+      }
+
+    }
+   
   }
 
   async function enviarSPL() {
-    setVacioModal(true);
+    if (toPublic == "") {
+      alert("Porfavor ingrese una direccion valida") 
+    }
+    else{
+      setVacioModal(true);
     setanmt("zoomIn");
     const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN), mint);
     const respuesta = await transaccion;
@@ -145,10 +157,15 @@ const EnviarDireccion = ({
       setVacioModal(false);
       navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
     }
-    
+
+    }  
   }
 
   async function enviarSPLStable() {
+    if (toPublic == "") {
+      alert("Porfavor ingrese una direccion valida") 
+    }
+   else{
     setVacioModal(true);
     setanmt("zoomIn");
     const transaccion = await sendSPLStable(
@@ -160,7 +177,9 @@ const EnviarDireccion = ({
     const respuesta = await transaccion;
     var respuesta_es = "";
     var spaceCount = respuesta.split(" ").length - 1;
+    
     //Handleo de errores
+
     if (
       respuesta ==
       "failed to send transaction: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1"
@@ -195,12 +214,15 @@ const EnviarDireccion = ({
       setanmt("zoomOut");
       setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
-    } else {
+    }
+     else {
       setanmt("zoomOut");
       setVacioModal(false);
       navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
       
     }
+   }
+    
   }
 
 
@@ -301,8 +323,8 @@ const EnviarDireccion = ({
               style={styles.pegaDir}
               onChangeText={(val) => setToPublic(val)}
               placeholder="Pegar dirección"
-            >
-              {copiedText}
+            > 
+           
             </TextInput>
           </View>
           <View style={styles.iconos}>
