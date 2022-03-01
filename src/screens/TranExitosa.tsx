@@ -104,11 +104,19 @@ const TranExitosa = ({
             <Lotiesucces />
           </View>
           <View style={styles.textInputE}>
-            <View>
-              <Text style={styles.icntt}>Cantidad</Text>
-            </View>
-            <View style={styles.txtingresa}>
-              <Text style={styles.transa}>{num}</Text>
+            <Text style={styles.icntt}>Cantidad</Text>
+
+            <View style={styles.txtAjustables}>
+              <Text
+                style={styles.transa}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                minimumFontScale={0.2}
+                adjustsFontSizeToFit={true}
+                allowFontScaling
+              >
+                {num}
+              </Text>
             </View>
             <View style={styles.contcnd}>
               <Text style={styles.cndrRx}>CNDR</Text>
