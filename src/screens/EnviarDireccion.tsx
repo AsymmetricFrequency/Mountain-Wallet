@@ -7,9 +7,10 @@ import {
   View,
   Clipboard,
   ScrollView,
+  Modal,
 } from "react-native";
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TapGestureHandler, TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { styles } from "../theme/appTheme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -17,6 +18,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { sendSoles } from "../../api";
 import { sendSPL } from "../../api";
 import { sendSPLStable } from "../../api";
+import * as Animatable from "react-native-animatable";
+import { LotieEnviado} from "./component/lottie";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -27,6 +30,11 @@ const EnviarDireccion = ({
   navigation: any;
   route: any;
 }) => {
+
+  //Modales
+  const [anmt, setanmt] = useState("");
+  const [vacioModal, setVacioModal] = useState(false);
+
   const [copiedText, setCopiedText] = useState("");
   const [toPublic, setToPublic] = useState("");
 
@@ -37,6 +45,14 @@ const EnviarDireccion = ({
   const mint = route.params?.mint;
 
   async function enviarSoles() {
+    setVacioModal(true);
+      setanmt("zoomIn");
+      setTimeout(() => {
+        setanmt("zoomOut");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 61000);
     const transaccion = await sendSoles(mnemonic, toPublic, Number(pinN));
     const respuesta = await transaccion;
     var respuesta_es = "";
@@ -72,6 +88,14 @@ const EnviarDireccion = ({
   }
 
   async function enviarSPL() {
+    setVacioModal(true);
+      setanmt("zoomIn");
+      setTimeout(() => {
+        setanmt("zoomOut");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 61000);
     const transaccion = await sendSPL(mnemonic, toPublic, Number(pinN), mint);
     const respuesta = await transaccion;
     var respuesta_es = "";
@@ -107,6 +131,14 @@ const EnviarDireccion = ({
   }
 
   async function enviarSPLStable() {
+    setVacioModal(true);
+      setanmt("zoomIn");
+      setTimeout(() => {
+        setanmt("zoomOut");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 61000);
     const transaccion = await sendSPLStable(
       mnemonic,
       toPublic,
@@ -143,6 +175,7 @@ const EnviarDireccion = ({
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else {
       navigation.navigate("TranExitosa", { resp: respuesta, num: pinN });
+      
     }
   }
 
@@ -178,6 +211,28 @@ const EnviarDireccion = ({
 
   return (
     <KeyboardAwareScrollView style={styles.body}>
+      <Modal
+        visible={vacioModal}
+        transparent
+        onRequestClose={() => setVacioModal(false)}
+        hardwareAccelerated
+      >
+        <View style={styles.cajafulldos}>
+          <Animatable.View animation={anmt} duration= {600}>
+            <View style={styles.ventanafull}>
+              <View style={styles.icontextfull}>
+                <View style={styles.contenedorlottiefull}>
+                  <LotieEnviado/>
+                                           
+                </View>
+              </View>
+              <View style={styles.contenedortextfull}>
+                <Text style={styles.texticonfull}>Transacción en proceso...</Text>
+              </View>
+            </View>
+          </Animatable.View>
+        </View>
+      </Modal>
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Enviar {titleMoneda}</Text>

@@ -138,6 +138,17 @@ const LotieCerrarSesion = () => {
   );
 };
 
+const LotieEnviado = () => {
+  return (
+    <LottieView
+      style={styles.lottiecerrars}
+      source={require("../Lottie/enviando.json")}
+      autoPlay={true}
+      loop={true}
+    />
+  );
+};
+
 export {
   Lotierror,
   Lotiexito,
@@ -150,5 +161,6 @@ export {
   Lotiesucces,
   LotiesuccesDark,
   LotieGraficaCondor,
-  LotieCerrarSesion
+  LotieCerrarSesion,
+  LotieEnviado, 
 };
