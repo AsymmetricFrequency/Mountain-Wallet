@@ -7,7 +7,7 @@ const Lotierror = () => {
   return (
     <LottieView
       style={styles.lottie}
-      speed={2}
+      speed={1.8}
       source={require("../Lottie/error_anim.json")}
       autoPlay
     />

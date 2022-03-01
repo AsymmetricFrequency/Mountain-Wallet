@@ -75,11 +75,11 @@ const Ajustes = ({ navigation, route }: { navigation: any; route: any }) => {
   setearLlaves();
 
   //Detecta el modo del sistema
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme) => {
-    setTheme(scheme.colorScheme);
-  });
-  const { colors } = useTheme();
+  // const [theme, setTheme] = useState(Appearance.getColorScheme());
+  // Appearance.addChangeListener((scheme) => {
+  //   setTheme(scheme.colorScheme);
+  // });
+  // const { colors } = useTheme();
   // Concatenar pkey
   var str = publicKey;
   var strFirstThree = str.substring(0, 5);
@@ -90,7 +90,10 @@ const Ajustes = ({ navigation, route }: { navigation: any; route: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
-
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <Modal
         visible={vacioModal}
         transparent
@@ -98,27 +101,20 @@ const Ajustes = ({ navigation, route }: { navigation: any; route: any }) => {
         hardwareAccelerated
       >
         <View style={styles.cajafull}>
-                        <Animatable.View animation={anmt} duration= {600}>
-                                <View style={styles.ventanafull}>
-                                    <View style={styles.icontextfull}>
-                                        <View style={styles.contenedorlottiefull}>
-                                            <LotieCerrarSesion/>
-                                            <View style={{position:"absolute"}}>
-                                              <Icons name="logout" size={25} color="white" />
-                                            </View>
-                                            
-                                        </View>
-                                    </View>
-                                </View>
-                        </Animatable.View>
-                    </View>
+          <Animatable.View animation={anmt} duration= {600}>
+            <View style={styles.ventanafull}>
+              <View style={styles.icontextfull}>
+                  <View style={styles.contenedorlottiefull}>
+                      <LotieCerrarSesion/>
+                      <View style={{position:"absolute"}}>
+                        <Icons name="logout" size={25} color="white" />
+                      </View>                       
+                  </View>
+              </View>
+            </View>
+          </Animatable.View>
+          </View>
       </Modal>
-
-
-
-
-
-
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Configuración</Text>

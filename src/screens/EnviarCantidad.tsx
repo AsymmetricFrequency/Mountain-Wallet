@@ -6,14 +6,15 @@ import {
   View,
   ScrollView,
   Alert,
+  Modal,
 } from "react-native";
 import React, { useState } from "react";
 import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/Feather";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../theme/appTheme";
-import "intl";
-import "intl/locale-data/jsonp/es-CO";
+import * as Animatable from "react-native-animatable";
+import { Lotierror } from "./component/lottie";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -35,6 +36,10 @@ const EnviarCantidad = ({
   const [pinNumerico, setPinnumerico] = useState("");
   const numbers = pinNumerico;
   const last2 = numbers.slice(0, -1);
+  //Modales
+  const [anmt, setanmt] = useState("");
+  const [vacioModal, setVacioModal] = useState(false);
+  const [MostrarError, setError] = useState("");
 
   const ima = () => {
     if (pmsg == "Condorcoin") {
@@ -81,7 +86,15 @@ const EnviarCantidad = ({
         mint: mint,
       })
     }else{
-      alert("OJO ingrese cantidad")
+      setVacioModal(true);
+      setError("Ingrese cantidad.");
+      setanmt("fadeInDownBig");
+      setTimeout(() => {
+        setanmt("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 1850);
     }
   }
 
@@ -89,6 +102,36 @@ const EnviarCantidad = ({
 
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
+      <Modal
+        visible={vacioModal}
+        transparent
+        onRequestClose={() => setVacioModal(false)}
+        hardwareAccelerated
+      >
+        <Animatable.View animation={anmt} duration={600}>
+          <View style={styles.bodymodal}>
+            <View style={styles.ventanamodal}>
+              <View style={styles.icontext}>
+                <View style={styles.contenedorlottie}>
+                  <Lotierror/>
+                </View>
+              </View>
+              <View style={styles.textnoti}>
+                <View style={styles.contenedortext}>
+                  <Text style={styles.texticon}>Error</Text>
+                </View>
+                <View>
+                  <Text style={styles.notificacion}>{MostrarError}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </Animatable.View>
+      </Modal>
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Enviar {pmsg}</Text>
@@ -192,7 +235,7 @@ const EnviarCantidad = ({
                 <Text style={styles.numberCero}>0</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => borrar()}>
-                <Icon name="delete" style={styles.btnBorrar} />
+                <Icon name="backspace" style={styles.btnBorrar} />
               </TouchableOpacity>
             </View>
           </View>

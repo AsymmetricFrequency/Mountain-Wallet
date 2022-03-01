@@ -7,16 +7,16 @@ import {
   Image,
   Modal,
   Dimensions,
+  StatusBar,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
-import LottieView from "lottie-react-native";
 import { readPassword } from "../../api";
 import { savePassword } from "../../api";
 import { styles } from "../theme/appTheme";
+import { Lotierror } from "./component/lottie";
 
 // import { useCalculadora } from '../hooks/useCalculadora';
 
@@ -59,6 +59,7 @@ export const ConfirContra = ({
   //Modales
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
+  const [MostrarError, setError] = useState("");
   const [storedPass, setStoredPass] = useState("");
 
   function validadorPassword() {
@@ -81,13 +82,14 @@ export const ConfirContra = ({
       navigation.navigate("PantallaCarga");
     } else {
       setVacioModal(true);
+      setError("Contraseña incorrecta.");
       setanmt("fadeInDownBig");
       setTimeout(() => {
         setanmt("fadeOutUp");
         setTimeout(() => {
           setVacioModal(false);
         }, 100);
-      }, 900);
+      }, 1850);
       //seteo variables contraseña incorrecta
       validadorPassword();
     }
@@ -136,6 +138,10 @@ export const ConfirContra = ({
 
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <Modal
         visible={vacioModal}
         transparent
@@ -147,11 +153,7 @@ export const ConfirContra = ({
             <View style={styles.ventanamodal}>
               <View style={styles.icontext}>
                 <View style={styles.contenedorlottie}>
-                  <LottieView
-                    style={styles.lottie}
-                    source={require("./Lottie/error.json")}
-                    autoPlay
-                  />
+                  <Lotierror/>
                 </View>
               </View>
               <View style={styles.textnoti}>
@@ -159,7 +161,7 @@ export const ConfirContra = ({
                   <Text style={styles.texticon}>Error</Text>
                 </View>
                 <View>
-                  <Text style={styles.notificacion}>Contraseña incorrecta</Text>
+                  <Text style={styles.notificacion}>{MostrarError}</Text>
                 </View>
               </View>
             </View>

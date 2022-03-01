@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         
     },
     textocarga: {
-        fontFamily:'OpenSans',
         fontSize: 20,
         fontWeight:'bold',
         top: "-10%",

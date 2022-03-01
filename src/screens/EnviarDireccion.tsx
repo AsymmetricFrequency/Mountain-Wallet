@@ -14,7 +14,7 @@ import {
   TapGestureHandler,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/Feather";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { styles } from "../theme/appTheme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -259,6 +259,10 @@ const EnviarDireccion = ({
 
   return (
     <KeyboardAwareScrollView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <Modal
         visible={vacioModal}
         transparent

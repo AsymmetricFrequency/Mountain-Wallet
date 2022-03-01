@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Platform,
   Appearance,
+  Modal
 } from "react-native";
 import React, { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -15,16 +16,19 @@ import { styles } from "../theme/appTheme";
 import { TextInput } from "react-native-gesture-handler";
 import { saveMmemonic, saveUser } from "../../api";
 import { useTheme } from "react-native-paper";
+import * as Animatable from "react-native-animatable";
+import { Lotierror } from "./component/lottie";
+
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 //
 const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
   //Detecta el modo del sistema
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme) => {
-    setTheme(scheme.colorScheme);
-  });
-  const { colors } = useTheme();
+  // const [theme, setTheme] = useState(Appearance.getColorScheme());
+  // Appearance.addChangeListener((scheme) => {
+  //   setTheme(scheme.colorScheme);
+  // });
+  // const { colors } = useTheme();
 
   const [values, setValues] = useState("");
   const elements: string[] = [];
@@ -34,18 +38,52 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
   }
 
   const [userRestaurar, setUserRestaurar] = useState("");
+  //Modales
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
+  const [MostrarError, setError] = useState("");
 
   function continuar() {
     if (values == "") {
-      alert("Porfavor escriba su frase secreta");
+      setVacioModal(true);
+      setError("Escriba su frase secreta.");
+      setanmt("fadeInDownBig");
+      setTimeout(() => {
+        setanmt("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 1850);
     } else if (words.length != 12) {
-      alert("Solo se permite 12 palabras");
+      setVacioModal(true);
+      setError("Máximo 12 palabras.");
+      setanmt("fadeInDownBig");
+      setTimeout(() => {
+        setanmt("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 1850);
     } else if (userRestaurar == "") {
-      alert("Porfavor escriba nombre de billetera");
+      setVacioModal(true);
+      setError("Nombre de la billetera vacío.");
+      setanmt("fadeInDownBig");
+      setTimeout(() => {
+        setanmt("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 1850);
     } else if (userRestaurar.length > 10) {
-      alert("Permitido solo 10 caracteres");
+      setVacioModal(true);
+      setError("Número de carácteres superado en el nombre.");
+      setanmt("fadeInDownBig");
+      setTimeout(() => {
+        setanmt("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 1850);
     } else {
       saveMmemonic(values);
       navigation.navigate("Contraseña", { pipo: userRestaurar });
@@ -65,6 +103,36 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
       contentContainerStyle={[styles.body]}
       scrollEnabled={false}
     >
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
+      <Modal
+        visible={vacioModal}
+        transparent
+        onRequestClose={() => setVacioModal(false)}
+        hardwareAccelerated
+      >
+        <Animatable.View animation={anmt} duration={600}>
+          <View style={styles.bodymodal}>
+            <View style={styles.ventanamodal}>
+              <View style={styles.icontext}>
+                <View style={styles.contenedorlottie}>
+                  <Lotierror/>
+                </View>
+              </View>
+              <View style={styles.textnoti}>
+                <View style={styles.contenedortext}>
+                  <Text style={styles.texticon}>Error</Text>
+                </View>
+                <View>
+                  <Text style={styles.notificacion}>{MostrarError}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </Animatable.View>
+      </Modal>
       <View style={styles.completo}>
         <View style={styles.cajaatras}>
           <TouchableOpacity

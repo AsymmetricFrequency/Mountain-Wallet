@@ -21,11 +21,11 @@ const altura = Platform.OS === "ios" ? 22 : 25;
 
 const Slider = ({ navigation, route }: { navigation: any; route: any }) => {
   //Detecta el modo del sistema
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme) => {
-    setTheme(scheme.colorScheme);
-  });
-  const { colors } = useTheme();
+  // const [theme, setTheme] = useState(Appearance.getColorScheme());
+  // Appearance.addChangeListener((scheme) => {
+  //   setTheme(scheme.colorScheme);
+  // });
+  // const { colors } = useTheme();
 
   const [mnemonic, setMnemonic] = useState("");
 
@@ -41,6 +41,10 @@ const Slider = ({ navigation, route }: { navigation: any; route: any }) => {
   const RenderItem = ({ item }) => {
     return (
       <SafeAreaView style={styles.body}>
+        <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
         <View style={styles.completo}>
           <Image style={styles.introImageStyle} source={item.image} />
           <View style={styles.cajatitle}>
@@ -89,7 +93,7 @@ const Slider = ({ navigation, route }: { navigation: any; route: any }) => {
         showDoneButton={false}
         renderDoneButton={renderdone}
         dotStyle={styles.dotst}
-        activeDotStyle={[styles.actist, { backgroundColor: colors.primary }]}
+        activeDotStyle={[styles.actist, { backgroundColor: '#440577' }]}
       />
     </>
   );

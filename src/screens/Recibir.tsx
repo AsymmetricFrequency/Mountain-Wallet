@@ -105,6 +105,10 @@ const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Recibir {pmsg}</Text>

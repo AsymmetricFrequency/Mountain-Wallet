@@ -42,11 +42,11 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
   setearPubKey();
 
   //Detecta el modo del sistema
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme) => {
-    setTheme(scheme.colorScheme);
-  });
-  const { colors } = useTheme();
+  // const [theme, setTheme] = useState(Appearance.getColorScheme());
+  // Appearance.addChangeListener((scheme) => {
+  //   setTheme(scheme.colorScheme);
+  // });
+  // const { colors } = useTheme();
 
   const { msg, mon } = route.params;
   const symbol = route.params?.moneda;
@@ -141,6 +141,10 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <View style={styles.completo}>
         <View style={styles.cajaatras}>
           <TouchableOpacity
@@ -255,7 +259,7 @@ const Moneda = ({ navigation, route }: { navigation: any; route: any }) => {
             )}
             {msg == "Condorcoin" && (
               <Text style={{ color: "#440577", fontSize: 15 }}>
-                En Construcción...
+                El gráfico se encuentra en proceso...
               </Text>
             )}
           </View>

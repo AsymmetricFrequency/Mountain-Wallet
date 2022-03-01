@@ -121,6 +121,10 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
 
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <Modal
         visible={vacioModal}
         transparent
