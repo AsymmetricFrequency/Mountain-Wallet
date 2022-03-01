@@ -6,6 +6,7 @@ import {
   Platform,
   Modal,
   RefreshControl,
+  StatusBar,
 } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import * as Animatable from "react-native-animatable";
@@ -62,12 +63,10 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
 
   console.log(elements);
 
-  //Modal
+  //Modales
   const [anmt, setanmt] = useState("");
-  const [MostrarModal, setModal] = useState(false);
+  const [vacioModal, setVacioModal] = useState(false);
   const [MostrarError, setError] = useState("");
-  const [lottie, setLottie] = useState(<Lotierror />);
-  const [mostrartitulo, setmostrartitulo] = useState("");
 
   //casillas faltantes
   const [values, setValues] = useState({
@@ -94,31 +93,18 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
     let arreglo2 = doceIncompleta.toString();
 
     if (arreglo1 === arreglo2) {
-      setanmt("fadeInDownBig");
-      setmostrartitulo("Correcto");
-      setError("Palabras correctas");
-      setModal(true);
-      setLottie(<Lotiexito />);
-      setTimeout(() => {
-        setanmt("fadeOutUp");
-        setTimeout(() => {
-          setModal(false);
-        }, 100);
         navigation.navigate("Contraseña");
-      }, 1000);
     } else {
       //alert("Frases incorrectas");
+      setVacioModal(true);
+      setError("Palabras incorrectas.");
       setanmt("fadeInDownBig");
-      setmostrartitulo("Incorrecto");
-      setError("Palabras incorrectas");
-      setModal(true);
-      setLottie(<Lotierror />);
       setTimeout(() => {
         setanmt("fadeOutUp");
         setTimeout(() => {
-          setModal(false);
+          setVacioModal(false);
         }, 100);
-      }, 1000);
+      }, 1850);
       for (let i = 0; i < doceIncompleta.length; i++) {
         for (let j = 0; j < arr.length; j++) {
           if (i == arr[j]) {
@@ -141,21 +127,27 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
           />
         }
       ></ScrollView>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <Modal
-        visible={MostrarModal}
+        visible={vacioModal}
         transparent
-        onRequestClose={() => setModal(false)}
+        onRequestClose={() => setVacioModal(false)}
         hardwareAccelerated
       >
         <Animatable.View animation={anmt} duration={600}>
           <View style={styles.bodymodal}>
             <View style={styles.ventanamodal}>
               <View style={styles.icontext}>
-                <View style={styles.contenedorlottie}>{lottie}</View>
+                <View style={styles.contenedorlottie}>
+                  <Lotierror/>
+                </View>
               </View>
               <View style={styles.textnoti}>
                 <View style={styles.contenedortext}>
-                  <Text style={styles.texticon}>{mostrartitulo}</Text>
+                  <Text style={styles.texticon}>Error</Text>
                 </View>
                 <View>
                   <Text style={styles.notificacion}>{MostrarError}</Text>

@@ -8,6 +8,7 @@ import {
   Clipboard,
   ToastAndroid,
   Alert,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "../theme/appTheme";
@@ -102,6 +103,10 @@ const ExFrase = ({ navigation }: { navigation: any }) => {
 
   return (
     <KeyboardAwareScrollView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <ScrollView
         style={{ backgroundColor: "red" }}
         refreshControl={

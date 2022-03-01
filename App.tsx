@@ -93,10 +93,10 @@ const barios = Platform.OS === "ios" ? 65 : 54;
 function Barra() {
   const { colors } = useTheme();
   //Detecta el modo del sistema
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme) => {
-    setTheme(scheme.colorScheme);
-  });
+  // const [theme, setTheme] = useState(Appearance.getColorScheme());
+  // Appearance.addChangeListener((scheme) => {
+  //   setTheme(scheme.colorScheme);
+  // });
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -114,15 +114,11 @@ function Barra() {
           let imagenes;
           if (route.name === "Balance") {
             imagenes = focused
-              ? theme == "dark"
-                ? require("./src/screens/img/walletcolor.png")
-                : require("./src/screens/img/walletcolor.png")
+              ? require("./src/screens/img/walletcolor.png")
               : require("./src/screens/img/walletblanco.png");
           } else if (route.name === "Ajustes") {
             imagenes = focused
-              ? theme == "dark"
-                ? require("./src/screens/img/settingscolorDark.png")
-                : require("./src/screens/img/settingscolor.png")
+              ? require("./src/screens/img/settingscolor.png")
               : require("./src/screens/img/settingsblanco.png");
           }
           return (
@@ -245,7 +241,7 @@ export default function App() {
               component={Splashc}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
+             <Stack.Screen
               name="Home"
               component={Home}
               options={{ headerShown: false }}
@@ -260,7 +256,7 @@ export default function App() {
               component={Restaurar}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
+             <Stack.Screen
               name="Crear"
               component={Crearcuenta}
               options={{ headerShown: false }}
@@ -269,7 +265,7 @@ export default function App() {
               name="DocePalabras"
               component={DocePalabras}
               options={{ headerShown: false }}
-            />
+            /> 
             <Stack.Screen
               name="Contraseña"
               component={Contraseña}

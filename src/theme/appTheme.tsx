@@ -195,10 +195,12 @@ export const styles = StyleSheet.create({
   icontext: {
     alignItems: "center",
   },
-  textnoti: {},
   contenedorlottie: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  textnoti: {
+    marginLeft: RFValue(5)
   },
   contenedortext: {
     justifyContent: "center",
@@ -344,8 +346,8 @@ export const styles = StyleSheet.create({
   //Fin Crearcuenta
   //Lottie
   lottie: {
-    width: 60,
-    height: 60,
+    width: RFValue(41.7),
+    height: RFValue(41.7),
   },
   lottiexito: {
     width: 60,
@@ -426,7 +428,6 @@ export const styles = StyleSheet.create({
   },
   ntxtcry: {
     color: "#000",
-    fontFamily: "opensans-regular",
     fontSize: RFValue(15),
     fontWeight: "500",
   },
@@ -449,7 +450,6 @@ export const styles = StyleSheet.create({
   },
   mtxtcry: {
     color: "#440577",
-    fontFamily: "Roboto",
     fontSize: RFValue(8.5),
     fontWeight: "400",
   },
@@ -559,7 +559,7 @@ export const styles = StyleSheet.create({
     //left: 40,
     marginHorizontal: 25,
     height: RFValue(260),
-    width: RFValue(280.4),
+    //width: RFValue(280.4),
     //flex: 1,
   },
   //FinMoneda
@@ -597,6 +597,8 @@ export const styles = StyleSheet.create({
     height: RFValue(64),
     marginTop: RFValue(20),
     paddingHorizontal: RFValue(30),
+    alignItems: "center",
+    justifyContent: "center",
   },
   cbtncop: {
     //width: "25%",
@@ -607,6 +609,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     padding: RFValue(5),
+    justifyContent: "center",
   },
   cuadroqr: {
     justifyContent: "center",
@@ -928,11 +931,10 @@ export const styles = StyleSheet.create({
   btnCont: {
     alignItems: "center",
     backgroundColor: "#440577",
-    borderRadius: 15,
-    height: 59,
+    borderRadius: 10,
+    height: RFValue(37.5),
     justifyContent: "center",
-
-    width: 99,
+    width: RFValue(110),
   },
   txtEnviar: {
     color: "white",
@@ -1011,13 +1013,13 @@ export const styles = StyleSheet.create({
   //FinAjustes
   //Exclave
   imgex: {
-    width: RFValue(201),
-    height: RFValue(201),
+    width: RFValue(191),
+    height: RFValue(191),
     marginTop: 20,
   },
   cajaex: {
-    width: RFValue(245.4),
-    height: RFValue(200),
+    width: RFValue(235.4),
+    height: RFValue(190),
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,

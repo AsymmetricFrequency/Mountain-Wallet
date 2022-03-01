@@ -24,16 +24,20 @@ const TranFallida = ({
   route: any;
 }) => {
   //Detecta el modo del sistema
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme) => {
-    setTheme(scheme.colorScheme);
-  });
+  // const [theme, setTheme] = useState(Appearance.getColorScheme());
+  // Appearance.addChangeListener((scheme) => {
+  //   setTheme(scheme.colorScheme);
+  // });
 
   const respuesta = route.params?.resp;
 
   const { colors } = useTheme();
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Transacción Fallida</Text>

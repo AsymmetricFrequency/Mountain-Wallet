@@ -36,11 +36,11 @@ const Crearcuenta = ({
   //const palabras = frase.split(" ")
 
   //Detecta el modo del sistema
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-  Appearance.addChangeListener((scheme) => {
-    setTheme(scheme.colorScheme);
-  });
-  const { colors } = useTheme();
+  // const [theme, setTheme] = useState(Appearance.getColorScheme());
+  // Appearance.addChangeListener((scheme) => {
+  //   setTheme(scheme.colorScheme);
+  // });
+  // const { colors } = useTheme();
 
   const [numero, setNumero] = useState(1);
 
@@ -54,6 +54,10 @@ const Crearcuenta = ({
 
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <View style={styles.cajacc}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Crear nueva cartera</Text>

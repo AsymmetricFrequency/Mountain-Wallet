@@ -9,15 +9,15 @@ import {
   Dimensions,
   Alert,
   ToastAndroid,
+  StatusBar,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { RFValue } from "react-native-responsive-fontsize";
 import * as Animatable from "react-native-animatable";
-import LottieView from "lottie-react-native";
 import { styles } from "../theme/appTheme";
 import { readPassword, saveUser } from "../../api";
+import { Lotierror } from "./component/lottie";
 import { ConfirContra } from "./ConfirContra";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
@@ -85,6 +85,7 @@ export const Contraseña = ({
   //Modales
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
+  const [MostrarError, setError] = useState("");
 
   function validadorPassword() {
     setColourCuatro("#FBF7FF");
@@ -105,7 +106,15 @@ export const Contraseña = ({
       navigation.navigate("ConfirContra", { prePassword: antipass });
     } else {
       validadorPassword();
-      ToastAndroid.show("Por favor digite 4 numeros", ToastAndroid.SHORT);
+      setVacioModal(true);
+      setError("Contraseña inválida.");
+      setanmt("fadeInDownBig");
+      setTimeout(() => {
+        setanmt("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal(false);
+        }, 100);
+      }, 1850);
     }
   }
 
@@ -152,6 +161,10 @@ export const Contraseña = ({
 
   return (
     <SafeAreaView style={styles.body}>
+      <StatusBar
+        backgroundColor={'#FBF7FF'}
+        barStyle={"dark-content"}
+      />
       <Modal
         visible={vacioModal}
         transparent
@@ -163,11 +176,7 @@ export const Contraseña = ({
             <View style={styles.ventanamodal}>
               <View style={styles.icontext}>
                 <View style={styles.contenedorlottie}>
-                  <LottieView
-                    style={styles.lottie}
-                    source={require("./Lottie/error.json")}
-                    autoPlay
-                  />
+                  <Lotierror/>
                 </View>
               </View>
               <View style={styles.textnoti}>
@@ -175,7 +184,7 @@ export const Contraseña = ({
                   <Text style={styles.texticon}>Error</Text>
                 </View>
                 <View>
-                  <Text style={styles.notificacion}>Contraseña incorrecta</Text>
+                  <Text style={styles.notificacion}>{MostrarError}</Text>
                 </View>
               </View>
             </View>
