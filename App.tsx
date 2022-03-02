@@ -47,6 +47,7 @@ import Restaurar from "./src/screens/Restaurar";
 import ExFrase from "./src/screens/ExFrase";
 import TranFallida from "./src/screens/TranFallida";
 import TranExitosa from "./src/screens/TranExitosa";
+import SinInternet from "./src/screens/SinInternet";
 
 const Tab = createBottomTabNavigator();
 //Detecta el sistema en navigator
@@ -164,6 +165,11 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="SinInternet"
+              component={SinInternet}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="Pass"
               component={PassLogin}
               options={{ headerShown: false }}
@@ -241,7 +247,12 @@ export default function App() {
               component={Splashc}
               options={{ headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
+              name="SinInternet"
+              component={SinInternet}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="Home"
               component={Home}
               options={{ headerShown: false }}

@@ -387,6 +387,10 @@ export const styles = StyleSheet.create({
     width: RFValue(230),
     height: RFValue(230),
   },
+  lottieinternet: {
+    width: RFValue(334),
+    height: RFValue(334),
+  },
   //Fin lottie
   //Balance
   logocolorB: {
@@ -1392,4 +1396,20 @@ export const styles = StyleSheet.create({
     paddingBottom: 25,
   },
   //Fin Tran Exitosa
+
+  //Sin internet
+  internet: {
+   marginTop: '30%',
+   
+  },
+  txtconectar: {
+    color: "#440577",
+    fontSize: RFValue(27),
+    fontWeight: '700',
+    height: RFValue(120),
+    width: RFValue(249.6),
+    textAlign: "center",
+    marginTop: RFValue(-48),
+  }
+  //Fin Sin internet
 });
