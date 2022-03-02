@@ -36,6 +36,11 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
   for (let index = 0; index < 12; index++) {
     elements.push(words[index]);
   }
+  if (elements[elements.length-1] == ""){
+    elements.pop()
+  }
+  console.log(elements);
+   
 
   const [userRestaurar, setUserRestaurar] = useState("");
   //Modales
@@ -54,7 +59,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
           setVacioModal(false);
         }, 100);
       }, 1850);
-    } else if (words.length != 12) {
+    } else if (elements.length != 12 ) {
       setVacioModal(true);
       setError("Máximo 12 palabras.");
       setanmt("fadeInDownBig");
@@ -150,7 +155,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
               style={styles.txtInputRest}
               multiline={true}
               autoCapitalize="none"
-              placeholder={"Por favor ingresa tu frase de respaldo."}
+              placeholder={"Por favor ingresa tu frase secreta de 12 palabras"}
               placeholderTextColor="#AEA3C6"
               onChangeText={(text) => setValues(text)}
             >

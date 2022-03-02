@@ -22,7 +22,7 @@ import { sendSoles } from "../../api";
 import { sendSPL } from "../../api";
 import { sendSPLStable } from "../../api";
 import * as Animatable from "react-native-animatable";
-import { LotieEnviado } from "./component/lottie";
+import { LotieEnviado, Lotierror } from "./component/lottie";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
@@ -36,21 +36,41 @@ const EnviarDireccion = ({
   //Modales
   const [anmt, setanmt] = useState("");
   const [vacioModal, setVacioModal] = useState(false);
+  const [MostrarError, setError] = useState("");
+
+  //Modaleserror
+  const [anmt1, setanmt1] = useState("");
+  const [vacioModal1, setVacioModal1] = useState(false);
+  const [MostrarError1, setError1] = useState("");
 
   const [copiedText, setCopiedText] = useState("");
   const [toPublic, setToPublic] = useState("");
 
+  //Variables importadas de otras pantallas
   const { pinN } = route.params;
   const { abrev } = route.params;
   const { titleMoneda } = route.params;
   const mnemonic = route.params?.memo;
   const mint = route.params?.mint;
   const text2 = route.params?.text;
-  
+
+  // Variable para bloquear textInpunt enviarDireccion 
+
+  const [bloqueoText , setBloqueoText] = useState (true)
+
+  //Funcion enviar SOL
   async function enviarSoles() {
 
     if (toPublic == "") {
-      alert("Porfavor ingrese una direccion valida") 
+      setVacioModal1(true);
+      setError1("Porfavor ingrese una direccion valida.");
+      setanmt1("fadeInDownBig");
+      setTimeout(() => {
+        setanmt1("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal1(false);
+        }, 100);
+      }, 1850); 
     }
     else{
       setVacioModal(true);
@@ -104,10 +124,18 @@ const EnviarDireccion = ({
     }
    
   }
-
+  //Funcion enviar CNDR
   async function enviarSPL() {
     if (toPublic == "") {
-      alert("Porfavor ingrese una direccion valida") 
+      setVacioModal1(true);
+      setError1("Porfavor ingrese una direccion valida.");
+      setanmt1("fadeInDownBig");
+      setTimeout(() => {
+        setanmt1("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal1(false);
+        }, 100);
+      }, 1850); 
     }
     else{
       setVacioModal(true);
@@ -160,10 +188,18 @@ const EnviarDireccion = ({
 
     }  
   }
-
+  // Funcion enviar TETHER
   async function enviarSPLStable() {
     if (toPublic == "") {
-      alert("Porfavor ingrese una direccion valida") 
+      setVacioModal1(true);
+      setError1("Porfavor ingrese una direccion valida.");
+      setanmt1("fadeInDownBig");
+      setTimeout(() => {
+        setanmt1("fadeOutUp");
+        setTimeout(() => {
+          setVacioModal1(false);
+        }, 100);
+      }, 1850); 
     }
    else{
     setVacioModal(true);
@@ -255,7 +291,11 @@ const EnviarDireccion = ({
     const text = await Clipboard.getString();
     setCopiedText(text);
     setToPublic(text);
+    setBloqueoText(false)
   };
+  
+  
+  
 
   return (
     <KeyboardAwareScrollView style={styles.body}>
@@ -286,6 +326,34 @@ const EnviarDireccion = ({
           </Animatable.View>
         </View>
       </Modal>
+
+      <Modal
+        visible={vacioModal1}
+        transparent
+        onRequestClose={() => setVacioModal1(false)}
+        hardwareAccelerated
+      >
+        <Animatable.View animation={anmt1} duration={600}>
+          <View style={styles.bodymodal}>
+            <View style={styles.ventanamodal}>
+              <View style={styles.icontext}>
+                <View style={styles.contenedorlottie}>
+                  <Lotierror/>
+                </View>
+              </View>
+              <View style={styles.textnoti}>
+                <View style={styles.contenedortext}>
+                  <Text style={styles.texticon}>Error</Text>
+                </View>
+                <View>
+                  <Text style={styles.notificacion}>{MostrarError1}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </Animatable.View>
+      </Modal>
+
       <View style={styles.completo}>
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Enviar {titleMoneda}</Text>
@@ -324,11 +392,11 @@ const EnviarDireccion = ({
         <View style={styles.pegarDireccion}>
           <View style={{ width: "55%" }}>
             <TextInput
+              editable = {bloqueoText}
               style={styles.pegaDir}
               onChangeText={(val) => setToPublic(val)}
               placeholder="Pegar dirección"
-            > 
-           
+            > {copiedText}
             </TextInput>
           </View>
           <View style={styles.iconos}>
