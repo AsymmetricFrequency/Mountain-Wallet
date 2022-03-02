@@ -95,6 +95,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
   const fetchCopiedText = async () => {
     const text = await Clipboard.getString();
     setCopiedText(text);
+    setValues(text);
   };
 
   return (
