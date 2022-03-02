@@ -63,7 +63,7 @@ const EnviarDireccion = ({
 
     if (toPublic == "") {
       setVacioModal1(true);
-      setError1("Porfavor ingrese una direccion valida.");
+      setError1("Porfavor ingrese una dirección válida.");
       setanmt1("fadeInDownBig");
       setTimeout(() => {
         setanmt1("fadeOutUp");
@@ -90,7 +90,7 @@ const EnviarDireccion = ({
         setVacioModal(false);        
         navigation.navigate("TranFallida", { resp: respuesta_es });
       } else if (respuesta == "Invalid public key input") {
-        respuesta_es = "Llave publica de destino invalida";
+        respuesta_es = "Llave pública de destino invalida";
         setanmt("zoomOut");
         setVacioModal(false);
         navigation.navigate("TranFallida", { resp: respuesta_es });
@@ -111,7 +111,7 @@ const EnviarDireccion = ({
         setVacioModal(false);
         navigation.navigate("TranFallida", { resp: respuesta_es });
       } else if (spaceCount > 0) {
-        respuesta_es = "Algo ha salido mal, intentalo de nuevo";
+        respuesta_es = "Algo ha salido mal, inténtalo de nuevo";
         setanmt("zoomOut");
         setVacioModal(false);
         navigation.navigate("TranFallida", { resp: respuesta_es });
@@ -128,7 +128,7 @@ const EnviarDireccion = ({
   async function enviarSPL() {
     if (toPublic == "") {
       setVacioModal1(true);
-      setError1("Porfavor ingrese una direccion valida.");
+      setError1("Porfavor ingrese una dirección válida.");
       setanmt1("fadeInDownBig");
       setTimeout(() => {
         setanmt1("fadeOutUp");
@@ -155,7 +155,7 @@ const EnviarDireccion = ({
       setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (respuesta == "Invalid public key input") {
-      respuesta_es = "Llave publica de destino invalida";
+      respuesta_es = "Llave pública de destino invalida";
       setanmt("zoomOut");
       setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
@@ -176,7 +176,7 @@ const EnviarDireccion = ({
       setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (spaceCount > 0) {
-      respuesta_es = "Algo ha salido mal, intentalo de nuevo";
+      respuesta_es = "Algo ha salido mal, inténtalo de nuevo";
       setanmt("zoomOut");
       setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
@@ -192,7 +192,7 @@ const EnviarDireccion = ({
   async function enviarSPLStable() {
     if (toPublic == "") {
       setVacioModal1(true);
-      setError1("Porfavor ingrese una direccion valida.");
+      setError1("Porfavor ingrese una dirección válida.");
       setanmt1("fadeInDownBig");
       setTimeout(() => {
         setanmt1("fadeOutUp");
@@ -246,7 +246,7 @@ const EnviarDireccion = ({
       setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
     } else if (spaceCount > 0) {
-      respuesta_es = "Algo ha salido mal, intentalo de nuevo";
+      respuesta_es = "Algo ha salido mal, inténtalo de nuevo";
       setanmt("zoomOut");
       setVacioModal(false);
       navigation.navigate("TranFallida", { resp: respuesta_es });
