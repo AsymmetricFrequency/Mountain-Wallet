@@ -149,6 +149,18 @@ const LotieEnviado = () => {
   );
 };
 
+const LotieInternet = () => {
+  return (
+    <LottieView
+      style={styles.lottieinternet}
+      source={require("../Lottie/sininternet.json")}
+      autoPlay={true}
+      loop={true}
+      speed={0.5}
+    />
+  );
+};
+
 export {
   Lotierror,
   Lotiexito,
@@ -162,5 +174,6 @@ export {
   LotiesuccesDark,
   LotieGraficaCondor,
   LotieCerrarSesion,
-  LotieEnviado, 
+  LotieEnviado,
+  LotieInternet 
 };
