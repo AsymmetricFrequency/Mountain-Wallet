@@ -23,23 +23,24 @@ import { Lotierror } from "./component/lottie";
 const altura = Platform.OS === "ios" ? 22 : 25;
 //
 const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
-  //Detecta el modo del sistema
-  // const [theme, setTheme] = useState(Appearance.getColorScheme());
-  // Appearance.addChangeListener((scheme) => {
-  //   setTheme(scheme.colorScheme);
-  // });
-  // const { colors } = useTheme();
+  
+  //const arrayComparador = ["1","2","3","4","5","6","7","8","9","10","11","12"]
 
   const [values, setValues] = useState("");
   const elements: string[] = [];
-  const words = values.split(" ");
-  for (let index = 0; index < 12; index++) {
-    elements.push(words[index]);
+  const words = values.split(" ")
+  for (let index = 0; index < words.length; index++) {
+    if (words[index] != ""){
+      elements.push(words[index]);
+    }
   }
-  if (elements[elements.length-1] == ""){
-    elements.pop()
-  }
+
   console.log(elements);
+  
+  // console.log(arrayComparador.length);
+  // console.log("pipo",elements.length);
+  
+  
    
 
   const [userRestaurar, setUserRestaurar] = useState("");
@@ -59,9 +60,9 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
           setVacioModal(false);
         }, 100);
       }, 1850);
-    } else if (elements.length != 12 ) {
+    } else if ( elements.length != 12  ) {
       setVacioModal(true);
-      setError("Máximo 12 palabras.");
+      setError("Error en la frase de respaldo");
       setanmt("fadeInDownBig");
       setTimeout(() => {
         setanmt("fadeOutUp");
@@ -94,7 +95,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
       navigation.navigate("Contraseña", { pipo: userRestaurar });
     }
   }
-  console.log(words);
+  
   const [copiedText, setCopiedText] = useState("");
 
   const fetchCopiedText = async () => {
@@ -155,7 +156,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
               style={styles.txtInputRest}
               multiline={true}
               autoCapitalize="none"
-              placeholder={"Por favor ingresa tu frase secreta de 12 palabras"}
+              placeholder={"Ingresar frase de respaldo"}
               placeholderTextColor="#AEA3C6"
               onChangeText={(text) => setValues(text)}
             >
