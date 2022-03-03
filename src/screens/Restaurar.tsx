@@ -6,7 +6,6 @@ import {
   StatusBar,
   TouchableOpacity,
   Platform,
-  Appearance,
   Modal
 } from "react-native";
 import React, { useState } from "react";
@@ -15,7 +14,6 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { styles } from "../theme/appTheme";
 import { TextInput } from "react-native-gesture-handler";
 import { saveMmemonic, saveUser } from "../../api";
-import { useTheme } from "react-native-paper";
 import * as Animatable from "react-native-animatable";
 import { Lotierror } from "./component/lottie";
 
@@ -23,14 +21,12 @@ import { Lotierror } from "./component/lottie";
 const altura = Platform.OS === "ios" ? 22 : 25;
 //
 const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
-  
-  //const arrayComparador = ["1","2","3","4","5","6","7","8","9","10","11","12"]
 
   const [values, setValues] = useState("");
   const elements: string[] = [];
   const words = values.split(" ")
   for (let index = 0; index < words.length; index++) {
-    if (words[index] != ""){
+    if (words[index] != "" && words[index] != undefined && words[index] != null){
       elements.push(words[index]);
     }
   }
@@ -52,7 +48,7 @@ const Restaurar = ({ navigation, route }: { navigation: any; route: any }) => {
   function continuar() {
     if (values == "") {
       setVacioModal(true);
-      setError("Escriba su frase secreta.");
+      setError("Escriba su frase de respaldo.");
       setanmt("fadeInDownBig");
       setTimeout(() => {
         setanmt("fadeOutUp");

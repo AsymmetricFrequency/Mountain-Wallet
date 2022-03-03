@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { useTheme } from "react-native-paper";
 import { generateMnemonic } from "../../api";
-
 import { styles } from "../theme/appTheme";
 
 const Home = ({ navigation }: { navigation: any }) => {

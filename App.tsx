@@ -35,6 +35,7 @@ import { ConfirContra } from "./src/screens/ConfirContra";
 import { PassLogin } from "./src/screens/PassLogin";
 import Editar from "./src/screens/Edituser";
 import Exclave from "./src/screens/Exclave";
+import Thinker from "./src/screens/Thinker";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EnviarCantidad from "./src/screens/EnviarCantidad";
@@ -143,14 +144,7 @@ function Barra() {
 
 export default function App() {
   const Stack = createStackNavigator();
-  const [llave, setLlave] = useState("");
-  const scheme = useColorScheme();
 
-  readPassword().then((value) => {
-    setLlave(value);
-  });
-
-  if (llave != null && llave != "" && llave != undefined) {
     return (
       <PaperProvider>
         <NavigationContainer>
@@ -160,88 +154,10 @@ export default function App() {
             }}
           >
             <Stack.Screen
-              name="Splash"
-              component={Splashc}
+              name="Thinker"
+              component={Thinker}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="SinInternet"
-              component={SinInternet}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Pass"
-              component={PassLogin}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Barra"
-              component={Barra}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
-            <Stack.Screen
-              name="Moneda"
-              component={Moneda}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
-            <Stack.Screen
-              name="Recibir"
-              component={Recibir}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EnviarCantidad"
-              component={EnviarCantidad}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EnviarDireccion"
-              component={EnviarDireccion}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="TranFallida"
-              component={TranFallida}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="TranExitosa"
-              component={TranExitosa}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="QrReader"
-              component={QrReader}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Editar"
-              component={Editar}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
-            <Stack.Screen
-              name="Exclave"
-              component={Exclave}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
-            <Stack.Screen
-              name="ExFrase"
-              component={ExFrase}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
-    );
-  } else {
-    return (
-      <PaperProvider>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
-            }}
-          >
             <Stack.Screen
               name="Splash"
               component={Splashc}
@@ -255,6 +171,11 @@ export default function App() {
             <Stack.Screen
               name="Home"
               component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Pass"
+              component={PassLogin}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -352,4 +273,3 @@ export default function App() {
       </PaperProvider>
     );
   }
-}

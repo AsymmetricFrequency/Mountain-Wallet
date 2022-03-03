@@ -24,6 +24,8 @@ const windowWidth = Dimensions.get("screen").width;
 
 const Recibir = ({ navigation, route }: { navigation: any; route: any }) => {
   const { pmsg, publicKey } = route.params;
+  const { msg, mon } = route.params;
+  const symbol = route.params?.moneda;
 
   console.log(publicKey);
 

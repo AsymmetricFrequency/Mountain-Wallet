@@ -1,31 +1,23 @@
-import React, { useState } from "react";
-import { View, SafeAreaView, StatusBar, Appearance } from "react-native";
-import { readPassword } from "../../api";
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { View, SafeAreaView, StatusBar } from "react-native";
 import { Lotiesplash } from "./component/lottie";
 import { styles } from "../theme/appTheme";
-import { useTheme } from "react-native-paper";
 
-const Splashc = () => {
-  //Detecta el modo del sistema
-  // const [theme, setTheme] = useState(Appearance.getColorScheme());
-  // Appearance.addChangeListener((scheme) => {
-  //   setTheme(scheme.colorScheme);
-  // });
-  // const { colors } = useTheme();
+const Splashc = ({ navigation, route }: { navigation: any; route: any }) => {
 
-  const navigation = useNavigation();
-  const [llave, setLlave] = useState("");
-  readPassword().then((value) => {
-    setLlave(value);
-  });
+  const texto = route.params?.text;
+  
+  function navegar() {
+    if (texto == "Pass") {
+      navigation.navigate("Pass")
+    } else if (texto == "Home") {
+      navigation.navigate("Home")
+    }
+  }
 
   setTimeout(() => {
-    if (llave != null && llave != "" && llave != undefined) {
-      navigation.navigate("Pass" as any);
-    }
-    navigation.navigate("Home" as any);
-  }, 3500);
+    navegar()
+  }, 4000);
 
   return (
     <SafeAreaView style={styles.body}>

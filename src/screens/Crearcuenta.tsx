@@ -33,14 +33,6 @@ const Crearcuenta = ({
   route: any;
 }) => {
   const frase = route.params?.msg.split(" ");
-  //const palabras = frase.split(" ")
-
-  //Detecta el modo del sistema
-  // const [theme, setTheme] = useState(Appearance.getColorScheme());
-  // Appearance.addChangeListener((scheme) => {
-  //   setTheme(scheme.colorScheme);
-  // });
-  // const { colors } = useTheme();
 
   const [numero, setNumero] = useState(1);
 
@@ -99,7 +91,7 @@ const Crearcuenta = ({
             <TouchableOpacity
               style={styles.btnDone}
               activeOpacity={0.5}
-              onPress={() => navigation.navigate("DocePalabras")}
+              onPress={() => navigation.navigate("DocePalabras", {msg: frase})}
             >
               <Text style={styles.txtDone}>Continuar</Text>
             </TouchableOpacity>

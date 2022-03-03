@@ -110,7 +110,7 @@ const Edituser = ({ navigation, route }: { navigation: any; route: any }) => {
           <TouchableOpacity
             activeOpacity={0.5}
             style={styles.btndo}
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate('Ajustes')}
           >
             <Icon name="arrow-left" size={altura} color="#440577" />
           </TouchableOpacity>
