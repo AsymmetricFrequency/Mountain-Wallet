@@ -117,39 +117,26 @@ async function saveUser(data){
 
 //generar mnemonic
 async function generateMnemonic() {
-  fetch("https://wallet-condor-8246.uc.r.appspot.com/mnemonic").then(
-      res => res.text()
-  ).then(
-    data =>{
-      //guardando mnemonic en asyncStorage
-      saveMmemonic(data) 
-      return data
-    }   
-  )
+  const response = await fetch(`https://wallet-condor-8246.uc.r.appspot.com/mnemonic/`)
+  const text = await response.text()
+  saveMmemonic(text)
+  return text
 }
 
 //Crear cuenta (public key)
 async function createAccount(mnemonic: string) {
-  fetch(`https://wallet-condor-8246.uc.r.appspot.com/keypair_public_key/${mnemonic}`).then(
-      res => res.text()
-  ).then(
-    data =>{
-      savePublicKey(data)
-      return data
-    }   
-  )
+  const response = await fetch(`https://wallet-condor-8246.uc.r.appspot.com/keypair_public_key/${mnemonic}`)
+  const text = await response.text()
+  savePublicKey(text)
+  return text
 }
 
 //Crear cuenta (secret key)
 async function fetchSecret(mnemonic: string) {
-  fetch(`https://wallet-condor-8246.uc.r.appspot.com/keypair_secret_key/${mnemonic}`).then(
-      res => res.text()
-  ).then(
-    data =>{
-      saveKey(data)
-      return data
-    }   
-  )
+  const response = await fetch(`https://wallet-condor-8246.uc.r.appspot.com/keypair_secret_key/${mnemonic}`)
+  const text = await response.text()
+  saveKey(text)
+  return text
 }
 
 async function sendSoles(mnemonic: string, toPublicKey: string, amount: number){
