@@ -1,9 +1,9 @@
 {
   "expo": {
     "userInterfaceStyle": "automatic",
-    "name": "MountainWallet",
-    "slug": "Mountain",
-    "version": "1.0.0",
+    "name": "CondorWallet",
+    "slug": "Condor",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,7 +20,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.barneyeldinosaurio.MountainWallet",
+      "bundleIdentifier": "com.barneyeldinosaurio.CondorWallet",
       "userInterfaceStyle": "automatic"
     },
     "android": {
@@ -29,7 +29,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "userInterfaceStyle": "automatic",
-      "package": "com.barneyeldinosaurio.MountainWallet",
+      "package": "com.barneyeldinosaurio.CondorWallet",
       "permissions": ["CAMERA", "READ_PHONE_STATE", "RECORD_AUDIO", "READ_CONTACTS"]
     },
     "web": {

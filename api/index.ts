@@ -1,11 +1,10 @@
 import * as solanaWeb3 from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
-import { PublicKey, Keypair } from '@solana/web3.js';
+import { PublicKey } from '@solana/web3.js';
 
 import  AsyncStorage  from "@react-native-async-storage/async-storage";
 
 //variables
-const SPL_TOKEN = "7TMzmUe9NknkeS3Nxcx6esocgyj8WdKyEMny9myDGDYJ"
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
 const LAMPORTS_PER_SOL = solanaWeb3.LAMPORTS_PER_SOL                                                                     
 
@@ -216,7 +215,6 @@ async function getToken(publicKey: string, splToken: string){
   } catch (e) {
     return 0
   }
-
 }
 
 // funcion para obtener el historial de transacciones
@@ -254,5 +252,6 @@ export {
   sendSPL,
   sendSPLStable,
   saveUser,
-  readUser
+  readUser, 
+  createConnection
 }

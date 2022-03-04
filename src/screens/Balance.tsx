@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import { getBalance, getToken, readPublicKey } from "../../api";
 import { styles } from "../theme/appTheme";
-import { useTheme } from "react-native-paper";
 import { readMnemonic } from "../../api";
 
 const Balance = ({ navigation }: { navigation: any }) => {
@@ -27,13 +26,6 @@ const Balance = ({ navigation }: { navigation: any }) => {
   }
 
   leerMnemonic();
-
-  //Detecta el modo del sistema
-  // const [theme, setTheme] = useState(Appearance.getColorScheme());
-  // Appearance.addChangeListener((scheme) => {
-  //   setTheme(scheme.colorScheme);
-  // });
-  // const { colors } = useTheme();
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(

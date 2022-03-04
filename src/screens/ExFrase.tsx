@@ -22,9 +22,9 @@ import { readPublicKey } from "../../api";
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
-const elements: string[] = [];
-const doceIncompleta: string[] = [];
-const arr: number[] = [];
+var elements: string[] = [];
+var doceIncompleta: string[] = [];
+var arr: number[] = [];
 
 function leerMnemonic() {
   const mnemonic = readMnemonic();
@@ -48,6 +48,32 @@ function leerMnemonic() {
     }
   }, 1);
 }
+function memo() {
+  doceIncompleta = []
+  elements = []
+  arr = []
+  const mnemonic = readMnemonic();
+
+  mnemonic.then((value) => {
+    const docePalabras = value;
+    const words = docePalabras.split(" ");
+    for (let index = 0; index < 12; index++) {
+      elements.push(words[index]);
+      doceIncompleta.push(words[index]);
+    }
+  });
+  //recorre las tres palabras restantes
+  setTimeout(() => {
+    while (arr.length < 3) {
+      var r = Math.floor(Math.random() * 11) + 1;
+      if (arr.indexOf(r) === -1) {
+        arr.push(r);
+        elements[r] = elements[r];
+      }
+    }
+  }, 1);
+}
+
 
 const ExFrase = ({ navigation }: { navigation: any }) => {
   const [refreshing, setRefreshing] = React.useState(false);
@@ -58,12 +84,14 @@ const ExFrase = ({ navigation }: { navigation: any }) => {
     if (elements.length === 0) {
       leerMnemonic();
     } else {
+      memo();
       console.log("lleno");
     }
     setTimeout(() => {
       setRefreshing(false);
     }, 5);
   }, []);
+  
 
   const frase = `${elements[0]} ${elements[1]} ${elements[2]} ${elements[3]} ${elements[4]} ${elements[5]} ${elements[6]} ${elements[7]} ${elements[8]} ${elements[9]} ${elements[10]} ${elements[11]}`;
 
@@ -122,7 +150,7 @@ const ExFrase = ({ navigation }: { navigation: any }) => {
           <TouchableOpacity
             activeOpacity={0.5}
             style={styles.btndo}
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate('Ajustes')}
           >
             <Icon name="arrow-left" size={altura} color="#440577" />
           </TouchableOpacity>

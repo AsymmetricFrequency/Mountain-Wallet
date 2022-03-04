@@ -16,23 +16,18 @@ import { styles } from "../theme/appTheme";
 import Icon from "react-native-vector-icons/Feather";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const elements: string[] = [];
-const doceIncompleta: string[] = [];
-const arr: number[] = [];
+var elements: string[] = [];
+var doceIncompleta: string[] = [];
+var arr: number[] = [];
 
 const altura = Platform.OS === "ios" ? 22 : 25;
 
-function leerMnemonic() {
-  const mnemonic = readMnemonic();
-
-  mnemonic.then((value) => {
-    const docePalabras = value;
-    const words = docePalabras.split(" ");
-    for (let index = 0; index < 12; index++) {
-      elements.push(words[index]);
-      doceIncompleta.push(words[index]);
+function leerMnemonic(palabras: []) {
+  console.log("Entre a la funcion");
+    for (let index = 0; index < palabras.length; index++) {
+      elements.push(palabras[index]);
+      doceIncompleta.push(palabras[index]);
     }
-  });
   //recorre las tres palabras restantes
   setTimeout(() => {
     while (arr.length < 3) {
@@ -45,14 +40,16 @@ function leerMnemonic() {
   }, 1);
 }
 
-const DocePalabras = ({ navigation }: { navigation: any }) => {
+const DocePalabras = ({ navigation, route }: { navigation: any, route: any }) => {
   const [refreshing, setRefreshing] = React.useState(false);
+
+  const frase = route.params?.msg
 
   useEffect(() => {
     setRefreshing(true);
 
     if (elements.length === 0) {
-      leerMnemonic();
+      leerMnemonic(frase);
     } else {
       console.log("lleno");
     }
@@ -93,7 +90,10 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
     let arreglo2 = doceIncompleta.toString();
 
     if (arreglo1 === arreglo2) {
-        navigation.navigate("Contraseña");
+      doceIncompleta = []
+      elements = []
+      arr = []
+      navigation.navigate("Contraseña");
     } else {
       //alert("Frases incorrectas");
       setVacioModal(true);
@@ -158,15 +158,6 @@ const DocePalabras = ({ navigation }: { navigation: any }) => {
         </Animatable.View>
       </Modal>
       <View style={styles.completo}>
-        <View style={styles.cajaatras}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={styles.btndo}
-            onPress={() => navigation.goBack()}
-          >
-            <Icon name="arrow-left" size={altura} color="#440577" />
-          </TouchableOpacity>
-        </View>
         <View style={styles.headerDos}>
           <Text style={styles.headerTitle}>
             Escribe las tres palabras {"\n"}faltantes en tu frase de {"\n"}

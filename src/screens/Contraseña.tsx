@@ -192,15 +192,6 @@ export const Contraseña = ({
         </Animatable.View>
       </Modal>
       <View style={styles.completo}>
-        <View style={styles.cajaatras}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={styles.btndo}
-            onPress={() => navigation.goBack()}
-          >
-            <Icon name="arrow-left" size={altura} color="#440577" />
-          </TouchableOpacity>
-        </View>
 
         <View style={styles.titlecc}>
           <Text style={styles.titletx}>Ingrese contraseña</Text>
