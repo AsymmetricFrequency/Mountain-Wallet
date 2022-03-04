@@ -1300,14 +1300,13 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(32),
   },
   textInputE: {
+    height: RFValue(121.1),
+    width: RFValue(116.8),
     alignItems: "center",
     borderWidth: 3,
     borderColor: "#E2DBEE",
-    borderRadius: 10,
-    height: RFValue(121.1),
-    marginTop: RFValue(30),
-    width: RFValue(116.8),
-    justifyContent: "center",
+    borderRadius: 20,
+    marginTop: 35,
   },
   icntt: {
     fontSize: RFValue(12.5),
