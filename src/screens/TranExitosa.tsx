@@ -107,8 +107,8 @@ const TranExitosa = ({
           <View style={styles.cajalotie}>
             <Lotiesucces />
           </View>
-          <View style={styles.textInputE}>
-            <Text style={styles.icntt}>Cantidad</Text>
+          <View style={styles.textInput}>
+            <Text style={styles.icnt}>Cantidad</Text>
 
             <View style={styles.txtAjustables}>
               <Text
@@ -119,7 +119,7 @@ const TranExitosa = ({
                 adjustsFontSizeToFit={true}
                 allowFontScaling
               >
-                {num}
+                {num} 
               </Text>
             </View>
             <View style={styles.contcnd}>
