@@ -8,6 +8,7 @@ import LottieView from "lottie-react-native";
 import { readPassword, savePassword } from "../../api";
 import { styles } from "../theme/appTheme";
 import { useTheme } from "react-native-paper";
+import { Lotierror } from "./component/lottie";
 
 export const PassLogin = ({ navigation }: { navigation: any }) => {
   //Detecta el modo del sistema
@@ -136,11 +137,7 @@ export const PassLogin = ({ navigation }: { navigation: any }) => {
             <View style={styles.ventanamodal}>
               <View style={styles.icontext}>
                 <View style={styles.contenedorlottie}>
-                  <LottieView
-                    style={styles.lottie}
-                    source={require("./Lottie/error.json")}
-                    autoPlay
-                  />
+                  <Lotierror/>
                 </View>
               </View>
               <View style={styles.textnoti}>
