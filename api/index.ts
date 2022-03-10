@@ -2,6 +2,9 @@ import * as solanaWeb3 from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
 import { PublicKey } from '@solana/web3.js';
 
+import { fetch as fetchPolyfill } from 'whatwg-fetch'
+global.fetch = fetchPolyfill
+
 import  AsyncStorage  from "@react-native-async-storage/async-storage";
 
 //variables
