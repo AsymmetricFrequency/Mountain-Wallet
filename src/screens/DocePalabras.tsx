@@ -168,25 +168,27 @@ const DocePalabras = ({ navigation, route }: { navigation: any, route: any }) =>
           {doceIncompleta.map((j, index) => {
             if (doceIncompleta[index] === "") {
               return (
-                <TextInput
-                  key={index}
-                  autoCapitalize="none"
-                  style={styles.fondoFrases}
-                  onChangeText={(text) =>
-                    handleChange(text, "vacio[" + index + "]")
-                  }
-                >
-                  <Text style={styles.txtDoceIncompleta}>
-                    {doceIncompleta[index]}
-                  </Text>
-                </TextInput>
+                <>
+                  <TextInput
+                    key={index}
+                    autoCapitalize="none"
+                    style={styles.fondoFrases}
+                    onChangeText={(text) =>
+                      handleChange(text, "vacio[" + index + "]")
+                    }
+                  >
+                    <Text style={styles.txtDoceIncompleta}>
+                      {doceIncompleta[index]}
+                    </Text>
+                  </TextInput>
+                </>
               );
             } else {
               return (
                 <TextInput
                   key={index}
                   style={styles.fondoFrases}
-                  editable={false}
+                  editable={true}
                 >
                   <Text style={styles.txtDoceIncompleta}>
                     {doceIncompleta[index]}
