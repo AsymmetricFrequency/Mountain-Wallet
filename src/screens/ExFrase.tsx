@@ -9,6 +9,7 @@ import {
   ToastAndroid,
   Alert,
   StatusBar,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "../theme/appTheme";
@@ -130,22 +131,15 @@ const ExFrase = ({ navigation }: { navigation: any }) => {
   }, [animacion]);
 
   return (
-    <KeyboardAwareScrollView style={styles.body}>
+    <SafeAreaView style={styles.body}>
       <StatusBar
         backgroundColor={'#FBF7FF'}
         barStyle={"dark-content"}
       />
-      <ScrollView
-        style={{ backgroundColor: "red" }}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            tintColor="#5b298a"
-            colors={["#5b298a", "#7e54a7"]}
-          />
-        }
-      ></ScrollView>
       <View style={styles.completo}>
+        <View style={styles.titlecc}>
+          <Text style={styles.titlexx}>Exportar frase de respaldo</Text>
+        </View>
         <View style={styles.cajaatras}>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -155,9 +149,11 @@ const ExFrase = ({ navigation }: { navigation: any }) => {
             <Icon name="arrow-left" size={altura} color="#440577" />
           </TouchableOpacity>
         </View>
-        <View style={styles.titlecc}>
-          <Text style={styles.titlexx}>Exportar frase de respaldo</Text>
-        </View>
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          horizontal={false}
+          showsVerticalScrollIndicator={false}
+        >
         <View style={styles.headerPrimario}>
           {elements.map((j, index) => {
             if (elements[index] === elements[index]) {
@@ -191,8 +187,9 @@ const ExFrase = ({ navigation }: { navigation: any }) => {
             </View>
           </View>
         </TouchableOpacity>
+        </ScrollView>
       </View>
-    </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

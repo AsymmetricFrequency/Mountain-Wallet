@@ -26,6 +26,9 @@ const panelDoceios = Platform.OS === "ios" ? 60 : 94;
 const swichLios = Platform.OS === "ios" ? -5 : 0;
 const swichTios = Platform.OS === "ios" ? 0.8 : 1;
 const btnCntRestios = Platform.OS === "ios" ? 0 : 20;
+const fontios = Platform.OS === "ios" ? 18 : 23;
+const fontiosd = Platform.OS === "ios" ? 17 : 23;
+const fontbaios = Platform.OS === "ios" ? 13 : 15;
 const SLIDER_WIDTH = Dimensions.get("screen").width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
@@ -110,7 +113,7 @@ export const styles = StyleSheet.create({
   cajatitle: {
     marginTop: RFValue(49.9),
     width: RFValue(229),
-    height: RFValue(118),
+    height: RFValue(130),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -123,7 +126,7 @@ export const styles = StyleSheet.create({
   cajatxt: {
     justifyContent: "center",
     width: RFValue(217),
-    height: RFValue(68.4),
+    height: RFValue(78),
     marginTop: RFValue(53),
   },
   introTextStyle: {
@@ -275,7 +278,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   titletx: {
-    fontSize: RFValue(23),
+    fontSize: RFValue(fontios),
     fontWeight: "bold",
     color: "#440577",
   },
@@ -432,7 +435,7 @@ export const styles = StyleSheet.create({
   },
   ntxtcry: {
     color: "#000",
-    fontSize: RFValue(15),
+    fontSize: RFValue(fontbaios),
     fontWeight: "500",
   },
   smcry: {
@@ -947,7 +950,7 @@ export const styles = StyleSheet.create({
   },
 
   titlex: {
-    fontSize: RFValue(20),
+    fontSize: RFValue(fontios),
     fontWeight: "bold",
     color: "#440577",
   },
@@ -1164,10 +1167,16 @@ export const styles = StyleSheet.create({
 
   //ExFrase
   titlexx: {
-    fontSize: RFValue(20),
+    fontSize: RFValue(fontios),
     fontWeight: "bold",
     color: "#440577",
-    marginLeft: 63,
+    marginLeft: RFValue(35),
+  },
+  titlexd: {
+    fontSize: RFValue(fontiosd),
+    fontWeight: "bold",
+    color: "#440577",
+    marginLeft: RFValue(30),
   },
   //Fin ExFrase
 

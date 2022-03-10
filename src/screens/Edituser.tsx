@@ -102,9 +102,7 @@ const Edituser = ({ navigation, route }: { navigation: any; route: any }) => {
         </Animatable.View>
       </Modal>
         <View style={styles.titlecc}>
-          <Text style={[styles.titlex, { left: 20 }]}>
-            Cambiar nombre de usuario
-          </Text>
+          <Text style={styles.titlexd}>Cambiar nombre de usuario</Text>
         </View>
         <View style={styles.cajaatras}>
           <TouchableOpacity
